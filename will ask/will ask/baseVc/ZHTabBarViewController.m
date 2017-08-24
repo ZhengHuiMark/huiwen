@@ -8,6 +8,10 @@
 
 #import "ZHTabBarViewController.h"
 #import "ZHNavigationVC.h"
+#import "HomeViewController.h"
+#import "AskViewController.h"
+#import "StudyViewController.h"
+#import "MineViewController.h"
 
 @interface ZHTabBarViewController ()
 
@@ -18,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self addController];
 }
 
 
@@ -25,18 +30,18 @@
 -(void)addController
 {
     
-    //添加五个nav控制器的子控制器
-    UIViewController *HomeViewController = [self setControllerWith:@"HomeViewController" Title:@"首页" image:@"home-"];
-    HomeViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"home"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    //添加四个nav控制器的子控制器
+    UIViewController *HomeViewController = [self setControllerWith:@"HomeViewController" Title:@"首页" image:@"001"];
+    HomeViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"h001"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
-    UIViewController *AskViewController =  [self setControllerWith:@"QAViewController" Title:@"提问" image:@""];
-    AskViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@""] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIViewController *AskViewController =  [self setControllerWith:@"AskViewController" Title:@"提问" image:@"002"];
+    AskViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"h0023x"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
-    UIViewController *StudyViewController =  [self setControllerWith:@"FocusViewController" Title:@"关注" image:@"follow"];
-    StudyViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"follow-"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIViewController *StudyViewController =  [self setControllerWith:@"StudyViewController" Title:@"关注" image:@"003"];
+    StudyViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"h003"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
-    UIViewController *MineViewController =  [self setControllerWith:@"MineViewController" Title:@"我的" image:@"我的2"];
-        MineViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"我的1"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIViewController *MineViewController =  [self setControllerWith:@"MineViewController" Title:@"我的" image:@"004"];
+        MineViewController.tabBarItem.selectedImage = [[UIImage imageNamed:@"h004"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
     
     
