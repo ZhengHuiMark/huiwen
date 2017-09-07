@@ -7,6 +7,7 @@
 //
 
 #import "HomeViewController.h"
+#import "ZHLoginViewController.h"
 
 @interface HomeViewController ()
 
@@ -17,13 +18,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor redColor];
+//    self.view.backgroundColor = [UIColor redColor];
+    [self configUI];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)configUI{
+    
+    UIButton *button  = [[UIButton alloc]initWithFrame:CGRectMake(100, 100, 100, 100)];
+    
+    button.backgroundColor = [UIColor redColor];
+    [button addTarget:self action:@selector(actionModal) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:button];
+    
 }
 
-
+- (void)actionModal{
+    
+    ZHLoginViewController *loginVc = [[ZHLoginViewController alloc]init];
+    
+    [self.navigationController pushViewController:loginVc animated:YES];
+    
+}
 @end
