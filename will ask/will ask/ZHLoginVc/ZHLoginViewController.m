@@ -7,8 +7,12 @@
 //
 
 #import "ZHLoginViewController.h"
+#import "ZHRegisteredViewController.h"
+#import "EncryptionAndDecryption.h"
+#import "YYmodel.h"
+#import "RSAEncryptor.h"
 
-@interface ZHLoginViewController ()
+@interface ZHLoginViewController ()<UITextFieldDelegate>
 
 //手机号输入框
 @property(nonatomic,copy)UITextField *PhoneNumberL;
@@ -41,7 +45,6 @@
 @property(nonatomic,copy)UIButton *DeleteNumberBtn;
 
 
-
 @end
 
 @implementation ZHLoginViewController
@@ -53,6 +56,74 @@
     
 
     [self configUI];
+    
+}
+
+
+- (void)clickBtnShow{
+    if (_AccordingBtn.selected == NO) {
+        _AccordingBtn.selected = YES;
+        [_AccordingBtn setBackgroundImage:[UIImage imageNamed:@"eyelash"] forState:UIControlStateSelected];
+        [_PasswordNumberL setSecureTextEntry:NO];
+    }else{
+        _AccordingBtn.selected = NO;
+        [_AccordingBtn setBackgroundImage:[UIImage imageNamed:@"look"] forState:UIControlStateSelected];
+        [_PasswordNumberL setSecureTextEntry:YES];
+
+    }
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    NSLog(@"点击1");
+//    _LineView.backgroundColor = [UIColor orangeColor];
+//    if (_PhoneNumberL.selected == YES) {
+//        _LineView.backgroundColor = [UIColor orangeColor];
+//    }else if (_PasswordNumberL.selected == YES) {
+//        _PhoneNumberL.selected = NO;
+//        
+//        _LineView1.backgroundColor = [UIColor orangeColor];
+//        _LineView.backgroundColor = [UIColor blackColor];
+//
+//    }
+//    
+    return YES;
+}// return NO to disallow editing.
+
+
+
+- (void)ceshi{
+    
+
+
+//原始数据
+    NSString *str = @"ibuaiVcKdpRxkhJA_1491819233692";
+    
+    //使用.der和.p12中的公钥私钥加密解密
+    NSString *public_key_path = [[NSBundle mainBundle] pathForResource:@"public_key.der" ofType:nil];
+    NSString *private_key_path = [[NSBundle mainBundle] pathForResource:@"private_key.p12" ofType:nil];
+    
+     NSString *encryptStr = [RSAEncryptor encryptString:str publicKeyWithContentsOfFile:public_key_path];
+    NSLog(@"加密前:%@", str);
+    NSLog(@"加密后:%@", encryptStr);
+    NSLog(@"解密后:%@", [RSAEncryptor decryptString:encryptStr privateKeyWithContentsOfFile:private_key_path password:@"zhenghui"]);
+   
+
+//    NSString *str1 = [RSAEncryptor encryptString:str publicKey:@"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCypBhs8fFzcaU1zTY4PXWImc2qOIIYbcNzbRMIOxAh7l37FlJEO+gIg/2lcMHOepPQVmWjYNBDZb7VgnOLJP939YUWeWkIO1hYhSX0sNasZ2Jma1D3m4CL9BhngPHD2qDu175O0ci2rL574y701Uzlh25mvbS084vBtxYBri6A8wIDAQAB"];
+//    NSLog(@"%@",str1);
+//    
+//    NSLog(@"解密后:%@", [RSAEncryptor decryptString:str1 privateKey:@"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBALKkGGzx8XNxpTXNNjg9dYiZzao4ghhtw3NtEwg7ECHuXfsWUkQ76AiD/aVwwc56k9BWZaNg0ENlvtWCc4sk/3f1hRZ5aQg7WFiFJfSw1qxnYmZrUPebgIv0GGeA8cPaoO7Xvk7RyLasvnvjLvTVTOWHbma9tLTzi8G3FgGuLoDzAgMBAAECgYEAj0YQ2P/K2P4itN3bSIvyQhao3obnwFP4WBD5HLbSH4SgF4s1e8hYNsw1mISwy7t/5a4FYl15azSlM3Sm2shXozVZTnTakflKuFC49EZDFJ1Dxu0waF9ATIFY2jPKohmhcVZENCBk53q4u7p3S6sXIAkdCxpXwzcy6oUabtAk4tECQQDX4wBpal/sQH3Qv6Ni9DryxK6igBqUQmjepYOjka3vnviNw+fFZqbJHnEQp+x/YvUlpH8ZOunDM6Dze0eYT+QtAkEA09Vw57YS+2Lt3iIWbyccss9HT8Jt9udsyPTxV83qHymcyozazlke3NquH1HOyNyvmCC26W/cM5PcRCFxkk+NnwJBAK2M+o7ECjr1mW9QL/vj1OPHA5D1JOjc/ktGia3b9hU1GiF1RQRnQltaEpDOPgwmNGc/d0GEH9phzdkO2P5z8z0CQGmql5ZNwWw6bfMXR9+MQAmF0cmcb+PwjtgzLswgv/9pb3euCVtTI00BnEetNBwH0WNuNi99h/cGc6JcmF1mZ3sCQC/oJdJrqIrgWL742c7Kb9JRfMzlAliyolFDhFXlwfJMH6X3GuHOe33Pabhh7fU1Ow5uFqRZRrIiXJ812IsJYo0="]);
+//    
+//    
+}
+
+
+
+
+- (void)clickButton{
+    ZHRegisteredViewController *registVc = [[ZHRegisteredViewController alloc]init];
+    
+    [self.navigationController pushViewController:registVc animated:YES];
+
 }
 
 - (void)configUI{
@@ -82,6 +153,7 @@
     _PhoneNumberL.textColor = [UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1];
     _PhoneNumberL.font = [UIFont systemFontOfSize:15];
     
+    _PhoneNumberL.delegate = self;
     [self.view addSubview:_PhoneNumberL];
     
     // 一键删除手机号按钮
@@ -97,7 +169,7 @@
     
     
     
-    
+    // 线
     CGFloat LineWidth = 330;
     CGFloat LineHeight = .5;
     CGFloat LineX = (self.view.frame.size.width - LineWidth) / 2;
@@ -109,7 +181,7 @@
     
     [self.view addSubview: _LineView];
     
-
+    // 密码
     CGFloat pwdWidth = 280;
     CGFloat PwdHeight = 13.5;
     CGFloat PwdX = CGRectGetMinX(self.view.frame) + 41;
@@ -120,7 +192,9 @@
     _PasswordNumberL.placeholder = @"密码";
     _PasswordNumberL.textColor = [UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1];
     _PasswordNumberL.font = [UIFont systemFontOfSize:15];
+
     
+    _PasswordNumberL.delegate = self;
     [self.view addSubview:_PasswordNumberL];
     
     // 显示密码按钮
@@ -132,6 +206,9 @@
     _AccordingBtn = [[UIButton alloc]init];
     _AccordingBtn.frame = CGRectMake(AccordingX, AccordingY, AccordingBtnWidth, AccordingBtnHeight);
     [_AccordingBtn setBackgroundImage:[UIImage imageNamed:@"look"] forState:UIControlStateNormal];
+    [_AccordingBtn addTarget:self action:@selector(clickBtnShow) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     [self.view addSubview:_AccordingBtn];
                                        
     
@@ -155,6 +232,8 @@
     _LoginBtn.layer.cornerRadius = 22.5;
     [_LoginBtn setTitle:@"登录" forState:UIControlStateNormal];
     [_LoginBtn setBackgroundColor:[UIColor colorWithRed:242/255.0 green:90/255.0 blue:41/255.0 alpha:1]];
+  //
+    [_LoginBtn addTarget:self action:@selector(ceshi) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:_LoginBtn];
     
@@ -240,7 +319,6 @@
 
 
 }
-
 
 
 

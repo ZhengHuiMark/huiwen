@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^ZHLoginCompletion)(BOOL isLoginSucess);
+
 @interface ZHLoginViewController : UIViewController
+
+@property (nonatomic, copy) ZHLoginCompletion loginCompletion;
+
 
 @end

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="MoneyCellid" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ZHMoneyTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UQf-X5-bNv">
+                        <rect key="frame" x="76" y="18" width="30" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="13" id="Yu0-v8-taN"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <state key="normal" title="123"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会员卡余额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUp-6M-cxe">
+                        <rect key="frame" x="62" y="37" width="63" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hd0-HS-1zb">
+                        <rect key="frame" x="187" y="14" width="1" height="40"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="0.5" id="s5S-SS-b6L"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ugf-VD-IYs">
+                        <rect key="frame" x="272" y="18" width="30" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="13" id="zY0-uz-a3y"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <state key="normal" title="123"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的收入" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jrM-8v-lZa">
+                        <rect key="frame" x="262" y="37" width="50" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="jrM-8v-lZa" firstAttribute="top" secondItem="Ugf-VD-IYs" secondAttribute="bottom" constant="6" id="2MQ-bV-X9a"/>
+                    <constraint firstItem="UQf-X5-bNv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="76" id="6SP-N8-oQx"/>
+                    <constraint firstItem="hd0-HS-1zb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="9mf-x8-M1f"/>
+                    <constraint firstItem="UQf-X5-bNv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="EDJ-mr-rfb"/>
+                    <constraint firstItem="Ugf-VD-IYs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="JM2-vC-lgi"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="hd0-HS-1zb" secondAttribute="bottom" constant="2.5" id="QGd-iZ-OUH"/>
+                    <constraint firstItem="uUp-6M-cxe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="62" id="Qck-XB-660"/>
+                    <constraint firstItem="hd0-HS-1zb" firstAttribute="leading" secondItem="uUp-6M-cxe" secondAttribute="trailing" constant="62" id="WWz-6D-LNW"/>
+                    <constraint firstAttribute="trailing" secondItem="Ugf-VD-IYs" secondAttribute="trailing" constant="73" id="ax5-ef-doO"/>
+                    <constraint firstItem="uUp-6M-cxe" firstAttribute="top" secondItem="UQf-X5-bNv" secondAttribute="bottom" constant="6" id="ayd-92-WnC"/>
+                    <constraint firstItem="hd0-HS-1zb" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="ec1-91-Hto"/>
+                    <constraint firstAttribute="trailing" secondItem="jrM-8v-lZa" secondAttribute="trailing" constant="63" id="syR-Kf-F8K"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="incomeBtn" destination="Ugf-VD-IYs" id="6kh-4h-YnU"/>
+                <outlet property="memberCardBtn" destination="UQf-X5-bNv" id="xlS-zq-RMr"/>
+            </connections>
+            <point key="canvasLocation" x="31.5" y="118.5"/>
+        </tableViewCell>
+    </objects>
+</document>
