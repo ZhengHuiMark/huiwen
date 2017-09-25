@@ -31,6 +31,8 @@ typedef enum : NSUInteger {
 
 - (void)test1;
 
++ (NSMutableDictionary *)parameters;
+
 + (instancetype)sharedTools;
 
 - (void)requestWithType: (RequestType)type andUrl: (NSString *)url andParams: (id)params andCallBlock: (void (^) (id response, NSError *error))callBlock;

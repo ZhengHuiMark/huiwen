@@ -28,7 +28,7 @@
                         <state key="normal" title="123"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会员卡余额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUp-6M-cxe">
-                        <rect key="frame" x="62" y="37" width="63" height="15"/>
+                        <rect key="frame" x="62" y="37" width="61.5" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -63,7 +63,6 @@
                     <constraint firstItem="Ugf-VD-IYs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="JM2-vC-lgi"/>
                     <constraint firstAttribute="bottomMargin" secondItem="hd0-HS-1zb" secondAttribute="bottom" constant="2.5" id="QGd-iZ-OUH"/>
                     <constraint firstItem="uUp-6M-cxe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="62" id="Qck-XB-660"/>
-                    <constraint firstItem="hd0-HS-1zb" firstAttribute="leading" secondItem="uUp-6M-cxe" secondAttribute="trailing" constant="62" id="WWz-6D-LNW"/>
                     <constraint firstAttribute="trailing" secondItem="Ugf-VD-IYs" secondAttribute="trailing" constant="73" id="ax5-ef-doO"/>
                     <constraint firstItem="uUp-6M-cxe" firstAttribute="top" secondItem="UQf-X5-bNv" secondAttribute="bottom" constant="6" id="ayd-92-WnC"/>
                     <constraint firstItem="hd0-HS-1zb" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="ec1-91-Hto"/>

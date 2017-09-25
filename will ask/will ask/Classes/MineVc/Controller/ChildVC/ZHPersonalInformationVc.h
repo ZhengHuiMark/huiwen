@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ZHPersonalInformationVc : UIViewController
+@interface ZHPersonalInformationVc : UITableViewController
 
 @end

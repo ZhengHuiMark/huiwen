@@ -14,6 +14,8 @@
 #import "SVProgressHUD.h"
 #import "RSAEncryptor.h"
 #import "OssService.h"
+#import "ZHMD5.h"
+#import "ZHRegisteredViewController.h"
 
 
 
@@ -77,6 +79,78 @@
     return tools;
 }
 
++(NSString *)return16LetterAndNumber{
+    //定义一个包含数字，大小写字母的字符串
+    NSString * strAll = @"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    //定义一个结果
+    NSString * result = [[NSMutableString alloc]initWithCapacity:16];
+    for (int i = 0; i < 16; i++)
+    {
+        //获取随机数
+        NSInteger index = arc4random() % (strAll.length-1);
+        char tempStr = [strAll characterAtIndex:index];
+        result = (NSMutableString *)[result stringByAppendingString:[NSString stringWithFormat:@"%c",tempStr]];
+    }
+    
+    return result;
+}
+
++ (NSMutableDictionary *)parameters {
+    
+    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
+    
+    
+    NSString *nonce = [self return16LetterAndNumber];
+    
+    
+    NSString *inStr = [NSString stringWithFormat: @"%ld", (long)interval];
+    NSLog(@"时间戳 = %@",inStr);
+    
+    
+    NSMutableString *contentString  =[NSMutableString string];
+    
+    NSDictionary *dict = @{
+                           @"nonce":nonce,
+                           @"timestamp":inStr,
+                           //                           @"client_secret":@"0d908XAIzx6OjpSJg0Yo"
+                           };
+    
+    NSArray *keys = [dict allKeys];
+    
+    //按字母顺序排序
+    NSArray *sortedArray = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        return [obj1 compare:obj2 options:NSNumericSearch];
+    }];
+    
+    //拼接字符串
+    for (NSString *categoryId in sortedArray) {
+        
+        if (   ![[dict objectForKey:categoryId] isEqualToString:@""]
+            && ![[dict objectForKey:categoryId] isEqualToString:@"sign"]
+            && ![[dict objectForKey:categoryId] isEqualToString:@"key"]
+            )
+        {
+            [contentString appendFormat:@"%@=%@&", categoryId, [dict objectForKey:categoryId]];
+        }
+    }
+    
+    
+    NSString *client_secret = @"0d908XAIzx6OjpSJg0Yo";
+    
+    [contentString appendFormat:@"client_secret=%@",client_secret];
+    NSLog(@"contentString = %@",contentString);
+    
+    
+    NSString *signature = [ZHMD5 MD5ForLower32Bate:contentString];
+    
+    NSDictionary *dic = @{
+                          @"nonce":nonce,
+                          @"timestamp":inStr,
+                          @"signature":signature
+                          };
+    return [NSMutableDictionary dictionaryWithDictionary: dic];
+}
+
 
 - (void)requestWithType: (RequestType)type andUrl: (NSString *)url andParams: (id)params andCallBlock: (void (^) (id response, NSError *error))callBlock
 {
@@ -85,9 +159,9 @@
 ////    NSString *tokenStr = [NSString stringWithFormat:@"%@",UserModel.token];
 ////    _access_token = [NSString stringWithFormat:@"%@",_access_token];
     NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
-    _timestamp = interval;
+//    _timestamp = interval;
     
-    NSString *inStr = [NSString stringWithFormat: @"%ld", (long)_timestamp];
+    NSString *inStr = [NSString stringWithFormat: @"%ld", (long)interval];
     NSLog(@"%@",inStr);
     
     NSString *str1 = @"a1FB4x";

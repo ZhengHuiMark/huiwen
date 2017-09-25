@@ -83,68 +83,78 @@
 }
 
 
+
 - (void)ClickRegistered{
     
-    ZHNetworkTools *net = [[ZHNetworkTools alloc]init];
-    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
-    net.timestamp = interval;
+//    ZHNetworkTools *net = [[ZHNetworkTools alloc]init];
+//    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
+//    net.timestamp = interval;
+//    
+//    net.nonce = [ZHRegisteredViewController return16LetterAndNumber];
+//    NSLog(@"nonce = %@",net.nonce);
+//    
+//    NSString *inStr = [NSString stringWithFormat: @"%ld", (long)interval];
+//    NSLog(@"时间戳 = %@",inStr);
+//    
+//    
+//    NSMutableString *contentString  =[NSMutableString string];
+//    
+//    NSDictionary *dict = @{
+//                           @"nonce":net.nonce,
+//                           @"timestamp":inStr,
+//                           //                           @"client_secret":@"0d908XAIzx6OjpSJg0Yo"
+//                           };
+//    
+//    NSArray *keys = [dict allKeys];
+//    
+//    //按字母顺序排序
+//    NSArray *sortedArray = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+//        return [obj1 compare:obj2 options:NSNumericSearch];
+//    }];
+//    
+//    //拼接字符串
+//    for (NSString *categoryId in sortedArray) {
+//        
+//        if (   ![[dict objectForKey:categoryId] isEqualToString:@""]
+//            && ![[dict objectForKey:categoryId] isEqualToString:@"sign"]
+//            && ![[dict objectForKey:categoryId] isEqualToString:@"key"]
+//            )
+//        {
+//            [contentString appendFormat:@"%@=%@&", categoryId, [dict objectForKey:categoryId]];
+//        }
+//    }
+//    
+//    
+//    NSString *client_secret = @"0d908XAIzx6OjpSJg0Yo";
+//    
+//    [contentString appendFormat:@"client_secret=%@",client_secret];
+//    NSLog(@"contentString = %@",contentString);
+//    
+//    
+//    net.signature = [ZHMD5 MD5ForLower32Bate:contentString];
+//    
+//    NSDictionary *dic = @{
+//                          @"authcode":_validationTf.text,
+//                          @"mobile":_PhoneNumberL.text,
+//                          @"password":_PasswordT.text,
+//                          @"nonce":net.nonce,
+//                          @"timestamp":inStr,
+//                          @"signature":net.signature
+//
+//                          };
     
-    net.nonce = [ZHRegisteredViewController return16LetterAndNumber];
-    NSLog(@"nonce = %@",net.nonce);
+    NSMutableDictionary *dict = [ZHNetworkTools parameters];
+    [dict setObject: _validationTf.text
+             forKey: @"authcode"];
+    [dict setObject: _PhoneNumberL.text
+             forKey: @"mobile"];
+    [dict setObject: _PasswordT.text
+             forKey: @"password"];
     
-    NSString *inStr = [NSString stringWithFormat: @"%ld", (long)net.timestamp];
-    NSLog(@"时间戳 = %@",inStr);
-    
-    
-    NSMutableString *contentString  =[NSMutableString string];
-    
-    NSDictionary *dict = @{
-                           @"nonce":net.nonce,
-                           @"timestamp":inStr,
-                           //                           @"client_secret":@"0d908XAIzx6OjpSJg0Yo"
-                           };
-    
-    NSArray *keys = [dict allKeys];
-    
-    //按字母顺序排序
-    NSArray *sortedArray = [keys sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        return [obj1 compare:obj2 options:NSNumericSearch];
-    }];
-    
-    //拼接字符串
-    for (NSString *categoryId in sortedArray) {
-        
-        if (   ![[dict objectForKey:categoryId] isEqualToString:@""]
-            && ![[dict objectForKey:categoryId] isEqualToString:@"sign"]
-            && ![[dict objectForKey:categoryId] isEqualToString:@"key"]
-            )
-        {
-            [contentString appendFormat:@"%@=%@&", categoryId, [dict objectForKey:categoryId]];
-        }
-    }
+    NSString *url = @"http://119.57.140.230:7000/api/user/register";
     
     
-    NSString *client_secret = @"0d908XAIzx6OjpSJg0Yo";
-    
-    [contentString appendFormat:@"client_secret=%@",client_secret];
-    NSLog(@"contentString = %@",contentString);
-    
-    
-    net.signature = [ZHMD5 MD5ForLower32Bate:contentString];
-    
-    NSDictionary *dic = @{
-                          @"authcode":_validationTf.text,
-                          @"mobile":_PhoneNumberL.text,
-                          @"password":_PasswordT.text,
-                          @"nonce":net.nonce,
-                          @"timestamp":inStr,
-                          @"signature":net.signature
-
-                          };
-    NSString *url = @"http://192.168.0.58:7000/api/user/register";
-    
-    
-    [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+    [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dict andCallBlock:^(id response, NSError *error) {
         // 2. 判断错误
         if (error) {
             NSLog(@"网络请求异常: %@", error);

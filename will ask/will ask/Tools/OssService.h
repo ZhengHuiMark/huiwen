@@ -10,9 +10,10 @@
 #define OssService_h
 #import <AliyunOSSiOS/OSSService.h>
 #import "ViewController.h"
+@class HomeViewController;
 @interface OssService : NSObject
 
-- (id)initWithViewController:(ViewController *)view
+- (id)initWithViewController:(HomeViewController*)view
                 withEndPoint:(NSString *)enpoint;
 
 - (void)setCallbackAddress:(NSString *)address;

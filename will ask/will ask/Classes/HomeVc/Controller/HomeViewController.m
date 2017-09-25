@@ -1,4 +1,4 @@
-//
+ //
 //  HomeViewController.m
 //  will ask
 //
@@ -44,17 +44,21 @@
 // 跳转信息页
 - (void)toMessage
 {
-    ZHMessageTableViewController *messageVc = [[ZHMessageTableViewController alloc]init];
+//    ZHMessageTableViewController *messageVc = [[ZHMessageTableViewController alloc]init];
+//    
+//    [self.navigationController pushViewController: messageVc animated:YES];
     
-    [self.navigationController pushViewController: messageVc animated:YES];
+
 }
 
 //// 测试用 跳转登录页
 - (void)actionModal{
     
-    ZHLoginViewController *loginVc = [[ZHLoginViewController alloc]init];
+//    ZHLoginViewController *loginVc = [[ZHLoginViewController alloc]init];
+//    
+//    [self.navigationController pushViewController:loginVc animated:YES];
     
-    [self.navigationController pushViewController:loginVc animated:YES];
+    
     
 }
 
@@ -123,7 +127,8 @@
 - (void)touch123456{
         NSString * objectKey = @"1" ;
         [service asyncPutImage:objectKey localFilePath:uploadFilePath];
-    
+
+
 }
 
 
@@ -132,13 +137,13 @@
 - (void)configUI{
     
     
+    
     UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [editorBtn addTarget:self action:@selector(toMessage) forControlEvents:UIControlEventTouchUpInside];
     [editorBtn setImage:[UIImage imageNamed:@"news"] forState:UIControlStateNormal];
     [editorBtn sizeToFit];
     UIBarButtonItem *editBtnItem = [[UIBarButtonItem alloc] initWithCustomView:editorBtn];
     self.navigationItem.rightBarButtonItem = editBtnItem;
-    
     
     UIButton *button  = [[UIButton alloc]initWithFrame:CGRectMake(100, 100, 100, 100)];
     

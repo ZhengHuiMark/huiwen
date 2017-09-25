@@ -12,7 +12,7 @@
 #import "HomeViewController.h"
 
 NSString * const bucketName = @"dwsoft";
-NSString * const STSServer = @"http://192.168.0.58:7000/aliyun/oss/getAccessToken";
+NSString * const STSServer = @"http://119.57.140.230:7000/aliyun/oss/getAccessToken";
 
 @implementation OssService
 {
