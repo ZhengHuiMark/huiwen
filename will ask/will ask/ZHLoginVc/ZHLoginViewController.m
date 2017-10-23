@@ -11,6 +11,10 @@
 #import "EncryptionAndDecryption.h"
 #import "YYmodel.h"
 #import "RSAEncryptor.h"
+#import "ZHNetworkTools.h"
+#import "UserModel.h"
+#import "UserManager.h"
+#import "Macro.h"
 
 @interface ZHLoginViewController ()<UITextFieldDelegate>
 
@@ -93,27 +97,50 @@
 
 - (void)ceshi{
     
-
-
-//原始数据
-    NSString *str = @"ibuaiVcKdpRxkhJA_1491819233692";
     
-    //使用.der和.p12中的公钥私钥加密解密
-    NSString *public_key_path = [[NSBundle mainBundle] pathForResource:@"public_key.der" ofType:nil];
-    NSString *private_key_path = [[NSBundle mainBundle] pathForResource:@"private_key.p12" ofType:nil];
+    NSMutableDictionary *dict = [ZHNetworkTools parameters];
+    [dict setObject: _PhoneNumberL.text
+             forKey: @"mobile"];
+    [dict setObject: _PasswordNumberL.text
+             forKey: @"password"];
     
-     NSString *encryptStr = [RSAEncryptor encryptString:str publicKeyWithContentsOfFile:public_key_path];
-    NSLog(@"加密前:%@", str);
-    NSLog(@"加密后:%@", encryptStr);
-    NSLog(@"解密后:%@", [RSAEncryptor decryptString:encryptStr privateKeyWithContentsOfFile:private_key_path password:@"zhenghui"]);
-   
+    NSString *url = [NSString stringWithFormat:@"%@/api/user/login",kIP];
 
-//    NSString *str1 = [RSAEncryptor encryptString:str publicKey:@"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCypBhs8fFzcaU1zTY4PXWImc2qOIIYbcNzbRMIOxAh7l37FlJEO+gIg/2lcMHOepPQVmWjYNBDZb7VgnOLJP939YUWeWkIO1hYhSX0sNasZ2Jma1D3m4CL9BhngPHD2qDu175O0ci2rL574y701Uzlh25mvbS084vBtxYBri6A8wIDAQAB"];
-//    NSLog(@"%@",str1);
+    [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dict andCallBlock:^(id response, NSError *error) {
+        if (error) {
+            NSLog(@"网络请求异常 %@",error);
+            return ;
+        }
+        
+        NSLog(@"%@",response);
+        [UserManager sharedManager].userModel = [UserModel yy_modelWithJSON:response[@"data"]];
+        [[UserManager sharedManager]saveUserModel];
+        
+        !self.loginCompletion?:self.loginCompletion(NO);
+        [[NSNotificationCenter defaultCenter] postNotificationName: @"loginSuccess"
+                                                            object: nil];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    }];
+////原始数据
+//    NSString *str = @"ibuaiVcKdpRxkhJA_1491819233692";
 //    
-//    NSLog(@"解密后:%@", [RSAEncryptor decryptString:str1 privateKey:@"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBALKkGGzx8XNxpTXNNjg9dYiZzao4ghhtw3NtEwg7ECHuXfsWUkQ76AiD/aVwwc56k9BWZaNg0ENlvtWCc4sk/3f1hRZ5aQg7WFiFJfSw1qxnYmZrUPebgIv0GGeA8cPaoO7Xvk7RyLasvnvjLvTVTOWHbma9tLTzi8G3FgGuLoDzAgMBAAECgYEAj0YQ2P/K2P4itN3bSIvyQhao3obnwFP4WBD5HLbSH4SgF4s1e8hYNsw1mISwy7t/5a4FYl15azSlM3Sm2shXozVZTnTakflKuFC49EZDFJ1Dxu0waF9ATIFY2jPKohmhcVZENCBk53q4u7p3S6sXIAkdCxpXwzcy6oUabtAk4tECQQDX4wBpal/sQH3Qv6Ni9DryxK6igBqUQmjepYOjka3vnviNw+fFZqbJHnEQp+x/YvUlpH8ZOunDM6Dze0eYT+QtAkEA09Vw57YS+2Lt3iIWbyccss9HT8Jt9udsyPTxV83qHymcyozazlke3NquH1HOyNyvmCC26W/cM5PcRCFxkk+NnwJBAK2M+o7ECjr1mW9QL/vj1OPHA5D1JOjc/ktGia3b9hU1GiF1RQRnQltaEpDOPgwmNGc/d0GEH9phzdkO2P5z8z0CQGmql5ZNwWw6bfMXR9+MQAmF0cmcb+PwjtgzLswgv/9pb3euCVtTI00BnEetNBwH0WNuNi99h/cGc6JcmF1mZ3sCQC/oJdJrqIrgWL742c7Kb9JRfMzlAliyolFDhFXlwfJMH6X3GuHOe33Pabhh7fU1Ow5uFqRZRrIiXJ812IsJYo0="]);
+//    //使用.der和.p12中的公钥私钥加密解密
+//    NSString *public_key_path = [[NSBundle mainBundle] pathForResource:@"public_key.der" ofType:nil];
+//    NSString *private_key_path = [[NSBundle mainBundle] pathForResource:@"private_key.p12" ofType:nil];
 //    
-//    
+//     NSString *encryptStr = [RSAEncryptor encryptString:str publicKeyWithContentsOfFile:public_key_path];
+//    NSLog(@"加密前:%@", str);
+//    NSLog(@"加密后:%@", encryptStr);
+//    NSLog(@"解密后:%@", [RSAEncryptor decryptString:encryptStr privateKeyWithContentsOfFile:private_key_path password:@"zhenghui"]);
+//   
+//
+////    NSString *str1 = [RSAEncryptor encryptString:str publicKey:@"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCypBhs8fFzcaU1zTY4PXWImc2qOIIYbcNzbRMIOxAh7l37FlJEO+gIg/2lcMHOepPQVmWjYNBDZb7VgnOLJP939YUWeWkIO1hYhSX0sNasZ2Jma1D3m4CL9BhngPHD2qDu175O0ci2rL574y701Uzlh25mvbS084vBtxYBri6A8wIDAQAB"];
+////    NSLog(@"%@",str1);
+////    
+////    NSLog(@"解密后:%@", [RSAEncryptor decryptString:str1 privateKey:@"MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBALKkGGzx8XNxpTXNNjg9dYiZzao4ghhtw3NtEwg7ECHuXfsWUkQ76AiD/aVwwc56k9BWZaNg0ENlvtWCc4sk/3f1hRZ5aQg7WFiFJfSw1qxnYmZrUPebgIv0GGeA8cPaoO7Xvk7RyLasvnvjLvTVTOWHbma9tLTzi8G3FgGuLoDzAgMBAAECgYEAj0YQ2P/K2P4itN3bSIvyQhao3obnwFP4WBD5HLbSH4SgF4s1e8hYNsw1mISwy7t/5a4FYl15azSlM3Sm2shXozVZTnTakflKuFC49EZDFJ1Dxu0waF9ATIFY2jPKohmhcVZENCBk53q4u7p3S6sXIAkdCxpXwzcy6oUabtAk4tECQQDX4wBpal/sQH3Qv6Ni9DryxK6igBqUQmjepYOjka3vnviNw+fFZqbJHnEQp+x/YvUlpH8ZOunDM6Dze0eYT+QtAkEA09Vw57YS+2Lt3iIWbyccss9HT8Jt9udsyPTxV83qHymcyozazlke3NquH1HOyNyvmCC26W/cM5PcRCFxkk+NnwJBAK2M+o7ECjr1mW9QL/vj1OPHA5D1JOjc/ktGia3b9hU1GiF1RQRnQltaEpDOPgwmNGc/d0GEH9phzdkO2P5z8z0CQGmql5ZNwWw6bfMXR9+MQAmF0cmcb+PwjtgzLswgv/9pb3euCVtTI00BnEetNBwH0WNuNi99h/cGc6JcmF1mZ3sCQC/oJdJrqIrgWL742c7Kb9JRfMzlAliyolFDhFXlwfJMH6X3GuHOe33Pabhh7fU1Ow5uFqRZRrIiXJ812IsJYo0="]);
+////    
+////    
 }
 
 

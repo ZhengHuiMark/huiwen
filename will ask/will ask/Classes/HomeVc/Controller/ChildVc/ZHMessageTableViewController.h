@@ -7,14 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JHMenuTableView.h"
 
-@interface ZHMessageTableViewController : UITableViewController <UITableViewDataSource,UITableViewDelegate,JHMenuTableViewDelegate>
+@interface ZHMessageTableViewController : UITableViewController
 
 
-{
-    UIView      *_toolBarView;
-}
-//@property (strong, nonatomic) UITableView *tableView;
+
 
 @end

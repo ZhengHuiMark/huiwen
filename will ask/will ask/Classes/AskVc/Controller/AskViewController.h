@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AskViewController : UIViewController
+@interface AskViewController : UITableViewController
 
 @end

@@ -155,6 +155,9 @@
             
         case kValidationViewControllerRow_Location: {
            
+            !self.LocationClick?:self.LocationClick(self.indexPath);
+
+            
            return NO;
         }
             break;

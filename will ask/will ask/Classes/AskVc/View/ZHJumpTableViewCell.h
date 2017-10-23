@@ -8,6 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^RewardBtnCellDidClick)(void);
+typedef void(^AskExpertBtnCellDidClick)(void);
+typedef void(^FreeBtnCellDidClick)(void);
+
+
 @interface ZHJumpTableViewCell : UITableViewCell
+
+
+@property (nonatomic,strong)NSIndexPath *indexPath;
+
+@property (nonatomic, copy) RewardBtnCellDidClick RewardBtnClick;
+
+@property (nonatomic, copy) AskExpertBtnCellDidClick AskExpertBtnClick;
+
+@property (nonatomic, copy) FreeBtnCellDidClick FreeBtnClick;
 
 @end

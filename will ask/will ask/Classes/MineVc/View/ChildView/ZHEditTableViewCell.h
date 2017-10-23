@@ -13,6 +13,9 @@ typedef void(^UserInfoCellDidClick)(NSIndexPath *indexPath);
 
 typedef void(^DateInfoCellDidClick)(NSIndexPath *indexPath);
 
+typedef void(^LocationCellDidClick)(NSIndexPath *indexPath);
+
+
 @interface ZHEditTableViewCell : UITableViewCell
 
 @property (nonatomic, strong) UserInfoModel *UserInfoModel;
@@ -27,6 +30,8 @@ typedef void(^DateInfoCellDidClick)(NSIndexPath *indexPath);
 @property (nonatomic, copy) UserInfoCellDidClick didClick;
 
 @property (nonatomic, copy) DateInfoCellDidClick DateClick;
+
+@property (nonatomic, copy) LocationCellDidClick LocationClick;
 
 
 

@@ -37,11 +37,19 @@ static NSString *MineListCellid = @"MineListCellid";
 -(void)viewWillAppear:(BOOL)animated{
 
     self.navigationController.navigationBar.hidden = YES;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName: @"loginSuccess"
+                                                        object: nil];
+    [self.tableView reloadData];
 
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     self.navigationController.navigationBar.hidden = NO;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName: @"loginSuccess"
+                                                        object: nil];
+    [self.tableView reloadData];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -120,23 +128,23 @@ static NSString *MineListCellid = @"MineListCellid";
             
             [self pushToSetControllerWithIndexPath:indexPath className:className];
         
-    }else if (indexPath.section == 1){
+    }else if (indexPath.section == 2){
         switch (indexPath.row) {
             case 0:{
                 
                 
-                NSString *className = @"PersonalInformation";
+                NSString *className = @"ValidationViewController";
                 [self pushToSetControllerWithIndexPath:indexPath className:className];
                 
                 break;
             }
-                //            case 1:
-                //            {
-                //                NSString *className = @"PrivateMessageViewController";
-                //                [self pushToSetControllerWithIndexPath:indexPath className:className];
-                //                break;
-                //
-                //            }
+            case 1:
+            {
+                NSString *className = @"ValidationViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                break;
+                
+            }
                 //            case 1:
                 //            {
                 //                NSString *className = @"AlertsViewController";
@@ -151,16 +159,11 @@ static NSString *MineListCellid = @"MineListCellid";
                 //                break;
                 //
                 //            }
-            case 1:
-            {
-     
-                break;
-                
-            }
+        
             case 2:
             {
                 
-                NSString *className = @"ZHUserFeedbackViewController";
+                NSString *className = @"ValidationViewController";
                 [self pushToSetControllerWithIndexPath:indexPath className:className];
                 
                 break;
@@ -199,8 +202,8 @@ static NSString *MineListCellid = @"MineListCellid";
             HeadCell = [[ZHHeaderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HeaderCellid];
         }
         HeadCell.placeholderView.backgroundColor = [UIColor orangeColor];
-        [HeadCell.touXiangBtn setImage:[UIImage imageNamed:@"wechat"] forState:UIControlStateNormal];
-        HeadCell.userIDLabel.text = @"12344567";
+
+        HeadCell.userIDLabel.text = [UserManager sharedManager].userModel.nickname;
         
         return HeadCell;
     }else if (indexPath.section == 1){

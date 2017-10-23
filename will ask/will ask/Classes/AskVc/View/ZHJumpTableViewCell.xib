@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ZHJumpTableViewCell">
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="JumpCellid" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ZHJumpTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -25,6 +25,9 @@
                             <constraint firstAttribute="height" constant="40" id="hKr-Ax-1d8"/>
                             <constraint firstAttribute="width" constant="40" id="zf3-8M-aWz"/>
                         </constraints>
+                        <connections>
+                            <action selector="Rewardbtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="NV7-Hh-CIa"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="悬赏问" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6g-Wm-ut5">
                         <rect key="frame" x="49" y="69" width="40" height="13"/>
@@ -36,15 +39,18 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WYz-Hw-KUn">
-                        <rect key="frame" x="166" y="24" width="40" height="40"/>
+                        <rect key="frame" x="167.5" y="24" width="40" height="40"/>
                         <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="VCd-L2-Vzy"/>
                             <constraint firstAttribute="height" constant="40" id="y1m-Df-h7q"/>
                         </constraints>
+                        <connections>
+                            <action selector="FreeBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="DaL-xT-SbN"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="免费问" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Xd-lg-tIo">
-                        <rect key="frame" x="166" y="69" width="40" height="13"/>
+                        <rect key="frame" x="167.5" y="69" width="40" height="13"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="13" id="t9b-GS-SxT"/>
                         </constraints>
@@ -59,6 +65,9 @@
                             <constraint firstAttribute="width" constant="40" id="Rhz-nH-vOy"/>
                             <constraint firstAttribute="height" constant="40" id="ZaN-Wl-2VU"/>
                         </constraints>
+                        <connections>
+                            <action selector="AskExpertBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bUi-0f-2QO"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="问专家" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GQU-Kg-PPy">
                         <rect key="frame" x="283" y="70" width="40" height="13"/>
@@ -75,16 +84,22 @@
                     <constraint firstItem="xxt-a5-zUd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="6Nb-CN-zRD"/>
                     <constraint firstItem="WYz-Hw-KUn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="7LH-Y9-8TI"/>
                     <constraint firstItem="h6g-Wm-ut5" firstAttribute="top" secondItem="T5E-dZ-jM8" secondAttribute="bottom" constant="5" id="9ft-Ic-jri"/>
-                    <constraint firstItem="xxt-a5-zUd" firstAttribute="leading" secondItem="WYz-Hw-KUn" secondAttribute="trailing" constant="77" id="KDR-a6-5Nz"/>
+                    <constraint firstItem="5Xd-lg-tIo" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="NLa-lJ-qER"/>
                     <constraint firstItem="T5E-dZ-jM8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="49" id="Rqz-P1-2lF"/>
                     <constraint firstItem="GQU-Kg-PPy" firstAttribute="top" secondItem="xxt-a5-zUd" secondAttribute="bottom" constant="5" id="TaO-yr-qmi"/>
                     <constraint firstItem="T5E-dZ-jM8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="UkT-xA-UkK"/>
-                    <constraint firstItem="5Xd-lg-tIo" firstAttribute="leading" secondItem="h6g-Wm-ut5" secondAttribute="trailing" constant="77" id="YUU-YQ-vcu"/>
-                    <constraint firstItem="WYz-Hw-KUn" firstAttribute="leading" secondItem="T5E-dZ-jM8" secondAttribute="trailing" constant="77" id="d2x-10-K4j"/>
-                    <constraint firstItem="GQU-Kg-PPy" firstAttribute="leading" secondItem="5Xd-lg-tIo" secondAttribute="trailing" constant="77" id="r0h-O5-eWx"/>
+                    <constraint firstItem="WYz-Hw-KUn" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="al2-GH-P0M"/>
+                    <constraint firstAttribute="trailing" secondItem="xxt-a5-zUd" secondAttribute="trailing" constant="52" id="du8-Pa-7kJ"/>
+                    <constraint firstAttribute="trailing" secondItem="GQU-Kg-PPy" secondAttribute="trailing" constant="52" id="skU-du-cdT"/>
                     <constraint firstItem="h6g-Wm-ut5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="49" id="uRR-3Y-MGo"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="btnExpert" destination="xxt-a5-zUd" id="wRv-Sw-fXR"/>
+                <outlet property="btnFree" destination="WYz-Hw-KUn" id="DNF-u4-9NR"/>
+                <outlet property="btnReward" destination="T5E-dZ-jM8" id="P84-cs-pTc"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="73"/>
         </tableViewCell>
     </objects>
 </document>

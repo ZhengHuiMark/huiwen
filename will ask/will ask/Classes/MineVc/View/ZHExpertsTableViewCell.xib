@@ -21,7 +21,7 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="atm-st-XeE">
                         <rect key="frame" x="25" y="12" width="325" height="40.5"/>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.49803921569999998" blue="0.035294117649999998" alpha="1" colorSpace="calibratedRGB"/>
-                        <state key="normal" title="Button">
+                        <state key="normal" title="认证专家">
                             <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>

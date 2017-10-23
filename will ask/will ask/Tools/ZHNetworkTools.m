@@ -202,8 +202,14 @@
             callBlock(responseObject, nil);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             callBlock(nil, error);
-            NSLog(@"error ==%@", [error userInfo][@"com.alamofire.serialization.response.error.string"]);
-        }];
+            NSError *underError = error.userInfo[@"NSUnderlyingError"];
+            NSData *responseData = underError.userInfo[@"com.alamofire.serialization.response.error.data"];
+            NSString *result = [[NSString alloc] initWithData:responseData  encoding:NSUTF8StringEncoding];
+            NSLog(@"result = %@",result);
+            NSLog(@"error ==%@", [error userInfo][@"com.alamofire.serialization.response.error.data"]);
+            NSData *responseDatt = [error userInfo][@"com.alamofire.serialization.response.error.data"];
+            NSString *result1 = [[NSString alloc] initWithData:responseDatt  encoding:NSUTF8StringEncoding];
+            NSLog(@"result1 = %@",result1);        }];
         
     } else {
         

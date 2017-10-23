@@ -49,6 +49,7 @@
                 <outlet property="NameTextF" destination="BMB-y5-GdC" id="xwI-SB-G1l"/>
                 <outlet property="labelTitle" destination="8fy-Id-DaM" id="jRW-SF-oVI"/>
             </connections>
+            <point key="canvasLocation" x="33.5" y="54"/>
         </tableViewCell>
     </objects>
 </document>
