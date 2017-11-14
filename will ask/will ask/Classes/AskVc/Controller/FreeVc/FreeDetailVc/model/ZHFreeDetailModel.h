@@ -25,15 +25,36 @@
 
 /** 阅读数 */
 @property(nonatomic,copy)NSString *readNumber;
+
 /** 提问时间 */
 @property(nonatomic,copy)NSString *time;
+
 /** 提问分类 */
 @property(nonatomic,copy)NSString *type;
-/** 免费问ID */
+
+/** 问题ID */
 @property(nonatomic,copy)NSString *uid;
+
 /** 提问用户ID */
 @property(nonatomic,copy)NSString *userId;
 
-@property(nonatomic,strong)NSArray<ZHFreeAnswerModel *> *anserModel;
+
+//  ----- 以下为悬赏问属性   ----
+
+@property(nonatomic,copy)NSString *remainingTime;
+
+
+@property(nonatomic,copy)NSString *amount;
+
+@property(nonatomic,copy)NSString *answerNumber;
+
+@property(nonatomic,assign)BOOL allowedAnswer;
+
+@property(nonatomic,copy)NSString *rewardAskId;
+
+
+@property(nonatomic,strong)NSArray<ZHFreeAnswerModel *> *anserModels;
+
+
 
 @end

@@ -27,5 +27,11 @@
 }
 
 
+- (void)setUserInfoModel:(UserInfoModel *)UserInfoModel {
+    _UserInfoModel = UserInfoModel;
+    
+    
+    
+}
 
 @end

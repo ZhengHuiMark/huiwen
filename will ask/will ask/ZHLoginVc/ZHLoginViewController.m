@@ -9,23 +9,37 @@
 #import "ZHLoginViewController.h"
 #import "ZHRegisteredViewController.h"
 #import "EncryptionAndDecryption.h"
-#import "YYmodel.h"
+#import "YYModel.h"
 #import "RSAEncryptor.h"
 #import "ZHNetworkTools.h"
 #import "UserModel.h"
 #import "UserManager.h"
 #import "Macro.h"
+#import "MLTextField.h"
+
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKConnector/ShareSDKConnector.h>
+#import <ShareSDKExtension/SSEThirdPartyLoginHelper.h>
+#import <ShareSDKExtension/ShareSDK+Extension.h>
+
+
+#import "WXApiObject.h"
+#import "WXApi.h"
+#import "AppDelegate.h"
+
+#define kWXAPPID wxc264c5d4f565c692
+#define kWXAppSecret db5c2c9660c35df6859bbd86d81e9b83
 
 @interface ZHLoginViewController ()<UITextFieldDelegate>
 
 //手机号输入框
-@property(nonatomic,copy)UITextField *PhoneNumberL;
+@property(nonatomic,copy)MLTextField *PhoneNumberL;
 // 密码输入框
-@property(nonatomic,copy)UITextField *PasswordNumberL;
+@property(nonatomic,copy)MLTextField *PasswordNumberL;
 // 底部线
-@property(nonatomic,copy)UIView *LineView;
+//@property(nonatomic,copy)UIView *LineView;
 // 底部线2
-@property(nonatomic,copy)UIView *LineView1;
+//@property(nonatomic,copy)UIView *LineView1;
 // 登录按钮
 @property(nonatomic,copy)UIButton *LoginBtn;
 // 忘记密码按钮
@@ -68,30 +82,14 @@
     if (_AccordingBtn.selected == NO) {
         _AccordingBtn.selected = YES;
         [_AccordingBtn setBackgroundImage:[UIImage imageNamed:@"eyelash"] forState:UIControlStateSelected];
-        [_PasswordNumberL setSecureTextEntry:NO];
+        [_PasswordNumberL.ml_textfiled setSecureTextEntry:NO];
     }else{
         _AccordingBtn.selected = NO;
         [_AccordingBtn setBackgroundImage:[UIImage imageNamed:@"look"] forState:UIControlStateSelected];
-        [_PasswordNumberL setSecureTextEntry:YES];
+        [_PasswordNumberL.ml_textfiled setSecureTextEntry:YES];
 
     }
 }
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    NSLog(@"点击1");
-//    _LineView.backgroundColor = [UIColor orangeColor];
-//    if (_PhoneNumberL.selected == YES) {
-//        _LineView.backgroundColor = [UIColor orangeColor];
-//    }else if (_PasswordNumberL.selected == YES) {
-//        _PhoneNumberL.selected = NO;
-//        
-//        _LineView1.backgroundColor = [UIColor orangeColor];
-//        _LineView.backgroundColor = [UIColor blackColor];
-//
-//    }
-//    
-    return YES;
-}// return NO to disallow editing.
 
 
 
@@ -99,9 +97,9 @@
     
     
     NSMutableDictionary *dict = [ZHNetworkTools parameters];
-    [dict setObject: _PhoneNumberL.text
+    [dict setObject: _PhoneNumberL.ml_textfiled.text
              forKey: @"mobile"];
-    [dict setObject: _PasswordNumberL.text
+    [dict setObject: _PasswordNumberL.ml_textfiled.text
              forKey: @"password"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/user/login",kIP];
@@ -153,6 +151,81 @@
 
 }
 
+
+- (void)LoginWeChat {
+    
+    
+
+    
+    [SSEThirdPartyLoginHelper loginByPlatform:SSDKPlatformTypeWechat onUserSync:^(SSDKUser *user, SSEUserAssociateHandler associateHandler) {
+        
+        //                     NSLog(@"%@",user.credential);
+        
+
+        NSString *access_token = user.credential.token;
+        //                     NSLog(@"access_token = %@",access_token);
+        NSString *openid = user.credential.uid;
+        //                     NSLog(@"openid = %@",openid);
+//        NSDictionary *dic = @{
+//                              @"accessToken":access_token,
+//                              @"openId":openid
+//                              };
+
+        NSMutableDictionary *dic =  [ZHNetworkTools parameters];
+        [dic setObject:access_token forKey:@"accessToken"];
+        [dic setObject:openid forKey:@"openId"];
+//
+        
+//        [SVProgressHUD show];
+        
+        
+        NSString *url = [NSString stringWithFormat:@"%@/api/user/loginByWechat", kIP];
+        
+        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+//            [SVProgressHUD dismiss];
+            if (error) {
+                NSLog(@"%@",error);
+            }
+            NSLog(@"%@",response);
+            
+            [UserManager sharedManager].userModel = [UserModel yy_modelWithJSON: response[@"data"]];
+            [[UserManager sharedManager] saveUserModel];
+            //
+            //                            [[NSNotificationCenter defaultCenter] postNotificationName: @"loginSuccess"
+            //                                                                                object: nil];
+            !self.loginCompletion?:self.loginCompletion(NO);
+//            NSInteger code = [response[@"code"] integerValue];
+//            if (!(code == 0)) {
+//                
+//                [SVProgressHUD showInfoWithStatus: response[@"message"]];
+//            }else if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass: [ZHNavigtaionController class]]) {
+//                ZHTabBarController *ZHTabController = [[ZHTabBarController alloc]init];
+//                [UIApplication sharedApplication].keyWindow.rootViewController = ZHTabController;
+//            } else {
+//                [self dismissViewControllerAnimated: YES completion: nil];
+//            }
+            
+        }];
+        
+        NSLog(@"%@",user.credential);
+        
+        
+    } onLoginResult:^(SSDKResponseState state, SSEBaseUser *user, NSError *error) {
+        
+        if (state == SSDKResponseStateSuccess)
+        {
+            NSLog(@"%@",user);
+            NSLog(@"%@",[UserManager sharedManager].userModel);
+        }
+        
+    }];
+
+
+    
+}
+
+
+
 - (void)configUI{
     
     UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 62, 20)] ;
@@ -169,25 +242,29 @@
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor blackColor];
 
     
-    CGFloat PhoneNumWidth = 280;
-    CGFloat PhoneNumHeight = 13.5;
-    CGFloat PhoneNumX = CGRectGetMinX(self.view.frame) + 41;
+    CGFloat PhoneNumWidth = [UIScreen mainScreen].bounds.size.width - 80;
+    CGFloat PhoneNumHeight = 40;
+    CGFloat PhoneNumX = CGRectGetMinX(self.view.frame) + 40;
     CGFloat PhoneNumY = CGRectGetMinY(self.view.frame) + 141;
 
-    _PhoneNumberL = [[UITextField alloc]init];
-    _PhoneNumberL.frame = CGRectMake(PhoneNumX , PhoneNumY, PhoneNumWidth, PhoneNumHeight);
-    _PhoneNumberL.placeholder = @"手机号";
-    _PhoneNumberL.textColor = [UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1];
-    _PhoneNumberL.font = [UIFont systemFontOfSize:15];
+    _PhoneNumberL = [MLTextField textFieldWithFrame:CGRectMake(PhoneNumX, PhoneNumY, PhoneNumWidth, PhoneNumHeight) inView:self.view];
     
-    _PhoneNumberL.delegate = self;
-    [self.view addSubview:_PhoneNumberL];
+    _PhoneNumberL.colorHighlight = [UIColor redColor];
+    _PhoneNumberL.colorNormal    = [UIColor blackColor];
+    
+    _PhoneNumberL.ml_textfiled.placeholder = @"手机号";
+    _PhoneNumberL.ml_textfiled.textColor = [UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1];
+    _PhoneNumberL.ml_textfiled.font = [UIFont systemFontOfSize:15];
+    [_PhoneNumberL.ml_textfiled setBorderStyle:UITextBorderStyleNone];
+
+    
+
     
     // 一键删除手机号按钮
     CGFloat DeleteBtnWidth = 15;
     CGFloat DeleteBtnHeight = 15;
-    CGFloat DeleteX = CGRectGetMaxX(_PhoneNumberL.frame) + 10;
-    CGFloat DeleteY = CGRectGetMinY(self.view.frame) + 141;
+    CGFloat DeleteX = CGRectGetMaxX(_PhoneNumberL.frame) - 30;
+    CGFloat DeleteY = CGRectGetMinY(_PhoneNumberL.frame) + 10;
     
     _DeleteNumberBtn = [[UIButton alloc]init];
     _DeleteNumberBtn.frame = CGRectMake(DeleteX, DeleteY , DeleteBtnWidth, DeleteBtnHeight);
@@ -196,39 +273,30 @@
     
     
     
-    // 线
-    CGFloat LineWidth = 330;
-    CGFloat LineHeight = .5;
-    CGFloat LineX = (self.view.frame.size.width - LineWidth) / 2;
-    CGFloat LineY = CGRectGetMaxY(_PhoneNumberL.frame);
-    
-    _LineView = [[UIView alloc]init];
-    _LineView.frame = CGRectMake(LineX, LineY + 10, LineWidth, LineHeight);
-    _LineView.backgroundColor = [UIColor blackColor];
-    
-    [self.view addSubview: _LineView];
-    
-    // 密码
-    CGFloat pwdWidth = 280;
-    CGFloat PwdHeight = 13.5;
-    CGFloat PwdX = CGRectGetMinX(self.view.frame) + 41;
-    CGFloat PwdY = CGRectGetMaxY(_LineView.frame);
-    
-    _PasswordNumberL = [[UITextField alloc]init];
-    _PasswordNumberL.frame = CGRectMake(PwdX, PwdY + 30, pwdWidth, PwdHeight);
-    _PasswordNumberL.placeholder = @"密码";
-    _PasswordNumberL.textColor = [UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1];
-    _PasswordNumberL.font = [UIFont systemFontOfSize:15];
 
     
-    _PasswordNumberL.delegate = self;
+    // 密码
+    CGFloat pwdWidth = [UIScreen mainScreen].bounds.size.width - 80;
+    CGFloat PwdHeight = 40;
+    CGFloat PwdX = CGRectGetMinX(self.view.frame) + 40;
+    CGFloat PwdY = CGRectGetMaxY(_PhoneNumberL.frame);
+    
+    _PasswordNumberL = [MLTextField textFieldWithFrame:CGRectMake(PwdX, PwdY + 30, pwdWidth, PwdHeight) inView:self.view];
+    _PasswordNumberL.colorHighlight = [UIColor redColor];
+    _PasswordNumberL.colorNormal    = [UIColor blackColor];
+    _PasswordNumberL.ml_textfiled.placeholder = @"密码";
+    _PasswordNumberL.ml_textfiled.textColor = [UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1];
+    _PasswordNumberL.ml_textfiled.font = [UIFont systemFontOfSize:15];
+     [_PasswordNumberL.ml_textfiled setBorderStyle:UITextBorderStyleNone];
+
+    
     [self.view addSubview:_PasswordNumberL];
     
     // 显示密码按钮
     CGFloat AccordingBtnWidth = 16;
     CGFloat AccordingBtnHeight = 10;
-    CGFloat AccordingX = CGRectGetMaxX(_PasswordNumberL.frame) + 10;
-    CGFloat AccordingY = CGRectGetMaxY(_LineView.frame) + 30;
+    CGFloat AccordingX = CGRectGetMaxX(_PasswordNumberL.frame) - 30;
+    CGFloat AccordingY = CGRectGetMinY(_PasswordNumberL.frame) + 15;
     
     _AccordingBtn = [[UIButton alloc]init];
     _AccordingBtn.frame = CGRectMake(AccordingX, AccordingY, AccordingBtnWidth, AccordingBtnHeight);
@@ -237,23 +305,12 @@
     
     
     [self.view addSubview:_AccordingBtn];
-                                       
     
-    CGFloat Line1Width = 330;
-    CGFloat Line1Height = .5;
-    CGFloat Line1X = (self.view.frame.size.width - Line1Width) / 2;
-    CGFloat Line1Y = CGRectGetMaxY(_PasswordNumberL.frame);
-    
-    _LineView1 = [[UIView alloc]init];
-    _LineView1.frame = CGRectMake(Line1X, Line1Y + 10, Line1Width, Line1Height);
-    _LineView1.backgroundColor = [UIColor blackColor];
-    
-    [self.view addSubview:_LineView1];
     
     CGFloat LoginBtnWidth = 300;
     CGFloat LoginBtnHeight = 45;
     CGFloat LoginBtnX = (self.view.frame.size.width - LoginBtnWidth) / 2;
-    CGFloat LoginBtnY = CGRectGetMaxY(_LineView1.frame);
+    CGFloat LoginBtnY = CGRectGetMaxY(_PasswordNumberL.frame);
     
     _LoginBtn = [[UIButton alloc]initWithFrame:CGRectMake(LoginBtnX, LoginBtnY + 47, LoginBtnWidth, LoginBtnHeight)];
     _LoginBtn.layer.cornerRadius = 22.5;
@@ -273,6 +330,7 @@
     [_ForgetPwdBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
     [_ForgetPwdBtn setTitleColor:[UIColor colorWithRed:242/255.0 green:90/255.0 blue:41/255.0 alpha:1] forState:UIControlStateNormal];
     _ForgetPwdBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+    [_ForgetPwdBtn addTarget:self action:@selector(forgetPassword) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:_ForgetPwdBtn];
     
@@ -299,6 +357,7 @@
     x = CGRectGetMaxX(_QQLoginBtn.frame) + Margin;
     _WeChatLoginBtn.frame = CGRectMake(x, y, BtnWidth, BtnHeight);
     [_WeChatLoginBtn setBackgroundImage:[UIImage imageNamed:@"wechat"] forState:UIControlStateNormal];
+    [_WeChatLoginBtn addTarget:self action:@selector(LoginWeChat) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:_WeChatLoginBtn];
     

@@ -30,7 +30,7 @@
 /** 专家审核状态 */
 @property(nonatomic,  copy)NSString *expertCheckStatus;
 /** 专家昵称 */
-@property(nonatomic,  copy)NSString * expertNickname;
+@property(nonatomic,  copy)NSString *expertNickname;
 /** 会员卡余额 */
 @property(nonatomic,  copy)NSString *myEarnings;
 /** 会员卡余额 */

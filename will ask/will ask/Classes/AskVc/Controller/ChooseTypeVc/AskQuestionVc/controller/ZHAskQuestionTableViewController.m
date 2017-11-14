@@ -16,12 +16,13 @@
 #import "MLImageCell.h"
 #import "LBViewController+ImagePicker.h"
 #import "ZHImageUploadTableViewCell.h"
+#import "ZHRewardMoneyViewController.h"
 
 
 static NSInteger kMaxCount = 3;
 
 
-@interface ZHAskQuestionTableViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UITextViewDelegate>
+@interface ZHAskQuestionTableViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UITextViewDelegate,UIActionSheetDelegate>
 
 
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -49,9 +50,10 @@ static NSInteger kMaxCount = 3;
     
     self.view.backgroundColor = [UIColor blueColor];
     
-    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"1" style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    self.navigationItem.backBarButtonItem = backBtn;
+    self.navigationController.navigationItem.leftBarButtonItem = backBtn;
+//    self.navigationItem.backBarButtonItem = backBtn;
     
     [self setupUI];
 }
@@ -211,6 +213,36 @@ static NSInteger kMaxCount = 3;
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+
+    if (indexPath.section == kValidationViewControllerSectionRewardMoneyAndDate && indexPath.row == kValidationViewControllerRow_RewardMoney) {
+        
+        ZHRewardMoneyViewController *rewardVc = [[ZHRewardMoneyViewController alloc]init];
+        
+        [self.navigationController pushViewController:rewardVc animated:YES];
+    }
+    
+    if (indexPath.section == kValidationViewControllerSectionRewardMoneyAndDate && indexPath.row == kValidationViewControllerRow_RewardData) {
+        
+        
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                      initWithTitle:@""
+                                      delegate:self
+                                      cancelButtonTitle:@"取消"
+                                      destructiveButtonTitle:nil
+                                      otherButtonTitles:@"48小时", @"24小时",@"12小时",@"6小时",nil];
+        
+        
+        actionSheet.actionSheetStyle = UIBarStyleDefault;
+        [actionSheet showInView:self.view];
+    
+    }
+    
+}
+
+
 - (ZHTitleTypeTableViewCell *)obtainTitleTypeCellWithTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath{
     
     ZHTitleTypeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: NSStringFromClass([ZHTitleTypeTableViewCell class])
@@ -239,7 +271,7 @@ static NSInteger kMaxCount = 3;
     _collectionView = [[UICollectionView alloc] initWithFrame: CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50) collectionViewLayout: self.layout];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
-    _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    _collectionView.contentInset = UIEdgeInsetsMake(0,18, 0, 0);
     [_collectionView registerNib:[UINib nibWithNibName: NSStringFromClass([MLImageCell class])
                                                 bundle: [NSBundle mainBundle]]
       forCellWithReuseIdentifier: NSStringFromClass([MLImageCell class])];

@@ -110,7 +110,7 @@
 //}
 
 + (CGFloat)btnWidth {
-    return 108.0f;
+    return ([UIScreen mainScreen].bounds.size.width - [self marginLeft] - [self marginRight] - ([self itemPreLine]-1)*[self marginMiddleH]) / [self itemPreLine];
 }
 
 + (CGFloat)btnHeight {

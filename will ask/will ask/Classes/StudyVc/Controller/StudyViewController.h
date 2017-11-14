@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ZHStudyModel,ZHCaseModel,ZHSubCaseModel;
 
 @interface StudyViewController : UIViewController
+
+
+
+@property(nonatomic,strong)ZHStudyModel *todayExpertModel;
+
+@property(nonatomic,strong)ZHCaseModel *caseModel;
+
+@property(nonatomic,strong)ZHSubCaseModel *subCaseModel;
+
+
 
 @end

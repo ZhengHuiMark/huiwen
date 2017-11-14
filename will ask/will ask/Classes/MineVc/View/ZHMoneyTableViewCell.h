@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class UserModel;
 
 @interface ZHMoneyTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *memberCardBtn;
 @property (weak, nonatomic) IBOutlet UIButton *incomeBtn;
+
+@property (strong, nonatomic) UserModel *usermodel;
 
 @end

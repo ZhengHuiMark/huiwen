@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ZHAskModel,ZHFreeDetailModel,ZHFreeAnswerModel;
 
 @interface FreeDetailViewController : UIViewController
+
+@property(nonatomic,strong)NSString *uidString;
+
+@property(nonatomic,strong)ZHAskModel *model;
+
+@property(nonatomic,strong)ZHFreeAnswerModel *answerModel;
+
+@property(nonatomic,strong)ZHFreeDetailModel *detailModel;
+
+
 
 @end

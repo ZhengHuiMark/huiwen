@@ -15,6 +15,7 @@
 #import "ZHNetworkTools.h"
 #import "BRPickerView.h"
 #import "NSDate+BRAdd.h"
+#import "LBViewController+ImagePicker.h"
 
 
 
@@ -38,6 +39,8 @@ static NSString *nameCellid = @"nameCellid";
 @property (nonatomic, strong) UserInfoModel *UserInfoModel;
 
 @property (nonatomic, weak)ZHPersonalHeaderTableViewCell *PersonalHeadlerCell;
+
+
 
 @property (nonatomic, weak)ZHEditTableViewCell *EditCell;
 
@@ -207,45 +210,23 @@ static NSString *nameCellid = @"nameCellid";
         
         HeadCell.AvatarClick = ^(NSIndexPath *indexPath){
           
-            NSString * title = @"选择";
-            NSString * cancelButtonTitle = @"取消";
-            NSString * picButtonTitle = @"拍照";
-            NSString * photoButtonTitle = @"从相册选择";
-            
-            UIAlertController * alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-            
-            UIAlertAction * cancelAction = [UIAlertAction actionWithTitle:cancelButtonTitle style:UIAlertActionStyleCancel handler:nil];
-            UIAlertAction * picAction = [UIAlertAction actionWithTitle:picButtonTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-                imagePickerController.delegate = self;
-                imagePickerController.allowsEditing = YES;
-                imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-                [self presentViewController:imagePickerController animated:YES completion:^{}];
-            }];
-            UIAlertAction * photoAction = [UIAlertAction actionWithTitle:photoButtonTitle style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-                imagePickerController.delegate = self;
-                imagePickerController.allowsEditing = YES;
-                imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                [self presentViewController:imagePickerController animated:YES completion:^{}];
-            }];
-            
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-                [alert addAction:cancelAction];
-                [alert addAction:picAction];
-                [alert addAction:photoAction];
-            } else {
-                [alert addAction:cancelAction];
-                [alert addAction:photoAction];
-            }
-            [self presentViewController:alert animated:YES completion:nil];
+            [self selectPhotoWithSuccessBlock:^(UIImagePickerController *imagePickerViewController, NSDictionary<NSString *,id> *info) {
+                UIImage *image = info[UIImagePickerControllerEditedImage];
+                
+                [self.PersonalHeadlerCell.UserAvatarImg setImage:image forState:UIControlStateNormal];
+                
+            } cancelBlock:^(UIImagePickerController *imagePickerViewController) {}];
+        
+        
 
-            
+
         };
         
     }else if (indexPath.section == 1){
         
-        ZHEditTableViewCell *nameCell = self.EditCell =[tableView dequeueReusableCellWithIdentifier:nameCellid forIndexPath:indexPath];    // 不写这句直接崩掉，找不到循环引用的cell
+        ZHEditTableViewCell *nameCell =[tableView dequeueReusableCellWithIdentifier:nameCellid forIndexPath:indexPath];    // 不写这句直接崩掉，找不到循环引用的cell
+        if (indexPath.row == kValidationViewControllerRow_Gender) self.EditCell = nameCell;
+        
         if (nameCell == nil) {
             nameCell = [[ZHEditTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nameCellid];
         }
@@ -298,6 +279,17 @@ static NSString *nameCellid = @"nameCellid";
                                             reuseIdentifier: @"Cell"];
 
     }
+
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    self.UserInfoModel.Gender= [actionSheet buttonTitleAtIndex: buttonIndex];
+    _EditCell.NameTextF.text = self.UserInfoModel.Gender;
+    
+    [self.tableView reloadData];
+}
+
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     

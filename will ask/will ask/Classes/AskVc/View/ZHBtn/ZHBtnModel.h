@@ -23,7 +23,7 @@
 
 @property(nonatomic,copy)NSString *type;
 
-@property(nonatomic,copy)NSNumber* amount;
+@property(nonatomic,copy)NSString* amount;
 
 @property(nonatomic,copy)NSString *uid;
 

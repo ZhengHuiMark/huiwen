@@ -1,14 +1,14 @@
 //
-//  ZHUserQuestionTableViewCell.m
+//  ZHRewardAnswerTableViewCell.m
 //  will ask
 //
-//  Created by 郑晖 on 2017/10/19.
+//  Created by 郑晖 on 2017/11/2.
 //  Copyright © 2017年 Hui Zheng. All rights reserved.
 //
 
-#import "ZHUserQuestionTableViewCell.h"
+#import "ZHRewardAnswerTableViewCell.h"
 
-@implementation ZHUserQuestionTableViewCell
+@implementation ZHRewardAnswerTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

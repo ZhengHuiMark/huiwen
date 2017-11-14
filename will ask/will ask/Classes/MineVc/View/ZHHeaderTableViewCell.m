@@ -7,6 +7,11 @@
 //
 
 #import "ZHHeaderTableViewCell.h"
+#import "UIImageView+WebCache.h"
+#import "ImageTools.h"
+#import "UserModel.h"
+#import <SDWebImage/UIButton+WebCache.h>
+
 
 @implementation ZHHeaderTableViewCell
 
@@ -24,5 +29,14 @@
 
     // Configure the view for the selected state
 }
+
+- (void)setUsermodel:(UserModel *)usermodel {
+    
+    _usermodel = usermodel;
+    
+    [self.touXiangBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUser,OSS,self.usermodel.avatar]] forState:UIControlStateNormal];
+    self.userIDLabel.text = self.usermodel.nickname;
+}
+
 
 @end

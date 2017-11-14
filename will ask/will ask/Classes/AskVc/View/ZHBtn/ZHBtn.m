@@ -9,6 +9,7 @@
 #import "ZHBtn.h"
 #import "ZHBtnModel.h"
 #import "UIImageView+WebCache.h"
+#import "ImageTools.h"
 
 
 
@@ -20,7 +21,7 @@
 
 @property(strong, nonatomic)UIImageView *typeImgV;
 
-@property(strong,nonatomic)UIImageView *RewardMoneyImgV;
+@property(strong,nonatomic)UILabel *RewardMoneyImgV;
 
 @property(strong,nonatomic)UILabel *ContentLaebl;
 
@@ -29,6 +30,8 @@
 @property(strong,nonatomic)UILabel *UserNameLabel;
 
 @property(strong,nonatomic)UIButton *clickBtn;
+
+@property(strong,nonatomic)UIImageView *imgView;
 
 
 @end
@@ -52,14 +55,22 @@
 - (void)setupUI{
     
     [self addSubview:_placeholderView];
+    
     [_placeholderView addSubview:_typeImgV];
+    
+    [_placeholderView addSubview:_imgView];
+    [_placeholderView sendSubviewToBack:_imgView];
     [_placeholderView addSubview:_RewardMoneyImgV];
+//    [_placeholderView addSubview:_imgView];
+
     [_placeholderView addSubview:_ContentLaebl];
 
     [_placeholderView addSubview:_jjjLabel];
     [_placeholderView addSubview:_UserNameLabel];
     [_placeholderView addSubview:_clickBtn];
 
+    
+ 
 }
 
 - (void)setTagModel:(ZHBtnModel *)tagModel {
@@ -67,6 +78,22 @@
     
     self.ContentLaebl.text = tagModel.content;
     self.UserNameLabel.text = tagModel.nickname;
+    if ([tagModel.type  isEqual: @"审计"]) {
+        [self.typeImgV setImage:[UIImage imageNamed:@"shenji-1"]];
+    }else if ([tagModel.type isEqual:@"税务"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"shuiwu1"]];
+        
+    }else if  ([tagModel.type isEqual:@"软件"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"ruanjian-1"]];
+        
+    }else if  ([tagModel.type isEqual:@"评估"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"pinggu-1"]];
+        
+    }else if  ([tagModel.type isEqual:@"会计"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"kuaiji-1"]];
+        
+    }
+    self.RewardMoneyImgV.text = [NSString stringWithFormat:@"赏金%@",tagModel.amount];
     
 //    [self.typeImgV sd_setImageWithURL:<#(nullable NSURL *)#>]
     
@@ -80,12 +107,16 @@
     self.placeholderView.frame = CGRectMake(0, 0, 108, 150.5);
     self.typeImgV.frame = CGRectMake(0, 14.5, 40, 20);
     
-    self.RewardMoneyImgV.frame = (CGRect){CGRectGetMaxX(self.typeImgV.frame ) + 22.5, 8,39.5 , 34.5};
+    
+    
+    self.imgView.frame = (CGRect){CGRectGetMaxX(self.typeImgV.frame ) + 22.5, 8,39.5 , 34.5};
+    
+    self.RewardMoneyImgV.frame = (CGRect){CGRectGetMaxX(self.typeImgV.frame ) + 13.5 , 8,90 , 10};
     
     CGSize size = CGSizeMake(_placeholderView.bounds.size.width - 20, 80);
     CGRect rectSize = [_ContentLaebl.text boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading  attributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:12] } context:nil];
     
-    self.ContentLaebl.frame = CGRectMake(6, CGRectGetMaxY(self.RewardMoneyImgV.frame) + 6,self.frame.size.width - 20,rectSize.size.height);
+    self.ContentLaebl.frame = CGRectMake(6, CGRectGetMaxY(self.imgView.frame) + 6,self.frame.size.width - 20,rectSize.size.height);
     NSLog(@"rectsize = %zd",rectSize.size.height);
     
     self.jjjLabel.frame = CGRectMake(6, CGRectGetMaxY(self.placeholderView.frame) - 13, 40, 13);
@@ -96,11 +127,28 @@
 
 }
 
+- (UIImageView *)imgView {
+    
+    if (!_imgView) {
+        _imgView = [UIImageView new];
+        _imgView.image = [UIImage imageNamed:@"bonus"];
+//        _imgView.backgroundColor = [UIColor blueColor];
+//        _imgView.transform = CGAffineTransformMakeRotation(- M_PI / 6);
+//        _imgView.contentMode = UIViewContentModeScaleAspectFill;
+        
+//        [_imgView sizeToFit];
+    }
+    
+    
+    return _imgView;
+}
+
 
 - (UIView *)placeholderView{
     if (!_placeholderView) {
         _placeholderView = [UIView new];
-        _placeholderView.backgroundColor = [UIColor redColor];
+        _placeholderView.backgroundColor = [UIColor colorWithRed:254/255.0 green:245/255.0 blue:230/255.0 alpha:1];
+        _placeholderView.layer.cornerRadius = 10;
     }
     
     return _placeholderView;
@@ -110,16 +158,27 @@
 - (UIImageView *)typeImgV{
     if (!_typeImgV) {
         _typeImgV = [UIImageView new];
-        _typeImgV.backgroundColor = [UIColor lightGrayColor];
+//        _typeImgV.backgroundColor = [UIColor lightGrayColor];
     }
     
     return _typeImgV;
 }
 
-- (UIImageView *)RewardMoneyImgV{
+- (UILabel *)RewardMoneyImgV{
     if (!_RewardMoneyImgV) {
-        _RewardMoneyImgV = [UIImageView new];
-        _RewardMoneyImgV.backgroundColor = [UIColor lightGrayColor];
+        _RewardMoneyImgV = [UILabel new];
+        _RewardMoneyImgV.backgroundColor = [UIColor clearColor];
+        
+//        _RewardMoneyImgV.text = @"text\n text\n text";
+//        _RewardMoneyImgV.text = @"10";
+        [_RewardMoneyImgV setFont:[UIFont fontWithName:@"Helvetica-Bold" size:9]];
+        _RewardMoneyImgV.textColor = [UIColor redColor];
+//        _RewardMoneyImgV.textAlignment = NSTextAlignmentCenter;
+        
+//        _RewardMoneyImgV.transform = CGAffineTransformMakeRotation(- M_PI / 6);
+//        _RewardMoneyImgV.contentMode = UIViewContentModeScaleAspectFill;
+
+        
     }
     
     return _RewardMoneyImgV;
@@ -134,7 +193,7 @@
 //        _ContentLaebl.textAlignment = NSTextAlignmentLeft;
         _ContentLaebl.font = [UIFont systemFontOfSize: 12];
         _ContentLaebl.textColor = [UIColor blackColor];
-        _ContentLaebl.backgroundColor = [UIColor yellowColor];
+//        _ContentLaebl.backgroundColor = [UIColor yellowColor];
         
      
     }

@@ -18,6 +18,7 @@
 #import "ZHRegisteredViewController.h"
 
 
+//static NSString *json = @"application/json";
 
 
 @implementation ZHNetworkTools
@@ -142,7 +143,8 @@
     
     
     NSString *signature = [ZHMD5 MD5ForLower32Bate:contentString];
-    
+    NSLog(@"signature = %@",signature);
+
     NSDictionary *dic = @{
                           @"nonce":nonce,
                           @"timestamp":inStr,
@@ -188,7 +190,10 @@
     }else{
 ////        [self.requestSerializer setValue:[NSString stringWithFormat:@"%@",tokenStr] forHTTPHeaderField:@"Authorization"];
 //        [self.requestSerializer setValue:[NSString stringWithFormat:@"%@",_access_token] forHTTPHeaderField:@"access_token"];
-            [self.requestSerializer setValue: [UserManager sharedManager].userModel.token?[UserManager sharedManager].userModel.token:@"" forHTTPHeaderField:@"token"];
+        
+        [self.requestSerializer setValue: [UserManager sharedManager].userModel.token?[UserManager sharedManager].userModel.token:@"" forHTTPHeaderField:@"Authorization"];
+        NSLog(@"%@",self.requestSerializer.HTTPRequestHeaders);
+        
             [self.requestSerializer setValue: _access_token?_access_token:@"" forHTTPHeaderField:@"access_token"];
 
     }
@@ -202,6 +207,7 @@
             callBlock(responseObject, nil);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             callBlock(nil, error);
+            
             NSError *underError = error.userInfo[@"NSUnderlyingError"];
             NSData *responseData = underError.userInfo[@"com.alamofire.serialization.response.error.data"];
             NSString *result = [[NSString alloc] initWithData:responseData  encoding:NSUTF8StringEncoding];
@@ -217,6 +223,7 @@
             callBlock(responseObject, nil);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             callBlock(nil, error);
+            
             NSError *underError = error.userInfo[@"NSUnderlyingError"];
             NSData *responseData = underError.userInfo[@"com.alamofire.serialization.response.error.data"];
             NSString *result = [[NSString alloc] initWithData:responseData  encoding:NSUTF8StringEncoding];

@@ -14,6 +14,11 @@
 #import "MineModel.h"
 #import "UserManager.h"
 #import "UserModel.h"
+#import <SDWebImage/UIButton+WebCache.h>
+#import "ImageTools.h"
+#import "ZHNetworkTools.h"
+#import "Macro.h"
+
 
 
 @interface MineViewController ()
@@ -61,28 +66,45 @@ static NSString *MineListCellid = @"MineListCellid";
         contentInset.top = -22;
         [self.tableView setContentInset:contentInset];
     }
-    // Do any additional setup after loading the view.
-//    self.navigationController.navigationBar.translucent = YES;
-//    UIColor *color = [UIColor clearColor];
-//    CGRect rect = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 64);
-//    UIGraphicsBeginImageContext(rect.size);
-//    CGContextRef context = UIGraphicsGetCurrentContext();
-//    CGContextSetFillColorWithColor(context, [color CGColor]);
-//    CGContextFillRect(context, rect);
-//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-//    UIGraphicsEndImageContext();
-//    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
-//    self.navigationController.navigationBar.clipsToBounds = YES;
-//    self.tableView.backgroundColor = [UIColor lightGrayColor];
+
     
     [self loadData];
     
     [self configUI];
     
+    [self loadUserInfo];
+    
+}
+
+
+- (void)loadUserInfo {
+    
+    ///api/ut/user/getMyHeadInfo
+    
+    NSMutableDictionary *dic = [ZHNetworkTools parameters];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/ut/user/getMyHeadInfo",kIP];
+    
+    [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+        
+        if (error) {
+            
+            NSLog(@"%@",error);
+        }
+        
+        NSLog(@"response = %@",response);
+        
+        
+        
+    }];
+    
+    
 }
 
 
 - (void)configUI{
+    
+    
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ZHHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:HeaderCellid];
     [self.tableView registerNib:[UINib nibWithNibName:@"ZHMoneyTableViewCell" bundle:nil] forCellReuseIdentifier:MoneyCellid];
@@ -203,7 +225,8 @@ static NSString *MineListCellid = @"MineListCellid";
         }
         HeadCell.placeholderView.backgroundColor = [UIColor orangeColor];
 
-        HeadCell.userIDLabel.text = [UserManager sharedManager].userModel.nickname;
+        HeadCell.usermodel = [UserManager sharedManager].userModel;
+
         
         return HeadCell;
     }else if (indexPath.section == 1){
@@ -211,6 +234,14 @@ static NSString *MineListCellid = @"MineListCellid";
         if (mCell == nil) {
             mCell = [[ZHMoneyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MoneyCellid];
         }
+        
+        mCell.usermodel = [UserManager sharedManager].userModel;
+        
+//        
+////        mCell.memberCardBtn.titleLabel.text = [UserManager sharedManager].userModel.cardBalance;
+//        [mCell.memberCardBtn setTitle:[UserManager sharedManager].userModel.cardBalance forState:UIControlStateNormal];
+////        mCell.incomeBtn.titleLabel.text = [UserManager sharedManager].userModel.myEarnings;
+//        [mCell.incomeBtn setTitle:[UserManager sharedManager].userModel.myEarnings forState:UIControlStateNormal];
         return mCell;
     }else if (indexPath.section == 2){
     ZHExpertsTableViewCell *eCell = [tableView dequeueReusableCellWithIdentifier:ExpertsCellid forIndexPath:indexPath];
@@ -267,6 +298,8 @@ static NSString *MineListCellid = @"MineListCellid";
     }
     return 0;
 }
+
+
 
 
 
