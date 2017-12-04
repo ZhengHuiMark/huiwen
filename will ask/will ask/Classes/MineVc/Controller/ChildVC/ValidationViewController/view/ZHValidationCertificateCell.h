@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class ReviewModel;
 @interface ZHValidationCertificateCell : UITableViewCell
+
+@property (nonatomic, strong) ReviewModel *model;
+
 
 @end

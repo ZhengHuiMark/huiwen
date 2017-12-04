@@ -47,6 +47,10 @@
                     <constraint firstItem="dpM-na-DTb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="wXk-BA-rX9"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="titleSubType" destination="Oba-mt-mmt" id="MMf-t5-sxv"/>
+                <outlet property="titleType" destination="dpM-na-DTb" id="wUT-ro-fxv"/>
+            </connections>
             <point key="canvasLocation" x="-34" y="21"/>
         </tableViewCell>
     </objects>

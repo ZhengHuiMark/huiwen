@@ -9,7 +9,7 @@
 #ifndef Macro_h
 #define Macro_h
 
-#define kDegug 1 // 是否测试
+#define kDegug 0 // 是否测试
 
 #if kDegug
     #define kIP @"http://192.168.0.21:7000" // 本地环境

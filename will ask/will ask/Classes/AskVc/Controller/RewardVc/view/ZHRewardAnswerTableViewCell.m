@@ -7,6 +7,8 @@
 //
 
 #import "ZHRewardAnswerTableViewCell.h"
+#import "ZHFreeAnswerModel.h"
+#import "ZHFreeDetailModel.h"
 
 @implementation ZHRewardAnswerTableViewCell
 
@@ -15,10 +17,33 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)setDetailModel:(ZHFreeDetailModel *)detailModel {
+    
+    _detailModel = detailModel;
 }
+
+
+- (void)setAnswerModel:(ZHFreeAnswerModel *)answerModel {
+    _answerModel = answerModel;
+    
+    
+    self.userName.text = self.answerModel.nickname;
+    
+    //    self.expertName.text = self.answerModel.
+    
+    self.clickNumber.text = self.answerModel.praiseNumber;
+    
+    
+    self.learnNumber.text = self.answerModel.learnNumber;
+    
+    self.releaseTime.text = self.answerModel.time;
+    
+    
+    
+    
+    
+    
+}
+
 
 @end

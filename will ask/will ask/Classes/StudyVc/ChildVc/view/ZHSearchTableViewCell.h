@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ZHSearchTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (weak, nonatomic) IBOutlet UIButton *screeningBtn;
 
 @end

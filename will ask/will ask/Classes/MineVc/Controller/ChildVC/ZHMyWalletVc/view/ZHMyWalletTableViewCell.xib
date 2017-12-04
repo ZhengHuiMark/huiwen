@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="WalletCellid" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="ZHMyWalletTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="155"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="154.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bxp-9e-zKe">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="154.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的余额 (元)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SxL-up-6Cn">
+                                <rect key="frame" x="23.5" y="15" width="91" height="14.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="14.5" id="8dI-je-ZWc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2P2-1K-gfr">
+                                <rect key="frame" x="23.5" y="58.5" width="119.5" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="SxL-up-6Cn" firstAttribute="top" secondItem="Bxp-9e-zKe" secondAttribute="top" constant="15" id="Akz-6q-CA9"/>
+                            <constraint firstItem="2P2-1K-gfr" firstAttribute="top" secondItem="SxL-up-6Cn" secondAttribute="bottom" constant="29" id="LJ8-sh-Zgg"/>
+                            <constraint firstItem="SxL-up-6Cn" firstAttribute="leading" secondItem="Bxp-9e-zKe" secondAttribute="leading" constant="23.5" id="iRx-1X-vgO"/>
+                            <constraint firstItem="2P2-1K-gfr" firstAttribute="leading" secondItem="Bxp-9e-zKe" secondAttribute="leading" constant="23.5" id="jLE-Ij-v2T"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Bxp-9e-zKe" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="DvX-Rv-9ND"/>
+                    <constraint firstItem="Bxp-9e-zKe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Ffv-uu-8OD"/>
+                    <constraint firstAttribute="trailing" secondItem="Bxp-9e-zKe" secondAttribute="trailing" id="Rna-aY-bis"/>
+                    <constraint firstAttribute="bottom" secondItem="Bxp-9e-zKe" secondAttribute="bottom" id="ubT-er-2u5"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="Balance" destination="2P2-1K-gfr" id="uMb-bI-jkt"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

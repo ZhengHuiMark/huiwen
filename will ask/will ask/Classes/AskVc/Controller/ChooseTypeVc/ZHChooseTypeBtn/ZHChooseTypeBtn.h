@@ -37,4 +37,6 @@ typedef void(^ActionBlock)(ZHChooseTypeBtn *tagButton, ZHChooseTypeBtnModel *tag
 @property (nonatomic, strong) ZHChooseTypeBtnModel *tagModel;
 
 @property (nonatomic, copy) ActionBlock action;
+
+
 @end

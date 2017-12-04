@@ -18,12 +18,11 @@
 #import "ImageTools.h"
 #import "ZHNetworkTools.h"
 #import "Macro.h"
+#import "ZHMyWalletViewController.h"
+#import "UserInfoModel.h"
+#import "YYModel.h"
 
 
-
-@interface MineViewController ()
-
-@end
 //头部cell
 static NSString *HeaderCellid = @"HeaderCellid";
 //收入cell
@@ -32,6 +31,12 @@ static NSString *MoneyCellid = @"MoneyCellid";
 static NSString *ExpertsCellid = @"ExpertsCellid";
 //列表cell
 static NSString *MineListCellid = @"MineListCellid";
+
+@interface MineViewController ()
+
+
+
+@end
 
 @implementation MineViewController
 {
@@ -70,9 +75,11 @@ static NSString *MineListCellid = @"MineListCellid";
     
     [self loadData];
     
+    [self loadUserInfo];
+
+    
     [self configUI];
     
-    [self loadUserInfo];
     
 }
 
@@ -92,10 +99,25 @@ static NSString *MineListCellid = @"MineListCellid";
             NSLog(@"%@",error);
         }
         
+        
+//        _UserInfoModel = [UserInfoModel yy_modelWithJSON:response[@"data"]];
+        
+        [UserManager sharedManager].userModel.cardBalance = response[@"data"][@"cardBalance"];
+        [UserManager sharedManager].userModel.concernNum = response[@"data"][@"concernNum"];
+        [UserManager sharedManager].userModel.avatar = response[@"data"][@"avatar"];
+        [UserManager sharedManager].userModel.expertCertified = response[@"data"][@"expertCertified"];
+        [UserManager sharedManager].userModel.expertCheckStatus = response[@"data"][@"expertCheckStatus"];
+        [UserManager sharedManager].userModel.expertCheckStatus = response[@"data"][@"expertCheckStatus"];
+        [UserManager sharedManager].userModel.expertNickname = response[@"data"][@"expertNickname"];
+        [UserManager sharedManager].userModel.myEarnings = response[@"data"][@"myEarnings"];
+        [UserManager sharedManager].userModel.consults = response[@"data"][@"consults"];
+        [UserManager sharedManager].userModel.nickname = response[@"data"][@"nickname"];
+        [UserManager sharedManager].userModel.realPhoto = response[@"data"][@"realPhoto"];
+
         NSLog(@"response = %@",response);
+        [[UserManager sharedManager]saveUserModel];
         
-        
-        
+        [self.tableView reloadData];
     }];
     
     
@@ -160,55 +182,48 @@ static NSString *MineListCellid = @"MineListCellid";
                 
                 break;
             }
-            case 1:
-            {
-                NSString *className = @"ValidationViewController";
-                [self pushToSetControllerWithIndexPath:indexPath className:className];
+            default:
                 break;
-                
-            }
-                //            case 1:
-                //            {
-                //                NSString *className = @"AlertsViewController";
-                //                [self pushToSetControllerWithIndexPath:indexPath className:className];
-                //                break;
-                //
-                //            }
-                //            case 1:
-                //            {
-                //                NSString *className = @"MyAccountViewController";
-                //                [self pushToSetControllerWithIndexPath:indexPath className:className];
-                //                break;
-                //
-                //            }
+        }
+    }else if (indexPath.section == 3){
         
-            case 2:
-            {
+        switch (indexPath.row) {
+            case 0:{
                 
-                NSString *className = @"ValidationViewController";
+                break;
+            }
+            case 1:{
+                
+                break;
+            }
+            case 2:{
+                
+                break;
+            }
+            case 3:{
+                
+                break;
+            }
+            case 4:{
+                
+                break;
+            }
+            case 5:{
+                
+                break;
+            }
+            case 6:{
+                
+                NSString *className = @"ZHMyWalletViewController";
                 [self pushToSetControllerWithIndexPath:indexPath className:className];
                 
                 break;
-                
             }
-            case 3:
-            {
+            case 7:{
                 
-          
                 break;
-                
             }
-            case 4:
-            {
-                
-           
-                break;
-                
-            }
-                
-                
-                
-                
+       
             default:
                 break;
         }
@@ -217,6 +232,7 @@ static NSString *MineListCellid = @"MineListCellid";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+ 
     if (indexPath.section == 0) {
         //HeaderCell
         ZHHeaderTableViewCell *HeadCell = [tableView dequeueReusableCellWithIdentifier:HeaderCellid forIndexPath:indexPath];    // 不写这句直接崩掉，找不到循环引用的cell
@@ -230,6 +246,7 @@ static NSString *MineListCellid = @"MineListCellid";
         
         return HeadCell;
     }else if (indexPath.section == 1){
+        
         ZHMoneyTableViewCell *mCell = [tableView dequeueReusableCellWithIdentifier:MoneyCellid forIndexPath:indexPath];
         if (mCell == nil) {
             mCell = [[ZHMoneyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MoneyCellid];
@@ -237,13 +254,10 @@ static NSString *MineListCellid = @"MineListCellid";
         
         mCell.usermodel = [UserManager sharedManager].userModel;
         
-//        
-////        mCell.memberCardBtn.titleLabel.text = [UserManager sharedManager].userModel.cardBalance;
-//        [mCell.memberCardBtn setTitle:[UserManager sharedManager].userModel.cardBalance forState:UIControlStateNormal];
-////        mCell.incomeBtn.titleLabel.text = [UserManager sharedManager].userModel.myEarnings;
-//        [mCell.incomeBtn setTitle:[UserManager sharedManager].userModel.myEarnings forState:UIControlStateNormal];
+        
         return mCell;
     }else if (indexPath.section == 2){
+        
     ZHExpertsTableViewCell *eCell = [tableView dequeueReusableCellWithIdentifier:ExpertsCellid forIndexPath:indexPath];
     if (eCell == nil) {
         eCell = [[ZHExpertsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ExpertsCellid];
@@ -276,10 +290,6 @@ static NSString *MineListCellid = @"MineListCellid";
         return 1;
     }else if (section == 2){
         return 1;
-//    }else if (section == 3){
-//        return 5;
-//    }
-//    return 3;
     }
     return 8;
  
@@ -304,6 +314,7 @@ static NSString *MineListCellid = @"MineListCellid";
 
 
 - (void)loadData{
+    
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"Mine.plist" withExtension:nil];
     
     NSArray *arr = [NSArray arrayWithContentsOfURL:url];
@@ -332,4 +343,7 @@ static NSString *MineListCellid = @"MineListCellid";
     
     
 }
+
+
+
 @end

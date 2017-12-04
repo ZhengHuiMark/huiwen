@@ -20,5 +20,11 @@
 
     // Configure the view for the selected state
 }
+- (IBAction)btnDidClick:(id)sender {
+    
+    !self.releaseBtnClick?:self.releaseBtnClick(sender);
+
+    
+}
 
 @end

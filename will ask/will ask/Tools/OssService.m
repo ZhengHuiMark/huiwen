@@ -10,6 +10,8 @@
 #import <AliyunOSSiOS/OSSService.h>
 #import "OssService.h"
 #import "HomeViewController.h"
+#import "Macro.h"
+#import "ImageTools.h"
 
 NSString * const bucketName = @"dwsoft";
 NSString * const STSServer = @"http://119.57.140.230:7000/aliyun/oss/getAccessToken";
@@ -26,12 +28,12 @@ NSString * const STSServer = @"http://119.57.140.230:7000/aliyun/oss/getAccessTo
 
     // 简单起见，全局只维护一个断点上传任务
     OSSResumableUploadRequest * resumableRequest;
-    HomeViewController * viewController;
+    ViewController * viewController;
     BOOL isCancelled;
     BOOL isResumeUpload;
 }
 
-- (id)initWithViewController:(HomeViewController *)view
+- (id)initWithViewController:(UIViewController *)view
                 withEndPoint:(NSString *)enpoint {
     if (self = [super init]) {
         viewController = view;
@@ -153,6 +155,63 @@ NSString * const STSServer = @"http://119.57.140.230:7000/aliyun/oss/getAccessTo
             } else {
                 dispatch_async(dispatch_get_main_queue(), ^{
 //                    [viewController showMessage:@"普通上传" inputMessage:@"Failed!"];
+                });
+            }
+        }
+        putRequest = nil;
+        return nil;
+    }];
+}
+
+- (void)asyncPutImage:(NSString *)objectKey
+        localFilePath:(NSString *)filePath
+           bucketName:(NSString *)bucketName
+            comletion:(UploadImageCompletion)completion {
+    
+    if (objectKey == nil || [objectKey length] == 0) {
+        return;
+    }
+    
+    putRequest = [OSSPutObjectRequest new];
+    putRequest.bucketName = bucketName;
+    putRequest.objectKey = objectKey;
+    putRequest.uploadingFileURL = [NSURL fileURLWithPath:filePath];
+    putRequest.uploadProgress = ^(int64_t bytesSent, int64_t totalByteSent, int64_t totalBytesExpectedToSend) {
+        NSLog(@"%lld, %lld, %lld", bytesSent, totalByteSent, totalBytesExpectedToSend);
+    };
+//    if (callbackAddress != nil) {
+//        putRequest.callbackParam = @{
+//                                     @"callbackUrl": callbackAddress,
+//                                     // callbackBody可自定义传入的信息
+//                                     @"callbackBody": @"filename=${object}"
+//                                     };
+//    }
+    
+    OSSTask * task = [client putObject:putRequest];
+    [task continueWithBlock:^id(OSSTask *task) {
+        OSSPutObjectResult * result = task.result;
+        // 查看server callback是否成功
+        if (!task.error) {
+            NSLog(@"Put image success!");
+            NSLog(@"server callback : %@", result.serverReturnJsonString);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                completion(YES);
+                
+                //                [viewController showMessage:@"普通上传" inputMessage:@"Success!"];
+            });
+        } else {
+            NSLog(@"Put image failed, %@", task.error);
+            if (task.error.code == OSSClientErrorCodeTaskCancelled) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    completion(NO);
+                    //                    [viewController showMessage:@"普通上传" inputMessage:@"任务取消!"];
+                });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    completion(NO);
+                    //                    [viewController showMessage:@"普通上传" inputMessage:@"Failed!"];
                 });
             }
         }

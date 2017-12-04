@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ZHTitleTypeTableViewCell : UITableViewCell
+// 大分类
+@property (weak, nonatomic) IBOutlet UILabel *titleType;
+// 小分类
+@property (weak, nonatomic) IBOutlet UILabel *titleSubType;
 
 @end

@@ -104,7 +104,7 @@
 - (void)setFrame:(CGRect)frame{
     [super setFrame:frame];
     
-    self.placeholderView.frame = CGRectMake(0, 0, 108, 150.5);
+    self.placeholderView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width / 3, 150.5);
     self.typeImgV.frame = CGRectMake(0, 14.5, 40, 20);
     
     
@@ -148,7 +148,7 @@
     if (!_placeholderView) {
         _placeholderView = [UIView new];
         _placeholderView.backgroundColor = [UIColor colorWithRed:254/255.0 green:245/255.0 blue:230/255.0 alpha:1];
-        _placeholderView.layer.cornerRadius = 10;
+        _placeholderView.layer.cornerRadius = 20;
     }
     
     return _placeholderView;
@@ -226,8 +226,16 @@
     if (!_clickBtn) {
         _clickBtn = [UIButton buttonWithType: UIButtonTypeCustom];
         [_clickBtn setTitle:@"我要揭榜" forState:UIControlStateNormal];
-        [_clickBtn setBackgroundColor:[UIColor blueColor]];
-        [_clickBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_clickBtn setTitleColor:[UIColor redColor]forState:UIControlStateNormal];
+        _clickBtn.titleLabel.font = [UIFont systemFontOfSize: 12.0];
+        //        [_clickBtn setBackgroundColor:[UIColor blueColor]];
+        _clickBtn.layer.cornerRadius = 10;
+        [_clickBtn.layer setBorderColor:[UIColor redColor].CGColor];
+        [_clickBtn.layer setBorderWidth:1];
+        [_clickBtn.layer setMasksToBounds:YES];
+        
+        
+//        [_clickBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 //        [_clickBtn addTarget: self
 //                 action: @selector(btnAction:)
 //       forControlEvents: UIControlEventTouchUpInside];

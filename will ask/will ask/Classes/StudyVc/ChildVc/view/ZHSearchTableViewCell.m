@@ -13,12 +13,18 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    _searchBar.placeholder = @"12345";
+    
+    _searchBar.searchBarStyle = UISearchBarStyleMinimal;
+    
+    _searchBar.layer.cornerRadius = 3;
+    _searchBar.layer.masksToBounds = YES;
+    _searchBar.layer.borderColor = [UIColor whiteColor].CGColor;
+
+    
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
-}
 
 @end

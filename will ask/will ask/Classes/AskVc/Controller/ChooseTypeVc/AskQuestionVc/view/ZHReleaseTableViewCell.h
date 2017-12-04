@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void(^ZHreleaseBtnClick)();
 
 @interface ZHReleaseTableViewCell : UITableViewCell
+
+@property(nonatomic,copy)ZHreleaseBtnClick releaseBtnClick;
 
 @end

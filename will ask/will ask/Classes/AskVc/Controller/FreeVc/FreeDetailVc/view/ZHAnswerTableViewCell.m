@@ -11,6 +11,16 @@
 #import "ZHFreeDetailModel.h"
 #import "ImageTools.h"
 #import "UIImageView+WebCache.h"
+#import "MLAvatarDisplayView.h"
+
+
+@interface ZHAnswerTableViewCell ()
+
+@property (nonatomic, strong) MLAvatarDisplayView *avatarDisplayView;
+
+
+@end
+
 
 @implementation ZHAnswerTableViewCell
 
@@ -37,13 +47,23 @@
 //    self.answerExpert.text = answerModel.
     self.answerContent.text = self.answerModel.content;
     
+    
 }
 
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (IBAction)imageButtonAction:(UIButton *)sender {
+    UIImageView *imageView = self.answerImgs[sender.tag];
+    [self.avatarDisplayView showFromImageView: imageView];
+    
+}
 
-    // Configure the view for the selected state
+
+#pragma mark - Lazy load
+- (MLAvatarDisplayView *)avatarDisplayView {
+    if (!_avatarDisplayView) {
+        _avatarDisplayView = [MLAvatarDisplayView ml_singleImageDisplayView];
+    }
+    return _avatarDisplayView;
 }
 
 @end

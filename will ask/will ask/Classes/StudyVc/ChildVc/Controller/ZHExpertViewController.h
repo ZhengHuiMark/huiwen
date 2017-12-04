@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class ZHStudyModel;
+
 @interface ZHExpertViewController : UIViewController
+
+@property(nonatomic,strong)ZHStudyModel *studyModel;
+
 
 @end

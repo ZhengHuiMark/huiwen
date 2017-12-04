@@ -14,6 +14,10 @@
     XLCircleProgress *_circle;
 }
 
+@property(nonatomic,strong)UIButton *determineBtn;
+
+
+
 @end
 
 @implementation ZHRewardMoneyViewController
@@ -35,8 +39,8 @@
 {
     //    CGFloat margin = 15.0f;
     CGFloat circleWidth = [UIScreen mainScreen].bounds.size.width - 2;
-    _circle = [[XLCircleProgress alloc] initWithFrame:CGRectMake(0,0, circleWidth, 300)];
-    _circle.center = self.view.center;
+    _circle = [[XLCircleProgress alloc] initWithFrame:CGRectMake(0,64, circleWidth, 300)];
+//    _circle.center = self.view.center;
     _circle.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:_circle];
     
@@ -68,6 +72,37 @@
     number3.font = [UIFont systemFontOfSize:15];
     
     [self.view addSubview:number3];
+    
+    _determineBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    _determineBtn.frame = CGRectMake(10, CGRectGetMaxX(_circle.frame) + 20, [UIScreen mainScreen].bounds.size.width - 20, 45);
+    
+    [_determineBtn setTitle:@"确定" forState:UIControlStateNormal];
+    
+    [_determineBtn setBackgroundColor: [UIColor orangeColor]];
+    
+    
+    [_determineBtn addTarget:self action:@selector(BackToVc) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:_determineBtn];
+    
+    
+    
+}
+
+
+- (void)BackToVc {
+    
+    NSString *inputString = _circle.percentLabel.text;
+    
+    if (self.returnValueBlock) {
+        //将自己的值传出去，完成传值
+        self.returnValueBlock(inputString);
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+
     
 }
 

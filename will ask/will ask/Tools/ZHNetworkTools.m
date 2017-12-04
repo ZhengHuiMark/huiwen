@@ -242,16 +242,45 @@
 
 - (void)upLoad:(NSString *)url forKey:(NSString *)key parameters:(NSDictionary *)parameter imageArray:(NSArray *)uploadImages andCallBlock: (void (^) (id response, NSError *error))callBlock {
     
+//    
+//    UserModel *UserModel = [UserManager sharedManager].userModel;
+//    NSString *tokenStr = [NSString stringWithFormat:@"%@",UserModel.token];
+//    NSLog(@" 第一个token = %@",UserModel.token);
     
-    UserModel *UserModel = [UserManager sharedManager].userModel;
-    NSString *tokenStr = [NSString stringWithFormat:@"%@",UserModel.token];
-    NSLog(@" 第一个token = %@",UserModel.token);
-    if (tokenStr == nil) {
+    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
+    //    _timestamp = interval;
+    
+    NSString *inStr = [NSString stringWithFormat: @"%ld", (long)interval];
+    NSLog(@"%@",inStr);
+    
+    NSString *str1 = @"a1FB4x";
+    
+    
+    NSString *client_id = [str1 stringByAppendingString:@"_"];
+    
+    NSString *content = [client_id stringByAppendingString:inStr];
+    
+    // 走文件
+    //    NSString *public_key_path = [[NSBundle mainBundle] pathForResource:@"public_key.der" ofType:nil];
+    //    NSString *encryptStr = [RSAEncryptor encryptString:content publicKeyWithContentsOfFile:public_key_path];
+    //    NSString *public_key = content;
+    // 字符串
+    NSString *encryptStr = [RSAEncryptor encryptString:content publicKey:@"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCypBhs8fFzcaU1zTY4PXWImc2qOIIYbcNzbRMIOxAh7l37FlJEO+gIg/2lcMHOepPQVmWjYNBDZb7VgnOLJP939YUWeWkIO1hYhSX0sNasZ2Jma1D3m4CL9BhngPHD2qDu175O0ci2rL574y701Uzlh25mvbS084vBtxYBri6A8wIDAQAB"];
+    
+    _access_token = encryptStr;
+    NSLog(@"第一个token = %@",_access_token);
+    
+    if (_access_token == nil) {
         [self.requestSerializer clearAuthorizationHeader];
         
     }else{
-        [self.requestSerializer setValue:[NSString stringWithFormat:@"%@",tokenStr] forHTTPHeaderField:@"Authorization"];
+//        [self.requestSerializer setValue:[NSString stringWithFormat:@"%@",_access_token] forHTTPHeaderField:@"Authorization"];
 //        [self.requestSerializer setValue:[NSString stringWithFormat:@"%@",_access_token] forHTTPHeaderField:_access_token];
+        
+        [self.requestSerializer setValue: [UserManager sharedManager].userModel.token?[UserManager sharedManager].userModel.token:@"" forHTTPHeaderField:@"Authorization"];
+        NSLog(@"%@",self.requestSerializer.HTTPRequestHeaders);
+        
+        [self.requestSerializer setValue: _access_token?_access_token:@"" forHTTPHeaderField:@"access_token"];
     }
     self.responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
     

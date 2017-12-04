@@ -38,6 +38,12 @@
 /** 提问用户ID */
 @property(nonatomic,copy)NSString *userId;
 
+@property(nonatomic,copy)NSString *answerId;
+
+@property(nonatomic,copy)NSString *certifiedNames;
+
+
+
 // ---------------------------------------------
 
 /** 头衔 */

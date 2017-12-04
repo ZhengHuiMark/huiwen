@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ZHFreeDetailModel,ZHFreeAnswerModel;
+
 
 @interface ZHRewardAnswerTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *userAvatar;
@@ -30,7 +32,9 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *releaseTime;
 
+@property (nonatomic,strong)ZHFreeAnswerModel *answerModel;
 
+@property (nonatomic,strong)ZHFreeDetailModel *detailModel;
 
 
 

@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ZHAskQuestionModel;
 
 @interface ZHAskTextViewTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *placeHolderLabel;
+
+@property (weak, nonatomic) IBOutlet UITextView *contentTextView;
+
+@property (weak, nonatomic) IBOutlet UILabel *numberLabel;
+
+@property (strong,nonatomic)ZHAskQuestionModel *model;
+
 
 @end

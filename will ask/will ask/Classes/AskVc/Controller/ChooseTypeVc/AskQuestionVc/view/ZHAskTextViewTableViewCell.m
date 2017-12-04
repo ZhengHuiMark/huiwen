@@ -7,18 +7,49 @@
 //
 
 #import "ZHAskTextViewTableViewCell.h"
+#import "ZHAskQuestionModel.h"
+
+@interface ZHAskTextViewTableViewCell ()<UITextViewDelegate>
+
+
+
+@end
 
 @implementation ZHAskTextViewTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    self.contentTextView.delegate = self;
+    
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+- (void)setModel:(ZHAskQuestionModel *)model{
+    _model = model;
+    
+    self.contentTextView.text = self.model.content;
 
-    // Configure the view for the selected state
+}
+
+- (void)textViewDidChange:(UITextView *)textView{
+    
+    if ([textView.text length] == 0) {
+        
+        [_placeHolderLabel setHidden:NO];
+        
+    }else{
+        
+        [_placeHolderLabel setHidden:YES];
+        
+    }
+    
+    
+    NSInteger wordCount = textView.text.length;
+    self.numberLabel.text = [NSString stringWithFormat:@"%ld/200",  (long)wordCount];
+    
+    
+    
 }
 
 @end

@@ -29,7 +29,7 @@
 
 - (IBAction)checkCase:(UIButton *)sender {
     
-    !self.CaseDidClick?:self.didClick();
+    !self.CaseDidClick?:self.CaseDidClick();
 }
 
 

@@ -111,8 +111,16 @@
         }
         
         NSLog(@"%@",response);
+        
+        // 创建用户数据模型
+        // 登录成功
         [UserManager sharedManager].userModel = [UserModel yy_modelWithJSON:response[@"data"]];
         [[UserManager sharedManager]saveUserModel];
+        
+//        // 个人中心
+//        NSDictionary *responseObject = @{@"userName":@"Zhenghui"};
+//        [UserManager sharedManager].userModel.nickname = responseObject[@"userName"];
+//        [[UserManager sharedManager]saveUserModel];
         
         !self.loginCompletion?:self.loginCompletion(NO);
         [[NSNotificationCenter defaultCenter] postNotificationName: @"loginSuccess"

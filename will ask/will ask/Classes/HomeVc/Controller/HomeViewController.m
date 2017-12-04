@@ -124,12 +124,12 @@
 //    
 }
 
-- (void)touch123456{
-        NSString * objectKey = @"1" ;
-        [service asyncPutImage:objectKey localFilePath:uploadFilePath];
-
-
-}
+//- (void)touch123456{
+//        NSString * objectKey = @"1" ;
+////        [service asyncPutImage:objectKey localFilePath:uploadFilePath comletion:^(BOOL isSuccess) {
+//            // 拦截图片是否上传成功
+//        }];
+//}
 
 
 

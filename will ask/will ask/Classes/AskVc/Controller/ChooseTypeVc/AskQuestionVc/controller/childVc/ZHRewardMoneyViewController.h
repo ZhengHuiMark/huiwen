@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^ReturnValueBlock) (NSString *strValue);
+
+
 @interface ZHRewardMoneyViewController : UIViewController
+
+/**
+ *  声明一个ReturnValueBlock属性，这个Block是获取传值的界面传进来的
+ */
+@property(nonatomic, copy) ReturnValueBlock returnValueBlock;
+
+
 
 @end

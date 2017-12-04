@@ -30,7 +30,7 @@
     CGFloat percentLabelWidth = [UIScreen mainScreen].bounds.size.width - 80;
     CGFloat percentLabelHeight = 30;
     CGFloat percentLabelX = CGRectGetMinX(self.frame) + 40;
-    CGFloat percentLabelY = CGRectGetMinY(self.frame) + 51;
+    CGFloat percentLabelY = CGRectGetMinY(self.frame) + 40;
     
     float lineWidth = 0.1*self.bounds.size.width;
     _percentLabel = [[UILabel alloc] initWithFrame:CGRectMake(percentLabelX, percentLabelY, percentLabelWidth, percentLabelHeight)];

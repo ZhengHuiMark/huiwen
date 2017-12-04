@@ -13,15 +13,15 @@
 static NSString *OSS = @".oss-cn-qingdao.aliyuncs.com/";
 
 /**  用户头像  */
-static NSString *bucketNameUser = @"http://dwsoft-userinfo";
+static NSString *bucketNameUser = @"dwsoft-userinfo";
 /**   悬赏问  */
-static NSString *bucketNameReward = @"http://dwsoft-rewardask";
+static NSString *bucketNameReward = @"dwsoft-rewardask";
 /**   咨询   */
-static NSString *bucketNameConsult = @"http://dwsoft-consult";
+static NSString *bucketNameConsult = @"dwsoft-consult";
 /**   免费问  */
-static NSString *bucketNameFree = @"http://dwsoft-freeask";
+static NSString *bucketNameFree = @"dwsoft-freeask";
 /**  其他资源 */
-static NSString *bucketNameDwsoft = @"http://dwsoft";
+static NSString *bucketNameDwsoft = @"dwsoft";
 
 
 #endif /* ImageTools_h */

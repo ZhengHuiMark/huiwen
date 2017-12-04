@@ -17,18 +17,39 @@
 #import "LBViewController+ImagePicker.h"
 #import "ZHImageUploadTableViewCell.h"
 #import "ZHRewardMoneyViewController.h"
+#import "ZHAskQuestionModel.h"
+#import "ZHNetworkTools.h"
+#import "Macro.h"
+#import "ImageTools.h"
+#import "OssService.h"
+#import "UserManager.h"
+#import "UserModel.h"
+#import "ImageTools.h"
+
 
 
 static NSInteger kMaxCount = 3;
 
 
 @interface ZHAskQuestionTableViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UITextViewDelegate,UIActionSheetDelegate>
+{
+    OssService * service;
+    NSString * uploadFilePath;
+    
+}
 
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *layout;
 @property (nonatomic, strong) NSMutableArray<MLImageModel *> *imageModels;
 
+
+@property(nonatomic,strong) ZHAskQuestionModel *model;
+
+@property(nonatomic,strong) ZHRewardAndDateTableViewCell *dateCell;
+
+
+@property(nonatomic,strong)NSMutableArray *mArray;
 
 
 @end
@@ -56,11 +77,17 @@ static NSInteger kMaxCount = 3;
 //    self.navigationItem.backBarButtonItem = backBtn;
     
     [self setupUI];
+    
+    NSString * const endPoint = @"http://oss-cn-qingdao.aliyuncs.com";
+    NSString * const callbackAddress = @"http://oss-demo.aliyuncs.com:23450";
+    
+    service = [[OssService alloc] initWithViewController:self withEndPoint:endPoint];
+    [service setCallbackAddress:callbackAddress];
 }
 
 
 
-- (void)setupUI{ 
+- (void)setupUI{
 
     
      self.tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
@@ -166,6 +193,7 @@ static NSInteger kMaxCount = 3;
     switch (indexPath.section) {
         case kValidationViewControllerSection_TypeTitle: {
             cell = [self obtainTitleTypeCellWithTableView: tableView atIndexPath: indexPath];
+            
         }
             break;
             
@@ -221,6 +249,16 @@ static NSInteger kMaxCount = 3;
         
         ZHRewardMoneyViewController *rewardVc = [[ZHRewardMoneyViewController alloc]init];
         
+        //赋值Block，并将捕获的值赋值给UILabel
+        rewardVc.returnValueBlock = ^(NSString *passedValue){
+            
+            self.model.amount = passedValue;
+            NSLog(@"悬赏金是 = %@",passedValue);
+            [self.tableView reloadData];
+        };
+        
+      
+        
         [self.navigationController pushViewController:rewardVc animated:YES];
     }
     
@@ -242,11 +280,22 @@ static NSInteger kMaxCount = 3;
     
 }
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    
+    self.model.timeLimit = [actionSheet buttonTitleAtIndex:buttonIndex];
+//    _dateCell.RewardNumberL.text = _model.timeLimit;
+    
+    [self.tableView reloadData];
+    
+    
+}
 
 - (ZHTitleTypeTableViewCell *)obtainTitleTypeCellWithTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath{
     
     ZHTitleTypeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: NSStringFromClass([ZHTitleTypeTableViewCell class])
                                                                         forIndexPath: indexPath];
+    cell.titleType.text = self.titleTypeLabel;
+    cell.titleSubType.text = self.titleSubTypeLabel;
     
     return  cell;
     
@@ -257,6 +306,8 @@ static NSInteger kMaxCount = 3;
     
     ZHAskTextViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: NSStringFromClass([ZHAskTextViewTableViewCell class])
                                                                      forIndexPath: indexPath];
+    cell.model = self.model;
+
     
     return  cell;
     
@@ -291,7 +342,11 @@ static NSInteger kMaxCount = 3;
     ZHRewardAndDateTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: NSStringFromClass([ZHRewardAndDateTableViewCell class])
                                                                      forIndexPath: indexPath];
     
+    cell.tete = self;
     cell.indexPath = indexPath;
+    cell.model = self.model;
+    
+ 
     
     return  cell;
     
@@ -301,7 +356,65 @@ static NSInteger kMaxCount = 3;
 - (ZHReleaseTableViewCell *)obtainReleaseCellWithTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath{
     
     ZHReleaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: NSStringFromClass([ZHReleaseTableViewCell class])
-                                                                     forIndexPath: indexPath];
+                                                                    forIndexPath: indexPath];
+    cell.releaseBtnClick = ^(){
+        
+        NSString *url = [NSString stringWithFormat:@"%@/api/freeask/ut/submit",kIP];
+        
+        NSMutableDictionary *dic = [ZHNetworkTools parameters];
+        [dic setObject:@"123" forKey:@"content"];
+        [dic setObject:self.titleSubTypeLabel forKey:@"typeCode"];
+        
+//        NSMutableArray *images = [NSMutableArray array];
+        NSInteger index=0;
+        
+        for (MLImageModel *imageModel in self.imageModels) {
+            if (imageModel.modelType == MLImageModelTypePlaceholder) continue;{
+                
+                
+                NSData *imageData = UIImageJPEGRepresentation(imageModel.image, 0.5);
+                NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"123"];
+                [imageData writeToFile:fullPath atomically:NO];
+                uploadFilePath = fullPath;
+//                NSLog(@"uploadFilePath : %@", uploadFilePath);
+                
+                
+                NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
+                
+                NSString * objectKey = [NSString stringWithFormat:@"%@%@%f%ld",[UserManager sharedManager].userModel.resourceId,@"AQ",interval,(long)index];
+                index++;
+                NSLog(@"2131312321323  ===%@",objectKey);
+                
+                NSString *bucketName = bucketNameFree;
+                NSLog(@"%@",bucketName);
+                
+                [service asyncPutImage:objectKey localFilePath:uploadFilePath bucketName:bucketName comletion:^(BOOL isSuccess) {
+                    
+                    if (isSuccess) {
+                        [self.mArray addObject:objectKey];
+                        NSLog(@"marray = %@", _mArray);
+                    }
+                    
+                }];
+                
+             
+            }
+        }
+        
+        
+//
+//        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+//            
+//            if (error) {
+////                NSLog(@"%@",error);
+//            }
+//            
+////            NSLog(@"response = %@",response);
+//            
+//            
+//        }];
+        
+    };
     
     return  cell;
     
@@ -367,6 +480,8 @@ static NSInteger kMaxCount = 3;
             [self selectPhotoWithSuccessBlock:^(UIImagePickerController *imagePickerViewController, NSDictionary<NSString *,id> *info) {
                 UIImage *image = info[UIImagePickerControllerEditedImage];
                 
+           
+         
                 // 创建数据模型
                 MLImageModel *imageModel = [MLImageModel new];
                 imageModel.image = image;
@@ -423,21 +538,7 @@ static NSInteger kMaxCount = 3;
     return _layout;
 }
 
-//- (UICollectionView *)collectionView {
-//    if (!_collectionView) {
-//        _collectionView = [[UICollectionView alloc] initWithFrame: CGRectMake(10, 250, [UIScreen mainScreen].bounds.size.width, 50) collectionViewLayout: self.layout];
-//        _collectionView.delegate = self;
-//        _collectionView.dataSource = self;
-//        _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-//        [_collectionView registerNib:[UINib nibWithNibName: NSStringFromClass([MLImageCell class])
-//                                                    bundle: [NSBundle mainBundle]]
-//          forCellWithReuseIdentifier: NSStringFromClass([MLImageCell class])];
-//        _collectionView.backgroundColor = [UIColor whiteColor];
-//        _collectionView.showsHorizontalScrollIndicator = NO;
-//        _collectionView.showsVerticalScrollIndicator = NO;
-//    }
-//    return _collectionView;
-//}
+
 
 - (NSMutableArray<MLImageModel *> *)imageModels {
     if (!_imageModels) {
@@ -445,6 +546,24 @@ static NSInteger kMaxCount = 3;
         
     }
     return _imageModels;
+}
+
+
+- (ZHAskQuestionModel *)model {
+    if (!_model) {
+        _model = [ZHAskQuestionModel new];
+    }
+    return _model;
+}
+
+- (NSMutableArray *)mArray {
+    
+    if (!_mArray) {
+        
+        _mArray = [[NSMutableArray alloc]init];
+    }
+    
+    return _mArray;
 }
 
 

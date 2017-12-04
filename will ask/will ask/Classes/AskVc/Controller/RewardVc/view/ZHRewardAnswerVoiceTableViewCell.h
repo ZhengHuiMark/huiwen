@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ZHFreeDetailModel,ZHFreeAnswerModel;
+
 
 @interface ZHRewardAnswerVoiceTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *userAvatar;
@@ -26,6 +28,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *learnNumber;
 
 @property (weak, nonatomic) IBOutlet UILabel *releaseTime;
+
+
+@property(nonatomic,strong)ZHFreeDetailModel *detailModel;
+
+@property(nonatomic,strong)ZHFreeAnswerModel *answerModel;
 
 
 

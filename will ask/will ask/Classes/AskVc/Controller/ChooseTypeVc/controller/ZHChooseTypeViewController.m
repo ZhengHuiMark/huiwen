@@ -26,6 +26,14 @@ static NSInteger kIsSubTag = 1;
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ZHChooseTypeBtnContainer *tagContainer;
+
+// 小分类
+@property (nonatomic, copy) NSString *SubTypeTitle;
+// 大分类
+@property (nonatomic,copy) UILabel *typeTitle;
+
+
+@property (nonatomic,copy) NSString *text1;
 @end
 
 @implementation ZHChooseTypeViewController
@@ -63,7 +71,14 @@ static NSInteger kIsSubTag = 1;
 
 - (void)toAskDetailVc{
     
+    
+    
     ZHAskQuestionTableViewController *askVc = [[ZHAskQuestionTableViewController alloc]init];
+    
+    askVc.titleTypeLabel = _text1;
+    
+    askVc.titleSubTypeLabel = self.SubTypeTitle;
+    
     
     [self.navigationController pushViewController:askVc animated:YES];
     
@@ -111,10 +126,12 @@ static NSInteger kIsSubTag = 1;
     UIView *header = [UIView new];
     header.backgroundColor = [UIColor greenColor];
     
-    UILabel *lbl = [UILabel new];
-    lbl.frame = (CGRect){CGPointZero, {200, 44}};
-    lbl.text = self.tagContainer.tagModels[section].title;
-    [header addSubview: lbl];
+    _typeTitle = [UILabel new];
+    _typeTitle.frame = (CGRect){CGPointZero, {200, 44}};
+    _typeTitle.text = self.tagContainer.tagModels[section].title;
+    [header addSubview: _typeTitle];
+    
+    
     
     return header;
 }
@@ -172,8 +189,14 @@ static NSInteger kIsSubTag = 1;
             cell.cellClick = ^(ZHChooseTypeTableViewCell *cell, ZHChooseTypeBtn *tagButton, ZHChooseTypeBtnModel *tagModel){
                 
                 if (tagModel.selected) {
-                    //                    _title = tagModel.title;
-                    NSLog(@"%@",[NSString stringWithFormat:@"%@", tagModel.title]);
+//                          _title = tagModel.title;
+//                    NSLog(@"%@",[NSString stringWithFormat:@"%@", tagModel.title]);
+                    _SubTypeTitle = tagModel.title;
+                    
+                    
+                    _text1 = self.tagContainer.tagModels[indexPath.section].title;
+//                    NSLog(@"text1 = %@", _text1);
+                
                 }
                 
             };

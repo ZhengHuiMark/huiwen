@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ZHAskQuestionTableViewController,ZHAskQuestionModel;
+
 
 @interface ZHRewardAndDateTableViewCell : UITableViewCell
 
@@ -14,5 +16,9 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *RewardLabel;
 @property (weak, nonatomic) IBOutlet UILabel *RewardNumberL;
+
+@property(nonatomic,weak)ZHAskQuestionTableViewController *tete;
+
+@property(nonatomic,strong)ZHAskQuestionModel *model;
 
 @end

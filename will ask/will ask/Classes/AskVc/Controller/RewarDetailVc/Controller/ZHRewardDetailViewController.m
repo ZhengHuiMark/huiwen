@@ -77,7 +77,52 @@ static NSString *RewardVoiceCellid = @"RewardVoiceCellid";
 }
 
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0) {
+        return 0.1;
+    }
+    
+    return 30;
+}
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == 0) {
+        
+        
+        
+        NSString *wenzi = self.detailModel.content;
+        CGFloat marin = 17.5;
+        CGFloat labelWidth = [UIScreen mainScreen].bounds.size.width - marin * 2;
+        CGFloat labelHeight = [wenzi boundingRectWithSize: CGSizeMake(labelWidth, 300)
+                                                  options: NSStringDrawingUsesLineFragmentOrigin
+                                               attributes: @{NSFontAttributeName : [UIFont systemFontOfSize: 14]}
+                                                  context: nil].size.height;
+        
+        
+        
+        return 219 + labelHeight;
+    }
+    
+    if (self.detailModel.anserModels[indexPath.row].content) {
+        
+        
+        NSString *wenzi = self.detailModel.anserModels[indexPath.row].content;
+        CGFloat marin = 17.5;
+        CGFloat labelWidth = [UIScreen mainScreen].bounds.size.width - marin * 2;
+        CGFloat labelHeight = [wenzi boundingRectWithSize: CGSizeMake(labelWidth, 300)
+                                                  options: NSStringDrawingUsesLineFragmentOrigin
+                                               attributes: @{NSFontAttributeName : [UIFont systemFontOfSize: 14]}
+                                                  context: nil].size.height;
+        
+        
+        return 219 + labelHeight;
+    }
+    
+    
+    return 285;
+}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -112,9 +157,9 @@ static NSString *RewardVoiceCellid = @"RewardVoiceCellid";
     if (self.detailModel.anserModels[indexPath.row].content) {
         ZHRewardAnswerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:RewardContentCellid forIndexPath:indexPath];
         
-//        cell.detailModel = self.detailModel;
-//        cell.answerModel = self.detailModel.anserModels[indexPath.row];
-        //
+        cell.detailModel = self.detailModel;
+        cell.answerModel = self.detailModel.anserModels[indexPath.row];
+        
         //        cell.answerVoiceModel = self.detailModel.anserModels[indexPath.row];
         
         return cell;
@@ -123,10 +168,10 @@ static NSString *RewardVoiceCellid = @"RewardVoiceCellid";
         //   (self.detailModel.anserModels[indexPath.row].voice)
         ZHRewardAnswerVoiceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:RewardVoiceCellid forIndexPath:indexPath];
         
-//        
-//        cell.detailModel = self.detailModel;
-//        
-//        cell.answerVoiceModel = self.detailModel.anserModels[indexPath.row];
+        
+        cell.detailModel = self.detailModel;
+
+        cell.answerModel = self.detailModel.anserModels[indexPath.row];
         
         return cell;
         
@@ -134,17 +179,6 @@ static NSString *RewardVoiceCellid = @"RewardVoiceCellid";
     
     return cell;
     
-    
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if (indexPath.section == 0 ) {
-        return 300;
-    }
-    
-    
-    return  300;
     
 }
 

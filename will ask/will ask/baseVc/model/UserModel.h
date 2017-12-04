@@ -33,10 +33,10 @@
 @property(nonatomic,  copy)NSString *expertNickname;
 /** 会员卡余额 */
 @property(nonatomic,  copy)NSString *myEarnings;
-/** 会员卡余额 */
+/** 真实照片 */
 @property(nonatomic,  copy)NSString *realPhoto;
-/** */
-@property(nonatomic,  copy)NSString *ConsultsNew;
+/** 新增资讯 */
+@property(nonatomic,  copy)NSString *consults;
 
 
 

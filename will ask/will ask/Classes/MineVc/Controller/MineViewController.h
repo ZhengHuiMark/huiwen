@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class UserModel;
 
 @interface MineViewController : UITableViewController
+
+@property(nonatomic,strong)UserModel *model;
 
 @end

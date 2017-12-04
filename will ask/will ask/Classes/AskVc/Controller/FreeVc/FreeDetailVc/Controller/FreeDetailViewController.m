@@ -26,6 +26,7 @@ static NSString *AnswerContentCellid = @"AnswerContentCellid";
 
 @property(nonatomic,strong)UITableView *tableView;
 
+@property (nonatomic, strong) UIButton *answerButton;
 
 @end
 
@@ -76,7 +77,55 @@ static NSString *AnswerContentCellid = @"AnswerContentCellid";
 }
 
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UIView *view= nil;
+    if (section == 1) {
+        UIView *footerView = [UIView new];
+        footerView.clipsToBounds = YES;
+        footerView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 80);
+        
+        _answerButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, [UIScreen mainScreen].bounds.size.width - 20, 40)];
+        [_answerButton setTitle:@"立即抢答" forState:UIControlStateNormal];
+        _answerButton.layer.masksToBounds = YES;
+        _answerButton.layer.cornerRadius = 10;
+        [_answerButton setBackgroundColor:[UIColor colorWithRed:195/255.0 green:226/255.0 blue:237/255.0 alpha:1]];
+        [_answerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        
+        // 立即抢答按钮点击事件
+//        [_answerButton addTarget:self action:@selector(answerTheQuestion) forControlEvents:UIControlEventTouchUpInside];
+        
+        [footerView addSubview:_answerButton];
+        
+        
+            UILabel *noteLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_answerButton.frame) - 60,CGRectGetMaxY(_answerButton.frame) + 10, [UIScreen mainScreen].bounds.size.width - 300, 15)];
+            noteLabel.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
+//        noteLabel.backgroundColor = [UIColor redColor];
+            noteLabel.text = @"抢答规则";
+            noteLabel.numberOfLines = 0;
+            noteLabel.font = [UIFont systemFontOfSize:13];
+            
+            [footerView addSubview:noteLabel];
+            
+        //
+        return footerView;
+    }
+   
 
+    return view;
+}
+
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    
+    if (section == 0) {
+        return 0.1;
+    }
+    
+    return 80;
+}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -136,14 +185,50 @@ static NSString *AnswerContentCellid = @"AnswerContentCellid";
     
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    
+//    
+//    return 80;
+//}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 0 ) {
-        return 300;
+
+
+        
+        NSString *wenzi = self.detailModel.content;
+        CGFloat marin = 17.5;
+        CGFloat labelWidth = [UIScreen mainScreen].bounds.size.width - marin * 2;
+        CGFloat labelHeight = [wenzi boundingRectWithSize: CGSizeMake(labelWidth, 300)
+                                                  options: NSStringDrawingUsesLineFragmentOrigin
+                                               attributes: @{NSFontAttributeName : [UIFont systemFontOfSize: 14]}
+                                                  context: nil].size.height;
+        
+        return 219 + labelHeight;
+    
+    }
+    
+    if (self.detailModel.anserModels[indexPath.row].content) {
+        
+        NSString *wenzi = self.detailModel.anserModels[indexPath.row].content;
+        CGFloat marin = 17.5;
+        CGFloat labelWidth = [UIScreen mainScreen].bounds.size.width - marin * 2;
+
+        CGFloat labelHeight = [wenzi boundingRectWithSize: CGSizeMake(labelWidth, 300)
+                                                  options: NSStringDrawingUsesLineFragmentOrigin
+                                               attributes: @{NSFontAttributeName : [UIFont systemFontOfSize: 14]}
+                                                  context: nil].size.height;
+        
+        
+        return 219 + labelHeight;
     }
     
     
-    return  300;
+    
+    return  290;
     
 }
 

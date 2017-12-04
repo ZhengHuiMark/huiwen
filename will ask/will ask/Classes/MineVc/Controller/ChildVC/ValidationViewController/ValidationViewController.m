@@ -13,8 +13,13 @@
 #import "ZHExpertChooseTableViewCell.h"
 #import "ZHValidationCertificateCell.h"
 #import "ValidationViewControllerHeader.h"
+#import "ReviewHeaderCell.h"
+#import "ReviewModel.h"
 
 @interface ValidationViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (nonatomic, strong) NSMutableArray<ReviewModel *> *models;
+
 
 @property(nonatomic , strong)UITableView *tableView;
 @end
@@ -80,6 +85,10 @@
                             break;
                     }
                 }
+//        case kValidationViewControllerSection_Certificate{
+            
+            
+//                }
                 default:
                     break;
             }
@@ -120,10 +129,14 @@
     
 }
 
-- (ZHExpertChooseTableViewCell *)obtainExpertChooseCellWithTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath{
+- (ReviewHeaderCell *)obtainExpertChooseCellWithTableView:(UITableView *)tableView atIndexPath:(NSIndexPath *)indexPath{
     
-    ZHExpertChooseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: NSStringFromClass([ZHExpertChooseTableViewCell class])
+    ReviewHeaderCell *cell = [tableView dequeueReusableCellWithIdentifier: NSStringFromClass([ReviewHeaderCell class])
                                                                        forIndexPath: indexPath];
+    cell.tableView = tableView;
+
+    cell.models = self.models;
+
     
     return  cell;
     
@@ -133,7 +146,8 @@
     
     ZHValidationCertificateCell *cell = [tableView dequeueReusableCellWithIdentifier: NSStringFromClass([ZHValidationCertificateCell class])
                                                                        forIndexPath: indexPath];
-    
+    cell.model = self.models[indexPath.row-1];
+
     return  cell;
     
 }
@@ -165,10 +179,10 @@
         }
             break;
             
-//        case kValidationViewControllerSection_Certificate:{
-//            return kValidationViewControllerSectionRowCountInSectionCertificate;
-//        }
-//            break;
+        case kValidationViewControllerSection_Certificate:{
+            return kValidationViewControllerSectionRowCountInSectionCertificate;
+        }
+            break;
         
         default:
             break;
@@ -196,8 +210,8 @@
         [_tableView registerNib: [UINib nibWithNibName: NSStringFromClass([ZHIdCardTableViewCell class]) bundle: bundle]
          forCellReuseIdentifier: NSStringFromClass([ZHIdCardTableViewCell class])];
      
-        [_tableView registerNib: [UINib nibWithNibName: NSStringFromClass([ZHExpertChooseTableViewCell class]) bundle: bundle]
-         forCellReuseIdentifier: NSStringFromClass([ZHExpertChooseTableViewCell class])];
+        [_tableView registerNib: [UINib nibWithNibName: NSStringFromClass([ReviewHeaderCell class]) bundle: bundle]
+         forCellReuseIdentifier: NSStringFromClass([ReviewHeaderCell class])];
        
         [_tableView registerNib: [UINib nibWithNibName: NSStringFromClass([ZHValidationCertificateCell class]) bundle: bundle]
          forCellReuseIdentifier: NSStringFromClass([ZHValidationCertificateCell class])];
@@ -232,10 +246,36 @@
                 }
               
             break;
+            
+        case kValidationViewControllerSection_Certificate: {
+            return kValidationViewControllerRowHeight_Certificate;
         }
+    }
+    
     
     
             return 0;
     }
+
+
+- (NSMutableArray<ReviewModel *> *)models {
+    if (!_models) {
+        
+        NSMutableArray *arr = [NSMutableArray array];
+        NSArray *titles = @[@"anniu1", @"anniu2", @"anniu3",@"anniu4"];
+        NSArray *status = @[@(ReviewStatusSelected), @(ReviewStatusNormal), @(ReviewStatusNormal),@(ReviewStatusNormal)];
+        for (NSInteger index=0; index<4; index++) {
+            
+            ReviewModel *model = [ReviewModel new];
+            model.status = [status[index] integerValue];
+            model.title = titles[index];
+            [arr addObject: model];
+        }
+        
+        _models = [NSMutableArray arrayWithArray: arr];
+    }
+    return _models;
+}
+
 
 @end

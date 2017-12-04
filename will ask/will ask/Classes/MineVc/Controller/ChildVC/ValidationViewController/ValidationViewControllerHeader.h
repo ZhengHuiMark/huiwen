@@ -12,7 +12,7 @@
 
 
 /** 专家认证页面 Section 数量*/
-static NSInteger const kValidationViewControllerSectionCount = 4;
+static NSInteger const kValidationViewControllerSectionCount = 5;
 /** 用户头像 row 数量*/
 static NSInteger const kValidationViewControllerSectionRowCountInSectionUserAvatar = 1;
 /** 用户信息 row 数量*/
@@ -82,7 +82,7 @@ static CGFloat const kValidationViewControllerRowHeight_UserInfo = 44.0f;
 /** 身份证 Cell 高度 */
 static CGFloat const kValidationViewControllerRowHeight_Identity = 190.0f;
 /** 专家选择 Cell 高度 */
-static CGFloat const kValidationViewControllerRowHeight_CertificateType = 102.0f;
+static CGFloat const kValidationViewControllerRowHeight_CertificateType = 44.0f;
 /** 专家图片 Cell 高度 */
 static CGFloat const kValidationViewControllerRowHeight_Certificate = 217.0f;
 

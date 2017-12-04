@@ -38,6 +38,8 @@
 /** 提问用户ID */
 @property(nonatomic,copy)NSString *userId;
 
+@property(nonatomic,copy)NSString *certifiedNames;
+
 
 //  ----- 以下为悬赏问属性   ----
 

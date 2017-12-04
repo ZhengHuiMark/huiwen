@@ -25,7 +25,7 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请详细描述您的问题，以便可以更快的为您回答" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JA0-aB-uUF">
-                        <rect key="frame" x="18" y="25" width="300" height="17"/>
+                        <rect key="frame" x="5" y="7" width="300" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.73725490199999999" green="0.73725490199999999" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -38,16 +38,21 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="JA0-aB-uUF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="7VG-bI-gCS"/>
+                    <constraint firstItem="JA0-aB-uUF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="7VG-bI-gCS"/>
                     <constraint firstItem="vPR-KO-afX" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="NUj-KQ-w6h"/>
                     <constraint firstAttribute="bottom" secondItem="Cvd-TO-3CL" secondAttribute="bottom" constant="8.5" id="RV2-5G-U7h"/>
-                    <constraint firstItem="JA0-aB-uUF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="YfY-wd-495"/>
+                    <constraint firstItem="JA0-aB-uUF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="YfY-wd-495"/>
                     <constraint firstAttribute="bottom" secondItem="vPR-KO-afX" secondAttribute="bottom" id="eEw-ji-AQH"/>
                     <constraint firstAttribute="trailing" secondItem="Cvd-TO-3CL" secondAttribute="trailing" constant="18" id="ihz-NG-r94"/>
                     <constraint firstItem="vPR-KO-afX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="liU-et-b15"/>
                     <constraint firstAttribute="trailing" secondItem="vPR-KO-afX" secondAttribute="trailing" id="qWb-P6-7aL"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="contentTextView" destination="vPR-KO-afX" id="lNY-iF-ogY"/>
+                <outlet property="numberLabel" destination="Cvd-TO-3CL" id="Gg4-ui-mfc"/>
+                <outlet property="placeHolderLabel" destination="JA0-aB-uUF" id="Hhr-hP-NAL"/>
+            </connections>
             <point key="canvasLocation" x="24.5" y="52"/>
         </tableViewCell>
     </objects>

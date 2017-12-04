@@ -50,7 +50,6 @@
                             <constraint firstAttribute="height" constant="60" id="0gT-x5-Onu"/>
                             <constraint firstAttribute="width" constant="60" id="m36-e5-2Dq"/>
                         </constraints>
-                        <state key="normal" title="Button"/>
                         <connections>
                             <action selector="findExpert:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6FX-Kp-zfS"/>
                         </connections>
@@ -61,7 +60,6 @@
                             <constraint firstAttribute="width" constant="60" id="9rl-0M-nZb"/>
                             <constraint firstAttribute="height" constant="60" id="LWS-Pq-cpd"/>
                         </constraints>
-                        <state key="normal" title="Button"/>
                         <connections>
                             <action selector="checkCase:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="6fr-bD-jKI"/>
                         </connections>

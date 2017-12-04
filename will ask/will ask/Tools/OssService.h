@@ -10,16 +10,23 @@
 #define OssService_h
 #import <AliyunOSSiOS/OSSService.h>
 #import "ViewController.h"
-@class HomeViewController;
+
+typedef void(^UploadImageCompletion)(BOOL isSuccess);
+
 @interface OssService : NSObject
 
-- (id)initWithViewController:(HomeViewController*)view
+- (id)initWithViewController:(UIViewController *)view
                 withEndPoint:(NSString *)enpoint;
 
 - (void)setCallbackAddress:(NSString *)address;
 
 - (void)asyncPutImage:(NSString *)objectKey
         localFilePath:(NSString *)filePath;
+
+- (void)asyncPutImage:(NSString *)objectKey
+        localFilePath:(NSString *)filePath
+             bucketName:(NSString *)bucketName
+            comletion:(UploadImageCompletion)completion;
 
 - (void)asyncGetImage:(NSString *)objectKey;
 

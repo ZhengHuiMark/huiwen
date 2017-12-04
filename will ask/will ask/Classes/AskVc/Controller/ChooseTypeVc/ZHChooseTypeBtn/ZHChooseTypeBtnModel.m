@@ -29,8 +29,10 @@
             NSArray *subTags = [dict objectForKey: @"subCategories"];
             if (subTags.count) {
                 NSMutableArray<ZHChooseTypeBtnModel *> *subTagModels = [NSMutableArray array];
-                for (NSInteger index=0; index<subTags.count; index++) {
+                for (NSInteger index = 0; index < subTags.count; index++) {
+                    
                     NSDictionary *dic = [subTags objectAtIndex: index];
+                    
                     [subTagModels addObject: [ZHChooseTypeSubTagModel tagModelWithDictionary: dic
                                                                            atIndex: index]];
                 }
