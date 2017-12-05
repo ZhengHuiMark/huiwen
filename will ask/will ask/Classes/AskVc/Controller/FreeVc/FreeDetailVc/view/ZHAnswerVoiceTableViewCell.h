@@ -25,7 +25,7 @@
 
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *answerImage;
 
-@property (weak, nonatomic) IBOutlet UIButton *answerImgBtn;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *answerImgBtn;
 
 @property (weak, nonatomic) IBOutlet UILabel *answerTime;
 

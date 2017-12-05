@@ -86,15 +86,15 @@
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2A-KW-pFm">
                         <rect key="frame" x="19" y="111" width="60" height="60"/>
-                        <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="imageButtonAction:" destination="I4U-Cw-1BU" eventType="touchUpInside" id="abe-UC-Bm1"/>
+                        </connections>
                     </button>
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="umd-lx-o70">
                         <rect key="frame" x="87" y="111" width="60" height="60"/>
-                        <state key="normal" title="Button"/>
                     </button>
                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NlC-nK-4s8">
                         <rect key="frame" x="154" y="111" width="60" height="60"/>
-                        <state key="normal" title="Button"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ds-ed-AzX">
                         <rect key="frame" x="21" y="200" width="31" height="12"/>
@@ -167,6 +167,10 @@
                 <outlet property="userNickName" destination="KYf-oy-daU" id="wfQ-5d-SwK"/>
                 <outletCollection property="contentImgs" destination="6nh-rP-m8v" id="bTh-QY-WWM"/>
                 <outletCollection property="contentBtn" destination="o2A-KW-pFm" id="TKO-Q5-s85"/>
+                <outletCollection property="contentBtn" destination="umd-lx-o70" id="LbC-wz-ugu"/>
+                <outletCollection property="contentBtn" destination="NlC-nK-4s8" id="eqj-FQ-idC"/>
+                <outletCollection property="contentImgs" destination="DfO-FU-nGI" id="osG-LS-IDF"/>
+                <outletCollection property="contentImgs" destination="GpT-Ey-8Tf" id="38N-e3-g1L"/>
             </connections>
             <point key="canvasLocation" x="-40.5" y="-131.5"/>
         </tableViewCell>

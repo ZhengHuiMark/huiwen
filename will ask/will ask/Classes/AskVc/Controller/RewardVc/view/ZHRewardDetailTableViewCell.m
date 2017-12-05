@@ -12,6 +12,16 @@
 #import "Macro.h"
 #import "ImageTools.h"
 #import "UIImageView+WebCache.h"
+#import "MLAvatarDisplayView.h"
+
+
+
+@interface ZHRewardDetailTableViewCell()
+
+@property (nonatomic, strong) MLAvatarDisplayView *avatarDisplayView;
+
+
+@end
 
 @implementation ZHRewardDetailTableViewCell
 
@@ -25,7 +35,7 @@
     
     self.userNickName.text = self.detailModel.nickname;
     
-    [self.userAvatarImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUser,OSS,self.detailModel.avatar]]];
+    [self.userAvatarImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.detailModel.avatar]]];
     
     self.content.text = [NSString stringWithFormat:@"      %@",self.detailModel.content];
     
@@ -61,7 +71,38 @@
     }
     
     
+    NSArray *PhotoArray = [self.detailModel.photos componentsSeparatedByString:@","];
+    
+    NSInteger index = -1;
+    NSLog(@"%zd",index);
+    for (UIImageView *imageView in self.contentImgs) {
+        index++;
+        if (PhotoArray.count <= index) {
+            imageView.hidden = YES;
+            [self.contentBtn[index] setHidden: YES];
+            continue;
+        }
+        imageView.hidden = NO;
+        [self.contentBtn[index] setHidden: NO];
+        [imageView sd_setImageWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@",bucketNameReward,OSS,PhotoArray[index]]]];
+    }
+    
+    
+}
+- (IBAction)imageButtonAction:(UIButton *)sender {
+    
+    UIImageView *imageView = self.contentImgs[sender.tag];
+    
+    [self.avatarDisplayView showFromImageView:imageView];
+    
 }
 
+#pragma mark - Lazy load
+- (MLAvatarDisplayView *)avatarDisplayView {
+    if (!_avatarDisplayView) {
+        _avatarDisplayView = [MLAvatarDisplayView ml_singleImageDisplayView];
+    }
+    return _avatarDisplayView;
+}
 
 @end

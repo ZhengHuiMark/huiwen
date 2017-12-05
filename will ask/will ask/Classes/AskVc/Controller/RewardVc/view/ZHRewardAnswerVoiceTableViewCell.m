@@ -10,7 +10,16 @@
 #import "ZHFreeDetailModel.h"
 #import "ZHFreeAnswerModel.h"
 #import "ImageTools.h"
+#import "MLAvatarDisplayView.h"
+#import "UIImageView+WebCache.h"
 
+
+@interface ZHRewardAnswerVoiceTableViewCell()
+
+@property (nonatomic, strong) MLAvatarDisplayView *avatarDisplayView;
+
+
+@end
 
 @implementation ZHRewardAnswerVoiceTableViewCell
 
@@ -41,10 +50,40 @@
     self.releaseTime.text = self.answerModel.time;
     
     
+    NSArray *PhotoArray = [self.answerModel.photos componentsSeparatedByString:@","];
+    
+    NSInteger index = -1;
+    NSLog(@"%zd",index);
+    for (UIImageView *imageView in self.ansImgViews) {
+        index++;
+        if (PhotoArray.count <= index) {
+            imageView.hidden = YES;
+            [self.ansImgBtn[index] setHidden: YES];
+            continue;
+        }
+        imageView.hidden = NO;
+        [self.ansImgBtn[index] setHidden: NO];
+        [imageView sd_setImageWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@",bucketNameRewardLoad,OSS,PhotoArray[index]]]];
+    }
     
     
+}
+
+- (IBAction)imgBtnAction:(UIButton *)sender {
     
     
+    UIImageView *imageView = self.ansImgViews[sender.tag];
+    
+    [self.avatarDisplayView showFromImageView:imageView];
+}
+
+
+#pragma mark - Lazy load
+- (MLAvatarDisplayView *)avatarDisplayView {
+    if (!_avatarDisplayView) {
+        _avatarDisplayView = [MLAvatarDisplayView ml_singleImageDisplayView];
+    }
+    return _avatarDisplayView;
 }
 
 @end

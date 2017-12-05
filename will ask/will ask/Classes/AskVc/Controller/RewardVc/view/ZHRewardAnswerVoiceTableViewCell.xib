@@ -81,7 +81,7 @@
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aF8-aI-vej">
-                        <rect key="frame" x="85.5" y="162" width="60" height="60"/>
+                        <rect key="frame" x="85" y="162" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="C2r-cj-8Ei"/>
                             <constraint firstAttribute="height" constant="60" id="d8G-Z6-42L"/>
@@ -113,12 +113,15 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RQc-zm-4R0">
                         <rect key="frame" x="18" y="162" width="60" height="60"/>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="imgBtnAction:" destination="cm9-dU-PZZ" eventType="touchUpInside" id="SW3-Pu-84P"/>
+                        </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ewH-dp-Egk">
+                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ewH-dp-Egk">
                         <rect key="frame" x="85.5" y="162" width="60" height="60"/>
                         <state key="normal" title="Button"/>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pbe-AB-chf">
+                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pbe-AB-chf">
                         <rect key="frame" x="153" y="162" width="60" height="60"/>
                         <state key="normal" title="Button"/>
                     </button>
@@ -219,8 +222,6 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="ClickUpNumber" destination="fBk-cG-V74" id="7Au-H6-BmN"/>
-                <outlet property="ContentImg" destination="RQc-zm-4R0" id="Ihi-6Q-lnR"/>
-                <outlet property="ContentImgs" destination="aF8-aI-vej" id="Eoi-zb-g9b"/>
                 <outlet property="VoiceBtn" destination="irY-K7-3bP" id="flQ-7R-6HD"/>
                 <outlet property="VoiceTime" destination="RRg-8d-Nca" id="78A-eS-Vfl"/>
                 <outlet property="expertName" destination="irL-5W-qNF" id="ouc-Nh-lks"/>
@@ -229,6 +230,12 @@
                 <outlet property="releaseTime" destination="jT7-Mu-Btc" id="Iht-3S-4DK"/>
                 <outlet property="userAvatar" destination="uHd-nv-GxF" id="RY4-3p-X2Q"/>
                 <outlet property="userName" destination="hrb-VH-FtC" id="P39-fn-zlc"/>
+                <outletCollection property="ansImgBtn" destination="RQc-zm-4R0" id="e2K-dG-u0d"/>
+                <outletCollection property="ansImgBtn" destination="ewH-dp-Egk" id="L9R-0J-8k8"/>
+                <outletCollection property="ansImgBtn" destination="Pbe-AB-chf" id="gQh-MY-aBk"/>
+                <outletCollection property="ansImgViews" destination="ulM-A0-tuf" id="vvq-aX-lXh"/>
+                <outletCollection property="ansImgViews" destination="aF8-aI-vej" id="iiF-1Y-KGY"/>
+                <outletCollection property="ansImgViews" destination="34G-bk-Z9G" id="lMS-af-bwH"/>
             </connections>
             <point key="canvasLocation" x="24.5" y="50.5"/>
         </tableViewCell>

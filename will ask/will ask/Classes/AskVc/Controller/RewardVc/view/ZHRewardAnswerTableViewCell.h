@@ -23,9 +23,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *content;
 
-@property (weak, nonatomic) IBOutlet UIButton *ImgButtons;
 
-@property (weak, nonatomic) IBOutlet UIImageView *ContentImgs;
 @property (weak, nonatomic) IBOutlet UILabel *clickNumber;
 
 @property (weak, nonatomic) IBOutlet UILabel *learnNumber;
@@ -37,8 +35,7 @@
 @property (nonatomic,strong)ZHFreeDetailModel *detailModel;
 
 
-
-
-
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *answerImgs;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *ansImgButtons;
 
 @end

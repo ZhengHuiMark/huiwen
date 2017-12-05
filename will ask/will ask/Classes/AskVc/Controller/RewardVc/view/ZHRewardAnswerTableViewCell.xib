@@ -96,15 +96,15 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h1h-Wc-jhn">
                         <rect key="frame" x="19" y="114" width="60" height="60"/>
-                        <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="imgsBtnAction:" destination="2xN-1w-mu0" eventType="touchUpInside" id="owe-Ew-Qpm"/>
+                        </connections>
                     </button>
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lZu-wT-rXj">
                         <rect key="frame" x="87" y="114" width="60" height="60"/>
-                        <state key="normal" title="Button"/>
                     </button>
                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9MU-oG-5d8">
                         <rect key="frame" x="154" y="114" width="60" height="60"/>
-                        <state key="normal" title="Button"/>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yqh-No-wrA">
                         <rect key="frame" x="98" y="24" width="50" height="15"/>
@@ -207,8 +207,6 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="ContentImgs" destination="1aS-m2-TJh" id="T2G-4U-9X3"/>
-                <outlet property="ImgButtons" destination="lZu-wT-rXj" id="TB9-zq-gfW"/>
                 <outlet property="clickNumber" destination="98o-uD-D10" id="gUC-9Y-9Lg"/>
                 <outlet property="content" destination="wSC-1r-PN8" id="HjD-7z-WuL"/>
                 <outlet property="expertName" destination="97g-cj-ohp" id="EaT-Hi-4mi"/>
@@ -218,6 +216,12 @@
                 <outlet property="releaseTime" destination="426-0t-Dmm" id="roW-gd-r8m"/>
                 <outlet property="userAvatar" destination="gwd-BO-Vty" id="zKq-gT-PsA"/>
                 <outlet property="userName" destination="lxW-kG-U7D" id="X6p-Fr-fbO"/>
+                <outletCollection property="answerImgs" destination="Cj9-32-bQQ" id="Wtr-iL-oSE"/>
+                <outletCollection property="answerImgs" destination="1aS-m2-TJh" id="kW2-0h-SRj"/>
+                <outletCollection property="answerImgs" destination="kgL-c7-o9Z" id="1T6-AD-IXG"/>
+                <outletCollection property="ansImgButtons" destination="h1h-Wc-jhn" id="8Nz-yl-who"/>
+                <outletCollection property="ansImgButtons" destination="lZu-wT-rXj" id="TFU-Uh-AQ2"/>
+                <outletCollection property="ansImgButtons" destination="9MU-oG-5d8" id="6If-MY-khv"/>
             </connections>
             <point key="canvasLocation" x="24.5" y="9"/>
         </tableViewCell>

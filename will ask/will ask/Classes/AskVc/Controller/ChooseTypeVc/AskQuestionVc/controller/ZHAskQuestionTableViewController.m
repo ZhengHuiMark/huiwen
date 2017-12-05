@@ -393,26 +393,40 @@ static NSInteger kMaxCount = 3;
                     if (isSuccess) {
                         [self.mArray addObject:objectKey];
                         NSLog(@"marray = %@", _mArray);
+                        
+                        
+                        
+                        self.model.photos = [_mArray componentsJoinedByString:@","];
+                        NSLog(@"self.model.photos = %@",self.model.photos);
+                        //
+                        
+                        
+                            //        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                            //
+                            //            if (error) {
+                            ////                NSLog(@"%@",error);
+                            //            }
+                            //
+                            ////            NSLog(@"response = %@",response);
+                            //
+                            //
+                            //        }];
+
+                      
                     }
+                    
+                  
+                    
+                    
                     
                 }];
                 
-             
+                
+                
             }
         }
         
-        
-//
-//        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
-//            
-//            if (error) {
-////                NSLog(@"%@",error);
-//            }
-//            
-////            NSLog(@"response = %@",response);
-//            
-//            
-//        }];
+
         
     };
     

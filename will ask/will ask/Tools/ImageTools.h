@@ -24,4 +24,18 @@ static NSString *bucketNameFree = @"dwsoft-freeask";
 static NSString *bucketNameDwsoft = @"dwsoft";
 
 
+/**  用户头像  */
+static NSString *bucketNameUserLoad = @"http://dwsoft-userinfo";
+/**   悬赏问  */
+static NSString *bucketNameRewardLoad = @"http://dwsoft-rewardask";
+/**   咨询   */
+static NSString *bucketNameConsultLoad = @"http://dwsoft-consult";
+/**   免费问  */
+static NSString *bucketNameFreeLoad = @"http://dwsoft-freeask";
+/**  其他资源 */
+static NSString *bucketNameDwsoftLoad = @"http://dwsoft";
+
+
+
+
 #endif /* ImageTools_h */

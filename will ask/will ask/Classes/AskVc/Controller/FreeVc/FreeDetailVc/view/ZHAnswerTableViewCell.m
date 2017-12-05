@@ -14,6 +14,7 @@
 #import "MLAvatarDisplayView.h"
 
 
+
 @interface ZHAnswerTableViewCell ()
 
 @property (nonatomic, strong) MLAvatarDisplayView *avatarDisplayView;
@@ -47,6 +48,22 @@
 //    self.answerExpert.text = answerModel.
     self.answerContent.text = self.answerModel.content;
     
+    
+    NSArray *PhotoArray = [self.answerModel.photos componentsSeparatedByString:@","];
+    
+    NSInteger index = -1;
+    NSLog(@"%zd",index);
+    for (UIImageView *imageView in self.answerImgs) {
+        index++;
+        if (PhotoArray.count <= index) {
+            imageView.hidden = YES;
+            [self.answerimgBtns[index] setHidden: YES];
+            continue;
+        }
+        imageView.hidden = NO;
+        [self.answerimgBtns[index] setHidden: NO];
+        [imageView sd_setImageWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@",bucketNameReward,OSS,PhotoArray[index]]]];
+    }
     
 }
 

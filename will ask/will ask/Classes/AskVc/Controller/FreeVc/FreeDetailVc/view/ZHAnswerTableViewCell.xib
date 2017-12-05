@@ -96,18 +96,15 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XkZ-mX-eVR">
                         <rect key="frame" x="19" y="114" width="60" height="60"/>
-                        <state key="normal" title="Button"/>
                         <connections>
                             <action selector="imageButtonAction:" destination="Vkb-jO-CWA" eventType="touchUpInside" id="RQV-XJ-Wy1"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aSb-Fs-eFj">
                         <rect key="frame" x="87" y="114" width="60" height="60"/>
-                        <state key="normal" title="Button"/>
                     </button>
                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nLV-sN-tsk">
                         <rect key="frame" x="154" y="114" width="60" height="60"/>
-                        <state key="normal" title="Button"/>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="brF-Fb-4I6">
                         <rect key="frame" x="98" y="24" width="50" height="15"/>
@@ -179,6 +176,10 @@
                 <outlet property="answerTime" destination="3Vt-sa-Px4" id="tkh-Tu-253"/>
                 <outletCollection property="answerImgs" destination="T0a-9G-kbq" id="Rsy-lY-e6e"/>
                 <outletCollection property="answerimgBtns" destination="XkZ-mX-eVR" id="Tgq-el-VY1"/>
+                <outletCollection property="answerimgBtns" destination="aSb-Fs-eFj" id="wZ1-Yi-FuQ"/>
+                <outletCollection property="answerimgBtns" destination="nLV-sN-tsk" id="G1Z-dU-wWg"/>
+                <outletCollection property="answerImgs" destination="Atj-ZP-pq7" id="Bbf-sY-NdW"/>
+                <outletCollection property="answerImgs" destination="D2t-Ud-Hbc" id="9HT-gg-y21"/>
             </connections>
             <point key="canvasLocation" x="24.5" y="7"/>
         </tableViewCell>

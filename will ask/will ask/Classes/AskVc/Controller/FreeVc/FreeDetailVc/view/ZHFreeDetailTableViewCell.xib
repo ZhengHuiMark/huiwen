@@ -120,6 +120,9 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6u-Dq-tbE">
                         <rect key="frame" x="19" y="119" width="60" height="60"/>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="imageButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="69m-zZ-NbR"/>
+                        </connections>
                     </button>
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aow-dk-lVF">
                         <rect key="frame" x="87" y="119" width="60" height="60"/>
@@ -187,6 +190,10 @@
                 <outlet property="userNickName" destination="U3E-0j-Y7z" id="XnI-gg-ngg"/>
                 <outletCollection property="ContentImageView" destination="2Xs-pg-5A0" id="Wy0-eg-mva"/>
                 <outletCollection property="imageButtons" destination="K6u-Dq-tbE" id="luA-cn-LE8"/>
+                <outletCollection property="ContentImageView" destination="wG2-Ne-Tlq" id="SL8-DY-49C"/>
+                <outletCollection property="ContentImageView" destination="RvI-qu-y9P" id="tg0-lp-btx"/>
+                <outletCollection property="imageButtons" destination="aow-dk-lVF" id="qsp-cp-muh"/>
+                <outletCollection property="imageButtons" destination="cin-N3-oOv" id="Aje-cl-E2v"/>
             </connections>
             <point key="canvasLocation" x="-62" y="-53"/>
         </tableViewCell>

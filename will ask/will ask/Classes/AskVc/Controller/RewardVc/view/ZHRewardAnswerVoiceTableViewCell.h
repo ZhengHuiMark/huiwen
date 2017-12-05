@@ -19,9 +19,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *VoiceTime;
 @property (weak, nonatomic) IBOutlet UIButton *VoiceBtn;
 
-@property (weak, nonatomic) IBOutlet UIButton *ContentImg;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *ansImgBtn;
 
-@property (weak, nonatomic) IBOutlet UIImageView *ContentImgs;
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *ansImgViews;
 
 @property (weak, nonatomic) IBOutlet UILabel *ClickUpNumber;
 

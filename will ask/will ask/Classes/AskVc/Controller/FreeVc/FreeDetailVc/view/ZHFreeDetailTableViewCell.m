@@ -10,6 +10,16 @@
 #import "ZHFreeDetailModel.h"
 #import "ImageTools.h"
 #import "UIImageView+WebCache.h"
+#import "Macro.h"
+#import "MLAvatarDisplayView.h"
+#import "ImageTools.h"
+
+@interface ZHFreeDetailTableViewCell()
+
+@property (nonatomic, strong) MLAvatarDisplayView *avatarDisplayView;
+
+
+@end
 
 @implementation ZHFreeDetailTableViewCell
 
@@ -43,13 +53,50 @@
         
     }
     
-    [self.userAvatarImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUser,OSS,self.model.avatar]]];
+    [self.userAvatarImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.model.avatar]]];
     
     self.contentL.text = [NSString stringWithFormat:@"       %@",self.model.content];
     
     
     [self.AskImg setImage:[UIImage imageNamed:@"ask"]];
+    
+    
+    NSArray *PhotoArray = [self.model.photos componentsSeparatedByString:@","];
+    if (self.model.photos) {
+        [PhotoArray arrayByAddingObject:self.model.photos];
+    }
+    NSLog(@"123  = %@",PhotoArray);
+    
+    NSInteger index = -1;
+    NSLog(@"%zd",index);
+    for (UIImageView *imageView in self.ContentImageView) {
+        index++;
+        if (PhotoArray.count <= index) {
+            imageView.hidden = YES;
+            [self.imageButtons[index] setHidden: YES];
+            continue;
+        }
+        imageView.hidden = NO;
+        [self.imageButtons[index] setHidden: NO];
+        [imageView sd_setImageWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@",bucketNameFreeLoad,OSS,PhotoArray[index]]]];
+    }
+    
 }
 
+- (IBAction)imageButtonAction:(UIButton *)sender {
+    
+    UIImageView *imageView = self.ContentImageView[sender.tag];
+    
+    [self.avatarDisplayView showFromImageView:imageView];
+}
+
+
+#pragma mark - Lazy load
+- (MLAvatarDisplayView *)avatarDisplayView {
+    if (!_avatarDisplayView) {
+        _avatarDisplayView = [MLAvatarDisplayView ml_singleImageDisplayView];
+    }
+    return _avatarDisplayView;
+}
 
 @end

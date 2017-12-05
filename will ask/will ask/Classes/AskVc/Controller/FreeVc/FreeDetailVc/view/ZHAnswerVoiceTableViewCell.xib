@@ -113,12 +113,15 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JTi-b0-ZqV">
                         <rect key="frame" x="18" y="162" width="60" height="60"/>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="imgBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lGb-tX-f6b"/>
+                        </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d94-3q-BcD">
+                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d94-3q-BcD">
                         <rect key="frame" x="85.5" y="162" width="60" height="60"/>
                         <state key="normal" title="Button"/>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofi-Vd-RWB">
+                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofi-Vd-RWB">
                         <rect key="frame" x="153" y="162" width="60" height="60"/>
                         <state key="normal" title="Button"/>
                     </button>
@@ -170,12 +173,16 @@
                 <outlet property="VoiceTimeL" destination="rvZ-Ll-Z1D" id="kfC-Nm-yqA"/>
                 <outlet property="ansexperTitle" destination="FmQ-gB-ImS" id="vOQ-uW-z3K"/>
                 <outlet property="answerExpert" destination="gSE-Vc-K7J" id="KZG-IF-Tka"/>
-                <outlet property="answerImgBtn" destination="JTi-b0-ZqV" id="nGP-Rx-6qQ"/>
                 <outlet property="answerName" destination="Oli-Xb-Ci2" id="iAb-We-8aY"/>
                 <outlet property="answerTime" destination="TIP-gz-M4R" id="8mW-pu-WiG"/>
                 <outlet property="playVoiceBtn" destination="0EN-qF-wRe" id="NDS-lf-wTO"/>
                 <outlet property="userAvatarImg" destination="sPj-d4-jzx" id="DsP-jh-qtt"/>
                 <outletCollection property="answerImage" destination="ddd-io-07t" id="nkw-zg-LHC"/>
+                <outletCollection property="answerImgBtn" destination="JTi-b0-ZqV" id="ZJZ-oK-xvN"/>
+                <outletCollection property="answerImgBtn" destination="d94-3q-BcD" id="onV-fA-yzn"/>
+                <outletCollection property="answerImgBtn" destination="ofi-Vd-RWB" id="3Za-xs-yLa"/>
+                <outletCollection property="answerImage" destination="XCb-rY-K7S" id="E6d-2Y-lck"/>
+                <outletCollection property="answerImage" destination="qdg-IM-agi" id="Llv-Bu-pqP"/>
             </connections>
             <point key="canvasLocation" x="24.5" y="52"/>
         </tableViewCell>
