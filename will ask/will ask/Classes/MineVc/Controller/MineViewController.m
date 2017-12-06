@@ -19,6 +19,7 @@
 #import "ZHNetworkTools.h"
 #import "Macro.h"
 #import "ZHMyWalletViewController.h"
+#import "ZHMyOrderViewController.h"
 #import "UserInfoModel.h"
 #import "YYModel.h"
 
@@ -220,6 +221,9 @@ static NSString *MineListCellid = @"MineListCellid";
                 break;
             }
             case 7:{
+                
+                NSString *className = @"ZHMyOrderViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 
                 break;
             }
