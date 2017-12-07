@@ -10,9 +10,9 @@
 @class ZHMyOrderModel;
 
 typedef NS_ENUM(NSUInteger, ReviewStatus) {
-    ReviewStatusWaitPayFor,
-    ReviewStatusCancel,
-    ReviewStatusSuccess,
+    ReviewStatusWaitPayFor = 0,
+    ReviewStatusCancel = 1,
+    ReviewStatusSuccess = 2,
 };
 
 @interface ZHMyorderTableViewCell : UITableViewCell

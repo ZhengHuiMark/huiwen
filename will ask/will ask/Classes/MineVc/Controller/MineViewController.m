@@ -191,10 +191,13 @@ static NSString *MineListCellid = @"MineListCellid";
         switch (indexPath.row) {
             case 0:{
                 
+                NSString *className = @"ZHMyFreeAskViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 break;
             }
             case 1:{
-                
+                NSString *className = @"ZHMyRewardAskViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 break;
             }
             case 2:{

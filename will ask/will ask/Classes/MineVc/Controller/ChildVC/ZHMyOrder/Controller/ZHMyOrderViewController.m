@@ -50,7 +50,6 @@ static NSString *myOrderCellid = @"myOrderCellid";
     
     [self.view addSubview:self.tableView];
     
-    [self loadData];
     
     
     _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -114,13 +113,6 @@ static NSString *myOrderCellid = @"myOrderCellid";
         }
         [self.tableView.mj_header endRefreshing];
     }];
-    
-    
-}
-
-- (void)loadData{
-   
-    
     
     
 }
@@ -240,6 +232,15 @@ static NSString *myOrderCellid = @"myOrderCellid";
         _tableView.mj_footer.automaticallyHidden = YES;
         
         [_tableView.mj_header beginRefreshing];
+        
+        
+        _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            _pageNo++;
+            
+            [self requestFormNetWorkstatus:@"0" pageNo:_pageNo];
+            
+        }];
+        [_tableView.mj_header beginRefreshing];
 
     }
     
@@ -257,6 +258,13 @@ static NSString *myOrderCellid = @"myOrderCellid";
         
         [_tableView.mj_header beginRefreshing];
 
+        _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            _pageNo++;
+            
+            [self requestFormNetWorkstatus:@"1" pageNo:_pageNo];
+            
+        }];
+        [_tableView.mj_header beginRefreshing];
         
 
     }
