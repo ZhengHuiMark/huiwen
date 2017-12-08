@@ -46,10 +46,26 @@ static NSString *MyFreeAskCellid = @"MyFreeAskCellid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.view addSubview:self.tableView];
+
+    
+    _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _pageNumber = 1;
+        
+        [self loadData];
+        
+    }];
+    _tableView.mj_header.automaticallyChangeAlpha = YES;
+    _tableView.mj_footer.automaticallyHidden = YES;
+    
+    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        _pageNumber++;
+        [self loadData];
+    }];
+    [_tableView.mj_header beginRefreshing];
     
     [self LoadFreeAskData];
     
-    [self.view addSubview:self.tableView];
 }
 
 
@@ -93,14 +109,14 @@ static NSString *MyFreeAskCellid = @"MyFreeAskCellid";
                                           ]]) {
                 if (tagModel.isSelected) {
 //                    _title = tagModel.title;
-                    //                        _pageNumber = @(1);
+                                            _pageNumber = 1;
                     
                     //                            _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
                     //                                _pageNumber = 1;
                     //                            }];
                     
                     
-                    NSString *url = [NSString stringWithFormat:@"%@/api/freeask/getFreeAskList",kIP];
+                    NSString *url = [NSString stringWithFormat:@"%@/api/freeask/ut/getMyFreeAskList",kIP];
                     
                     NSMutableDictionary *dic = [ZHNetworkTools parameters];
                     [dic setObject:tagModel.code forKey:@"typeCode"];
@@ -144,7 +160,7 @@ static NSString *MyFreeAskCellid = @"MyFreeAskCellid";
                     
                     
                     
-                    NSString *url = [NSString stringWithFormat:@"%@/api/freeask/getFreeAskList",kIP];
+                    NSString *url = [NSString stringWithFormat:@"%@/api/freeask/ut/getMyFreeAskList",kIP];
                     
                     NSMutableDictionary *dic = [ZHNetworkTools parameters];
                     [dic setObject:tagModel.code forKey:@"typeCode"];
@@ -225,6 +241,52 @@ static NSString *MyFreeAskCellid = @"MyFreeAskCellid";
         
     }];
     
+    
+}
+
+- (void)loadData {
+    
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/freeask/ut/getMyFreeAskList",kIP];
+    
+    NSMutableDictionary *dic = [ZHNetworkTools parameters];
+//    [dic setObject:tagModel.code forKey:@"typeCode"];
+    [dic setObject:@(_pageNumber) forKey:@"pageNo"];
+    
+    [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+        if (error) {
+            NSLog(@"%@",error);
+        }
+        
+        NSLog(@"response = %@",response);
+        
+        
+        NSArray<ZHMyFreeAskModel *> *models = [NSArray yy_modelArrayWithClass:[ZHMyFreeAskModel class] json:response[@"data"]];
+        
+        
+        //  3.2 判断是刷新 还是 加载更多
+        if (_pageNumber == 1) { // 刷新
+            self.Freemodels = [NSMutableArray arrayWithArray:models];
+        } else { // 加载更多
+            
+            [self.Freemodels addObjectsFromArray: models];
+        }
+        
+        
+        [self.tableView reloadData];
+        
+        
+        if (!models || !models.count) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        } else {
+            [self.tableView.mj_footer resetNoMoreData];
+        }
+        [self.tableView.mj_header endRefreshing];
+        
+        
+        
+        
+    }];
     
 }
 

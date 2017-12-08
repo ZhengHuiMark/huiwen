@@ -140,6 +140,17 @@
                     <constraint firstItem="dNv-lf-a2A" firstAttribute="leading" secondItem="0xO-m1-CIu" secondAttribute="trailing" constant="8.5" id="y2n-bC-TOt"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="amount" destination="art-YX-l8i" id="MrB-PG-6m1"/>
+                <outlet property="content" destination="xNZ-oj-vu1" id="4cq-U1-o1Z"/>
+                <outlet property="expertAskNum" destination="Uln-MP-3kE" id="wZi-EX-SCT"/>
+                <outlet property="learnNum" destination="ODz-15-YFl" id="hid-ol-c7c"/>
+                <outlet property="remainingTime" destination="1df-Uc-EKH" id="eTb-T4-9lb"/>
+                <outlet property="time" destination="3kT-LY-ay7" id="0Eh-Qo-uKR"/>
+                <outlet property="typeimg" destination="DIA-FM-g6x" id="0xH-bP-zp1"/>
+                <outlet property="userAvatar" destination="0xO-m1-CIu" id="QJK-bf-7JV"/>
+                <outlet property="userName" destination="dNv-lf-a2A" id="7Aj-di-CfG"/>
+            </connections>
             <point key="canvasLocation" x="25.5" y="52.5"/>
         </tableViewCell>
     </objects>

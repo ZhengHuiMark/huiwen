@@ -24,7 +24,11 @@ static NSString *MyRewardListCellid = @"MyRewardListCellid";
 static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
 
 
-@interface ZHMyRewardAskViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ZHMyRewardAskViewController ()<UITableViewDelegate,UITableViewDataSource>{
+    NSInteger _pageNo;
+//    NSString *answered;
+
+}
 
 @property (nonatomic, strong) MLTagModelContainer *tagContainer;
 
@@ -57,7 +61,47 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
 
     [self setupUI];
     [self initTableView];
+    
+    _leftTableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _pageNo = 1;
+        
+        
+        [self requestFormNetWorkanswered:@"true" pageNo:_pageNo typeCode:@""];
+        
+    }];
+    _leftTableView.mj_header.automaticallyChangeAlpha = YES;
+    _leftTableView.mj_footer.automaticallyHidden = YES;
+    
+    _leftTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        _pageNo++;
+        
+        [self requestFormNetWorkanswered:@"true" pageNo:_pageNo typeCode:@""];
+        
+    }];
+    [_leftTableView.mj_header beginRefreshing];
 
+}
+
+- (void)requestFormNetWorkanswered:(NSString *)answered pageNo:(NSInteger)pageNo typeCode:(NSString *)typeCode{
+    
+    NSMutableDictionary *dic = [ZHNetworkTools parameters];
+    [dic setObject:answered forKey:@"answered"];
+    [dic setObject:@(pageNo) forKey:@"pageNo"];
+    [dic setObject:typeCode forKey:@"typeCode"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/rewardask/ut/getMyRewardAskList",kIP];
+    
+    [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+        
+        if (error) {
+            NSLog(@"%@",error);
+        }
+        
+        NSLog(@"response = %@",response);
+        
+        
+    }];
+    
 }
 
 
@@ -149,6 +193,107 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (self.tag == 0) {
+        
+        if (indexPath.section == 0) {
+            
+            MLTagCell *cell = [tableView dequeueReusableCellWithIdentifier: @"123"];
+            if (!cell) {
+                cell = [[MLTagCell alloc] initWithStyle: UITableViewCellStyleDefault
+                                        reuseIdentifier: @"123"];
+                cell.tableView = tableView;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.cellClick = ^(MLTagCell *cell, MLTagButton *tagButton, MLTagModel *tagModel) {
+                    if ([tagModel isKindOfClass: [MLSubTagModel class
+                                                  ]]) {
+                        if (tagModel.isSelected) {
+                            //                    _title = tagModel.title;
+                            //                        _pageNumber = @(1);
+                            
+                            //                            _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+                            //                                _pageNumber = 1;
+                            //                            }];
+                            
+                            
+                            NSString *url = [NSString stringWithFormat:@"%@/api/rewardask/ut/getMyRewardAskList",kIP];
+                            
+                           NSString * answered = @"ture";
+                            
+                            NSMutableDictionary *dic = [ZHNetworkTools parameters];
+                            [dic setObject:tagModel.code forKey:@"typeCode"];
+                            [dic setObject:@(_pageNo) forKey:@"pageNo"];
+                            [dic setObject:answered forKey:@"answered"];
+                            
+                            [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                                if (error) {
+                                    NSLog(@"%@",error);
+                                    [_leftTableView.mj_header endRefreshing];
+                                    [_leftTableView.mj_footer endRefreshing];
+                                    
+                                }
+                                
+                                NSLog(@"response = %@",response);
+                                
+                                
+//                                NSArray<ZHMyFreeAskModel *> *models = [NSArray yy_modelArrayWithClass:[ZHMyFreeAskModel class] json:response[@"data"]];
+//                                
+//                                
+//                                self.Freemodels = [NSMutableArray arrayWithArray:models];
+//                                
+//                                
+//                                [self.tableView reloadData];
+                                
+                                
+                                
+                                
+                            }];
+                            
+                            
+                            
+                        } else {
+                            //                    _title = @"未选中标签";
+                            
+                        }
+                    } else if ([tagModel isKindOfClass: [MLTagModel class]]) {
+                        if (tagModel.isSelected) {
+                            //                    _title = @"未选中标签";
+                            
+                            _pageNo = 1;
+                            
+                            
+                            
+                            NSString *url = [NSString stringWithFormat:@"%@/api/rewardask/ut/getMyRewardAskList",kIP];
+                            
+                            NSMutableDictionary *dic = [ZHNetworkTools parameters];
+                            [dic setObject:tagModel.code forKey:@"typeCode"];
+                            [dic setObject:@(_pageNo) forKey:@"pageNo"];
+                            
+                            [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                                if (error) {
+                                    NSLog(@"%@",error);
+                                }
+//                                
+//                                NSLog(@"response = %@",response);
+//                                
+//                                
+//                                NSArray<ZHMyFreeAskModel *> *models = [NSArray yy_modelArrayWithClass:[ZHMyFreeAskModel class] json:response[@"data"]];
+//                                
+//                                self.Freemodels = [NSMutableArray arrayWithArray:models];
+//                                
+//                                
+//                                [self.tableView reloadData];
+//                                
+                            }];
+                            
+                            
+                        }
+                    }
+                };
+            }
+            cell.tagContainer = self.tagContainer;
+            return cell;
+        }
+
+        
         ZHMyRewardListTableViewCell *cell = [[ZHMyRewardListTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyRewardListCellid];
         
         return cell;
@@ -158,6 +303,79 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
         return cell;
     }
     return nil;
+    
+}
+
+- (void)LoadFreeAskData {
+    
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/commoncategory/getCategories",kIP];
+    
+    NSMutableDictionary *dic = [ZHNetworkTools parameters];
+    [dic setObject: @"2"
+            forKey: @"type"];
+    
+    
+    [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+        if (error) {
+            NSLog(@"%@",error);
+        }
+        
+        //        NSLog(@"response = %@",response);
+        
+        //        _title = @"未选中标签";
+        NSArray<NSDictionary *> *JSONArray = response[@"data"];
+        NSMutableArray<MLTagModel *> *tagModels = [NSMutableArray array];
+        
+        NSInteger index=0;
+        for (NSDictionary *dict in JSONArray) {
+            [tagModels addObject: [MLTagModel tagModelWithDictionary: dict
+                                                             atIndex: index]];
+            index++;
+        }
+        self.tagContainer.tagModels = [NSArray arrayWithArray: tagModels];
+        
+        [_leftTableView reloadData];
+        
+    }];
+    
+    
+}
+
+
+- (void)LoadFreeAskDatas {
+    
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/commoncategory/getCategories",kIP];
+    
+    NSMutableDictionary *dic = [ZHNetworkTools parameters];
+    [dic setObject: @"2"
+            forKey: @"type"];
+    
+    
+    [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+        if (error) {
+            NSLog(@"%@",error);
+        }
+        
+        //        NSLog(@"response = %@",response);
+        
+        //        _title = @"未选中标签";
+        NSArray<NSDictionary *> *JSONArray = response[@"data"];
+        NSMutableArray<MLTagModel *> *tagModels = [NSMutableArray array];
+        
+        NSInteger index=0;
+        for (NSDictionary *dict in JSONArray) {
+            [tagModels addObject: [MLTagModel tagModelWithDictionary: dict
+                                                             atIndex: index]];
+            index++;
+        }
+        self.tagContainer.tagModels = [NSArray arrayWithArray: tagModels];
+        
+        [_rightTableView reloadData];
+        
+    }];
+    
     
 }
 

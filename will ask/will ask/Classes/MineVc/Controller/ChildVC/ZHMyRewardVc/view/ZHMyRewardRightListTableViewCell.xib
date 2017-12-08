@@ -126,6 +126,15 @@
                     <constraint firstItem="7YC-xc-6jm" firstAttribute="top" secondItem="6h9-8q-I4j" secondAttribute="bottom" constant="24.5" id="xjc-iX-h5U"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="amount" destination="7Nx-N3-j5b" id="TZK-6p-Mzm"/>
+                <outlet property="content" destination="kSG-tg-z16" id="ZoD-XF-LXx"/>
+                <outlet property="remainingTime" destination="7YC-xc-6jm" id="t2X-Kr-lsb"/>
+                <outlet property="time" destination="awL-t5-quV" id="KtI-hS-rAh"/>
+                <outlet property="typeImg" destination="6h9-8q-I4j" id="KZO-6t-deb"/>
+                <outlet property="userAvatar" destination="Bk6-lG-uWK" id="9Zq-dF-u6P"/>
+                <outlet property="userName" destination="Nma-X8-0hn" id="v7v-0v-AAQ"/>
+            </connections>
             <point key="canvasLocation" x="24.5" y="49.5"/>
         </tableViewCell>
     </objects>
