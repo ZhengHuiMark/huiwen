@@ -18,6 +18,7 @@
 #import "MJRefresh.h"
 #import "ZHMyRewardListTableViewCell.h"
 #import "ZHMyRewardRightListTableViewCell.h"
+#import "ZHMyRewardListModel.h"
 
 static NSString *MyRewardListCellid = @"MyRewardListCellid";
 
@@ -58,27 +59,28 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.tag = 0;
+    [self initTableView];
 
     [self setupUI];
-    [self initTableView];
+    [self LoadFreeAskData];
     
-    _leftTableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.leftTableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         _pageNo = 1;
         
         
         [self requestFormNetWorkanswered:@"true" pageNo:_pageNo typeCode:@""];
         
     }];
-    _leftTableView.mj_header.automaticallyChangeAlpha = YES;
-    _leftTableView.mj_footer.automaticallyHidden = YES;
+    self.leftTableView.mj_header.automaticallyChangeAlpha = YES;
+    self.leftTableView.mj_footer.automaticallyHidden = YES;
     
-    _leftTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+    self.leftTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         _pageNo++;
         
         [self requestFormNetWorkanswered:@"true" pageNo:_pageNo typeCode:@""];
         
     }];
-    [_leftTableView.mj_header beginRefreshing];
+    [self.leftTableView.mj_header beginRefreshing];
 
 }
 
@@ -98,6 +100,28 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
         }
         
         NSLog(@"response = %@",response);
+        NSArray <ZHMyRewardListModel *> *models = [NSArray yy_modelArrayWithClass:[ZHMyRewardListModel class] json:response[@"data"]];
+        
+        //  3.2 判断是刷新 还是 加载更多
+        if (_pageNo == 1) { // 刷新
+            _leftArray = [NSMutableArray arrayWithArray:models];
+        } else { // 加载更多
+            
+            [_leftArray addObjectsFromArray: models];
+        }
+        
+        
+        [self.leftTableView reloadData];
+        
+        
+        if (!models || !models.count) {
+            [self.leftTableView.mj_footer endRefreshingWithNoMoreData];
+        } else {
+            [self.leftTableView.mj_footer resetNoMoreData];
+        }
+        [self.leftTableView.mj_header endRefreshing];
+        
+
         
         
     }];
@@ -107,26 +131,30 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
 
 - (void)initTableView {
     
-    _leftTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 130, [UIScreen mainScreen].bounds.size.width, self.view.frame.size.height - 130) style:UITableViewStylePlain];
-    _leftTableView.delegate = self;
-    _leftTableView.dataSource = self;
-    _leftTableView.estimatedRowHeight = 44.0f;
-    _leftTableView.rowHeight = UITableViewAutomaticDimension;
-    _leftTableView.showsVerticalScrollIndicator = NO;
+    self.leftTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 130, [UIScreen mainScreen].bounds.size.width, self.view.frame.size.height - 130) style:UITableViewStylePlain];
+    self.leftTableView.delegate = self;
+    self.leftTableView.dataSource = self;
+    self.leftTableView.estimatedRowHeight = 44.0f;
+    self.leftTableView.rowHeight = UITableViewAutomaticDimension;
+    self.leftTableView.showsVerticalScrollIndicator = NO;
+    [self.leftTableView registerNib:[UINib nibWithNibName:@"ZHMyRewardListTableViewCell" bundle:nil] forCellReuseIdentifier:MyRewardListCellid];
     
-    [self.view addSubview:_leftTableView];
+    [self.view addSubview:self.leftTableView];
     
-    _rightTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 130, [UIScreen mainScreen].bounds.size.width,self.view.frame.size.height - 130) style:UITableViewStylePlain];
-    _rightTableView.delegate = self;
-    _rightTableView.dataSource = self;
-    _rightTableView.estimatedRowHeight = 44.0f;
-    _rightTableView.rowHeight = UITableViewAutomaticDimension;
-    _rightTableView.backgroundColor = [UIColor redColor];
-    _rightTableView.showsVerticalScrollIndicator = NO;
+    self.rightTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 130, [UIScreen mainScreen].bounds.size.width,self.view.frame.size.height - 130) style:UITableViewStylePlain];
+    self.rightTableView.delegate = self;
+    self.rightTableView.dataSource = self;
+    self.rightTableView.estimatedRowHeight = 44.0f;
+    self.rightTableView.rowHeight = UITableViewAutomaticDimension;
+    self.rightTableView.backgroundColor = [UIColor redColor];
+    self.rightTableView.showsVerticalScrollIndicator = NO;
     
-    [self.view addSubview:_rightTableView];
+    [self.rightTableView registerNib:[UINib nibWithNibName:@"ZHMyRewardRightListTableViewCell" bundle:nil] forCellReuseIdentifier:MyRewardRightListCellid];
+    
+    [self.view addSubview:self.rightTableView];
+    
     if (self.tag == 0) {
-        _rightTableView.hidden = YES;
+        self.rightTableView.hidden = YES;
     }
 }
 
@@ -164,19 +192,60 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
 - (void)selectItem:(UISegmentedControl *)sender {
 
     if (sender.selectedSegmentIndex == 0) {
-        _leftTableView.hidden = NO;
-        _rightTableView.hidden = YES;
+        self.leftTableView.hidden = NO;
+        self.rightTableView.hidden = YES;
+        
+        [self requestFormNetWorkanswered:@"ture" pageNo:1 typeCode:@""];
         
         self.tag = 0;
-        [_leftTableView reloadData];
+        [self.leftTableView reloadData];
     }else if (sender.selectedSegmentIndex == 1){
-        _rightTableView.hidden = NO;
-        _leftTableView.hidden = YES;
+        self.rightTableView.hidden = NO;
+        
+        self.leftTableView.hidden = YES;
+        
+        [self LoadFreeAskDatas];
+        
+        self.rightTableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            _pageNo = 1;
+            
+            
+            [self requestFormNetWorkanswered:@"false" pageNo:_pageNo typeCode:@""];
+            
+        }];
+        self.rightTableView.mj_header.automaticallyChangeAlpha = YES;
+        self.rightTableView.mj_footer.automaticallyHidden = YES;
+        
+        self.rightTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            _pageNo++;
+            
+            [self requestFormNetWorkanswered:@"false" pageNo:_pageNo typeCode:@""];
+            
+        }];
+        [self.rightTableView.mj_header beginRefreshing];
+
         
         self.tag = 1;
-        [_rightTableView reloadData];
+        [self.rightTableView reloadData];
     }
     
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (self.tag == 0) {
+        if (indexPath.section == 0) {
+            return self.tagContainer.cellHeight;
+        }
+        return 211;
+    }
+    
+    if (self.tag == 1) {
+        if (indexPath.section == 0) {
+            return self.tagContainer.cellHeight;
+        }
+    }
+    return 212;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -185,8 +254,18 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (self.tag == 0) {
+        if (section == 0) {
+            return 1;
+        }
         return self.leftArray.count;
-    }return self.rigthArray.count;
+    }
+    
+    if (self.tag == 1) {
+        if (section == 0) {
+            return 1;
+        }
+    }
+    return self.rigthArray.count;
 
 }
 
@@ -226,21 +305,21 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
                             [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
                                 if (error) {
                                     NSLog(@"%@",error);
-                                    [_leftTableView.mj_header endRefreshing];
-                                    [_leftTableView.mj_footer endRefreshing];
+                                    [self.leftTableView.mj_header endRefreshing];
+                                    [self.leftTableView.mj_footer endRefreshing];
                                     
                                 }
                                 
                                 NSLog(@"response = %@",response);
                                 
                                 
-//                                NSArray<ZHMyFreeAskModel *> *models = [NSArray yy_modelArrayWithClass:[ZHMyFreeAskModel class] json:response[@"data"]];
-//                                
-//                                
-//                                self.Freemodels = [NSMutableArray arrayWithArray:models];
-//                                
-//                                
-//                                [self.tableView reloadData];
+                                NSArray<ZHMyRewardListModel *> *models = [NSArray yy_modelArrayWithClass:[ZHMyRewardListModel class] json:response[@"data"]];
+                                
+                                
+                                self.leftArray = [NSMutableArray arrayWithArray:models];
+                                
+                                
+                                [self.leftTableView reloadData];
                                 
                                 
                                 
@@ -272,16 +351,126 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
                                     NSLog(@"%@",error);
                                 }
 //                                
-//                                NSLog(@"response = %@",response);
-//                                
-//                                
-//                                NSArray<ZHMyFreeAskModel *> *models = [NSArray yy_modelArrayWithClass:[ZHMyFreeAskModel class] json:response[@"data"]];
-//                                
-//                                self.Freemodels = [NSMutableArray arrayWithArray:models];
-//                                
-//                                
-//                                [self.tableView reloadData];
-//                                
+                                NSLog(@"response = %@",response);
+                                
+                                
+                                NSArray<ZHMyRewardListModel *> *models = [NSArray yy_modelArrayWithClass:[ZHMyRewardListModel class] json:response[@"data"]];
+                                
+                                _leftArray = [NSMutableArray arrayWithArray:models];
+                                
+                                
+                                [self.leftTableView reloadData];
+//
+                            }];
+                            
+                            
+                        }
+                    }
+                };
+            }
+            cell.tagContainer = self.tagContainer;
+            return cell;
+        }
+
+        ZHMyRewardListModel *model = _leftArray[indexPath.row];
+        
+        ZHMyRewardListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyRewardListCellid forIndexPath:indexPath];
+
+    
+
+        cell.listModel = model;
+        
+        return cell;
+    }else if (self.tag == 1) {
+        
+        if (indexPath.section == 0) {
+            
+            MLTagCell *cell = [tableView dequeueReusableCellWithIdentifier: @"123"];
+            if (!cell) {
+                cell = [[MLTagCell alloc] initWithStyle: UITableViewCellStyleDefault
+                                        reuseIdentifier: @"123"];
+                cell.tableView = tableView;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.cellClick = ^(MLTagCell *cell, MLTagButton *tagButton, MLTagModel *tagModel) {
+                    if ([tagModel isKindOfClass: [MLSubTagModel class
+                                                  ]]) {
+                        if (tagModel.isSelected) {
+                            //                    _title = tagModel.title;
+                            //                        _pageNumber = @(1);
+                            
+                            //                            _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+                            //                                _pageNumber = 1;
+                            //                            }];
+                            
+                            
+                            NSString *url = [NSString stringWithFormat:@"%@/api/rewardask/ut/getMyRewardAskList",kIP];
+                            
+                            NSString * answered = @"ture";
+                            
+                            NSMutableDictionary *dic = [ZHNetworkTools parameters];
+                            [dic setObject:tagModel.code forKey:@"typeCode"];
+                            [dic setObject:@(_pageNo) forKey:@"pageNo"];
+                            [dic setObject:answered forKey:@"answered"];
+                            
+                            [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                                if (error) {
+                                    NSLog(@"%@",error);
+                                    [self.rightTableView.mj_header endRefreshing];
+                                    [self.rightTableView.mj_footer endRefreshing];
+                                    
+                                }
+                                
+                                NSLog(@"response = %@",response);
+                                
+                                
+                             NSArray<ZHMyRewardListModel *> *models = [NSArray yy_modelArrayWithClass:[ZHMyRewardListModel class] json:response[@"data"]];
+                                
+                                
+                                      self.rigthArray = [NSMutableArray arrayWithArray:models];
+                                
+                                
+                                             [self.rightTableView reloadData];
+                                
+                                
+                                
+                                
+                            }];
+                            
+                            
+                            
+                        } else {
+                            //                    _title = @"未选中标签";
+                            
+                        }
+                    } else if ([tagModel isKindOfClass: [MLTagModel class]]) {
+                        if (tagModel.isSelected) {
+                            //                    _title = @"未选中标签";
+                            
+                            _pageNo = 1;
+                            
+                            
+                            
+                            NSString *url = [NSString stringWithFormat:@"%@/api/rewardask/ut/getMyRewardAskList",kIP];
+                            
+                            NSMutableDictionary *dic = [ZHNetworkTools parameters];
+                            [dic setObject:tagModel.code forKey:@"typeCode"];
+                            [dic setObject:@(_pageNo) forKey:@"pageNo"];
+                            
+                            [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                                if (error) {
+                                    NSLog(@"%@",error);
+                                }
+                                //
+                                NSLog(@"response = %@",response);
+                                
+                                
+                                NSArray<ZHMyRewardListModel *> *models = [NSArray yy_modelArrayWithClass:[ZHMyRewardListModel class] json:response[@"data"]];
+                                
+                                _rigthArray = [NSMutableArray arrayWithArray:models];
+                                
+                                
+                                [self.rightTableView reloadData];
+                                //
                             }];
                             
                             
@@ -294,12 +483,18 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
         }
 
         
-        ZHMyRewardListTableViewCell *cell = [[ZHMyRewardListTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyRewardListCellid];
         
-        return cell;
-    }
-    else if (self.tag == 1) {
-        ZHMyRewardRightListTableViewCell *cell = [[ZHMyRewardRightListTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyRewardRightListCellid];
+        ZHMyRewardListModel *model = _rigthArray[indexPath.row];
+
+        
+        ZHMyRewardRightListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyRewardRightListCellid forIndexPath:indexPath];
+
+        if (cell == nil) {
+            cell = [[ZHMyRewardRightListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyRewardRightListCellid];
+        }
+        cell.listModel = model;
+        
+        
         return cell;
     }
     return nil;
@@ -335,7 +530,7 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
         }
         self.tagContainer.tagModels = [NSArray arrayWithArray: tagModels];
         
-        [_leftTableView reloadData];
+        [self.leftTableView reloadData];
         
     }];
     
@@ -372,11 +567,20 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
         }
         self.tagContainer.tagModels = [NSArray arrayWithArray: tagModels];
         
-        [_rightTableView reloadData];
+        [self.rightTableView reloadData];
         
     }];
     
     
+}
+
+
+
+- (MLTagModelContainer *)tagContainer {
+    if (!_tagContainer) {
+        _tagContainer = [MLTagModelContainer new];
+    }
+    return _tagContainer;
 }
 
 - (NSMutableArray *)leftArray {

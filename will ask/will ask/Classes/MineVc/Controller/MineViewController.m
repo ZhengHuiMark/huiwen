@@ -201,6 +201,8 @@ static NSString *MineListCellid = @"MineListCellid";
                 break;
             }
             case 2:{
+                NSString *className = @"ZHMyConsultingViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 
                 break;
             }
@@ -213,6 +215,9 @@ static NSString *MineListCellid = @"MineListCellid";
                 break;
             }
             case 5:{
+                
+                NSString *className = @"ZHMyVipCardViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 
                 break;
             }

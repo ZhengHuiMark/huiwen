@@ -29,15 +29,15 @@
     
     self.userName.text = [UserManager sharedManager].userModel.nickname;
     
-    self.amount.text = self.listModel.amount;
+    self.amount.text = [NSString stringWithFormat:@"悬赏金额%@",self.listModel.amount];
     
     self.content.text = self.listModel.content;
     
-    self.learnNum.text = self.listModel.learnNumber;
+    self.learnNum.text = [NSString stringWithFormat:@"学习用户:%@ 位",self.listModel.learnNumber];
     
-    self.expertAskNum.text = self.listModel.answerNumber;
+    self.expertAskNum.text = [NSString stringWithFormat:@"抢答专家: %@ 位",self.listModel.answerNumber];
     
-    self.remainingTime.text = self.listModel.remainingTime;
+    self.remainingTime.text = [NSString stringWithFormat:@"剩余时间: %@",self.listModel.remainingTime];
     
     self.time.text = self.listModel.time;
     

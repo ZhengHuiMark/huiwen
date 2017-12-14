@@ -52,9 +52,9 @@ static NSString *AnswerContentCellid = @"AnswerContentCellid";
     
     NSString *url = [NSString stringWithFormat:@"%@/api/freeask/getFreeAskDetail",kIP];
     
-    NSLog(@"url = %@",url);
-    
-    NSLog(@"231231 = %@",dic);
+//    NSLog(@"url = %@",url);
+//    
+//    NSLog(@"231231 = %@",dic);
     
     [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
         
@@ -62,7 +62,7 @@ static NSString *AnswerContentCellid = @"AnswerContentCellid";
             NSLog(@"%@",error);
         }
         
-        NSLog(@"response = %@",response);
+//        NSLog(@"response = %@",response);
         
         _detailModel = [ZHFreeDetailModel yy_modelWithJSON:response[@"data"]];
         
