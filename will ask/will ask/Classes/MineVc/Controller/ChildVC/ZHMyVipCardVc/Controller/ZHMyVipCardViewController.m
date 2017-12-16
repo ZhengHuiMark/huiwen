@@ -15,6 +15,7 @@
 #import "ZHVipCardModel.h"
 #import "YYModel.h"
 #import "ZHRecordMoneyViewController.h"
+#import "ZHInvoiceViewController.h"
 
 static NSString *cardNumberCellid = @"cardNumberCellid";
 
@@ -119,6 +120,14 @@ static NSString *vipCardDetailCellid = @"vipCardDetailCellid";
             ZHRecordMoneyViewController *recordVc = [[ZHRecordMoneyViewController alloc]init];
             
             [self.navigationController pushViewController:recordVc animated:YES];
+            
+        };
+        
+        cell.invoiceBtnClick = ^(){
+          
+            ZHInvoiceViewController *invoceVc = [[ZHInvoiceViewController alloc]init];
+            
+            [self.navigationController pushViewController:invoceVc animated:YES];
             
         };
         

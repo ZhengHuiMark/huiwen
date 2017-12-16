@@ -12,6 +12,8 @@
 #import "ImageTools.h"
 #import "UserManager.h"
 #import "UserModel.h"
+#import "UIImageView+WebCache.h"
+
 
 
 @implementation ZHMyConsultingListTableViewCell
@@ -24,13 +26,15 @@
 - (void)setListModel:(ZHMyConsultModel *)listModel{
     _listModel = listModel;
     
+    [self.userAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,[UserManager sharedManager].userModel.avatar]]];
+    
     self.userName.text = [UserManager sharedManager].userModel.nickname;
     
-    self.amount.text = self.listModel.amount;
+    self.amount.text = [NSString stringWithFormat:@"提问金额%@",self.listModel.amount];
     
-    self.timeL.text = self.listModel.questionTime;
+    self.timeL.text = [NSString stringWithFormat:@"提问时间:%@",self.listModel.questionTime];
     
-    self.content.text = self.listModel.question;
+    self.content.text = [NSString stringWithFormat:@"        %@",self.listModel.question];
     
     
 }

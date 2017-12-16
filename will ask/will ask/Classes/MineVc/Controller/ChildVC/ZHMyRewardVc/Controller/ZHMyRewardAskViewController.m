@@ -28,7 +28,8 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
 @interface ZHMyRewardAskViewController ()<UITableViewDelegate,UITableViewDataSource>{
     NSInteger _pageNo;
 //    NSString *answered;
-
+    NSURLSessionDataTask *_leftTask;
+    NSURLSessionDataTask *_rightTask;
 }
 
 @property (nonatomic, strong) MLTagModelContainer *tagContainer;
@@ -81,10 +82,26 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
         
     }];
     [self.leftTableView.mj_header beginRefreshing];
+    
+    self.rightTableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _pageNo = 1;
+//        [self LoadFreeAskDatas];
+        [self requestFormNetWorkanswered:@"false" pageNo:_pageNo typeCode:@""];
+    }];
+    self.rightTableView.mj_header.automaticallyChangeAlpha = YES;
+    self.rightTableView.mj_footer.automaticallyHidden = YES;
+    self.rightTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        _pageNo++;
+        [self requestFormNetWorkanswered:@"false" pageNo:_pageNo typeCode:@""];
+        
+    }];
 
 }
 
 - (void)requestFormNetWorkanswered:(NSString *)answered pageNo:(NSInteger)pageNo typeCode:(NSString *)typeCode{
+    
+    [_leftTask cancel];
+    [_rightTask cancel];
     
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
     [dic setObject:answered forKey:@"answered"];
@@ -93,62 +110,78 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
     
     NSString *url = [NSString stringWithFormat:@"%@/api/rewardask/ut/getMyRewardAskList",kIP];
     
-    [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+    
+    NSURLSessionDataTask *task = [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
         
         if (error) {
             NSLog(@"%@",error);
-        }
-        
-        NSLog(@"response = %@",response);
-        NSArray <ZHMyRewardListModel *> *models = [NSArray yy_modelArrayWithClass:[ZHMyRewardListModel class] json:response[@"data"]];
-        
-        //  3.2 判断是刷新 还是 加载更多
-        if (_pageNo == 1) { // 刷新
-            _leftArray = [NSMutableArray arrayWithArray:models];
-        } else { // 加载更多
+            [self.leftTableView.mj_header endRefreshing];
+            [self.rightTableView.mj_header endRefreshing];
             
-            [_leftArray addObjectsFromArray: models];
-        }
-        
-        
-        [self.leftTableView reloadData];
-        
-        
-        if (!models || !models.count) {
-            [self.leftTableView.mj_footer endRefreshingWithNoMoreData];
         } else {
-            [self.leftTableView.mj_footer resetNoMoreData];
+            
+            NSLog(@"response = %@",response);
+            NSArray <ZHMyRewardListModel *> *models = [NSArray yy_modelArrayWithClass:[ZHMyRewardListModel class] json:response[@"data"]];
+            
+            //  3.2 判断是刷新 还是 加载更多
+            if (_pageNo == 1) { // 刷新
+                _leftArray = [NSMutableArray arrayWithArray:models];
+            } else { // 加载更多
+                
+                [_leftArray addObjectsFromArray: models];
+            }
+            
+            
+            [self.leftTableView reloadData];
+            
+            
+            if (!models || !models.count) {
+                [self.leftTableView.mj_footer endRefreshingWithNoMoreData];
+                [self.rightTableView.mj_footer endRefreshingWithNoMoreData];
+            } else {
+                [self.leftTableView.mj_footer resetNoMoreData];
+                [self.rightTableView.mj_footer resetNoMoreData];
+            }
+            [self.leftTableView.mj_header endRefreshing];
+            [self.rightTableView.mj_header endRefreshing];
         }
-        [self.leftTableView.mj_header endRefreshing];
-        
-
         
         
     }];
     
+    if (self.segmentedControl.selectedSegmentIndex == 0) {
+        _leftTask = task;
+    } else if (self.segmentedControl.selectedSegmentIndex == 1) {
+        _rightTask = task;
+    }
+    
 }
 
-
+// 17710875374
 - (void)initTableView {
     
-    self.leftTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 130, [UIScreen mainScreen].bounds.size.width, self.view.frame.size.height - 130) style:UITableViewStylePlain];
+    [self.view addSubview: [UIView new]];
+    
+    self.leftTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 70 + 64, [UIScreen mainScreen].bounds.size.width, self.view.frame.size.height - 70 - 64) style:UITableViewStylePlain];
     self.leftTableView.delegate = self;
     self.leftTableView.dataSource = self;
     self.leftTableView.estimatedRowHeight = 44.0f;
     self.leftTableView.rowHeight = UITableViewAutomaticDimension;
     self.leftTableView.showsVerticalScrollIndicator = NO;
     [self.leftTableView registerNib:[UINib nibWithNibName:@"ZHMyRewardListTableViewCell" bundle:nil] forCellReuseIdentifier:MyRewardListCellid];
+//    [self.leftTableView registerNib:[UINib nibWithNibName:@"ZHMyRewardRightListTableViewCell" bundle:nil] forCellReuseIdentifier:MyRewardRightListCellid];
     
     [self.view addSubview:self.leftTableView];
     
-    self.rightTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 130, [UIScreen mainScreen].bounds.size.width,self.view.frame.size.height - 130) style:UITableViewStylePlain];
+    self.rightTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 70 + 64, [UIScreen mainScreen].bounds.size.width,self.view.frame.size.height - 70 - 64) style:UITableViewStylePlain];
     self.rightTableView.delegate = self;
     self.rightTableView.dataSource = self;
     self.rightTableView.estimatedRowHeight = 44.0f;
     self.rightTableView.rowHeight = UITableViewAutomaticDimension;
-    self.rightTableView.backgroundColor = [UIColor redColor];
+    self.rightTableView.contentInset = self.leftTableView.contentInset;
+//    self.rightTableView.backgroundColor = [UIColor redColor];
     self.rightTableView.showsVerticalScrollIndicator = NO;
-    
+//    [self.rightTableView registerNib:[UINib nibWithNibName:@"ZHMyRewardListTableViewCell" bundle:nil] forCellReuseIdentifier:MyRewardListCellid];
     [self.rightTableView registerNib:[UINib nibWithNibName:@"ZHMyRewardRightListTableViewCell" bundle:nil] forCellReuseIdentifier:MyRewardRightListCellid];
     
     [self.view addSubview:self.rightTableView];
@@ -195,52 +228,34 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
         self.leftTableView.hidden = NO;
         self.rightTableView.hidden = YES;
         
-        [self requestFormNetWorkanswered:@"ture" pageNo:1 typeCode:@""];
+//        [self requestFormNetWorkanswered:@"ture" pageNo:1 typeCode:@""];
+//        [self.leftTableView reloadData];
+        [self.leftTableView.mj_header beginRefreshing];
         
         self.tag = 0;
-        [self.leftTableView reloadData];
     }else if (sender.selectedSegmentIndex == 1){
         self.rightTableView.hidden = NO;
         
         self.leftTableView.hidden = YES;
-        
-        [self LoadFreeAskDatas];
-        
-        self.rightTableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            _pageNo = 1;
-            
-            
-            [self requestFormNetWorkanswered:@"false" pageNo:_pageNo typeCode:@""];
-            
-        }];
-        self.rightTableView.mj_header.automaticallyChangeAlpha = YES;
-        self.rightTableView.mj_footer.automaticallyHidden = YES;
-        
-        self.rightTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-            _pageNo++;
-            
-            [self requestFormNetWorkanswered:@"false" pageNo:_pageNo typeCode:@""];
-            
-        }];
         [self.rightTableView.mj_header beginRefreshing];
+        self.tag = 1;
 
         
-        self.tag = 1;
-        [self.rightTableView reloadData];
+//        [self.rightTableView reloadData];
     }
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (self.tag == 0) {
+    if (tableView == self.leftTableView) {
         if (indexPath.section == 0) {
             return self.tagContainer.cellHeight;
         }
         return 211;
     }
     
-    if (self.tag == 1) {
+    if (tableView == self.rightTableView) {
         if (indexPath.section == 0) {
             return self.tagContainer.cellHeight;
         }
@@ -253,14 +268,14 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (self.tag == 0) {
+    if (tableView == self.leftTableView) {
         if (section == 0) {
             return 1;
         }
         return self.leftArray.count;
     }
     
-    if (self.tag == 1) {
+    if (tableView == self.rightTableView) {
         if (section == 0) {
             return 1;
         }
@@ -271,8 +286,8 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (self.tag == 0) {
-        
+//    if (self.tag == 0) {
+    if (tableView == self.leftTableView) {
         if (indexPath.section == 0) {
             
             MLTagCell *cell = [tableView dequeueReusableCellWithIdentifier: @"123"];
@@ -381,7 +396,7 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
         cell.listModel = model;
         
         return cell;
-    }else if (self.tag == 1) {
+    }else if (tableView == self.rightTableView) {
         
         if (indexPath.section == 0) {
             
@@ -474,6 +489,14 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
                             }];
                             
                             
+                            /*
+                             (lldb) po self.leftTableView
+                             <UITableView: 0x7fedbf870000; frame = (0 70; 414 666); clipsToBounds = YES; gestureRecognizers = <NSArray: 0x610000243bd0>; layer = <CALayer: 0x61000002b6c0>; contentOffset: {0, 0}; contentSize: {0, 0}>
+                             
+                             (lldb) po self.rightTableView
+                             <UITableView: 0x7fedbf87ee00; frame = (0 70; 414 666); clipsToBounds = YES; gestureRecognizers = <NSArray: 0x6100002444d0>; layer = <CALayer: 0x610000034c60>; contentOffset: {0, 0}; contentSize: {0, 0}>
+                             */
+                            
                         }
                     }
                 };
@@ -488,10 +511,12 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
 
         
         ZHMyRewardRightListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyRewardRightListCellid forIndexPath:indexPath];
+        
 
-        if (cell == nil) {
-            cell = [[ZHMyRewardRightListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyRewardRightListCellid];
-        }
+        
+//        if (cell == nil) {
+//            cell = [[ZHMyRewardRightListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyRewardRightListCellid];
+//        }
         cell.listModel = model;
         
         

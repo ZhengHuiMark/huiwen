@@ -14,6 +14,8 @@
 #import "ZHNetworkTools.h"
 #import "ZHMyConsultModel.h"
 
+#import "ZHMyConsultDetailViewController.h"
+
 static NSString *conultListCellid = @"conultListCellid";
 
 @interface ZHMyConsultingViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -163,6 +165,8 @@ static NSString *conultListCellid = @"conultListCellid";
 }
 
 
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
@@ -193,7 +197,7 @@ static NSString *conultListCellid = @"conultListCellid";
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
-        _tableView.rowHeight = 60;
+        _tableView.rowHeight = 180;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         //    NSBundle *bundle = [NSBundle mainBundle];
         
@@ -203,6 +207,17 @@ static NSString *conultListCellid = @"conultListCellid";
     }
     
     return _tableView;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    
+    ZHMyConsultDetailViewController *detailvc = [[ZHMyConsultDetailViewController alloc]init];
+    
+    [self.navigationController pushViewController:detailvc animated:YES];
+    
 }
 
 

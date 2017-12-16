@@ -34,7 +34,7 @@
     
     _usermodel = usermodel;
     
-    [self.touXiangBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUser,OSS,self.usermodel.avatar]] forState:UIControlStateNormal];
+    [self.touXiangBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.usermodel.avatar]] forState:UIControlStateNormal];
     self.userIDLabel.text = self.usermodel.nickname;
 }
 

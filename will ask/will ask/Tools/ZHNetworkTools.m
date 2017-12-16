@@ -154,7 +154,7 @@
 }
 
 
-- (void)requestWithType: (RequestType)type andUrl: (NSString *)url andParams: (id)params andCallBlock: (void (^) (id response, NSError *error))callBlock
+- (NSURLSessionDataTask *)requestWithType: (RequestType)type andUrl: (NSString *)url andParams: (id)params andCallBlock: (void (^) (id response, NSError *error))callBlock
 {
     
 //    UserModel *UserModel = [UserManager sharedManager].userModel;
@@ -201,9 +201,10 @@
 //    NSString *token1 = nil;
 //    NSString *token2 = nil;
 
+    NSURLSessionDataTask *task = nil;
     
     if (type == GET) {
-        [self GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        task = [self GET:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             callBlock(responseObject, nil);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             callBlock(nil, error);
@@ -219,7 +220,7 @@
         
     } else {
         
-        [self POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        task = [self POST:url parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             callBlock(responseObject, nil);
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             callBlock(nil, error);
@@ -237,7 +238,7 @@
         
     }
     
-    
+    return task;
 }
 
 - (void)upLoad:(NSString *)url forKey:(NSString *)key parameters:(NSDictionary *)parameter imageArray:(NSArray *)uploadImages andCallBlock: (void (^) (id response, NSError *error))callBlock {

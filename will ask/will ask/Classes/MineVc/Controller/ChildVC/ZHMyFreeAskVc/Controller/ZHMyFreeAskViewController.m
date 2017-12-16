@@ -66,6 +66,23 @@ static NSString *MyFreeAskCellid = @"MyFreeAskCellid";
     
     [self LoadFreeAskData];
     
+    [self setupUI];
+    
+}
+
+- (void)setupUI{
+    
+    
+    UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 62, 20)] ;
+    
+    titleLabel.text  = @"我的免费问";
+    //    titleLabel.backgroundColor  = [UIColor blueColor]   ;
+    
+    titleLabel.textColor = [UIColor blackColor];
+    
+    titleLabel.font= [UIFont systemFontOfSize:18];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.navigationItem.titleView = titleLabel;
 }
 
 

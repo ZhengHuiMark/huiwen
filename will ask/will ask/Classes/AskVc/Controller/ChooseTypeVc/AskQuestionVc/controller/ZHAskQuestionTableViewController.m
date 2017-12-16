@@ -47,6 +47,7 @@ static NSInteger kMaxCount = 3;
 @property(nonatomic,strong) ZHAskQuestionModel *model;
 
 @property(nonatomic,strong) ZHRewardAndDateTableViewCell *dateCell;
+@property(nonatomic,strong) ZHRewardAndDateTableViewCell *moneyCell;
 
 
 @property(nonatomic,strong)NSMutableArray *mArray;
@@ -342,6 +343,9 @@ static NSInteger kMaxCount = 3;
     ZHRewardAndDateTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: NSStringFromClass([ZHRewardAndDateTableViewCell class])
                                                                      forIndexPath: indexPath];
     
+    if (indexPath.row == 0) self.moneyCell = cell;
+    if (indexPath.row == 1) self.dateCell  = cell;
+    
     cell.tete = self;
     cell.indexPath = indexPath;
     cell.model = self.model;
@@ -367,6 +371,11 @@ static NSInteger kMaxCount = 3;
         
 //        NSMutableArray *images = [NSMutableArray array];
         NSInteger index=0;
+        NSInteger __block imgCount = 0;
+        for (MLImageModel *imgModel in self.imageModels) {
+            if (imgModel.modelType == MLImageModelTypePlaceholder) continue;
+            imgCount++;
+        }
         
         for (MLImageModel *imageModel in self.imageModels) {
             if (imageModel.modelType == MLImageModelTypePlaceholder) continue;{
@@ -394,31 +403,28 @@ static NSInteger kMaxCount = 3;
                         [self.mArray addObject:objectKey];
                         NSLog(@"marray = %@", _mArray);
                         
-                        
-                        
-                        self.model.photos = [_mArray componentsJoinedByString:@","];
-                        NSLog(@"self.model.photos = %@",self.model.photos);
+                        if (self.mArray.count >= imgCount) {
+                            [dic setObject: [_mArray componentsJoinedByString:@","] forKey: @"photos"];
+                            [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                    
+                                if (error) {
+                    //                NSLog(@"%@",error);
+                                }
+                    
+                    //            NSLog(@"response = %@",response);
+                    
+                    
+                            }];
+                        }
+//                        self.model.photos = [_mArray componentsJoinedByString:@","];
+//                        NSLog(@"self.model.photos = %@",self.model.photos);
                         //
                         
                         
-                            //        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
-                            //
-                            //            if (error) {
-                            ////                NSLog(@"%@",error);
-                            //            }
-                            //
-                            ////            NSLog(@"response = %@",response);
-                            //
-                            //
-                            //        }];
-
-                      
+                        
+                    } else {
+                        imgCount--;
                     }
-                    
-                  
-                    
-                    
-                    
                 }];
                 
                 
