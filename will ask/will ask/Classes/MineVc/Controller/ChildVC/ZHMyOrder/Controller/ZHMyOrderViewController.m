@@ -25,7 +25,8 @@ static NSString *myOrderCellid = @"myOrderCellid";
 
 @property(nonatomic,strong)UIButton *allBtn;
 
-@property(nonatomic,strong)NSMutableArray *btnMutableArray;
+@property(nonatomic,strong)NSMutableArray<UIButton *> *btnMutableArray;
+@property (nonatomic, strong)NSMutableArray<UIView*> *arrSepViews;
 
 @property(nonatomic,strong)NSMutableArray <ZHMyOrderModel *>* orderModels;
 
@@ -162,6 +163,7 @@ static NSString *myOrderCellid = @"myOrderCellid";
     
     
     _btnMutableArray = [[NSMutableArray alloc]init]; //将button放到数组里面
+    _arrSepViews = [[NSMutableArray alloc] init];
 
     NSArray * array = [NSArray arrayWithObjects:@"全部",@"待支付",@"已完成", nil];
     
@@ -173,7 +175,7 @@ static NSString *myOrderCellid = @"myOrderCellid";
         _allBtn.backgroundColor = [UIColor colorWithWhite:100*i alpha:0];
         [_allBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_allBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-
+        
       
         
         [_allBtn addTarget:self action:@selector(btnActions:) forControlEvents:UIControlEventTouchUpInside];
@@ -182,10 +184,20 @@ static NSString *myOrderCellid = @"myOrderCellid";
         
         [_btnMutableArray addObject:_allBtn];
  
+        UIView *view = [UIView new];
+        view.frame = (CGRect){CGRectGetMinX(_allBtn.frame), CGRectGetMaxY(_allBtn.frame)-1, CGRectGetWidth(_allBtn.frame), 1};
+        view.hidden = YES;
+        [view setBackgroundColor: [UIColor redColor]];
+        [HeaderView addSubview: view];
+        [_arrSepViews addObject: view];
         
+        if (!i) {
+            _allBtn.selected = YES;
+            view.hidden = NO;
+        }
     }
     
-    ((UIButton *)[_btnMutableArray objectAtIndex:0]).selected = YES;  // 关键是这里，设置 数组的第一个button为选中状态
+//    ((UIButton *)[_btnMutableArray objectAtIndex:0]).selected = YES;  // 关键是这里，设置 数组的第一个button为选中状态
 
     
 //    _tempBtn = nil;
@@ -198,9 +210,20 @@ static NSString *myOrderCellid = @"myOrderCellid";
 
 - (void)btnActions:(UIButton *)sender{
     
+    if (sender.selected) return;
+    
     NSInteger tag = sender.tag;
     
-    ((UIButton *)[_btnMutableArray objectAtIndex:0]).selected=NO; //点击其他button之后这里设置为非选中状态，否则会出现2个红色的选中状态
+//    ((UIButton *)[_btnMutableArray objectAtIndex:0]).selected=NO; //点击其他button之后这里设置为非选中状态，否则会出现2个红色的选中状态
+//    [self.btnMutableArray makeObjectsPerformSelector: @selector(setSelected:) withObject: @(NO)];
+    for (UIButton *btn in self.btnMutableArray) {
+        btn.selected = NO;
+    }
+//    [self.btnMutableArray makeObjectsPerformSelector: @selector(setSelected:)
+//                                          withObject: @(NO)];
+    [self.arrSepViews makeObjectsPerformSelector: @selector(setHidden:) withObject: @(YES)];
+    sender.selected = YES;
+    [[self.arrSepViews objectAtIndex: sender.tag] setHidden: NO];
     
     if (tag == 0) {
         
@@ -215,7 +238,7 @@ static NSString *myOrderCellid = @"myOrderCellid";
         _tableView.mj_footer.automaticallyHidden = YES;
         
         [_tableView.mj_header beginRefreshing];
-
+        
 
     }
     
@@ -261,7 +284,7 @@ static NSString *myOrderCellid = @"myOrderCellid";
         _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
             _pageNo++;
             
-            [self requestFormNetWorkstatus:@"1" pageNo:_pageNo];
+            [self requestFormNetWorkstatus:@"2" pageNo:_pageNo];
             
         }];
         [_tableView.mj_header beginRefreshing];
@@ -269,17 +292,17 @@ static NSString *myOrderCellid = @"myOrderCellid";
 
     }
     
-    if(_tempBtn == sender) {
-        //上次点击过的按钮，不做处理
-    } else{
-        //本次点击的按钮设为红色
-        [sender setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        
-
-        //将上次点击过的按钮设为黑色
-        [_tempBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    }
-    _tempBtn = sender;
+//    if(_tempBtn == sender) {
+//        //上次点击过的按钮，不做处理
+//    } else{
+//        //本次点击的按钮设为红色
+//        [sender setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+//        
+//
+//        //将上次点击过的按钮设为黑色
+//        [_tempBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    }
+//    _tempBtn = sender;
     
 }
 

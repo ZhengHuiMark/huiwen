@@ -12,6 +12,7 @@
 @interface ZHVipCardDetailTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *cardImg;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *content;
 @property (weak, nonatomic) IBOutlet UILabel *moneyL;

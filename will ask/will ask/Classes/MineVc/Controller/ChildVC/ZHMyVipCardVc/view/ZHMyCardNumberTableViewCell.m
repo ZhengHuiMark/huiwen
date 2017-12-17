@@ -19,7 +19,7 @@
 -(void)setModel:(ZHVipCardModel *)model{
     _model = model;
     
-    self.CardNumber.text = self.model.balance;
+    self.CardNumber.text = [NSString stringWithFormat:@"会员卡余额:%@",self.model.balance];
     
 }
 

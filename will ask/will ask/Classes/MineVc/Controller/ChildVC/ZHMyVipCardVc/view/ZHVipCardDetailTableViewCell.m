@@ -31,8 +31,12 @@
     
 //    self.content.text = self.numberModel.
     
-    self.moneyL.text = self.numberModel.amount;
-    [self.cardImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameDwsoft,OSS,self.numberModel.photo]]];
+    self.moneyL.text = [NSString stringWithFormat:@"￥%@",self.numberModel.amount];
+    self.content.text = self.numberModel.descriptions;
+    self.nameLabel.text = self.numberModel.name;
+    
+    [self.cardImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameDwsoftLoad,OSS,self.numberModel.photo]]];
+    
     
 }
 
