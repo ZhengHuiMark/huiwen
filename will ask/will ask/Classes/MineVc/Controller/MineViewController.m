@@ -207,6 +207,9 @@ static NSString *MineListCellid = @"MineListCellid";
                 break;
             }
             case 3:{
+                // 测试
+                NSString *className = @"ZHUserHomePageViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 
                 break;
             }
