@@ -211,6 +211,8 @@ static NSString *MineListCellid = @"MineListCellid";
                 break;
             }
             case 4:{
+                NSString *className = @"ZHMyFocusExpertViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 
                 break;
             }

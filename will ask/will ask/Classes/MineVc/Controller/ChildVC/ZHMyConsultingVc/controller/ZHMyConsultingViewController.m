@@ -15,6 +15,7 @@
 #import "ZHMyConsultModel.h"
 
 #import "ZHMyConsultDetailViewController.h"
+#import "ZHMyConsultVc.h"
 
 static NSString *conultListCellid = @"conultListCellid";
 
@@ -213,10 +214,13 @@ static NSString *conultListCellid = @"conultListCellid";
 
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 
+//    
+//    ZHMyConsultDetailViewController *detailvc = [[ZHMyConsultDetailViewController alloc]init];
+//
+    ZHMyConsultVc *myvc = [[ZHMyConsultVc alloc]init];
     
-    ZHMyConsultDetailViewController *detailvc = [[ZHMyConsultDetailViewController alloc]init];
-    
-    [self.navigationController pushViewController:detailvc animated:YES];
+    myvc.consultId = _listModels[indexPath.row].consultId;
+    [self.navigationController pushViewController:myvc animated:YES];
     
 }
 

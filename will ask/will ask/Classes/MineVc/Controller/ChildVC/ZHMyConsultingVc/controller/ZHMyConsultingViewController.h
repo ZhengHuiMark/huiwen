@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ZHMyConsultModel;
 
 @interface ZHMyConsultingViewController : UIViewController
+
+@property(nonatomic,strong)ZHMyConsultModel *model;
 
 @end
