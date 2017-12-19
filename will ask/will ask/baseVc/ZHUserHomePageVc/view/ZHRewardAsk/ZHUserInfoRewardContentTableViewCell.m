@@ -30,13 +30,14 @@
     
     self.clickNumber.text = self.rewardModel.praiseNumber;
     
-    self.learnNumber.text = self.rewardModel.learnNumber;
+    self.learnNumber.text = [NSString stringWithFormat:@"%@人已学习",self.rewardModel.learnNumber];
     
     self.releaseTime.text = self.rewardModel.time;
     
     [self.userAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.rewardModel.expertAvatar]]];
     
-    
+    self.learnBtn.hidden = YES;
+    self.backgroundImg.hidden =YES ;
 }
 
 @end

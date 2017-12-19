@@ -13,6 +13,7 @@
 #import "ZHUserInfoRewardContentTableViewCell.h"
 #import "ZHUserInfoFreeAskTableViewCell.h"
 #import "ZHUserInfoNoModelTableViewCell.h"
+#import "HomeViewController.h"
 
 #import "ZHNetworkTools.h"
 #import "Macro.h"
@@ -95,9 +96,12 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
     
     if (self.tableView.style == UITableViewStylePlain) {
         UIEdgeInsets contentInset = self.tableView.contentInset;
-        contentInset.top = -64;
+        contentInset.top = - 64 ;
         [self.tableView setContentInset:contentInset];
     }
+    
+   
+
 }
 
 - (void)loadData{
@@ -127,6 +131,110 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
     }];
     
     
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0) {
+        return 0.1;
+    }
+    
+    return 43;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    
+    return 10;
+    
+}
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    
+    UIView * view = nil;
+    
+    if (section == 1 ) {
+        
+        UIView *headerView = [[UIView alloc] init];
+        headerView.backgroundColor = [UIColor whiteColor];
+        //    headerView.frame = self.view.frame;
+        //
+        UILabel *nameLa = [[UILabel alloc]init];
+        
+        nameLa.frame = CGRectMake(20, 10 ,[UIScreen mainScreen].bounds.size.width, 20);
+        
+        nameLa.text = @"悬赏问";
+        
+        [headerView addSubview:nameLa];
+        
+        UIView * lineView = [[UIView alloc]init];
+        lineView.frame = CGRectMake(0, 43, [UIScreen mainScreen].bounds.size.width, 1);
+        lineView.backgroundColor = [UIColor grayColor];
+        
+        [headerView addSubview:lineView];
+        
+        UIButton *moreBtn = [[UIButton alloc]init];
+        moreBtn.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 40 - 18, 18, 50 , 20);
+        [moreBtn setTitle:@"更多>>" forState:UIControlStateNormal];
+        moreBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        [moreBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [moreBtn addTarget:self action:@selector(moreRewardAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        [headerView addSubview:moreBtn];
+        
+        return headerView;
+        
+        
+    }
+    
+    if (section == 2 ) {
+        
+        UIView *headerView = [[UIView alloc] init];
+        headerView.backgroundColor = [UIColor whiteColor];
+        //    headerView.frame = self.view.frame;
+        //
+        UILabel *nameLa = [[UILabel alloc]init];
+        
+        nameLa.frame = CGRectMake(20, 10 ,[UIScreen mainScreen].bounds.size.width, 20);
+        
+        nameLa.text = @"免费问";
+        
+        [headerView addSubview:nameLa];
+        
+        UIView * lineView = [[UIView alloc]init];
+        lineView.frame = CGRectMake(0, 43, [UIScreen mainScreen].bounds.size.width, 1);
+        lineView.backgroundColor = [UIColor grayColor];
+        
+        [headerView addSubview:lineView];
+        
+        UIButton *moreBtn = [[UIButton alloc]init];
+        moreBtn.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 40 - 18, 18, 50 , 20);
+        [moreBtn setTitle:@"更多>>" forState:UIControlStateNormal];
+        moreBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        [moreBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [moreBtn addTarget:self action:@selector(moreFreeAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        [headerView addSubview:moreBtn];
+
+        
+        return headerView;
+        
+        
+    }
+    
+    
+    
+    return view;
+    
+    
+}
+
+- (void)moreRewardAction{
+    
+    HomeViewController *homeVc  = [[HomeViewController alloc]init];
+    
+    [self.navigationController pushViewController:homeVc animated:YES];
 }
 
 
@@ -216,9 +324,10 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
-        
+        self.tableView.sectionHeaderHeight = 43;
+
         //    NSBundle *bundle = [NSBundle mainBundle];
-        
+ 
         
         [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoCellid];
         
@@ -230,6 +339,9 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
         [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoFreeAskTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoFreeContentCellid];
         
         [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoNoModelTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoNoModelCellid];
+        
+//        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
     }
     
     return _tableView;

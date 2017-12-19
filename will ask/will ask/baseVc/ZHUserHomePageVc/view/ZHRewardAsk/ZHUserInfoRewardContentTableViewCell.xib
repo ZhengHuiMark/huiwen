@@ -127,7 +127,7 @@
                             <constraint firstAttribute="height" constant="10" id="GtG-G9-hxo"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="book-bj" translatesAutoresizingMaskIntoConstraints="NO" id="7vc-we-lf8">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7vc-we-lf8">
                         <rect key="frame" x="0.0" y="55" width="375" height="133"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGV-mH-Pi6">
@@ -215,7 +215,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="book-bj" width="375" height="155"/>
         <image name="optimum" width="64" height="50"/>
         <image name="zan-" width="14" height="14"/>
     </resources>

@@ -19,7 +19,7 @@
 -(void)setRewardModel:(ZHUserInfoRewardModel *)rewardModel{
     _rewardModel = rewardModel;
     
-    self.contentLabel.text = self.rewardModel.questionsContent;
+    self.contentLabel.text = [NSString stringWithFormat:@"      %@",self.rewardModel.questionsContent];
     
 }
 

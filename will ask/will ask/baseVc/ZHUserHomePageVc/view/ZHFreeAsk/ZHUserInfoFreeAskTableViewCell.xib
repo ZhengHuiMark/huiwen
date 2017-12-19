@@ -34,7 +34,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ecj-PV-m0N">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="read" translatesAutoresizingMaskIntoConstraints="NO" id="Ecj-PV-m0N">
                         <rect key="frame" x="57.5" y="78" width="16" height="12"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="16" id="ITk-Cu-hxD"/>
@@ -50,7 +50,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rBZ-AL-O1G">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="reply" translatesAutoresizingMaskIntoConstraints="NO" id="rBZ-AL-O1G">
                         <rect key="frame" x="160.5" y="78" width="16" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="Ub6-x1-0nG"/>
@@ -104,4 +104,8 @@
             <point key="canvasLocation" x="24.5" y="52"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="read" width="16" height="12"/>
+        <image name="reply" width="15" height="14"/>
+    </resources>
 </document>
