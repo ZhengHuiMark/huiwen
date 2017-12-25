@@ -1,0 +1,19 @@
+ platform :ios, ‘8.0’
+
+target 'will ask' do
+
+
+pod 'AFNetworking'
+pod 'SDWebImage'
+pod 'Masonry'
+pod 'YYModel'
+pod 'XRCarouselView'
+
+pod 'SVProgressHUD'
+pod 'MJRefresh'
+pod 'YYText'
+pod 'IQKeyboardManager'
+pod 'AliyunOSSiOS'
+
+
+end

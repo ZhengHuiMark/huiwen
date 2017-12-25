@@ -17,16 +17,26 @@
 #import "ZHAskModel.h"
 #import "YYModel.h"
 #import "MLTagButton.h"
+#import "FreeDetailViewController.h"
+#import "MJRefresh.h"
+#import "ZHChooseTypeViewController.h"
+
+
 
 static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 
-@interface ZHFreeQuestionViewController ()<UITableViewDelegate,UITableViewDataSource>{
+
+
+@interface ZHFreeQuestionViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>{
     NSString *_title;
-    NSNumber *_pageNumber;
+    NSInteger _pageNumber;
 
 
 }
+
+// 给提问选择分类界面所传的值
+@property(nonatomic,strong) NSString *stringType;
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -35,11 +45,15 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 @property(nonatomic,strong)NSMutableArray<ZHAskModel *>* Freemodels;
 
+
+
 @property(nonatomic,strong)MLTagButton *btn;
 
 @property(nonatomic,strong)MLTagModel *model;
 
 @property(nonatomic,strong)MLSubTagModel *subModel;
+
+@property (nonatomic,strong)UISearchBar *searchBar;
 
 
 
@@ -51,12 +65,39 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self LoadFreeAskData];
+    
+
+    
+
+    
+    
     
     [self setupUI];
     
-    [self LoadData];
+
+    
+    _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _pageNumber = 1;
+        
+        [self LoadData];
+
+    }];
+    _tableView.mj_header.automaticallyChangeAlpha = YES;
+    _tableView.mj_footer.automaticallyHidden = YES;
+    
+    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        _pageNumber++;
+        [self LoadData];
+    }];
+    [_tableView.mj_header beginRefreshing];
+    
+    [self LoadFreeAskData];
+
+//    [self LoadData];
+
+
 }
+
 
 
 
@@ -65,12 +106,62 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     
     // Table view
     
+    if (self.tableView.style == UITableViewStyleGrouped) {
+        UIEdgeInsets contentInset = self.tableView.contentInset;
+        contentInset.top =  +40;
+        [self.tableView setContentInset:contentInset];
+    }
+    
     [self.view addSubview: self.tableView];
+    
+    
+    UIView *PlaceHolderView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 44)];
+    PlaceHolderView.backgroundColor = [UIColor whiteColor];
+    
+    [self.view addSubview:PlaceHolderView];
+    [PlaceHolderView addSubview:self.searchBar];
+    
+    UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [editorBtn addTarget:self action:@selector(toAskQuestion) forControlEvents:UIControlEventTouchUpInside];
+    [editorBtn setTitle:@"提问" forState:UIControlStateNormal];
+//    editorBtn.titleLabel.text = @"提问";
+    [editorBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [editorBtn sizeToFit];
+    UIBarButtonItem *editBtnItem = [[UIBarButtonItem alloc] initWithCustomView:editorBtn];
+    self.navigationItem.rightBarButtonItem = editBtnItem;
+    
+    
+    //重新创建一个barButtonItem
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    //设置backBarButtonItem即可
+    self.navigationItem.backBarButtonItem = backItem;
+    
+   [[UINavigationBar appearance]setTintColor:[UIColor grayColor]];
+    
+
+    
+
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(NSIntegerMin, NSIntegerMin)
+                                                         forBarMetrics:UIBarMetricsDefault];
     
 
     
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ZHFreeListTableViewCell" bundle:nil] forCellReuseIdentifier:FreeListTableViewCellid];
+}
+
+
+
+- (void)toAskQuestion {
+    
+    _stringType = @"2";
+    
+    ZHChooseTypeViewController *AskQuestionVc = [[ZHChooseTypeViewController alloc]init];
+    
+    AskQuestionVc.typeString = _stringType;
+    
+    [self.navigationController pushViewController:AskQuestionVc animated:YES];
+    
 }
 
 
@@ -83,22 +174,11 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
         
         UIView *headerView = [[UIView alloc] init];
         headerView.backgroundColor = [UIColor redColor];
-//            headerView.frame = self.view.frame;
-        //
-//        UILabel *nameLa = [[UILabel alloc]init];
-//        
-////        nameLa.frame = CGRectMake(20, 10 ,[UIScreen mainScreen].bounds.size.width, 20);
-//        
-//        nameLa.text = @"123";
-//        
-//        [headerView addSubview:nameLa];
         
-//        UIView * lineView = [[UIView alloc]init];
-//        lineView.frame = CGRectMake(0, 43, [UIScreen mainScreen].bounds.size.width, 1);
-//        lineView.backgroundColor = [UIColor grayColor];
-//        
-//        [headerView addSubview:lineView];
+//        UILabel *label
         
+        
+
         return headerView;
         
         
@@ -111,12 +191,41 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 2) {
+        return 50;
+    }
+    return 0.1;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    if (indexPath.section == 0) {
+        return;
+    }
+    
+    if (self.Freemodels[indexPath.row].freeAskId) {
+        
+        FreeDetailViewController *FDeetailVc = [[FreeDetailViewController alloc]init];
+
+        FDeetailVc.uidString = self.Freemodels[indexPath.row].freeAskId ;
+        
+        [self.navigationController pushViewController:FDeetailVc animated:YES];
+        
+    }
+    
+    
+}
 
 
 #pragma mark - UITableViewDataSource
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 20;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+//    return 100;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 10;
@@ -137,7 +246,16 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     if (indexPath.section == 0) {
         return self.tagContainer.cellHeight;
     }
-    return 155;
+    
+//    if (indexPath.section == 1) {
+        ZHFreeListTableViewCell *cell = (ZHFreeListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:FreeListTableViewCellid];
+        
+        CGSize size = CGSizeMake(cell.bounds.size.width, 300);
+        CGRect rectSize = [cell.contentLabel.text boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading  attributes:nil context:nil];
+        
+        return 155 + rectSize.size.height;
+//    }
+//    return 155;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -154,19 +272,25 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
                                               ]]) {
                     if (tagModel.isSelected) {
                         _title = tagModel.title;
-                        _pageNumber = @(1);
+//                        _pageNumber = @(1);
                         
+//                            _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//                                _pageNumber = 1;
+//                            }];
                         
                         
                         NSString *url = [NSString stringWithFormat:@"%@/api/freeask/getFreeAskList",kIP];
                         
                         NSMutableDictionary *dic = [ZHNetworkTools parameters];
                         [dic setObject:tagModel.code forKey:@"typeCode"];
-                        [dic setObject:_pageNumber forKey:@"pageNo"];
+                        [dic setObject:@(_pageNumber) forKey:@"pageNo"];
                         
                         [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
                             if (error) {
                                 NSLog(@"%@",error);
+                                [self.tableView.mj_header endRefreshing];
+                                [self.tableView.mj_footer endRefreshing];
+
                             }
                             
                             NSLog(@"response = %@",response);
@@ -174,10 +298,14 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
                             
                             NSArray<ZHAskModel *> *models = [NSArray yy_modelArrayWithClass:[ZHAskModel class] json:response[@"data"]];
                             
+                            
                             self.Freemodels = [NSMutableArray arrayWithArray:models];
                             
                             
                             [self.tableView reloadData];
+                            
+                            
+                            
                             
                         }];
                         
@@ -191,7 +319,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
                     if (tagModel.isSelected) {
                         _title = @"未选中标签";
 
-                        _pageNumber = @(1);
+                        _pageNumber = 1;
                         
                         
                         
@@ -199,7 +327,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
                         
                         NSMutableDictionary *dic = [ZHNetworkTools parameters];
                         [dic setObject:tagModel.code forKey:@"typeCode"];
-                        [dic setObject:_pageNumber forKey:@"pageNo"];
+                        [dic setObject:@(_pageNumber) forKey:@"pageNo"];
                         
                         [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
                             if (error) {
@@ -227,12 +355,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
         return cell;
     }
     
-//    UITableViewCell *aCell = [tableView dequeueReusableCellWithIdentifier: @"1"];
-//    if (!aCell) {
-//        aCell = [[UITableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle
-//                                       reuseIdentifier: @"1"];
-//    }
-//    aCell.textLabel.text = _title;
+
     
     ZHAskModel *model = _Freemodels[indexPath.row];
     
@@ -257,7 +380,9 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         self.tableView.rowHeight = 155;
-        self.tableView.sectionHeaderHeight = 43;
+//        self.tableView.sectionHeaderHeight = 43;
+//        NSLog(@"self.tableview.height = %f",self.tableView.sectionHeaderHeight);
+        
         
     }
     return _tableView;
@@ -301,7 +426,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
             NSLog(@"%@",error);
         }
         
-        NSLog(@"response = %@",response);
+//        NSLog(@"response = %@",response);
         
         _title = @"未选中标签";
         NSArray<NSDictionary *> *JSONArray = response[@"data"];
@@ -324,15 +449,15 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 
 
+
 - (void)LoadData {
    
   
     NSString *url = [NSString stringWithFormat:@"%@/api/freeask/getFreeAskList",kIP];
     
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
-    [dic setObject: @"1"
-            forKey: @"type"];
-    
+
+    [dic setObject:@(_pageNumber) forKey:@"pageNo"];
     
     
     [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
@@ -340,17 +465,53 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
             NSLog(@"%@",error);
         }
         
-        NSLog(@"response = %@",response);
+//        NSLog(@"response = %@",response);
         
         NSArray<ZHAskModel *> *models = [NSArray yy_modelArrayWithClass:[ZHAskModel class] json:response[@"data"]];
         
-        self.Freemodels = [NSMutableArray arrayWithArray:models];
+        //  3.2 判断是刷新 还是 加载更多
+        if (_pageNumber == 1) { // 刷新
+            self.Freemodels = [NSMutableArray arrayWithArray:models];
+        } else { // 加载更多
+            
+            [self.Freemodels addObjectsFromArray: models];
+        }
+        
         
         [self.tableView reloadData];
+
+        
+        if (!models || !models.count) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        } else {
+            [self.tableView.mj_footer resetNoMoreData];
+        }
+        [self.tableView.mj_header endRefreshing];
+        
+        
         
     }];
     
     
+}
+
+
+- (UISearchBar *)searchBar {
+    if (!_searchBar) {
+        _searchBar = [[UISearchBar alloc] initWithFrame: CGRectMake(20, 0, [UIScreen mainScreen].bounds.size.width-40, 44)];
+        
+        _searchBar.delegate = self;
+        
+        _searchBar.placeholder = @"搜索案例,资讯,问答";
+        
+        _searchBar.searchBarStyle =UISearchBarStyleMinimal;
+        
+        _searchBar.layer.cornerRadius = 3;
+        _searchBar.layer.masksToBounds = YES;
+        _searchBar.layer.borderColor = [UIColor whiteColor].CGColor;
+
+    }
+    return _searchBar;
 }
 
 
