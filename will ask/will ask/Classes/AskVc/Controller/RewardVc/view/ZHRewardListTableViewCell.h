@@ -31,4 +31,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *answerNum;
 
+@property (weak, nonatomic) IBOutlet UILabel *answerNumer;
+
+@property (weak, nonatomic) IBOutlet UILabel *learnNumber;
+
 @end

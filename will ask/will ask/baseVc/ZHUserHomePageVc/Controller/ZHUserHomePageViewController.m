@@ -14,6 +14,7 @@
 #import "ZHUserInfoFreeAskTableViewCell.h"
 #import "ZHUserInfoNoModelTableViewCell.h"
 #import "HomeViewController.h"
+#import "ZHMoreFreeListViewController.h"
 
 #import "ZHNetworkTools.h"
 #import "Macro.h"
@@ -230,6 +231,14 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
     
 }
 
+- (void)moreFreeAction {
+    
+    ZHMoreFreeListViewController *FreeListVc = [[ZHMoreFreeListViewController alloc]init];
+    
+    [self.navigationController pushViewController:FreeListVc animated:YES];
+    
+}
+
 - (void)moreRewardAction{
     
     HomeViewController *homeVc  = [[HomeViewController alloc]init];
@@ -240,7 +249,7 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        return 171;
+        return 235;
     }
     if (indexPath.section == 1) {
         
