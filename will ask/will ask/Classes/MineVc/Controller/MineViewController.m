@@ -24,6 +24,8 @@
 #import "YYModel.h"
 
 
+#import "ZHExpertUserInfoHomePageViewController.h"
+
 //头部cell
 static NSString *HeaderCellid = @"HeaderCellid";
 //收入cell
@@ -207,8 +209,10 @@ static NSString *MineListCellid = @"MineListCellid";
                 break;
             }
             case 3:{
-                // 测试
-                NSString *className = @"ZHUserHomePageViewController";
+//                // 测试
+//                NSString *className = @"ZHUserHomePageViewController";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                NSString *className = @"ZHExpertUserInfoHomePageViewController";
                 [self pushToSetControllerWithIndexPath:indexPath className:className];
                 
                 break;

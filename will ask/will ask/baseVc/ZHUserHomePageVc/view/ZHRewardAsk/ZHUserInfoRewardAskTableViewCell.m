@@ -8,12 +8,20 @@
 
 #import "ZHUserInfoRewardAskTableViewCell.h"
 #import "ZHUserInfoRewardModel.h"
+#import "ZHExpertRewardModel.h"
 
 @implementation ZHUserInfoRewardAskTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+}
+
+- (void)setExpertRewardModel:(ZHExpertRewardModel *)expertRewardModel{
+    _expertRewardModel = expertRewardModel;
+    
+    self.contentLabel.text = [NSString stringWithFormat:@"      %@",self.expertRewardModel.questionsContent];
+    
 }
 
 -(void)setRewardModel:(ZHUserInfoRewardModel *)rewardModel{
