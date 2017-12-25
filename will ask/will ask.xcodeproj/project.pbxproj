@@ -183,6 +183,12 @@
 		444D49731FF0EEC300D82736 /* ZHExpertBigUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D49721FF0EEC300D82736 /* ZHExpertBigUserModel.m */; };
 		444D49771FF1078700D82736 /* ZHExpertUserInfoCaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D49751FF1078700D82736 /* ZHExpertUserInfoCaseTableViewCell.m */; };
 		444D49781FF1078700D82736 /* ZHExpertUserInfoCaseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444D49761FF1078700D82736 /* ZHExpertUserInfoCaseTableViewCell.xib */; };
+		444D497F1FF1191800D82736 /* ZHExpertServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D497E1FF1191800D82736 /* ZHExpertServiceViewController.m */; };
+		444D49831FF1193F00D82736 /* ZHExpertServiceListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D49811FF1193F00D82736 /* ZHExpertServiceListTableViewCell.m */; };
+		444D49841FF1193F00D82736 /* ZHExpertServiceListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444D49821FF1193F00D82736 /* ZHExpertServiceListTableViewCell.xib */; };
+		444D49871FF125AB00D82736 /* ZHExpertServiceListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D49861FF125AB00D82736 /* ZHExpertServiceListModel.m */; };
+		444D498B1FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D49891FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.m */; };
+		444D498C1FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444D498A1FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.xib */; };
 		4476748E1F8DC8C4007162AC /* ZHLatestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4476748C1F8DC8C4007162AC /* ZHLatestTableViewCell.m */; };
 		4476748F1F8DC8C4007162AC /* ZHLatestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4476748D1F8DC8C4007162AC /* ZHLatestTableViewCell.xib */; };
 		447674931F8DC9AB007162AC /* ZHAllRewardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 447674911F8DC9AB007162AC /* ZHAllRewardTableViewCell.m */; };
@@ -592,6 +598,16 @@
 		444D49741FF1078700D82736 /* ZHExpertUserInfoCaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHExpertUserInfoCaseTableViewCell.h; sourceTree = "<group>"; };
 		444D49751FF1078700D82736 /* ZHExpertUserInfoCaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHExpertUserInfoCaseTableViewCell.m; sourceTree = "<group>"; };
 		444D49761FF1078700D82736 /* ZHExpertUserInfoCaseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHExpertUserInfoCaseTableViewCell.xib; sourceTree = "<group>"; };
+		444D497D1FF1191800D82736 /* ZHExpertServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHExpertServiceViewController.h; sourceTree = "<group>"; };
+		444D497E1FF1191800D82736 /* ZHExpertServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHExpertServiceViewController.m; sourceTree = "<group>"; };
+		444D49801FF1193F00D82736 /* ZHExpertServiceListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHExpertServiceListTableViewCell.h; sourceTree = "<group>"; };
+		444D49811FF1193F00D82736 /* ZHExpertServiceListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHExpertServiceListTableViewCell.m; sourceTree = "<group>"; };
+		444D49821FF1193F00D82736 /* ZHExpertServiceListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHExpertServiceListTableViewCell.xib; sourceTree = "<group>"; };
+		444D49851FF125AB00D82736 /* ZHExpertServiceListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHExpertServiceListModel.h; sourceTree = "<group>"; };
+		444D49861FF125AB00D82736 /* ZHExpertServiceListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHExpertServiceListModel.m; sourceTree = "<group>"; };
+		444D49881FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHExpertServicePriceTableViewCell.h; sourceTree = "<group>"; };
+		444D49891FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHExpertServicePriceTableViewCell.m; sourceTree = "<group>"; };
+		444D498A1FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHExpertServicePriceTableViewCell.xib; sourceTree = "<group>"; };
 		4476748B1F8DC8C4007162AC /* ZHLatestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHLatestTableViewCell.h; sourceTree = "<group>"; };
 		4476748C1F8DC8C4007162AC /* ZHLatestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHLatestTableViewCell.m; sourceTree = "<group>"; };
 		4476748D1F8DC8C4007162AC /* ZHLatestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHLatestTableViewCell.xib; sourceTree = "<group>"; };
@@ -844,7 +860,8 @@
 				440280B21F7E2B250020BD47 /* ZHPersonalInformationVc.h */,
 				440280B31F7E2B250020BD47 /* ZHPersonalInformationVc.m */,
 			);
-			path = ZHPersonalformationVc;
+			name = ZHPersonalformationVc;
+			path = ChildVC/ZHPersonalformationVc;
 			sourceTree = "<group>";
 		};
 		440280B61F7E2B3F0020BD47 /* model */ = {
@@ -1750,6 +1767,7 @@
 			isa = PBXGroup;
 			children = (
 				442C03981F70EBE80078CDC7 /* ChildVC */,
+				440280B01F7E2B250020BD47 /* ZHPersonalformationVc */,
 				4422893C1F4BD50D0084EB83 /* MineViewController.h */,
 				4422893D1F4BD50D0084EB83 /* MineViewController.m */,
 			);
@@ -1847,6 +1865,7 @@
 		442C03981F70EBE80078CDC7 /* ChildVC */ = {
 			isa = PBXGroup;
 			children = (
+				444D49791FF112B900D82736 /* ZHExpertServiceVc */,
 				440771071FE7C3270000C20E /* ZHMyFocusExpertVc */,
 				4407706C1FDE7A550000C20E /* ZHMyVipCardVc */,
 				4407705D1FDE50FB0000C20E /* ZHMyConsultingVc */,
@@ -1855,7 +1874,6 @@
 				440770281FD6961F0000C20E /* ZHMyOrder */,
 				44BB65FB1FD0F20E003C3A6E /* ZHMyWalletVc */,
 				440280AC1F7E2B250020BD47 /* ValidationViewController */,
-				440280B01F7E2B250020BD47 /* ZHPersonalformationVc */,
 			);
 			path = ChildVC;
 			sourceTree = "<group>";
@@ -1934,6 +1952,47 @@
 				444D49741FF1078700D82736 /* ZHExpertUserInfoCaseTableViewCell.h */,
 				444D49751FF1078700D82736 /* ZHExpertUserInfoCaseTableViewCell.m */,
 				444D49761FF1078700D82736 /* ZHExpertUserInfoCaseTableViewCell.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		444D49791FF112B900D82736 /* ZHExpertServiceVc */ = {
+			isa = PBXGroup;
+			children = (
+				444D497A1FF112B900D82736 /* controller */,
+				444D497B1FF112B900D82736 /* model */,
+				444D497C1FF112B900D82736 /* view */,
+			);
+			path = ZHExpertServiceVc;
+			sourceTree = "<group>";
+		};
+		444D497A1FF112B900D82736 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				444D497D1FF1191800D82736 /* ZHExpertServiceViewController.h */,
+				444D497E1FF1191800D82736 /* ZHExpertServiceViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		444D497B1FF112B900D82736 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				444D49851FF125AB00D82736 /* ZHExpertServiceListModel.h */,
+				444D49861FF125AB00D82736 /* ZHExpertServiceListModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		444D497C1FF112B900D82736 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				444D49801FF1193F00D82736 /* ZHExpertServiceListTableViewCell.h */,
+				444D49811FF1193F00D82736 /* ZHExpertServiceListTableViewCell.m */,
+				444D49821FF1193F00D82736 /* ZHExpertServiceListTableViewCell.xib */,
+				444D49881FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.h */,
+				444D49891FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.m */,
+				444D498A1FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -2666,6 +2725,7 @@
 				442C03A61F735E300078CDC7 /* ZHEditTableViewCell.xib in Resources */,
 				44BB66291FD100F1003C3A6E /* ZHMyWalletTableViewCell.xib in Resources */,
 				442C03D51F7553A70078CDC7 /* Property List.plist in Resources */,
+				444D498C1FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.xib in Resources */,
 				440770591FD936500000C20E /* ZHMyRewardRightListTableViewCell.xib in Resources */,
 				4435A6CB1F8B166D00C1744E /* ZHValidationCertificateCell.xib in Resources */,
 				447674D41F8F5F50007162AC /* ZHTitleTypeTableViewCell.xib in Resources */,
@@ -2703,6 +2763,7 @@
 				4411EF451F78EC7E003AAF1C /* ZHJumpTableViewCell.xib in Resources */,
 				440770681FDE53950000C20E /* ZHMyConsultingListTableViewCell.xib in Resources */,
 				44827C191FAAC5C20097F1E7 /* ZHRewardAnswerVoiceTableViewCell.xib in Resources */,
+				444D49841FF1193F00D82736 /* ZHExpertServiceListTableViewCell.xib in Resources */,
 				44C9520E1FBACF18002B5509 /* ZHTypeTableViewCell.xib in Resources */,
 				4411EF4A1F79FE26003AAF1C /* ZHLatestPriceTableViewCell.xib in Resources */,
 				441018871F4EADC700EBA751 /* ShareSDK.bundle in Resources */,
@@ -2797,6 +2858,7 @@
 				449956B71F6275160087503B /* EncryptionAndDecryption.m in Sources */,
 				44C7ACAD1FB3F88900F42616 /* ZHCaseModel.m in Sources */,
 				44C7AC8B1FAAF26900F42616 /* ZHRewardMoneyViewController.m in Sources */,
+				444D49871FF125AB00D82736 /* ZHExpertServiceListModel.m in Sources */,
 				442C032C1F6A85DF0078CDC7 /* ZHExpertsTableViewCell.m in Sources */,
 				4422893B1F4BD5040084EB83 /* StudyViewController.m in Sources */,
 				442C03841F6BBE6C0078CDC7 /* ZHExpertsListTableViewCell.m in Sources */,
@@ -2825,6 +2887,7 @@
 				440770D61FE6593D0000C20E /* ZHAllMyDetailModel.m in Sources */,
 				440770A81FE2514F0000C20E /* ZHInvoiceModel.m in Sources */,
 				4407702E1FD696330000C20E /* ZHMyOrderViewController.m in Sources */,
+				444D497F1FF1191800D82736 /* ZHExpertServiceViewController.m in Sources */,
 				441ADE991F3ABBED00ECD63E /* ViewController.m in Sources */,
 				44827BEA1FA851330097F1E7 /* ZHFreeDetailTableViewCell.m in Sources */,
 				440770861FDFDB8F0000C20E /* ZHRecordMoneyViewController.m in Sources */,
@@ -2843,6 +2906,7 @@
 				440771321FE8E50A0000C20E /* ZHUserInfoRewardContentTableViewCell.m in Sources */,
 				449957131F678F6A0087503B /* ZHMD5.m in Sources */,
 				44827B3A1F971EEE0097F1E7 /* ZHBtn.m in Sources */,
+				444D49831FF1193F00D82736 /* ZHExpertServiceListTableViewCell.m in Sources */,
 				440770401FD8DDD10000C20E /* ZHMyFreeAskViewController.m in Sources */,
 				44C7AC871FAAF22500F42616 /* XLCircleProgress.m in Sources */,
 				440770481FD8E9820000C20E /* ZHMyFreeAskModel.m in Sources */,
@@ -2967,6 +3031,7 @@
 				4407711D1FE8AF500000C20E /* ZHUserHomePageViewController.m in Sources */,
 				449956AF1F6128D80087503B /* ZHRegisteredViewController.m in Sources */,
 				44827C0C1FAAB9350097F1E7 /* MLTagCell.m in Sources */,
+				444D498B1FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

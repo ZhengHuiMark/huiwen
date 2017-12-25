@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface ZHExpertsListTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *foucsMeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *incomeNumber;
+@property (weak, nonatomic) IBOutlet UILabel *NewConsultingNumber;
 
 @end
