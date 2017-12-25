@@ -38,22 +38,19 @@
                     self.PayStatus.text = @"等待支付";
             //
             
-            
         }
             break;
-        case ReviewStatusCancel:{ // 完成
+        case ReviewStatusCancel:{
                     self.closeTime.hidden = YES;
                     self.orderDetailL.text = @"订单详情";
             
                     self.payForBtn.hidden = YES;
-            self.payLabel.text = self.orderModel.payMode;
-            self.payLabel.text = @"asdfasdfasdf";
-
+                    self.payLabel.text = self.orderModel.payMode;
                     self.closeTime.text = self.orderModel.payTime;
                     self.PayStatus.text = @"已完成";
         }
             break;
-        case ReviewStatusSuccess:{ // 关闭
+        case ReviewStatusSuccess:{
             
                     self.closeTime.text = self.orderModel.closeTime;
                     self.orderDetailL.text = @"订单详情";

@@ -7,15 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ZHUserInfoRewardModel,ZHExpertRewarModel;
+@class ZHUserInfoRewardModel;
 
 @interface ZHUserInfoRewardAskTableViewCell : UITableViewCell
-
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 
 @property(nonatomic,strong)ZHUserInfoRewardModel *rewardModel;
-
-@property(nonatomic,strong)ZHExpertRewarModel *expertRewardModel;
 
 
 @end
