@@ -87,9 +87,6 @@
         }
         
         tagButton.tagModel = [arrTagModels objectAtIndex: index];
-        
-        
-        
     }
     
     [self refreshUI];

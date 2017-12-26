@@ -67,7 +67,6 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 
 
-
     
 }
 
@@ -102,7 +101,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     self.tableView.sectionHeaderHeight = 43;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+//    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
 
 
@@ -115,6 +114,26 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     
     UIView * view = nil;
     
+    if (section == 1) {
+        UIView *headerView = [[UIView alloc] init];
+        headerView.backgroundColor = [UIColor redColor];
+        //    headerView.frame = self.view.frame;
+        
+        UILabel *nameLa = [[UILabel alloc]init];
+        
+        nameLa.frame = CGRectMake(20, 10 ,[UIScreen mainScreen].bounds.size.width, 20);
+        
+        nameLa.text = @"最新悬赏榜";
+        
+        [headerView addSubview:nameLa];
+        
+        UIView * lineView = [[UIView alloc]init];
+        lineView.frame = CGRectMake(0, 43, [UIScreen mainScreen].bounds.size.width, 1);
+        lineView.backgroundColor = [UIColor grayColor];
+        
+        [headerView addSubview:lineView];
+    }
+    
     if (section == 2) {
         
         UIView *headerView = [[UIView alloc] init];
@@ -125,7 +144,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
         
             nameLa.frame = CGRectMake(20, 10 ,[UIScreen mainScreen].bounds.size.width, 20);
         
-            nameLa.text = @"最新悬赏问";
+            nameLa.text = @"最新免费问";
         
         [headerView addSubview:nameLa];
         
@@ -136,15 +155,9 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
         [headerView addSubview:lineView];
         
         return headerView;
-
-
     }
-   
 
-    
     return view;
-
-    
 }
 
 
@@ -187,7 +200,6 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
             cell.tableView = tableView;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
-        
         cell.tagContainer = self.tagContainer;
         
         return cell;
@@ -237,6 +249,10 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    
+    if (section == 1) {
+        return 50;
+    }
     
     if (section == 2) {
         return 50;

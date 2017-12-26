@@ -20,11 +20,11 @@
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T5E-dZ-jM8">
                         <rect key="frame" x="49" y="24" width="40" height="40"/>
-                        <color key="backgroundColor" red="0.97647058819999999" green="0.49803921569999998" blue="0.035294117649999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="hKr-Ax-1d8"/>
                             <constraint firstAttribute="width" constant="40" id="zf3-8M-aWz"/>
                         </constraints>
+                        <state key="normal" image="xswen1"/>
                         <connections>
                             <action selector="Rewardbtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="NV7-Hh-CIa"/>
                         </connections>
@@ -38,13 +38,13 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WYz-Hw-KUn">
-                        <rect key="frame" x="167.5" y="24" width="40" height="40"/>
-                        <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WYz-Hw-KUn">
+                        <rect key="frame" x="168" y="24" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="VCd-L2-Vzy"/>
                             <constraint firstAttribute="height" constant="40" id="y1m-Df-h7q"/>
                         </constraints>
+                        <state key="normal" image="mfwen1"/>
                         <connections>
                             <action selector="FreeBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="DaL-xT-SbN"/>
                         </connections>
@@ -58,13 +58,13 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxt-a5-zUd">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xxt-a5-zUd">
                         <rect key="frame" x="283" y="25" width="40" height="40"/>
-                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="Rhz-nH-vOy"/>
                             <constraint firstAttribute="height" constant="40" id="ZaN-Wl-2VU"/>
                         </constraints>
+                        <state key="normal" image="zjwen"/>
                         <connections>
                             <action selector="AskExpertBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bUi-0f-2QO"/>
                         </connections>
@@ -102,4 +102,9 @@
             <point key="canvasLocation" x="33.5" y="73"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="mfwen1" width="40" height="40"/>
+        <image name="xswen1" width="40" height="40"/>
+        <image name="zjwen" width="40" height="40"/>
+    </resources>
 </document>

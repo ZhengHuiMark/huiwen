@@ -196,6 +196,7 @@
 		444D499D1FF2230800D82736 /* ZHTitleLabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444D499B1FF2230800D82736 /* ZHTitleLabelTableViewCell.xib */; };
 		444D49A11FF22CAF00D82736 /* ZHNormalUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D499F1FF22CAF00D82736 /* ZHNormalUserTableViewCell.m */; };
 		444D49A21FF22CAF00D82736 /* ZHNormalUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444D49A01FF22CAF00D82736 /* ZHNormalUserTableViewCell.xib */; };
+		444D49CB1FF23FC700D82736 /* UIView+LayerEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D49CA1FF23FC700D82736 /* UIView+LayerEffects.m */; };
 		4476748E1F8DC8C4007162AC /* ZHLatestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4476748C1F8DC8C4007162AC /* ZHLatestTableViewCell.m */; };
 		4476748F1F8DC8C4007162AC /* ZHLatestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4476748D1F8DC8C4007162AC /* ZHLatestTableViewCell.xib */; };
 		447674931F8DC9AB007162AC /* ZHAllRewardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 447674911F8DC9AB007162AC /* ZHAllRewardTableViewCell.m */; };
@@ -626,6 +627,8 @@
 		444D499E1FF22CAF00D82736 /* ZHNormalUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHNormalUserTableViewCell.h; sourceTree = "<group>"; };
 		444D499F1FF22CAF00D82736 /* ZHNormalUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHNormalUserTableViewCell.m; sourceTree = "<group>"; };
 		444D49A01FF22CAF00D82736 /* ZHNormalUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHNormalUserTableViewCell.xib; sourceTree = "<group>"; };
+		444D49C91FF23FC700D82736 /* UIView+LayerEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+LayerEffects.h"; sourceTree = "<group>"; };
+		444D49CA1FF23FC700D82736 /* UIView+LayerEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+LayerEffects.m"; sourceTree = "<group>"; };
 		4476748B1F8DC8C4007162AC /* ZHLatestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHLatestTableViewCell.h; sourceTree = "<group>"; };
 		4476748C1F8DC8C4007162AC /* ZHLatestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHLatestTableViewCell.m; sourceTree = "<group>"; };
 		4476748D1F8DC8C4007162AC /* ZHLatestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHLatestTableViewCell.xib; sourceTree = "<group>"; };
@@ -2394,6 +2397,8 @@
 				44827BDB1FA01FA80097F1E7 /* TextFiled */,
 				44827BB71F9DBB6B0097F1E7 /* BRPickerView */,
 				449956B11F6275160087503B /* DESEncryption */,
+				444D49C91FF23FC700D82736 /* UIView+LayerEffects.h */,
+				444D49CA1FF23FC700D82736 /* UIView+LayerEffects.m */,
 				44C7AC821FAAF22500F42616 /* XLCircle.h */,
 				44C7AC831FAAF22500F42616 /* XLCircle.m */,
 				44C7AC841FAAF22500F42616 /* XLCircleProgress.h */,
@@ -3018,6 +3023,7 @@
 				440771541FE929880000C20E /* ZHMoreRewardListViewController.m in Sources */,
 				44BB65E41FCD3549003C3A6E /* ZHCaseListTableViewCell.m in Sources */,
 				4435A5621F87A1F800C1744E /* ZHHeaderAvatarTableViewCell.m in Sources */,
+				444D49CB1FF23FC700D82736 /* UIView+LayerEffects.m in Sources */,
 				447674D81F8F6031007162AC /* ZHAskTextViewTableViewCell.m in Sources */,
 				442C03371F6B6FC70078CDC7 /* MineModel.m in Sources */,
 				4407713C1FE8E6B40000C20E /* ZHUserInfoNoModelTableViewCell.m in Sources */,
