@@ -13,6 +13,7 @@
 #import "Macro.h"
 #import "YYModel.h"
 #import "ZHExpertServicePriceTableViewCell.h"
+#import "ZHExpertAskIdentityViewController.h"
 
 static NSString *expertServicePriceCellid = @"expertServicePriceCellid";
 static NSString *expertServiceCellid = @"expertServiceCellid";
@@ -135,6 +136,76 @@ static NSString *expertServiceCellid = @"expertServiceCellid";
                                             reuseIdentifier: @"Cell"];
 }
 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    if (indexPath.section == 0) return;
+    
+    if (indexPath.section == 1) {
+
+        switch (indexPath.row) {
+            case 0:{
+                
+//                NSString *className = @"ValidationViewController";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                
+                break;
+   
+            }
+            case 1:{
+//                
+//                NSString *className = @"ValidationViewController";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                
+                break;
+                
+            }
+            case 2:{
+                
+//                NSString *className = @"ValidationViewController";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+//                
+                break;
+                
+            }
+            case 3:{
+                
+//                NSString *className = @"ValidationViewController";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                
+                break;
+                
+            }
+            case 4:{
+                
+//                NSString *className = @"ValidationViewController";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                
+                break;
+                
+            }
+            case 5:{
+                
+                NSString *className = @"ZHExpertAskIdentityViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                
+                break;
+                
+            }
+            break;
+            
+        default:
+            break;
+        }
+        
+    }
+    
+    
+    
+    
+}
+
 - (UITableView *)tableView {
     //
     
@@ -159,6 +230,19 @@ static NSString *expertServiceCellid = @"expertServiceCellid";
     }
     
     return _tableView;
+}
+
+
+#pragma mark - 实现点击跳转到控制器
+-(void)pushToSetControllerWithIndexPath:(NSIndexPath *)indexPath className:(NSString *)className{
+    
+    Class clz = NSClassFromString(className);
+    UIViewController *controller = [[clz alloc]init];
+    NSLog(@"%@",controller);
+    [self.navigationController pushViewController:controller animated:YES];
+    
+    
+    
 }
 
 

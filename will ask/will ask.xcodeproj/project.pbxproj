@@ -189,6 +189,13 @@
 		444D49871FF125AB00D82736 /* ZHExpertServiceListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D49861FF125AB00D82736 /* ZHExpertServiceListModel.m */; };
 		444D498B1FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D49891FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.m */; };
 		444D498C1FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444D498A1FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.xib */; };
+		444D49931FF1F9DC00D82736 /* ZHExpertAskIdentityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D49921FF1F9DC00D82736 /* ZHExpertAskIdentityViewController.m */; };
+		444D49971FF1FC4000D82736 /* ZHSetUpIdentityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D49951FF1FC4000D82736 /* ZHSetUpIdentityTableViewCell.m */; };
+		444D49981FF1FC4000D82736 /* ZHSetUpIdentityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444D49961FF1FC4000D82736 /* ZHSetUpIdentityTableViewCell.xib */; };
+		444D499C1FF2230800D82736 /* ZHTitleLabelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D499A1FF2230800D82736 /* ZHTitleLabelTableViewCell.m */; };
+		444D499D1FF2230800D82736 /* ZHTitleLabelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444D499B1FF2230800D82736 /* ZHTitleLabelTableViewCell.xib */; };
+		444D49A11FF22CAF00D82736 /* ZHNormalUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D499F1FF22CAF00D82736 /* ZHNormalUserTableViewCell.m */; };
+		444D49A21FF22CAF00D82736 /* ZHNormalUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444D49A01FF22CAF00D82736 /* ZHNormalUserTableViewCell.xib */; };
 		4476748E1F8DC8C4007162AC /* ZHLatestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4476748C1F8DC8C4007162AC /* ZHLatestTableViewCell.m */; };
 		4476748F1F8DC8C4007162AC /* ZHLatestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4476748D1F8DC8C4007162AC /* ZHLatestTableViewCell.xib */; };
 		447674931F8DC9AB007162AC /* ZHAllRewardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 447674911F8DC9AB007162AC /* ZHAllRewardTableViewCell.m */; };
@@ -608,6 +615,17 @@
 		444D49881FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHExpertServicePriceTableViewCell.h; sourceTree = "<group>"; };
 		444D49891FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHExpertServicePriceTableViewCell.m; sourceTree = "<group>"; };
 		444D498A1FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHExpertServicePriceTableViewCell.xib; sourceTree = "<group>"; };
+		444D49911FF1F9DC00D82736 /* ZHExpertAskIdentityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHExpertAskIdentityViewController.h; sourceTree = "<group>"; };
+		444D49921FF1F9DC00D82736 /* ZHExpertAskIdentityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHExpertAskIdentityViewController.m; sourceTree = "<group>"; };
+		444D49941FF1FC4000D82736 /* ZHSetUpIdentityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHSetUpIdentityTableViewCell.h; sourceTree = "<group>"; };
+		444D49951FF1FC4000D82736 /* ZHSetUpIdentityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHSetUpIdentityTableViewCell.m; sourceTree = "<group>"; };
+		444D49961FF1FC4000D82736 /* ZHSetUpIdentityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHSetUpIdentityTableViewCell.xib; sourceTree = "<group>"; };
+		444D49991FF2230800D82736 /* ZHTitleLabelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHTitleLabelTableViewCell.h; sourceTree = "<group>"; };
+		444D499A1FF2230800D82736 /* ZHTitleLabelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHTitleLabelTableViewCell.m; sourceTree = "<group>"; };
+		444D499B1FF2230800D82736 /* ZHTitleLabelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHTitleLabelTableViewCell.xib; sourceTree = "<group>"; };
+		444D499E1FF22CAF00D82736 /* ZHNormalUserTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHNormalUserTableViewCell.h; sourceTree = "<group>"; };
+		444D499F1FF22CAF00D82736 /* ZHNormalUserTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHNormalUserTableViewCell.m; sourceTree = "<group>"; };
+		444D49A01FF22CAF00D82736 /* ZHNormalUserTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHNormalUserTableViewCell.xib; sourceTree = "<group>"; };
 		4476748B1F8DC8C4007162AC /* ZHLatestTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHLatestTableViewCell.h; sourceTree = "<group>"; };
 		4476748C1F8DC8C4007162AC /* ZHLatestTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHLatestTableViewCell.m; sourceTree = "<group>"; };
 		4476748D1F8DC8C4007162AC /* ZHLatestTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHLatestTableViewCell.xib; sourceTree = "<group>"; };
@@ -1959,6 +1977,7 @@
 		444D49791FF112B900D82736 /* ZHExpertServiceVc */ = {
 			isa = PBXGroup;
 			children = (
+				444D498D1FF1F99300D82736 /* ZHAskIdVc */,
 				444D497A1FF112B900D82736 /* controller */,
 				444D497B1FF112B900D82736 /* model */,
 				444D497C1FF112B900D82736 /* view */,
@@ -1993,6 +2012,48 @@
 				444D49881FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.h */,
 				444D49891FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.m */,
 				444D498A1FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		444D498D1FF1F99300D82736 /* ZHAskIdVc */ = {
+			isa = PBXGroup;
+			children = (
+				444D498E1FF1F99300D82736 /* Controller */,
+				444D498F1FF1F99300D82736 /* model */,
+				444D49901FF1F99300D82736 /* view */,
+			);
+			path = ZHAskIdVc;
+			sourceTree = "<group>";
+		};
+		444D498E1FF1F99300D82736 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				444D49911FF1F9DC00D82736 /* ZHExpertAskIdentityViewController.h */,
+				444D49921FF1F9DC00D82736 /* ZHExpertAskIdentityViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		444D498F1FF1F99300D82736 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		444D49901FF1F99300D82736 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				444D49941FF1FC4000D82736 /* ZHSetUpIdentityTableViewCell.h */,
+				444D49951FF1FC4000D82736 /* ZHSetUpIdentityTableViewCell.m */,
+				444D49961FF1FC4000D82736 /* ZHSetUpIdentityTableViewCell.xib */,
+				444D49991FF2230800D82736 /* ZHTitleLabelTableViewCell.h */,
+				444D499A1FF2230800D82736 /* ZHTitleLabelTableViewCell.m */,
+				444D499B1FF2230800D82736 /* ZHTitleLabelTableViewCell.xib */,
+				444D499E1FF22CAF00D82736 /* ZHNormalUserTableViewCell.h */,
+				444D499F1FF22CAF00D82736 /* ZHNormalUserTableViewCell.m */,
+				444D49A01FF22CAF00D82736 /* ZHNormalUserTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -2707,6 +2768,7 @@
 				447674DE1F8F666F007162AC /* ZHRewardAndDateTableViewCell.xib in Resources */,
 				4407707C1FDE86DE0000C20E /* ZHVipCardDetailTableViewCell.xib in Resources */,
 				440770F21FE76D520000C20E /* ZHMyConsultingDetailTableViewCell.xib in Resources */,
+				444D499D1FF2230800D82736 /* ZHTitleLabelTableViewCell.xib in Resources */,
 				44310E191F906DCB00A68A66 /* MLImageCell.xib in Resources */,
 				441018801F4EADC700EBA751 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				441018851F4EADC700EBA751 /* README.txt in Resources */,
@@ -2724,6 +2786,7 @@
 				4476748F1F8DC8C4007162AC /* ZHLatestTableViewCell.xib in Resources */,
 				442C03A61F735E300078CDC7 /* ZHEditTableViewCell.xib in Resources */,
 				44BB66291FD100F1003C3A6E /* ZHMyWalletTableViewCell.xib in Resources */,
+				444D49A21FF22CAF00D82736 /* ZHNormalUserTableViewCell.xib in Resources */,
 				442C03D51F7553A70078CDC7 /* Property List.plist in Resources */,
 				444D498C1FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.xib in Resources */,
 				440770591FD936500000C20E /* ZHMyRewardRightListTableViewCell.xib in Resources */,
@@ -2790,6 +2853,7 @@
 				44C7ACA21FB2A1A000F42616 /* ZHCaseBreakDownTableViewCell.xib in Resources */,
 				4435A5701F87DCC600C1744E /* Info.plist in Resources */,
 				440770331FD784470000C20E /* ZHMyorderTableViewCell.xib in Resources */,
+				444D49981FF1FC4000D82736 /* ZHSetUpIdentityTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2852,6 +2916,7 @@
 				44C12D731F6A7DE400E48FED /* ZHMoneyTableViewCell.m in Sources */,
 				4407701A1FD52B820000C20E /* ZHTransactionViewController.m in Sources */,
 				44BB66011FD0F22D003C3A6E /* ZHMyWalletViewController.m in Sources */,
+				444D49931FF1F9DC00D82736 /* ZHExpertAskIdentityViewController.m in Sources */,
 				4411EF501F7B4603003AAF1C /* ZHAskModel.m in Sources */,
 				4407708C1FDFDBDE0000C20E /* ZHRecordListTableViewCell.m in Sources */,
 				44BB65EB1FCD4A4E003C3A6E /* ZHCaseListsModel.m in Sources */,
@@ -2866,6 +2931,7 @@
 				440770CB1FE37EA00000C20E /* ZHContentTextViewTableViewCell.m in Sources */,
 				4407704F1FD92D930000C20E /* ZHMyRewardAskViewController.m in Sources */,
 				440770821FDF8C4C0000C20E /* ZHCardNumberModel.m in Sources */,
+				444D49A11FF22CAF00D82736 /* ZHNormalUserTableViewCell.m in Sources */,
 				44C7ACB01FB3F8A300F42616 /* ZHSubCaseModel.m in Sources */,
 				440770F11FE76D520000C20E /* ZHMyConsultingDetailTableViewCell.m in Sources */,
 				449956C71F6292850087503B /* RSAEncryptor.m in Sources */,
@@ -2945,6 +3011,7 @@
 				447674CF1F8F5F1F007162AC /* ZHAskQuestionTableViewController.m in Sources */,
 				442C03A51F735E300078CDC7 /* ZHEditTableViewCell.m in Sources */,
 				44BB65EF1FCFD987003C3A6E /* ZHCaseDetailViewController.m in Sources */,
+				444D499C1FF2230800D82736 /* ZHTitleLabelTableViewCell.m in Sources */,
 				4407705C1FDA40820000C20E /* ZHMyRewardListModel.m in Sources */,
 				442C038E1F6FC0220078CDC7 /* OssService.m in Sources */,
 				440770581FD936500000C20E /* ZHMyRewardRightListTableViewCell.m in Sources */,
@@ -2988,6 +3055,7 @@
 				44BB65F51FD0101E003C3A6E /* ZHCaseDetailsModel.m in Sources */,
 				44827BD21F9DBB6B0097F1E7 /* BaseView.m in Sources */,
 				44827B511F974D2C0097F1E7 /* MLSubTagModel.m in Sources */,
+				444D49971FF1FC4000D82736 /* ZHSetUpIdentityTableViewCell.m in Sources */,
 				440770EF1FE76D520000C20E /* ZHMyConsultingAnswerVoiceTableViewCell.m in Sources */,
 				4411EF441F78EC7E003AAF1C /* ZHJumpTableViewCell.m in Sources */,
 				441ADE931F3ABBED00ECD63E /* main.m in Sources */,
