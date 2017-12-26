@@ -29,7 +29,7 @@ static NSString *expertServiceCellid = @"expertServiceCellid";
 
 - (void)viewWillDisappear:(BOOL)animated {
     
-    if (self.priceCell.priceTextFiled.text) {
+    if (!self.priceCell.priceTextFiled.text) {
         NSMutableDictionary *dic = [ZHNetworkTools parameters];
         [dic setObject:self.priceCell.priceTextFiled.text forKey:@"consultPrice"];
         
@@ -82,6 +82,14 @@ static NSString *expertServiceCellid = @"expertServiceCellid";
     
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (section == 0) {
+        return 0;
+    }
+    
+    return 20;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
     return 2;
@@ -113,6 +121,7 @@ static NSString *expertServiceCellid = @"expertServiceCellid";
     if (indexPath.section == 1) {
             ZHExpertServiceListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:expertServiceCellid forIndexPath:indexPath];
         cell.indexPath = indexPath;
+        cell.expertServiceModel = _expertServiceModel;
         
         return cell;
         
@@ -135,8 +144,9 @@ static NSString *expertServiceCellid = @"expertServiceCellid";
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
-        _tableView.sectionHeaderHeight = 43;
-        
+        _tableView.sectionHeaderHeight = 50;
+        _tableView.tableFooterView = [UIView new];
+
         //        _tableView.rowHeight = 299;
         
         //    NSBundle *bundle = [NSBundle mainBundle];

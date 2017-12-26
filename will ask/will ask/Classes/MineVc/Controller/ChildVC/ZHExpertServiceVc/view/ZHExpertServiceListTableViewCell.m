@@ -21,28 +21,29 @@
     
     switch (self.indexPath.row) {
         case 0:{
-            self.detailedLabel.text = [NSString stringWithFormat:@"待回答:%@",self.expertServiceModel.consultWaitNumber];
+            self.variableLabel.text =self.expertServiceModel.consultWaitNumber;
         }
             break;
         case 1:{
-            
+            self.variableLabel.hidden = YES;
         }
             break;
         case 2:{
-            self.detailedLabel.text = [NSString stringWithFormat:@"待回答:%@",self.expertServiceModel.rewardAnswerIncome];
+            self.variableLabel.text = self.expertServiceModel.rewardAnswerIncome;
 
         }
             break;
         case 3:{
-            
+            self.variableLabel.hidden = YES;
         }
             break;
         case 4:{
-            self.detailedLabel.text = [NSString stringWithFormat:@"待回答:%@",self.expertServiceModel.rewardLearningIncome];
+            self.variableLabel.text = self.expertServiceModel.rewardLearningIncome;
         }
             break;
         case 5:{
-            
+            self.variableLabel.hidden = YES;
+
         }
             break;
             

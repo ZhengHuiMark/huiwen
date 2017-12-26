@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的咨询价格:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pIH-Xr-lj3">
-                        <rect key="frame" x="17.5" y="18.5" width="96.5" height="15"/>
+                        <rect key="frame" x="17.5" y="17.5" width="96.5" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="81o-7p-VDP"/>
                         </constraints>
@@ -28,7 +28,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/次" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KYd-FL-Uwp">
-                        <rect key="frame" x="337.5" y="18.5" width="20.5" height="15"/>
+                        <rect key="frame" x="337.5" y="17.5" width="20.5" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="7OG-b9-bFm"/>
                         </constraints>
@@ -37,7 +37,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="dad " borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jNY-vE-YPZ">
-                        <rect key="frame" x="119" y="12" width="100" height="30"/>
+                        <rect key="frame" x="119" y="10" width="100" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="pSD-yn-ELd"/>
                             <constraint firstAttribute="height" constant="30" id="r4W-95-0sk"/>
@@ -50,9 +50,9 @@
                 <constraints>
                     <constraint firstItem="pIH-Xr-lj3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17.5" id="2sM-GK-hIO"/>
                     <constraint firstAttribute="trailing" secondItem="KYd-FL-Uwp" secondAttribute="trailing" constant="17" id="72Q-eT-O7m"/>
-                    <constraint firstItem="KYd-FL-Uwp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18.5" id="AlR-ys-Efc"/>
-                    <constraint firstItem="pIH-Xr-lj3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18.5" id="hSZ-mk-VKo"/>
-                    <constraint firstItem="jNY-vE-YPZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="i8j-Wb-haD"/>
+                    <constraint firstItem="jNY-vE-YPZ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="MDe-hx-mRl"/>
+                    <constraint firstItem="KYd-FL-Uwp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Oue-h9-gUt"/>
+                    <constraint firstItem="pIH-Xr-lj3" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="TCj-kT-Vu5"/>
                     <constraint firstItem="jNY-vE-YPZ" firstAttribute="leading" secondItem="pIH-Xr-lj3" secondAttribute="trailing" constant="5" id="zIO-PH-Vsu"/>
                 </constraints>
             </tableViewCellContentView>
