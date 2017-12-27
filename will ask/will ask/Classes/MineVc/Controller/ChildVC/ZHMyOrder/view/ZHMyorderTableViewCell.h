@@ -15,6 +15,8 @@ typedef NS_ENUM(NSUInteger, ReviewStatus) {
     ReviewStatusSuccess = 2,
 };
 
+typedef void(^payBtnClick)();
+
 @interface ZHMyorderTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *TypeName;
@@ -38,5 +40,7 @@ typedef NS_ENUM(NSUInteger, ReviewStatus) {
 @property (weak, nonatomic) ZHMyOrderModel *orderModel;
 
 @property (nonatomic, assign) ReviewStatus status;
+
+@property (nonatomic,copy)payBtnClick didClick;
 
 @end
