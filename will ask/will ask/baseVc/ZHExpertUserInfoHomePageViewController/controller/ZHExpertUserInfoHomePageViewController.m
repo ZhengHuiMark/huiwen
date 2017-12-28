@@ -99,6 +99,8 @@ static NSString *expertUserInfoCaseCellid = @"expertUserInfoCaseCellid";
         
         _bigModel.expertRewardModel = [ZHExpertRewardModel yy_modelWithJSON:response[@"data"][@"rewardAsk"]];
         
+        
+        
         [self.tableView reloadData];
         
     }];

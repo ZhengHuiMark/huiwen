@@ -127,10 +127,16 @@
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aow-dk-lVF">
                         <rect key="frame" x="87" y="119" width="60" height="60"/>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="imageButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Laj-sc-mnQ"/>
+                        </connections>
                     </button>
                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cin-N3-oOv">
                         <rect key="frame" x="154" y="119" width="60" height="60"/>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="imageButtonAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gjR-yu-JiU"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

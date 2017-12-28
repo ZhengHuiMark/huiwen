@@ -17,6 +17,7 @@
 #import "MJRefresh.h"
 #import "ZHOrderPaymentViewController.h"
 
+#import "ZHOrderDetailViewController.h"
 
 
 static NSString *myOrderCellid = @"myOrderCellid";
@@ -32,7 +33,6 @@ static NSString *myOrderCellid = @"myOrderCellid";
 @property (nonatomic, strong)NSMutableArray<UIView*> *arrSepViews;
 
 @property(nonatomic,strong)NSMutableArray * orderModels;
-
 
 @property(nonatomic,strong)UITableView *tableView;
 
@@ -165,9 +165,11 @@ static NSString *myOrderCellid = @"myOrderCellid";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
-    
-    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+
+    ZHOrderDetailViewController *orderDetailVc = [[ZHOrderDetailViewController alloc]init];
+    orderDetailVc.payModel = _orderModels[indexPath.row];
+    [self.navigationController pushViewController:orderDetailVc animated:YES];
 }
 
 
