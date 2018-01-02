@@ -18,6 +18,8 @@ PODS:
   - IQKeyboardManager (5.0.7)
   - Masonry (1.1.0)
   - MJRefresh (3.1.15.1)
+  - SDCycleScrollView (1.75):
+    - SDWebImage (>= 4.0.0)
   - SDWebImage (4.2.2):
     - SDWebImage/Core (= 4.2.2)
   - SDWebImage/Core (4.2.2)
@@ -32,6 +34,7 @@ DEPENDENCIES:
   - IQKeyboardManager
   - Masonry
   - MJRefresh
+  - SDCycleScrollView
   - SDWebImage
   - SVProgressHUD
   - XRCarouselView
@@ -44,12 +47,13 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 0bfa4607d39924116b5c0c8b55b5d789288b5cba
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
+  SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
   SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   XRCarouselView: d3f949d1601e7de51604cdabd6e2f35a770e0f99
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: d4e344bf38706c3556b2e22fb186a93f045ab4fc
+PODFILE CHECKSUM: 4e98ce4bb7f829ffcd882667f049232436a1c0de
 
 COCOAPODS: 1.2.1

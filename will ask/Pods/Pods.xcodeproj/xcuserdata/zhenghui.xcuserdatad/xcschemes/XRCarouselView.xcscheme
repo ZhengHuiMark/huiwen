@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'ABFFCD006E07A92B4F830F81D0CADA1F'
+               BlueprintIdentifier = 'EA736602B8965E1194B35FF8E2B22EB2'
                BlueprintName = 'XRCarouselView'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libXRCarouselView.a'>
