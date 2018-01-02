@@ -38,7 +38,7 @@
     
     self.expertTitle.text = self.model.certifiedNames;
     
-    [self.expertImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUser,OSS,self.model.avatar]]];
+    [self.expertImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.model.avatar]]];
     
     self.CaseMoney.text = [NSString stringWithFormat:@"售价:￥%@",self.model.price];
     

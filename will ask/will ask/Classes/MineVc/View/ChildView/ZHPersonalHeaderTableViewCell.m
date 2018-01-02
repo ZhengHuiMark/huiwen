@@ -7,6 +7,11 @@
 //
 
 #import "ZHPersonalHeaderTableViewCell.h"
+#import "UIImageView+WebCache.h"
+#import "ImageTools.h"
+#import "UserModel.h"
+#import "UserManager.h"
+
 
 @implementation ZHPersonalHeaderTableViewCell
 
@@ -14,9 +19,12 @@
     [super awakeFromNib];
     // Initialization code
     
+    [self.userAvatarImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,[UserManager sharedManager].userModel.avatar]]];
+    
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.UserAvatarImg.layer.masksToBounds = YES;
-    self.UserAvatarImg.layer.cornerRadius = 40;
+    
+    self.userAvatarImageView.layer.masksToBounds = YES;
+    self.userAvatarImageView.layer.cornerRadius = 40;
     
 }
 

@@ -125,6 +125,7 @@
         !self.loginCompletion?:self.loginCompletion(NO);
         [[NSNotificationCenter defaultCenter] postNotificationName: @"loginSuccess"
                                                             object: nil];
+        
         [self.navigationController popViewControllerAnimated:YES];
         
     }];

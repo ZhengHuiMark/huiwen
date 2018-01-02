@@ -37,7 +37,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z2E-i1-S2n">
-                        <rect key="frame" x="323" y="18.5" width="0.0" height="15"/>
+                        <rect key="frame" x="323" y="16" width="0.0" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="U3U-H0-z5H"/>
                         </constraints>
@@ -58,7 +58,7 @@
                 <constraints>
                     <constraint firstItem="4C2-fd-mAP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17.5" id="2lS-7q-UuJ"/>
                     <constraint firstItem="wtA-fG-BCV" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="UWs-v2-WG3"/>
-                    <constraint firstItem="Z2E-i1-S2n" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18.5" id="Uww-vR-f0o"/>
+                    <constraint firstItem="Z2E-i1-S2n" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Uww-vR-f0o"/>
                     <constraint firstItem="Z2E-i1-S2n" firstAttribute="leading" secondItem="uiO-RT-NQA" secondAttribute="trailing" constant="10" id="gxK-w2-18w"/>
                     <constraint firstItem="uiO-RT-NQA" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="irq-SG-9Sw"/>
                     <constraint firstItem="4C2-fd-mAP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="lH4-1C-bgZ"/>
@@ -72,7 +72,7 @@
                 <outlet property="titleLabel" destination="4C2-fd-mAP" id="ELP-94-dxM"/>
                 <outlet property="variableLabel" destination="Z2E-i1-S2n" id="T6d-qq-sMK"/>
             </connections>
-            <point key="canvasLocation" x="103.5" y="133"/>
+            <point key="canvasLocation" x="105" y="137"/>
         </tableViewCell>
     </objects>
 </document>

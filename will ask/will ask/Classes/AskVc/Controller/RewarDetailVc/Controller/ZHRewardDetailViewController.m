@@ -277,45 +277,45 @@ static NSInteger kMaxCount = 3;
     [btnUp addTarget:self action:@selector(UPUP) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btnUp];
     
-    [self.view addSubview:self.AllView];
-    [_AllView addSubview:self.ControlsView];
-    [_AllView addSubview:self.ContentView];
-    //    [_AllView addSubview:self.speakView];
-    [_AllView addSubview:self.ImageView];
-    
-    
-    [self.ContentView addSubview:self.ContentTextView];
-    [self.ControlsView addSubview:self.downBtn];
-    [self.ControlsView addSubview:self.textBtn];
-    [self.ControlsView addSubview:self.speakBtn];
-    [self.ControlsView addSubview:self.ReleaseBtn];
-    
-    [self.ContentTextView addSubview:self.PlaceholderLabel];
-    [self.ContentTextView addSubview:self.LinkageLabel];
-    //    [self.speakView addSubview:self.VoiceBtn];
-    
-    self.ContentTextView.delegate = self;
-    
-    CGFloat VoiceBtnWidth = 75;
-    CGFloat VoiceBtnHeight = VoiceBtnWidth;
+//    [self.view addSubview:self.AllView];
+//    [_AllView addSubview:self.ControlsView];
+//    [_AllView addSubview:self.ContentView];
+//    //    [_AllView addSubview:self.speakView];
+//    [_AllView addSubview:self.ImageView];
 //    
+//    
+//    [self.ContentView addSubview:self.ContentTextView];
+//    [self.ControlsView addSubview:self.downBtn];
+//    [self.ControlsView addSubview:self.textBtn];
+//    [self.ControlsView addSubview:self.speakBtn];
+//    [self.ControlsView addSubview:self.ReleaseBtn];
+//    
+//    [self.ContentTextView addSubview:self.PlaceholderLabel];
+//    [self.ContentTextView addSubview:self.LinkageLabel];
+//    //    [self.speakView addSubview:self.VoiceBtn];
+//    
+//    self.ContentTextView.delegate = self;
+//    
+//    CGFloat VoiceBtnWidth = 75;
+//    CGFloat VoiceBtnHeight = VoiceBtnWidth;
+////    
 //    ICChatBox *btn = [[ICChatBox alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - VoiceBtnWidth ) / 2, 42.5, VoiceBtnWidth, VoiceBtnHeight)];
 //    btn.delegate = self;
 //    [self.speakView addSubview:btn];
     
-    _collectionView = [[UICollectionView alloc] initWithFrame: CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50) collectionViewLayout: self.layout];
-    _collectionView.delegate = self;
-    _collectionView.dataSource = self;
-    _collectionView.contentInset = UIEdgeInsetsMake(0,18, 0, 0);
-    [_collectionView registerNib:[UINib nibWithNibName: NSStringFromClass([MLImageCell class])
-                                                bundle: [NSBundle mainBundle]]
-      forCellWithReuseIdentifier: NSStringFromClass([MLImageCell class])];
-    _collectionView.backgroundColor = [UIColor whiteColor];
-    _collectionView.showsHorizontalScrollIndicator = NO;
-    _collectionView.showsVerticalScrollIndicator = NO;
-    
-    [self.ImageView addSubview:self.collectionView];
-    
+//    _collectionView = [[UICollectionView alloc] initWithFrame: CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50) collectionViewLayout: self.layout];
+//    _collectionView.delegate = self;
+//    _collectionView.dataSource = self;
+//    _collectionView.contentInset = UIEdgeInsetsMake(0,18, 0, 0);
+//    [_collectionView registerNib:[UINib nibWithNibName: NSStringFromClass([MLImageCell class])
+//                                                bundle: [NSBundle mainBundle]]
+//      forCellWithReuseIdentifier: NSStringFromClass([MLImageCell class])];
+//    _collectionView.backgroundColor = [UIColor whiteColor];
+//    _collectionView.showsHorizontalScrollIndicator = NO;
+//    _collectionView.showsVerticalScrollIndicator = NO;
+//    
+//    [self.ImageView addSubview:self.collectionView];
+//    
 }
 
 - (UIButton *)VoiceBtn{

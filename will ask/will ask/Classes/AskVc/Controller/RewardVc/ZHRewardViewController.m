@@ -227,7 +227,7 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
     CGSize size = CGSizeMake(cell.bounds.size.width, 300);
     CGRect rectSize = [cell.content.text boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading  attributes:nil context:nil];
     
-    return 155 + rectSize.size.height;
+    return 204 + rectSize.size.height;
     
 //    return 155;
 }
