@@ -115,7 +115,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     [self.view addSubview: self.tableView];
     
     
-    UIView *PlaceHolderView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 44)];
+    UIView *PlaceHolderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
     PlaceHolderView.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:PlaceHolderView];
