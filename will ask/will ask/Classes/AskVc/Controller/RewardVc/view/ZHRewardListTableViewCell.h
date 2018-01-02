@@ -29,6 +29,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *remainingTime;
 
-@property (weak, nonatomic) IBOutlet UILabel *answerNum;
+@property (weak, nonatomic) IBOutlet UILabel *answerNumber;
+
+@property (weak, nonatomic) IBOutlet UILabel *learnNumber;
 
 @end

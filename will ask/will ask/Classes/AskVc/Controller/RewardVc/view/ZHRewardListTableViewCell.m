@@ -22,7 +22,7 @@
 - (void)setModel:(ZHAskModel *)model {
     _model = model;
     
-    [self.avatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUser,OSS,self.model.avatar]]];
+    [self.avatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.model.avatar]]];
     
     self.nickName.text = self.model.nickname;
     
@@ -39,8 +39,9 @@
 
     self.remainingTime.text = [NSString stringWithFormat:@"剩余时间:%@",self.model.remainingTime];
     
-    self.answerNum.text = [NSString stringWithFormat:@"%@人已抢答",self.model.answerNumber];
+    self.answerNumber.text = [NSString stringWithFormat:@"%@人已抢答",self.model.answerNumber];
     
+    self.learnNumber.text = [NSString stringWithFormat:@"%@人学习",self.model.learnNumber];
     
     if ([self.model.type  isEqual: @"审计"]) {
         [self.typeImg setImage:[UIImage imageNamed:@"shenji"]];
