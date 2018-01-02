@@ -10,7 +10,7 @@
 #import "ZHBtnModel.h"
 #import "UIImageView+WebCache.h"
 #import "ImageTools.h"
-
+#import "UIView+LayerEffects.h"
 
 
 
@@ -95,7 +95,6 @@
     }
     self.RewardMoneyImgV.text = [NSString stringWithFormat:@"赏金%@",tagModel.amount];
     
-//    [self.typeImgV sd_setImageWithURL:<#(nullable NSURL *)#>]
     
     
     self.frame = tagModel.frame;
@@ -104,20 +103,18 @@
 - (void)setFrame:(CGRect)frame{
     [super setFrame:frame];
     
-    self.placeholderView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width / 3, 150.5);
+    self.placeholderView.frame = CGRectMake(0, 0, ([UIScreen mainScreen].bounds.size.width - 50) / 3, 150.5);
+    
     self.typeImgV.frame = CGRectMake(0, 14.5, 40, 20);
-    
-    
-    
+
     self.imgView.frame = (CGRect){CGRectGetMaxX(self.typeImgV.frame ) + 22.5, 8,39.5 , 34.5};
     
-    self.RewardMoneyImgV.frame = (CGRect){CGRectGetMaxX(self.typeImgV.frame ) + 13.5 , 8,90 , 10};
+    self.RewardMoneyImgV.frame = (CGRect){CGRectGetMaxX(self.typeImgV.frame ) + 23.5 , 20,50 , 10};
     
     CGSize size = CGSizeMake(_placeholderView.bounds.size.width - 20, 80);
     CGRect rectSize = [_ContentLaebl.text boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading  attributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:12] } context:nil];
     
     self.ContentLaebl.frame = CGRectMake(6, CGRectGetMaxY(self.imgView.frame) + 6,self.frame.size.width - 20,rectSize.size.height);
-    NSLog(@"rectsize = %zd",rectSize.size.height);
     
     self.jjjLabel.frame = CGRectMake(6, CGRectGetMaxY(self.placeholderView.frame) - 13, 40, 13);
     
@@ -132,11 +129,6 @@
     if (!_imgView) {
         _imgView = [UIImageView new];
         _imgView.image = [UIImage imageNamed:@"bonus"];
-//        _imgView.backgroundColor = [UIColor blueColor];
-//        _imgView.transform = CGAffineTransformMakeRotation(- M_PI / 6);
-//        _imgView.contentMode = UIViewContentModeScaleAspectFill;
-        
-//        [_imgView sizeToFit];
     }
     
     
@@ -148,7 +140,11 @@
     if (!_placeholderView) {
         _placeholderView = [UIView new];
         _placeholderView.backgroundColor = [UIColor colorWithRed:254/255.0 green:245/255.0 blue:230/255.0 alpha:1];
-        _placeholderView.layer.cornerRadius = 20;
+        
+        _placeholderView.layer.masksToBounds = YES;
+//        _placeholderView.layer.cornerRadius = 20;
+
+        [_placeholderView setCornerRadius:10];
     }
     
     return _placeholderView;
@@ -158,7 +154,6 @@
 - (UIImageView *)typeImgV{
     if (!_typeImgV) {
         _typeImgV = [UIImageView new];
-//        _typeImgV.backgroundColor = [UIColor lightGrayColor];
     }
     
     return _typeImgV;
@@ -168,17 +163,8 @@
     if (!_RewardMoneyImgV) {
         _RewardMoneyImgV = [UILabel new];
         _RewardMoneyImgV.backgroundColor = [UIColor clearColor];
-        
-//        _RewardMoneyImgV.text = @"text\n text\n text";
-//        _RewardMoneyImgV.text = @"10";
         [_RewardMoneyImgV setFont:[UIFont fontWithName:@"Helvetica-Bold" size:9]];
         _RewardMoneyImgV.textColor = [UIColor redColor];
-//        _RewardMoneyImgV.textAlignment = NSTextAlignmentCenter;
-        
-//        _RewardMoneyImgV.transform = CGAffineTransformMakeRotation(- M_PI / 6);
-//        _RewardMoneyImgV.contentMode = UIViewContentModeScaleAspectFill;
-
-        
     }
     
     return _RewardMoneyImgV;
@@ -190,10 +176,8 @@
         _ContentLaebl.numberOfLines = 0;
 
         _ContentLaebl.text = @"312312人员人员人dada三个三个个三个个三个个三个";
-//        _ContentLaebl.textAlignment = NSTextAlignmentLeft;
         _ContentLaebl.font = [UIFont systemFontOfSize: 12];
         _ContentLaebl.textColor = [UIColor blackColor];
-//        _ContentLaebl.backgroundColor = [UIColor yellowColor];
         
      
     }
@@ -233,12 +217,6 @@
         [_clickBtn.layer setBorderColor:[UIColor redColor].CGColor];
         [_clickBtn.layer setBorderWidth:1];
         [_clickBtn.layer setMasksToBounds:YES];
-        
-        
-//        [_clickBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//        [_clickBtn addTarget: self
-//                 action: @selector(btnAction:)
-//       forControlEvents: UIControlEventTouchUpInside];
     }
     return _clickBtn;
 }

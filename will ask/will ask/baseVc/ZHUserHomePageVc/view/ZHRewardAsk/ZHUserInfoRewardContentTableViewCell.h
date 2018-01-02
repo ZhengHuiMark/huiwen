@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ZHUserInfoRewardModel,ZHExpertRewarModel;
+@class ZHUserInfoRewardModel,ZHExpertRewardModel;
 @interface ZHUserInfoRewardContentTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *userAvatar;
@@ -34,5 +34,5 @@
 
 @property(nonatomic,strong)ZHUserInfoRewardModel *rewardModel;
 
-@property(nonatomic,strong)ZHExpertRewarModel *expertRewardModel;
+@property(nonatomic,strong)ZHExpertRewardModel *expertRewardModel;
 @end

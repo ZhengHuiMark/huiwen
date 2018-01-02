@@ -1,1 +1,1 @@
-../../../AliyunOSSiOS/AliyunOSSiOS/OSSIPv6/OSSReachabilityManager.h
+../../../AliyunOSSiOS/AliyunOSSSDK/OSSIPv6/OSSReachabilityManager.h

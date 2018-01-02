@@ -145,6 +145,7 @@
     switch (_btnType) {
         case MLTagButtonTypeImage: {
             // 设置图片
+            
         }
             break;
             

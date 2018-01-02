@@ -15,6 +15,10 @@
 #import "Macro.h"
 #import "YYModel.h"
 #import "MJRefresh.h"
+#import "ZHOrderPaymentViewController.h"
+
+#import "ZHOrderDetailViewController.h"
+
 
 static NSString *myOrderCellid = @"myOrderCellid";
 
@@ -28,8 +32,7 @@ static NSString *myOrderCellid = @"myOrderCellid";
 @property(nonatomic,strong)NSMutableArray<UIButton *> *btnMutableArray;
 @property (nonatomic, strong)NSMutableArray<UIView*> *arrSepViews;
 
-@property(nonatomic,strong)NSMutableArray <ZHMyOrderModel *>* orderModels;
-
+@property(nonatomic,strong)NSMutableArray * orderModels;
 
 @property(nonatomic,strong)UITableView *tableView;
 
@@ -120,6 +123,8 @@ static NSString *myOrderCellid = @"myOrderCellid";
 
 
 
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -145,12 +150,27 @@ static NSString *myOrderCellid = @"myOrderCellid";
     ZHMyOrderModel *model = _orderModels[indexPath.row];
     
     cell.orderModel = model;
+    
+    cell.didClick = ^(){
+      
+        ZHOrderPaymentViewController *orderPaymentVc = [[ZHOrderPaymentViewController alloc]init];
+        orderPaymentVc.payModel = _orderModels[indexPath.row];
+        [self.navigationController pushViewController:orderPaymentVc animated:YES];
+        
+    };
 //
     return cell;
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
 
+    ZHOrderDetailViewController *orderDetailVc = [[ZHOrderDetailViewController alloc]init];
+    orderDetailVc.payModel = _orderModels[indexPath.row];
+    [self.navigationController pushViewController:orderDetailVc animated:YES];
+}
 
 
 - (void)setupUI{
@@ -219,8 +239,7 @@ static NSString *myOrderCellid = @"myOrderCellid";
     for (UIButton *btn in self.btnMutableArray) {
         btn.selected = NO;
     }
-//    [self.btnMutableArray makeObjectsPerformSelector: @selector(setSelected:)
-//                                          withObject: @(NO)];
+
     [self.arrSepViews makeObjectsPerformSelector: @selector(setHidden:) withObject: @(YES)];
     sender.selected = YES;
     [[self.arrSepViews objectAtIndex: sender.tag] setHidden: NO];
@@ -292,17 +311,7 @@ static NSString *myOrderCellid = @"myOrderCellid";
 
     }
     
-//    if(_tempBtn == sender) {
-//        //上次点击过的按钮，不做处理
-//    } else{
-//        //本次点击的按钮设为红色
-//        [sender setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//        
-//
-//        //将上次点击过的按钮设为黑色
-//        [_tempBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    }
-//    _tempBtn = sender;
+
     
 }
 

@@ -115,7 +115,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     [self.view addSubview: self.tableView];
     
     
-    UIView *PlaceHolderView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 44)];
+    UIView *PlaceHolderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
     PlaceHolderView.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:PlaceHolderView];
@@ -395,21 +395,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     return _tagContainer;
 }
 
-//#pragma mark - Test methods
-//- (void)testData {
-//    
-//    _title = @"未选中标签";
-//    NSArray<NSDictionary *> *JSONArray = [self JSONArray];
-//    NSMutableArray<MLTagModel *> *tagModels = [NSMutableArray array];
-//    
-//    NSInteger index=0;
-//    for (NSDictionary *dict in JSONArray) {
-//        [tagModels addObject: [MLTagModel tagModelWithDictionary: dict
-//                                                         atIndex: index]];
-//        index++;
-//    }
-//    self.tagContainer.tagModels = [NSArray arrayWithArray: tagModels];
-//}
+
 
 - (void)LoadFreeAskData {
     
@@ -426,7 +412,6 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
             NSLog(@"%@",error);
         }
         
-//        NSLog(@"response = %@",response);
         
         _title = @"未选中标签";
         NSArray<NSDictionary *> *JSONArray = response[@"data"];
@@ -446,8 +431,6 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     
     
 }
-
-
 
 
 - (void)LoadData {

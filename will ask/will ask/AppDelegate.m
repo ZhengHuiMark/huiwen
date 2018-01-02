@@ -120,6 +120,7 @@
     
     
     _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    
 
     ZHTabBarViewController *tabBarVC = [[ZHTabBarViewController alloc]init];
  

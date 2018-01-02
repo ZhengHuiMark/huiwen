@@ -12,6 +12,7 @@
 #import "Macro.h"
 #import "MLAvatarDisplayView.h"
 #import "ImageTools.h"
+#import "ZHExpertRewardModel.h"
 
 
 @implementation ZHUserInfoRewardContentTableViewCell
@@ -19,6 +20,26 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+}
+
+- (void)setExpertRewardModel:(ZHExpertRewardModel *)expertRewardModel{
+    _expertRewardModel = expertRewardModel;
+    
+    
+    self.userName.text = self.expertRewardModel.questionerNickName;
+    
+    self.content.text = self.expertRewardModel.answerContent;
+    
+    self.clickNumber.text = self.expertRewardModel.praiseNumber;
+    
+    self.learnNumber.text = [NSString stringWithFormat:@"%@人已学习",self.expertRewardModel.learnNumber];
+    
+    self.releaseTime.text = self.expertRewardModel.time;
+    
+    [self.userAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.expertRewardModel.questionerAvatar]]];
+    
+    self.learnBtn.hidden = YES;
+    self.backgroundImg.hidden =YES ;
 }
 
 - (void)setRewardModel:(ZHUserInfoRewardModel *)rewardModel {

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="learnCellid" id="KGk-i7-Jjw" customClass="ZHOrderDetailLearnTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ask" translatesAutoresizingMaskIntoConstraints="NO" id="YUh-Ih-aZp">
+                        <rect key="frame" x="18.5" y="15" width="20" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="22" id="bW3-66-VrB"/>
+                            <constraint firstAttribute="width" constant="20" id="rIT-he-SgF"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCF-ex-ldk">
+                        <rect key="frame" x="18" y="18" width="334.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="STk-9N-Ssm">
+                        <rect key="frame" x="0.0" y="59" width="375" height="1"/>
+                        <color key="backgroundColor" red="0.73725490199999999" green="0.73725490199999999" blue="0.73725490199999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Xnv-bt-kDi"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yjs-ZV-eRq">
+                        <rect key="frame" x="326" y="75" width="31" height="11.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="11.5" id="1Co-M4-qLX"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="YUh-Ih-aZp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="7Yh-cC-mAO"/>
+                    <constraint firstAttribute="bottom" secondItem="Yjs-ZV-eRq" secondAttribute="bottom" constant="13" id="FzO-ek-US8"/>
+                    <constraint firstItem="STk-9N-Ssm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Ifq-ls-Trm"/>
+                    <constraint firstItem="YUh-Ih-aZp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18.5" id="QrO-U6-qvR"/>
+                    <constraint firstAttribute="trailing" secondItem="STk-9N-Ssm" secondAttribute="trailing" id="TpK-XX-4xq"/>
+                    <constraint firstItem="JCF-ex-ldk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17.5" id="dYy-R4-0l7"/>
+                    <constraint firstAttribute="trailing" secondItem="Yjs-ZV-eRq" secondAttribute="trailing" constant="18" id="hn7-my-z9w"/>
+                    <constraint firstItem="STk-9N-Ssm" firstAttribute="top" secondItem="JCF-ex-ldk" secondAttribute="bottom" constant="24" id="jEM-X6-iAH"/>
+                    <constraint firstAttribute="trailing" secondItem="JCF-ex-ldk" secondAttribute="trailing" constant="22.5" id="uKY-UW-QhU"/>
+                    <constraint firstItem="JCF-ex-ldk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="uTj-eH-d4J"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="content" destination="JCF-ex-ldk" id="Hzp-8X-0xO"/>
+                <outlet property="nickName" destination="Yjs-ZV-eRq" id="6dg-rP-XSR"/>
+            </connections>
+            <point key="canvasLocation" x="43.5" y="59"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ask" width="20" height="22"/>
+    </resources>
+</document>

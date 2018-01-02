@@ -18,9 +18,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="46d-pj-zN6">
+                        <rect key="frame" x="147" y="35" width="80" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="cg1-hf-9PA"/>
+                            <constraint firstAttribute="height" constant="80" id="ppw-eV-QOs"/>
+                        </constraints>
+                    </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3s-8Q-zcj">
                         <rect key="frame" x="147" y="35" width="80" height="80"/>
-                        <color key="backgroundColor" red="0.97647058819999999" green="0.49803921569999998" blue="0.035294117649999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="4oA-OM-jI8"/>
                             <constraint firstAttribute="height" constant="80" id="Yhm-M2-dV1"/>
@@ -31,13 +37,15 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="u3s-8Q-zcj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="35" id="AIu-Zw-836"/>
                     <constraint firstItem="u3s-8Q-zcj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="35" id="Pi9-M2-da6"/>
+                    <constraint firstItem="46d-pj-zN6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="35" id="fC7-Lv-mal"/>
+                    <constraint firstItem="46d-pj-zN6" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="xfI-nw-DJH"/>
                     <constraint firstItem="u3s-8Q-zcj" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="yjV-SA-Z3H"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="UserAvatarImg" destination="u3s-8Q-zcj" id="1lc-Xk-a4l"/>
+                <outlet property="userAvatarImageView" destination="46d-pj-zN6" id="F6D-uw-YEF"/>
             </connections>
         </tableViewCell>
     </objects>

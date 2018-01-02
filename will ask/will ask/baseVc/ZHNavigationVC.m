@@ -20,14 +20,14 @@
     //    [self.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
     //    [self.navigationBar setShadowImage:[[UIImage alloc]init]];
     //取消导航栏的穿透效果，不取消，则头部视图的高度是从顶部算起
-    //    self.navigationBar.translucent = NO;
+        self.navigationBar.translucent = NO;
     
     self.view.backgroundColor = [UIColor whiteColor];
     //设置文字的颜色
-    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
     
     
-    [self.navigationBar setTintColor:[UIColor redColor]];
+    [self.navigationBar setTintColor:[UIColor blackColor]];
 
 
 }

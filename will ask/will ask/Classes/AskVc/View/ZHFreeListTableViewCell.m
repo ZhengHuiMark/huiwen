@@ -24,7 +24,7 @@
     _model = model;
     
 //    self.userAvatarImg = model.avatar;
-    [self.userAvatarImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUser,OSS,model.avatar]]];
+    [self.userAvatarImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,model.avatar]]];
     
     self.userNickNameL.text = model.nickname;
     self.expertsTitleL.text = model.certifiedNames;

@@ -23,6 +23,9 @@
 #import "UserInfoModel.h"
 #import "YYModel.h"
 
+#import "ZHExpertServiceViewController.h"
+#import "ZHExpertUserInfoHomePageViewController.h"
+#import "ZHSetupViewController.h"
 
 //头部cell
 static NSString *HeaderCellid = @"HeaderCellid";
@@ -207,10 +210,17 @@ static NSString *MineListCellid = @"MineListCellid";
                 break;
             }
             case 3:{
-                // 测试
-                NSString *className = @"ZHUserHomePageViewController";
-                [self pushToSetControllerWithIndexPath:indexPath className:className];
+//                // 测试
+//                NSString *className = @"ZHUserHomePageViewController";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 
+//                NSString *className = @"ZHExpertUserInfoHomePageViewController";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+//                
+//                    NSString *className = @"ZHExpertServiceViewController";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                NSString *className = @"ZHSetupViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 break;
             }
             case 4:{

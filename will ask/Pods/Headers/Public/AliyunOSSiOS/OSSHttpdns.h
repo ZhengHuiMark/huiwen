@@ -1,1 +1,1 @@
-../../../AliyunOSSiOS/AliyunOSSiOS/OSSHttpdns.h
+../../../AliyunOSSiOS/AliyunOSSSDK/OSSHttpdns.h

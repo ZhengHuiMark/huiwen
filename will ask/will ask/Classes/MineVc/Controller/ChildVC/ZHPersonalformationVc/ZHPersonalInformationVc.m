@@ -17,7 +17,11 @@
 #import "NSDate+BRAdd.h"
 #import "LBViewController+ImagePicker.h"
 
-
+#import "UserManager.h"
+#import "UserModel.h"
+#import "ImageTools.h"
+#import "Macro.h"
+#import "SVProgressHUD.h"
 
 // HeaderCellid
 static NSString *HeaderCellid = @"HeaderCellid";
@@ -87,32 +91,46 @@ static NSString *nameCellid = @"nameCellid";
 
 - (void)clickButton{
     
-    NSString * objectKey = @"2" ;
-    [service asyncPutImage:objectKey localFilePath:uploadFilePath];
-    
-    NSMutableDictionary *dict = [ZHNetworkTools parameters];
-    
-    [dict setObject: objectKey
-             forKey: @"avatar"];
-    [dict setObject: self.EditCell.NameTextF.text
-             forKey: @"nickname"];
-//    [dict setObject: _PasswordT.text
-//             forKey: @"password"];
+    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
 
-    NSString *url = @"http://119.57.140.230:7000/api/ut/user/saveUserInfo";
-
-    [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dict andCallBlock:^(id response, NSError *error) {
-        // 2. 判断错误
-        if (error) {
-            NSLog(@"网络请求异常: %@", error);
-            
-            return;
-        }
-        NSLog(@"%@",response);
-//        [UserManager sharedManager].userModel = [UserModel yy_modelWithJSON:response[@"data"]];
-//        [[UserManager sharedManager]saveUserModel];
+    NSString * objectKey = [NSString stringWithFormat:@"%@%@%f",[UserManager sharedManager].userModel.resourceId,@"avatar",interval];
+    if (uploadFilePath) {
         
-    }];
+        [service asyncPutImage:objectKey localFilePath:uploadFilePath bucketName:bucketNameUser comletion:^(BOOL isSuccess) {
+            
+            if (isSuccess) {
+                NSMutableDictionary *dict = [ZHNetworkTools parameters];
+                
+                [dict setObject: objectKey
+                         forKey: @"avatar"];
+                [dict setObject: self.EditCell.NameTextF.text
+                         forKey: @"nickname"];
+                [dict setObject: self.EditCell.NameTextF.text
+                         forKey: @"duty"];
+                
+                NSString *url = [NSString stringWithFormat:@"%@/api/ut/user/saveUserInfo",kIP];
+                
+                [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dict andCallBlock:^(id response, NSError *error) {
+                    // 2. 判断错误
+                    if (error) {
+                        NSLog(@"网络请求异常: %@", error);
+                        
+                        return;
+                    }
+                    NSLog(@"%@",response);
+                    //        [UserManager sharedManager].userModel = [UserModel yy_modelWithJSON:response[@"data"]];
+                    //        [[UserManager sharedManager]saveUserModel];
+                    
+                }];
+            }
+        }];
+        
+    }else{
+      
+    }
+    
+ 
+   
     
 }
 
@@ -131,23 +149,14 @@ static NSString *nameCellid = @"nameCellid";
     NSLog(@"image width:%f, height:%f", image.size.width, image.size.height);
     [self saveImage:image withName:@"currentImage"];
     
-    [self.PersonalHeadlerCell.UserAvatarImg setImage:image forState:UIControlStateNormal];
-    
+//    [self.PersonalHeadlerCell.userAvatarImageView setImage:image forState:UIControlStateNormal];
+    self.PersonalHeadlerCell.userAvatarImageView.image = image;
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissViewControllerAnimated:YES completion:^{}];
 }
-
-- (void)touch123{
-    
-
-    //    NSString * objectKey = @"1" ;
-    //    [service asyncPutImage:objectKey localFilePath:uploadFilePath];
-    //    
-}
-
 
 
 - (void)configurUI{
@@ -200,7 +209,8 @@ static NSString *nameCellid = @"nameCellid";
     UITableViewCell *cell = nil;
     
     if (indexPath.section == 0) {
-        ZHPersonalHeaderTableViewCell *HeadCell = self.PersonalHeadlerCell =  [tableView dequeueReusableCellWithIdentifier:HeaderCellid forIndexPath:indexPath];    // 不写这句直接崩掉，找不到循环引用的cell
+        ZHPersonalHeaderTableViewCell *HeadCell = self.PersonalHeadlerCell =  [tableView dequeueReusableCellWithIdentifier:HeaderCellid forIndexPath:indexPath];// 不写这句直接崩掉，找不到循环引用的cell
+        
         if (HeadCell == nil) {
             HeadCell = [[ZHPersonalHeaderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HeaderCellid];
         }
@@ -213,7 +223,8 @@ static NSString *nameCellid = @"nameCellid";
             [self selectPhotoWithSuccessBlock:^(UIImagePickerController *imagePickerViewController, NSDictionary<NSString *,id> *info) {
                 UIImage *image = info[UIImagePickerControllerEditedImage];
                 
-                [self.PersonalHeadlerCell.UserAvatarImg setImage:image forState:UIControlStateNormal];
+//                [self.PersonalHeadlerCell.UserAvatarImg setImage:image forState:UIControlStateNormal];
+                self.PersonalHeadlerCell.userAvatarImageView.image = image;
                 
             } cancelBlock:^(UIImagePickerController *imagePickerViewController) {}];
         

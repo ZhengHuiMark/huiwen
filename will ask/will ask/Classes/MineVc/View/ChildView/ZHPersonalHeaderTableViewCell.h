@@ -19,6 +19,8 @@ typedef void(^UserAvatarCellDidClick)(NSIndexPath *indexPath);
 
 @property (nonatomic, copy) UserAvatarCellDidClick AvatarClick;
 
+@property (weak, nonatomic) IBOutlet UIImageView *userAvatarImageView;
+
 @property (nonatomic, strong) UserInfoModel *UserInfoModel;
 
 

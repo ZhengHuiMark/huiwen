@@ -1,1 +1,1 @@
-../../../AliyunOSSiOS/AliyunOSSiOS/OSSModel.h
+../../../AliyunOSSiOS/AliyunOSSSDK/OSSModel.h
