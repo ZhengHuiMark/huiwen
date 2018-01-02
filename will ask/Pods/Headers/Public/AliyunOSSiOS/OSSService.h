@@ -1,1 +1,1 @@
-../../../AliyunOSSiOS/AliyunOSSiOS/OSSService.h
+../../../AliyunOSSiOS/AliyunOSSSDK/OSSService.h

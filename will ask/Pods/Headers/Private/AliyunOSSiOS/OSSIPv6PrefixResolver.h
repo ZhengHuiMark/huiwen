@@ -1,1 +1,1 @@
-../../../AliyunOSSiOS/AliyunOSSiOS/OSSIPv6/OSSIPv6PrefixResolver.h
+../../../AliyunOSSiOS/AliyunOSSSDK/OSSIPv6/OSSIPv6PrefixResolver.h

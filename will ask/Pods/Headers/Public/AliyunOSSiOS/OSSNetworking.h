@@ -1,1 +1,1 @@
-../../../AliyunOSSiOS/AliyunOSSiOS/OSSNetworking.h
+../../../AliyunOSSiOS/AliyunOSSSDK/OSSNetworking.h

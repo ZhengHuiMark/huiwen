@@ -1,1 +1,1 @@
-../../../AliyunOSSiOS/AliyunOSSiOS/OSSXMLDictionary.h
+../../../AliyunOSSiOS/AliyunOSSSDK/OSSXMLDictionary.h

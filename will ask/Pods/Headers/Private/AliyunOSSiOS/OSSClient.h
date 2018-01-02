@@ -1,1 +1,1 @@
-../../../AliyunOSSiOS/AliyunOSSiOS/OSSClient.h
+../../../AliyunOSSiOS/AliyunOSSSDK/OSSClient.h

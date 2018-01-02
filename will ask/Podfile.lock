@@ -14,13 +14,13 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - AliyunOSSiOS (2.6.3)
-  - IQKeyboardManager (5.0.4)
+  - AliyunOSSiOS (2.8.0)
+  - IQKeyboardManager (5.0.7)
   - Masonry (1.1.0)
-  - MJRefresh (3.1.14.1)
-  - SDWebImage (4.1.2):
-    - SDWebImage/Core (= 4.1.2)
-  - SDWebImage/Core (4.1.2)
+  - MJRefresh (3.1.15.1)
+  - SDWebImage (4.2.2):
+    - SDWebImage/Core (= 4.2.2)
+  - SDWebImage/Core (4.2.2)
   - SVProgressHUD (2.2.2)
   - XRCarouselView (2.6.1)
   - YYModel (1.0.4)
@@ -40,16 +40,16 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  AliyunOSSiOS: 98d79abaceed7485ec0e28dd09c5464acf4a67a0
-  IQKeyboardManager: 1df9c0f147af1681cfb2d9977bc30309d45a7e76
+  AliyunOSSiOS: e4668b7b2674da6c0aba1c8c09de7df879817407
+  IQKeyboardManager: 0bfa4607d39924116b5c0c8b55b5d789288b5cba
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  MJRefresh: 238e6a37e2dba12160ee3b79f6d2a2b26abcab42
-  SDWebImage: cb6f9f266a9977741efcbc21e618e8be3734c774
+  MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
+  SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   XRCarouselView: d3f949d1601e7de51604cdabd6e2f35a770e0f99
   YYModel: 2a7fdd96aaa4b86a824e26d0c517de8928c04b30
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: e873e8e46d734b640a258fd89e3d655329b0ac67
+PODFILE CHECKSUM: d4e344bf38706c3556b2e22fb186a93f045ab4fc
 
 COCOAPODS: 1.2.1

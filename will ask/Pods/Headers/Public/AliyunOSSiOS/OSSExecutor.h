@@ -1,1 +1,1 @@
-../../../AliyunOSSiOS/AliyunOSSiOS/OSSTask/OSSExecutor.h
+../../../AliyunOSSiOS/AliyunOSSSDK/OSSTask/OSSExecutor.h
