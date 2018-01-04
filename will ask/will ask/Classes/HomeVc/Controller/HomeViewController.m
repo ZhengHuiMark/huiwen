@@ -54,16 +54,16 @@
 //
 //}
 
-////// 测试用 跳转登录页
-//- (void)actionModal{
-//    
-//    ZHLoginViewController *loginVc = [[ZHLoginViewController alloc]init];
-//    
-//    [self.navigationController pushViewController:loginVc animated:YES];
-//    
-//    
-//    
-//}
+//// 测试用 跳转登录页
+- (void)actionModal{
+    
+    ZHLoginViewController *loginVc = [[ZHLoginViewController alloc]init];
+    
+    [self.navigationController pushViewController:loginVc animated:YES];
+    
+    
+    
+}
 //
 //- (void)saveImage:(UIImage *)currentImage withName:(NSString *)imageName {
 //    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
@@ -137,26 +137,26 @@
 
 - (void)configUI{
 
-//    UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [editorBtn addTarget:self action:@selector(toMessage) forControlEvents:UIControlEventTouchUpInside];
-//    [editorBtn setImage:[UIImage imageNamed:@"news"] forState:UIControlStateNormal];
-//    [editorBtn sizeToFit];
-//    UIBarButtonItem *editBtnItem = [[UIBarButtonItem alloc] initWithCustomView:editorBtn];
-//    self.navigationItem.rightBarButtonItem = editBtnItem;
-//    
-//    UIButton *button  = [[UIButton alloc]initWithFrame:CGRectMake(100, 100, 100, 100)];
-//    
-//    button.backgroundColor = [UIColor redColor];
-//    [button addTarget:self action:@selector(actionModal) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [self.view addSubview:button];
-//    
-//    UIButton *button1  = [[UIButton alloc]initWithFrame:CGRectMake(200, 200, 100, 100)];
-//    
-//    button1.backgroundColor = [UIColor blueColor];
-//    [button1 addTarget:self action:@selector(touch123456) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [self.view addSubview:button1];
+    UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [editorBtn addTarget:self action:@selector(toMessage) forControlEvents:UIControlEventTouchUpInside];
+    [editorBtn setImage:[UIImage imageNamed:@"news"] forState:UIControlStateNormal];
+    [editorBtn sizeToFit];
+    UIBarButtonItem *editBtnItem = [[UIBarButtonItem alloc] initWithCustomView:editorBtn];
+    self.navigationItem.rightBarButtonItem = editBtnItem;
+    
+    UIButton *button  = [[UIButton alloc]initWithFrame:CGRectMake(100, 100, 100, 100)];
+    
+    button.backgroundColor = [UIColor redColor];
+    [button addTarget:self action:@selector(actionModal) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:button];
+    
+    UIButton *button1  = [[UIButton alloc]initWithFrame:CGRectMake(200, 200, 100, 100)];
+    
+    button1.backgroundColor = [UIColor blueColor];
+    [button1 addTarget:self action:@selector(touch123456) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:button1];
 
 }
 

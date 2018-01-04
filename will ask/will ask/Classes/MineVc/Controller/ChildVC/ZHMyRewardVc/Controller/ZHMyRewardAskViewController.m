@@ -19,6 +19,7 @@
 #import "ZHMyRewardListTableViewCell.h"
 #import "ZHMyRewardRightListTableViewCell.h"
 #import "ZHMyRewardListModel.h"
+#import "ZHToLearnViewController.h"
 
 static NSString *MyRewardListCellid = @"MyRewardListCellid";
 
@@ -162,7 +163,7 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
     
     [self.view addSubview: [UIView new]];
     
-    self.leftTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 70 + 64, [UIScreen mainScreen].bounds.size.width, self.view.frame.size.height - 70 - 64) style:UITableViewStylePlain];
+    self.leftTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,  64, [UIScreen mainScreen].bounds.size.width, self.view.frame.size.height - 70 - 64) style:UITableViewStylePlain];
     self.leftTableView.delegate = self;
     self.leftTableView.dataSource = self;
     self.leftTableView.estimatedRowHeight = 44.0f;
@@ -173,7 +174,7 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
     
     [self.view addSubview:self.leftTableView];
     
-    self.rightTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 70 + 64, [UIScreen mainScreen].bounds.size.width,self.view.frame.size.height - 70 - 64) style:UITableViewStylePlain];
+    self.rightTableView = [[UITableView alloc]initWithFrame:CGRectMake(0,  64, [UIScreen mainScreen].bounds.size.width,self.view.frame.size.height - 70 - 64) style:UITableViewStylePlain];
     self.rightTableView.delegate = self;
     self.rightTableView.dataSource = self;
     self.rightTableView.estimatedRowHeight = 44.0f;
@@ -195,7 +196,7 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
 - (void)setupUI{
     
     
-    UIView *backGroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, 60)];
+    UIView *backGroundView = [[UIView alloc]initWithFrame:CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, 60)];
     
     backGroundView.backgroundColor = [UIColor whiteColor];
     
@@ -252,7 +253,7 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
         if (indexPath.section == 0) {
             return self.tagContainer.cellHeight;
         }
-        return 211;
+        return 220;
     }
     
     if (tableView == self.rightTableView) {
@@ -391,8 +392,13 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
         
         ZHMyRewardListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyRewardListCellid forIndexPath:indexPath];
 
-    
-
+        cell.didClick = ^(){
+          
+            ZHToLearnViewController *learnVc = [[ZHToLearnViewController alloc]init];
+            learnVc.rewardAskId = model.rewardAskId;
+            [self.navigationController pushViewController:learnVc animated:YES];
+        };
+        
         cell.listModel = model;
         
         return cell;

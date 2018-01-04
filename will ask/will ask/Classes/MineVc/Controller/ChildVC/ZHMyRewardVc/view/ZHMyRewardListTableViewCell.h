@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 @class ZHMyRewardListModel;
+
+typedef void(^btnDidClick)();
+
 @interface ZHMyRewardListTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *userAvatar;
 
@@ -28,5 +31,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *learnNum;
 
 @property (weak, nonatomic) ZHMyRewardListModel *listModel;
+
+
+@property (nonatomic,copy)btnDidClick didClick;
 
 @end

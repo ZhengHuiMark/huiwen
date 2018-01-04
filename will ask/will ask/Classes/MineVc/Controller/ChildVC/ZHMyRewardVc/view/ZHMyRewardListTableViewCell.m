@@ -44,5 +44,11 @@
 
     
 }
+- (IBAction)BtnAction:(UIButton *)sender {
+    
+    
+    !self.didClick?:self.didClick();
+
+}
 
 @end

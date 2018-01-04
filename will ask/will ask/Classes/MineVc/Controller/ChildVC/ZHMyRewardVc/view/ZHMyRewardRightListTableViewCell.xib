@@ -96,7 +96,6 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dj4-cn-VMS">
                         <rect key="frame" x="0.0" y="177" width="375" height="53.5"/>
-                        <state key="normal" title="Button"/>
                     </button>
                 </subviews>
                 <constraints>
