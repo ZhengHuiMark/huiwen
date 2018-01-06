@@ -172,6 +172,16 @@
 		4435A6CB1F8B166D00C1744E /* ZHValidationCertificateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4435A6C91F8B166D00C1744E /* ZHValidationCertificateCell.xib */; };
 		4445F7E12000FD680027EB1B /* businessCellViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4445F7DE2000FD680027EB1B /* businessCellViewCell.m */; };
 		4445F7E22000FD680027EB1B /* ButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4445F7E02000FD680027EB1B /* ButtonView.m */; };
+		4445F7FF200103D50027EB1B /* alertString.m in Sources */ = {isa = PBXBuildFile; fileRef = 4445F7E5200103D50027EB1B /* alertString.m */; };
+		4445F800200103D50027EB1B /* ICChatBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 4445F7E7200103D50027EB1B /* ICChatBox.m */; };
+		4445F801200103D50027EB1B /* ICFileTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4445F7E9200103D50027EB1B /* ICFileTool.m */; };
+		4445F802200103D50027EB1B /* ICRecordManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4445F7EB200103D50027EB1B /* ICRecordManager.m */; };
+		4445F803200103D50027EB1B /* ICVoiceHud.m in Sources */ = {isa = PBXBuildFile; fileRef = 4445F7ED200103D50027EB1B /* ICVoiceHud.m */; };
+		4445F804200103D50027EB1B /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4445F7F1200103D50027EB1B /* amrFileCodec.mm */; };
+		4445F805200103D50027EB1B /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4445F7F3200103D50027EB1B /* libopencore-amrnb.a */; };
+		4445F806200103D50027EB1B /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4445F7F4200103D50027EB1B /* libopencore-amrwb.a */; };
+		4445F807200103D50027EB1B /* VoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4445F7FC200103D50027EB1B /* VoiceConverter.mm */; };
+		4445F808200103D50027EB1B /* yuyinView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4445F7FE200103D50027EB1B /* yuyinView.m */; };
 		444D49511FF0D94700D82736 /* ZHUserInfoFreeListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D49501FF0D94700D82736 /* ZHUserInfoFreeListViewController.m */; };
 		444D49541FF0D95C00D82736 /* ZHMoerFreeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D49531FF0D95C00D82736 /* ZHMoerFreeListModel.m */; };
 		444D495B1FF0D99600D82736 /* ZHMoreFreeListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 444D49591FF0D99600D82736 /* ZHMoreFreeListTableViewCell.m */; };
@@ -643,6 +653,28 @@
 		4445F7DE2000FD680027EB1B /* businessCellViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = businessCellViewCell.m; sourceTree = "<group>"; };
 		4445F7DF2000FD680027EB1B /* ButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ButtonView.h; sourceTree = "<group>"; };
 		4445F7E02000FD680027EB1B /* ButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ButtonView.m; sourceTree = "<group>"; };
+		4445F7E4200103D50027EB1B /* alertString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = alertString.h; sourceTree = "<group>"; };
+		4445F7E5200103D50027EB1B /* alertString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = alertString.m; sourceTree = "<group>"; };
+		4445F7E6200103D50027EB1B /* ICChatBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICChatBox.h; sourceTree = "<group>"; };
+		4445F7E7200103D50027EB1B /* ICChatBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICChatBox.m; sourceTree = "<group>"; };
+		4445F7E8200103D50027EB1B /* ICFileTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICFileTool.h; sourceTree = "<group>"; };
+		4445F7E9200103D50027EB1B /* ICFileTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICFileTool.m; sourceTree = "<group>"; };
+		4445F7EA200103D50027EB1B /* ICRecordManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICRecordManager.h; sourceTree = "<group>"; };
+		4445F7EB200103D50027EB1B /* ICRecordManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICRecordManager.m; sourceTree = "<group>"; };
+		4445F7EC200103D50027EB1B /* ICVoiceHud.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICVoiceHud.h; sourceTree = "<group>"; };
+		4445F7ED200103D50027EB1B /* ICVoiceHud.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ICVoiceHud.m; sourceTree = "<group>"; };
+		4445F7F0200103D50027EB1B /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
+		4445F7F1200103D50027EB1B /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
+		4445F7F3200103D50027EB1B /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
+		4445F7F4200103D50027EB1B /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
+		4445F7F6200103D50027EB1B /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
+		4445F7F7200103D50027EB1B /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
+		4445F7F9200103D50027EB1B /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
+		4445F7FA200103D50027EB1B /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
+		4445F7FB200103D50027EB1B /* VoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VoiceConverter.h; sourceTree = "<group>"; };
+		4445F7FC200103D50027EB1B /* VoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VoiceConverter.mm; sourceTree = "<group>"; };
+		4445F7FD200103D50027EB1B /* yuyinView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = yuyinView.h; sourceTree = "<group>"; };
+		4445F7FE200103D50027EB1B /* yuyinView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = yuyinView.m; sourceTree = "<group>"; };
 		444D494F1FF0D94700D82736 /* ZHUserInfoFreeListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHUserInfoFreeListViewController.h; sourceTree = "<group>"; };
 		444D49501FF0D94700D82736 /* ZHUserInfoFreeListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHUserInfoFreeListViewController.m; sourceTree = "<group>"; };
 		444D49521FF0D95C00D82736 /* ZHMoerFreeListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHMoerFreeListModel.h; sourceTree = "<group>"; };
@@ -995,8 +1027,10 @@
 				4410188C1F4EAEE500EBA751 /* libsqlite3.tbd in Frameworks */,
 				4410188A1F4EAED000EBA751 /* JavaScriptCore.framework in Frameworks */,
 				441018861F4EADC700EBA751 /* MOBFoundation.framework in Frameworks */,
+				4445F806200103D50027EB1B /* libopencore-amrwb.a in Frameworks */,
 				4410187B1F4EADC700EBA751 /* ShareSDKUI.framework in Frameworks */,
 				4410187F1F4EADC700EBA751 /* TencentOpenAPI.framework in Frameworks */,
+				4445F805200103D50027EB1B /* libopencore-amrnb.a in Frameworks */,
 				351E85DE158DC14ABBBF687A /* libPods-will ask.a in Frameworks */,
 				4410187C1F4EADC700EBA751 /* QQConnector.framework in Frameworks */,
 				441018791F4EADC700EBA751 /* ShareSDKExtension.framework in Frameworks */,
@@ -2101,6 +2135,75 @@
 			path = businessCell;
 			sourceTree = "<group>";
 		};
+		4445F7E3200103D50027EB1B /* voiceBtn */ = {
+			isa = PBXGroup;
+			children = (
+				4445F7E4200103D50027EB1B /* alertString.h */,
+				4445F7E5200103D50027EB1B /* alertString.m */,
+				4445F7E6200103D50027EB1B /* ICChatBox.h */,
+				4445F7E7200103D50027EB1B /* ICChatBox.m */,
+				4445F7E8200103D50027EB1B /* ICFileTool.h */,
+				4445F7E9200103D50027EB1B /* ICFileTool.m */,
+				4445F7EA200103D50027EB1B /* ICRecordManager.h */,
+				4445F7EB200103D50027EB1B /* ICRecordManager.m */,
+				4445F7EC200103D50027EB1B /* ICVoiceHud.h */,
+				4445F7ED200103D50027EB1B /* ICVoiceHud.m */,
+				4445F7EE200103D50027EB1B /* VoiceConvert */,
+				4445F7FD200103D50027EB1B /* yuyinView.h */,
+				4445F7FE200103D50027EB1B /* yuyinView.m */,
+			);
+			path = voiceBtn;
+			sourceTree = "<group>";
+		};
+		4445F7EE200103D50027EB1B /* VoiceConvert */ = {
+			isa = PBXGroup;
+			children = (
+				4445F7EF200103D50027EB1B /* amrwapper */,
+				4445F7F2200103D50027EB1B /* lib */,
+				4445F7F5200103D50027EB1B /* opencore-amrnb */,
+				4445F7F8200103D50027EB1B /* opencore-amrwb */,
+				4445F7FB200103D50027EB1B /* VoiceConverter.h */,
+				4445F7FC200103D50027EB1B /* VoiceConverter.mm */,
+			);
+			path = VoiceConvert;
+			sourceTree = "<group>";
+		};
+		4445F7EF200103D50027EB1B /* amrwapper */ = {
+			isa = PBXGroup;
+			children = (
+				4445F7F0200103D50027EB1B /* amrFileCodec.h */,
+				4445F7F1200103D50027EB1B /* amrFileCodec.mm */,
+			);
+			path = amrwapper;
+			sourceTree = "<group>";
+		};
+		4445F7F2200103D50027EB1B /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				4445F7F3200103D50027EB1B /* libopencore-amrnb.a */,
+				4445F7F4200103D50027EB1B /* libopencore-amrwb.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		4445F7F5200103D50027EB1B /* opencore-amrnb */ = {
+			isa = PBXGroup;
+			children = (
+				4445F7F6200103D50027EB1B /* interf_dec.h */,
+				4445F7F7200103D50027EB1B /* interf_enc.h */,
+			);
+			path = "opencore-amrnb";
+			sourceTree = "<group>";
+		};
+		4445F7F8200103D50027EB1B /* opencore-amrwb */ = {
+			isa = PBXGroup;
+			children = (
+				4445F7F9200103D50027EB1B /* dec_if.h */,
+				4445F7FA200103D50027EB1B /* if_rom.h */,
+			);
+			path = "opencore-amrwb";
+			sourceTree = "<group>";
+		};
 		444D494C1FF0D93600D82736 /* controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -2871,6 +2974,7 @@
 		449956B01F6275160087503B /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				4445F7E3200103D50027EB1B /* voiceBtn */,
 				44C9521B1FC420AD002B5509 /* MLAvatarDisplayView */,
 				44827BDB1FA01FA80097F1E7 /* TextFiled */,
 				44827BB71F9DBB6B0097F1E7 /* BRPickerView */,
@@ -3422,6 +3526,7 @@
 				4407708C1FDFDBDE0000C20E /* ZHRecordListTableViewCell.m in Sources */,
 				44BB65EB1FCD4A4E003C3A6E /* ZHCaseListsModel.m in Sources */,
 				448DC9A71FFB572F004F4F2A /* ZHContactViewController.m in Sources */,
+				4445F802200103D50027EB1B /* ICRecordManager.m in Sources */,
 				449956B71F6275160087503B /* EncryptionAndDecryption.m in Sources */,
 				448DC9BE1FFDC638004F4F2A /* ZHToLearnModel.m in Sources */,
 				44C7ACAD1FB3F88900F42616 /* ZHCaseModel.m in Sources */,
@@ -3507,6 +3612,7 @@
 				444D4A061FF351D600D82736 /* ZHOrderDetailRewardModel.m in Sources */,
 				44827B6F1F98A9B00097F1E7 /* ZHFreeAnswerModel.m in Sources */,
 				4445F7E22000FD680027EB1B /* ButtonView.m in Sources */,
+				4445F803200103D50027EB1B /* ICVoiceHud.m in Sources */,
 				440771431FE8EAEE0000C20E /* ZHUserInfoRewardModel.m in Sources */,
 				44CB43DB1FC8168E0045F80E /* ZHButton.m in Sources */,
 				44827BD01F9DBB6B0097F1E7 /* BRAddressPickerView.m in Sources */,
@@ -3545,6 +3651,7 @@
 				447674D81F8F6031007162AC /* ZHAskTextViewTableViewCell.m in Sources */,
 				442C03371F6B6FC70078CDC7 /* MineModel.m in Sources */,
 				4407713C1FE8E6B40000C20E /* ZHUserInfoNoModelTableViewCell.m in Sources */,
+				4445F807200103D50027EB1B /* VoiceConverter.mm in Sources */,
 				444D4A0C1FF376F000D82736 /* ZHOrderDetailVipCardModel.m in Sources */,
 				440770441FD8E21D0000C20E /* ZHMyFreeAskTableViewCell.m in Sources */,
 				440770531FD930730000C20E /* ZHMyRewardListTableViewCell.m in Sources */,
@@ -3561,6 +3668,7 @@
 				44C7AC861FAAF22500F42616 /* XLCircle.m in Sources */,
 				44827B611F989CF20097F1E7 /* FreeDetailViewController.m in Sources */,
 				44C952091FB97AC4002B5509 /* ZHChooseTypeViewController.m in Sources */,
+				4445F801200103D50027EB1B /* ICFileTool.m in Sources */,
 				440770671FDE53950000C20E /* ZHMyConsultingListTableViewCell.m in Sources */,
 				440770631FDE52DE0000C20E /* ZHMyConsultingViewController.m in Sources */,
 				44827C0B1FAAB9350097F1E7 /* MLTagButton.m in Sources */,
@@ -3595,6 +3703,7 @@
 				440770C71FE37A240000C20E /* ZHMyConsultDetailViewController.m in Sources */,
 				44827C181FAAC5C20097F1E7 /* ZHRewardAnswerVoiceTableViewCell.m in Sources */,
 				444D4A101FF37A1E00D82736 /* ZHOrderDetailVipCardTableViewCell.m in Sources */,
+				4445F808200103D50027EB1B /* yuyinView.m in Sources */,
 				44827BD41F9DBB6B0097F1E7 /* BRStringPickerView.m in Sources */,
 				44827C1D1FAAC5DC0097F1E7 /* ZHRewardAnswerTableViewCell.m in Sources */,
 				44C12D6E1F6A65D400E48FED /* ZHHeaderTableViewCell.m in Sources */,
@@ -3621,6 +3730,8 @@
 				440771151FE7CFBF0000C20E /* ZHMyFocusModel.m in Sources */,
 				440770901FDFDC820000C20E /* ZHRecordListModel.m in Sources */,
 				4407707B1FDE86DE0000C20E /* ZHVipCardDetailTableViewCell.m in Sources */,
+				4445F800200103D50027EB1B /* ICChatBox.m in Sources */,
+				4445F804200103D50027EB1B /* amrFileCodec.mm in Sources */,
 				449957101F67787A0087503B /* UserManager.m in Sources */,
 				44BB65F21FCFE9A2003C3A6E /* ZHLIstsModel.m in Sources */,
 				440770121FD24E490000C20E /* ReviewModel.m in Sources */,
@@ -3629,6 +3740,7 @@
 				44C9521E1FC420AD002B5509 /* MLAvatarDisplayView.m in Sources */,
 				440770761FDE86CA0000C20E /* ZHMyCardNumberTableViewCell.m in Sources */,
 				442289351F4BD4E50084EB83 /* HomeViewController.m in Sources */,
+				4445F7FF200103D50027EB1B /* alertString.m in Sources */,
 				442C03911F6FC0DE0078CDC7 /* LBViewController+ImagePicker.m in Sources */,
 				44C7ACA61FB2E45F00F42616 /* ZHIntroductionTableViewCell.m in Sources */,
 				448DC9CC1FFDFBB7004F4F2A /* ZHWithdrawalRecordTableViewCell.m in Sources */,
@@ -3788,6 +3900,9 @@
 					"$(PROJECT_DIR)/will\\ ask/ShareSDK/Support/PlatformSDK/WeChatSDK",
 					"$(PROJECT_DIR)/will\\ ask/baseVc/voiceBtn/VoiceConvert/lib",
 					"$(PROJECT_DIR)/will\\ ask/baseVc/voiceBtn/VoiceConvert/lib",
+					"$(PROJECT_DIR)/will\\ ask/Tools/voiceBtn/VoiceConvert/lib",
+					"$(PROJECT_DIR)/will\\ ask/Tools/voiceBtn/VoiceConvert/lib",
+					"$(PROJECT_DIR)/will\\ ask/Tools/voiceBtn/VoiceConvert/lib/libopencore-amrwb.a",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				OTHER_LDFLAGS = (
@@ -3832,6 +3947,9 @@
 					"$(PROJECT_DIR)/will\\ ask/ShareSDK/Support/PlatformSDK/WeChatSDK",
 					"$(PROJECT_DIR)/will\\ ask/baseVc/voiceBtn/VoiceConvert/lib",
 					"$(PROJECT_DIR)/will\\ ask/baseVc/voiceBtn/VoiceConvert/lib",
+					"$(PROJECT_DIR)/will\\ ask/Tools/voiceBtn/VoiceConvert/lib",
+					"$(PROJECT_DIR)/will\\ ask/Tools/voiceBtn/VoiceConvert/lib",
+					"$(PROJECT_DIR)/will\\ ask/Tools/voiceBtn/VoiceConvert/lib/libopencore-amrwb.a",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				OTHER_LDFLAGS = (
