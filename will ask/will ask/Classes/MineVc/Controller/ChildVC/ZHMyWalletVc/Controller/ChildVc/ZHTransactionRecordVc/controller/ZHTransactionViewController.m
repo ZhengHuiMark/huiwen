@@ -62,7 +62,7 @@ static NSString *transCellid = @"transCellid";
 
 - (void)setupUI{
     
-    UIView *backGroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, 60)];
+    UIView *backGroundView = [[UIView alloc]initWithFrame:CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, 60)];
     
     backGroundView.backgroundColor = [UIColor whiteColor];
     

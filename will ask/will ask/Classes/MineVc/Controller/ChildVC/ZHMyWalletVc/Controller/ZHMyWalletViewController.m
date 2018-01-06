@@ -14,6 +14,7 @@
 #import "ZHWalletModel.h"
 #import "YYModel.h"
 #import "ZHTransactionViewController.h"
+#import "ZHWithdrawalViewController.h"
 
 static NSString *WalletCellid = @"WalletCellid";
 
@@ -134,9 +135,10 @@ static NSString *WalletListCellid = @"WalletListCellid";
             }
                 break;
             case 2:{
+                ZHWithdrawalViewController *withDrawalVc = [[ZHWithdrawalViewController alloc]init];
                 
+                [self.navigationController pushViewController:withDrawalVc animated:YES];
            
-                
             }
                 break;
                 

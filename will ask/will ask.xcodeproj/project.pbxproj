@@ -296,6 +296,10 @@
 		448DC9BE1FFDC638004F4F2A /* ZHToLearnModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 448DC9BD1FFDC638004F4F2A /* ZHToLearnModel.m */; };
 		448DC9C11FFDC828004F4F2A /* ZHTotalIncomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 448DC9C01FFDC828004F4F2A /* ZHTotalIncomeModel.m */; };
 		448DC9C41FFDCB11004F4F2A /* ZHToLearnViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 448DC9C31FFDCB11004F4F2A /* ZHToLearnViewController.m */; };
+		448DC9CC1FFDFBB7004F4F2A /* ZHWithdrawalRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 448DC9CA1FFDFBB7004F4F2A /* ZHWithdrawalRecordTableViewCell.m */; };
+		448DC9CD1FFDFBB7004F4F2A /* ZHWithdrawalRecordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 448DC9CB1FFDFBB7004F4F2A /* ZHWithdrawalRecordTableViewCell.xib */; };
+		448DC9D01FFE07F7004F4F2A /* ZHWithdrawalModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 448DC9CF1FFE07F7004F4F2A /* ZHWithdrawalModel.m */; };
+		448DC9D31FFE0B1F004F4F2A /* ZHWithdrawalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 448DC9D21FFE0B1F004F4F2A /* ZHWithdrawalViewController.m */; };
 		449956A91F5E45200087503B /* ZHLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 449956A81F5E45200087503B /* ZHLoginViewController.m */; };
 		449956AF1F6128D80087503B /* ZHRegisteredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 449956AE1F6128D80087503B /* ZHRegisteredViewController.m */; };
 		449956B61F6275160087503B /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 449956B31F6275160087503B /* Base64.m */; };
@@ -846,6 +850,13 @@
 		448DC9C01FFDC828004F4F2A /* ZHTotalIncomeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHTotalIncomeModel.m; sourceTree = "<group>"; };
 		448DC9C21FFDCB11004F4F2A /* ZHToLearnViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHToLearnViewController.h; sourceTree = "<group>"; };
 		448DC9C31FFDCB11004F4F2A /* ZHToLearnViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHToLearnViewController.m; sourceTree = "<group>"; };
+		448DC9C91FFDFBB7004F4F2A /* ZHWithdrawalRecordTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHWithdrawalRecordTableViewCell.h; sourceTree = "<group>"; };
+		448DC9CA1FFDFBB7004F4F2A /* ZHWithdrawalRecordTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHWithdrawalRecordTableViewCell.m; sourceTree = "<group>"; };
+		448DC9CB1FFDFBB7004F4F2A /* ZHWithdrawalRecordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHWithdrawalRecordTableViewCell.xib; sourceTree = "<group>"; };
+		448DC9CE1FFE07F7004F4F2A /* ZHWithdrawalModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHWithdrawalModel.h; sourceTree = "<group>"; };
+		448DC9CF1FFE07F7004F4F2A /* ZHWithdrawalModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHWithdrawalModel.m; sourceTree = "<group>"; };
+		448DC9D11FFE0B1F004F4F2A /* ZHWithdrawalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHWithdrawalViewController.h; sourceTree = "<group>"; };
+		448DC9D21FFE0B1F004F4F2A /* ZHWithdrawalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHWithdrawalViewController.m; sourceTree = "<group>"; };
 		449956A71F5E45200087503B /* ZHLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHLoginViewController.h; sourceTree = "<group>"; };
 		449956A81F5E45200087503B /* ZHLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHLoginViewController.m; sourceTree = "<group>"; wrapsLines = 0; };
 		449956AD1F6128D80087503B /* ZHRegisteredViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHRegisteredViewController.h; sourceTree = "<group>"; };
@@ -1050,6 +1061,7 @@
 		440770131FD52B2E0000C20E /* ChildVc */ = {
 			isa = PBXGroup;
 			children = (
+				448DC9C51FFDFB94004F4F2A /* ZHWithdrawalRecord */,
 				440770141FD52B2E0000C20E /* ZHTransactionRecordVc */,
 			);
 			path = ChildVc;
@@ -2777,6 +2789,44 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		448DC9C51FFDFB94004F4F2A /* ZHWithdrawalRecord */ = {
+			isa = PBXGroup;
+			children = (
+				448DC9C61FFDFB94004F4F2A /* controller */,
+				448DC9C71FFDFB94004F4F2A /* model */,
+				448DC9C81FFDFB94004F4F2A /* view */,
+			);
+			path = ZHWithdrawalRecord;
+			sourceTree = "<group>";
+		};
+		448DC9C61FFDFB94004F4F2A /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				448DC9D11FFE0B1F004F4F2A /* ZHWithdrawalViewController.h */,
+				448DC9D21FFE0B1F004F4F2A /* ZHWithdrawalViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		448DC9C71FFDFB94004F4F2A /* model */ = {
+			isa = PBXGroup;
+			children = (
+				448DC9CE1FFE07F7004F4F2A /* ZHWithdrawalModel.h */,
+				448DC9CF1FFE07F7004F4F2A /* ZHWithdrawalModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		448DC9C81FFDFB94004F4F2A /* view */ = {
+			isa = PBXGroup;
+			children = (
+				448DC9C91FFDFBB7004F4F2A /* ZHWithdrawalRecordTableViewCell.h */,
+				448DC9CA1FFDFBB7004F4F2A /* ZHWithdrawalRecordTableViewCell.m */,
+				448DC9CB1FFDFBB7004F4F2A /* ZHWithdrawalRecordTableViewCell.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		449956A61F5E3D4D0087503B /* ZHLoginVc */ = {
 			isa = PBXGroup;
 			children = (
@@ -3195,6 +3245,7 @@
 				442C03A61F735E300078CDC7 /* ZHEditTableViewCell.xib in Resources */,
 				444D49E81FF3505D00D82736 /* ZHOrderDetailPayTableViewCell.xib in Resources */,
 				44BB66291FD100F1003C3A6E /* ZHMyWalletTableViewCell.xib in Resources */,
+				448DC9CD1FFDFBB7004F4F2A /* ZHWithdrawalRecordTableViewCell.xib in Resources */,
 				444D49A21FF22CAF00D82736 /* ZHNormalUserTableViewCell.xib in Resources */,
 				442C03D51F7553A70078CDC7 /* Property List.plist in Resources */,
 				444D498C1FF12A2A00D82736 /* ZHExpertServicePriceTableViewCell.xib in Resources */,
@@ -3415,6 +3466,7 @@
 				440770F71FE792C50000C20E /* ZHMyConsultVc.m in Sources */,
 				44C952061FB97AA9002B5509 /* ZHChooseTypeTableViewCell.m in Sources */,
 				44827BD31F9DBB6B0097F1E7 /* BRDatePickerView.m in Sources */,
+				448DC9D01FFE07F7004F4F2A /* ZHWithdrawalModel.m in Sources */,
 				440771281FE8B6C70000C20E /* ZHUserInfoFreeAskTableViewCell.m in Sources */,
 				4411EF491F79FE26003AAF1C /* ZHLatestPriceTableViewCell.m in Sources */,
 				440771461FE8EB010000C20E /* ZHUserInfoModel.m in Sources */,
@@ -3443,6 +3495,7 @@
 				444D495B1FF0D99600D82736 /* ZHMoreFreeListTableViewCell.m in Sources */,
 				442289211F4BCE070084EB83 /* ZHNavigationVC.m in Sources */,
 				44C7ACA11FB2A1A000F42616 /* ZHCaseBreakDownTableViewCell.m in Sources */,
+				448DC9D31FFE0B1F004F4F2A /* ZHWithdrawalViewController.m in Sources */,
 				449957091F6777790087503B /* ZHNetworkTools.m in Sources */,
 				444D49541FF0D95C00D82736 /* ZHMoerFreeListModel.m in Sources */,
 				444D496A1FF0E77F00D82736 /* ZHExpertUserInfoModel.m in Sources */,
@@ -3546,6 +3599,7 @@
 				442289351F4BD4E50084EB83 /* HomeViewController.m in Sources */,
 				442C03911F6FC0DE0078CDC7 /* LBViewController+ImagePicker.m in Sources */,
 				44C7ACA61FB2E45F00F42616 /* ZHIntroductionTableViewCell.m in Sources */,
+				448DC9CC1FFDFBB7004F4F2A /* ZHWithdrawalRecordTableViewCell.m in Sources */,
 				44827BD91F9DBD090097F1E7 /* NSDate+BRAdd.m in Sources */,
 				444D49771FF1078700D82736 /* ZHExpertUserInfoCaseTableViewCell.m in Sources */,
 				440771581FE929A00000C20E /* ZHMoreRewardListTableViewCell.m in Sources */,
