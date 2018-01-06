@@ -34,13 +34,14 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 @interface AskViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property(nonatomic,strong)ZHBtnModel *model;
+@property (nonatomic, strong)ZHBtnModel *model;
 @property (nonatomic, strong) NSMutableArray<ZHBtn *> *tagButtons;
 
-@property(nonatomic,strong)NSMutableArray<ZHAskModel *>* Freemodels;
+@property (nonatomic, strong)NSMutableArray<ZHAskModel *>* Freemodels;
 
 
 @property (nonatomic, strong) ZHBtnContainer *tagContainer;
+
 
 
 

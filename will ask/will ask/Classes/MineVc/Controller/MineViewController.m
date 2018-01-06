@@ -214,13 +214,13 @@ static NSString *MineListCellid = @"MineListCellid";
 //                NSString *className = @"ZHUserHomePageViewController";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 
-//                NSString *className = @"ZHExpertUserInfoHomePageViewController";
-//                [self pushToSetControllerWithIndexPath:indexPath className:className];
-//                
+                NSString *className = @"ZHExpertUserInfoHomePageViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
+//
 //                    NSString *className = @"ZHExpertServiceViewController";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
-                NSString *className = @"ZHSetupViewController";
-                [self pushToSetControllerWithIndexPath:indexPath className:className];
+//                NSString *className = @"ZHSetupViewController";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 break;
             }
             case 4:{

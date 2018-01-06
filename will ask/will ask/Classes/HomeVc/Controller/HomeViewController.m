@@ -13,6 +13,13 @@
 #import "LBViewController+ImagePicker.h"
 #import "ImageModel.h"
 
+#import "ZHBtn.h"
+#import "ZHBtnModel.h"
+#import "ZHBtnContainer.h"
+#import "Macro.h"
+#import "ZHNetworkTools.h"
+#import "YYModel.h"
+#import "MJRefresh.h"
 #import "ZHRewardCellTableViewCell.h"
 #import "ZHSpecialExpertTableViewCell.h"
 #import "ZHJumpFourTableViewCell.h"
@@ -21,9 +28,16 @@
 {
     OssService * service;
     NSString * uploadFilePath;
-
 }
 @property(nonatomic,strong)NSData *imageData;
+
+@property(nonatomic,strong)ZHBtnContainer *tagContainer;
+
+@property(nonatomic,strong)NSMutableArray <ZHBtn *> *tagButtons;
+
+@property(nonatomic,strong)ZHBtnModel *model;
+
+@property(nonatomic,strong)UITableView *tableView;
 
 
 @end
@@ -33,14 +47,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.view.backgroundColor = [UIColor redColor];
+    [self.view addSubview:self.tableView];
     [self configUI];
 //    NSString * const endPoint = @"http://oss-cn-qingdao.aliyuncs.com";
 //    NSString * const callbackAddress = @"http://oss-demo.aliyuncs.com:23450";
 //
 //        service = [[OssService alloc] initWithViewController:self withEndPoint:endPoint];
 //        [service setCallbackAddress:callbackAddress];
+    [self loadData];
     
+    _tagContainer =  [ZHBtnContainer new];
+
 }
 
 //
@@ -136,6 +153,10 @@
 
 
 - (void)configUI{
+    
+    
+
+
 
     UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [editorBtn addTarget:self action:@selector(toMessage) forControlEvents:UIControlEventTouchUpInside];
@@ -161,7 +182,100 @@
 }
 
 
+- (void)loadData{
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/rewardask/getRewardAskByLatest",kIP];
+    
+    NSMutableDictionary *dic = [ZHNetworkTools parameters];
+    
+    [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+        if (error) {
+            NSLog(@"%@",error);
+        }
+        
+        NSLog(@"response = %@",response);
+        
+        NSArray<ZHBtnModel *> *models = [NSArray yy_modelArrayWithClass:[ZHBtnModel class] json:response[@"data"]];
+        NSMutableArray<ZHBtnModel *> *tagModels = [NSMutableArray array];
+        
+        NSInteger index=0;
+        for (NSDictionary *dict in response[@"data"]) {
+            [tagModels addObject: [ZHBtnModel tagModelWithDictionary: dict
+                                                             atIndex: index]];
+            index++;
+        }
+        self.tagContainer.BtnTagModels = [NSMutableArray arrayWithArray: tagModels];
+        
+        [self.tableView reloadData];
+        
+    }];
+    
+}
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    ZHRewardCellTableViewCell *cell = [[ZHRewardCellTableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
+                                                                       reuseIdentifier: @"123"];
+    if (!cell) {
+        
+        cell.tableView = tableView;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    cell.tagContainer = self.tagContainer;
+    
+    return cell;
+
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 190 + self.tagContainer.cellHeight;
+
+}
+- (UITableView *)tableView {
+    //
+    
+    if (!_tableView) {
+        
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
+        
+        
+        //    NSBundle *bundle = [NSBundle mainBundle];
+        
+//        
+//        [_tableView registerNib:[UINib nibWithNibName:@"ZHSearchTableViewCell" bundle:nil] forCellReuseIdentifier:SearchCellid];
+//        
+//        [_tableView registerNib:[UINib nibWithNibName:@"ZHExpertTodayTableViewCell" bundle:nil] forCellReuseIdentifier:ExpertsCellid];
+//        
+        //        [_tableView registerNib:[UINib nibWithNibName:@"ZHIntroductionTableViewCell" bundle:nil] forCellReuseIdentifier:IntroductionCellid];
+        
+        //        [_tableView registerNib:[UINib nibWithNibName:@"ZHTypeTableViewCell" bundle:nil] forCellReuseIdentifier:typeCellid];
+    }
+    
+    return _tableView;
+}
+
+
+#pragma mark - Lazy load
+- (NSMutableArray<ZHBtn *> *)tagButtons {
+    if (!_tagButtons) {
+        _tagButtons = [NSMutableArray array];
+    }
+    return _tagButtons;
+}
 
 
 

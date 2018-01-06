@@ -12,6 +12,7 @@
 #import "ZHUserInfoRewardAskTableViewCell.h"
 #import "ZHUserInfoRewardContentTableViewCell.h"
 #import "ZHExpertUserInfoCaseTableViewCell.h"
+#import "businessCellViewCell.h"
 
 #import "ZHNetworkTools.h"
 #import "Macro.h"
@@ -30,6 +31,8 @@ static NSString *userInfoRewardCellid = @"userInfoRewardCellid";
 static NSString *userInfoRewardContntCellid = @"userInfoRewardContntCellid";
 
 static NSString *expertUserInfoCaseCellid = @"expertUserInfoCaseCellid";
+
+static NSString *businessCellid = @"businessCellid";
 
 
 @interface ZHExpertUserInfoHomePageViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -71,11 +74,7 @@ static NSString *expertUserInfoCaseCellid = @"expertUserInfoCaseCellid";
     [self.view addSubview:self.tableView];
     
     
-    if (self.tableView.style == UITableViewStylePlain) {
-        UIEdgeInsets contentInset = self.tableView.contentInset;
-        contentInset.top = - 64 ;
-        [self.tableView setContentInset:contentInset];
-    }
+
 
 }
 
@@ -111,7 +110,7 @@ static NSString *expertUserInfoCaseCellid = @"expertUserInfoCaseCellid";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -119,7 +118,7 @@ static NSString *expertUserInfoCaseCellid = @"expertUserInfoCaseCellid";
     if (section == 0) {
         return 1;
     }
-    if (section == 1) {
+    if (section == 2) {
         return 2;
     }
     return 1;
@@ -139,7 +138,17 @@ static NSString *expertUserInfoCaseCellid = @"expertUserInfoCaseCellid";
         
         return 339 + labelHeight;
     }
+    
     if (indexPath.section == 1) {
+        
+        NSString *tmpStr = self.bigModel.expertUserInfoModel.business;
+        NSArray *tempArray = [tmpStr componentsSeparatedByString:@","];
+        
+        return tempArray.count > 4 ? 170 : 130;
+
+    }
+    
+    if (indexPath.section == 2) {
         
         if (indexPath.row == 0) {
             return 50;
@@ -176,6 +185,14 @@ static NSString *expertUserInfoCaseCellid = @"expertUserInfoCaseCellid";
     }
     
     if (indexPath.section == 1) {
+        businessCellViewCell *cell = [tableView dequeueReusableCellWithIdentifier:businessCellid forIndexPath:indexPath];
+        cell.btnStrDataSoure = _bigModel.expertUserInfoModel.business;
+        
+        return cell;
+    }
+    
+    
+    if (indexPath.section == 2) {
         
         if (indexPath.row == 0) {
             
@@ -199,7 +216,7 @@ static NSString *expertUserInfoCaseCellid = @"expertUserInfoCaseCellid";
         
     }
     
-    if (indexPath.section == 2) {
+    if (indexPath.section == 3) {
         ZHExpertUserInfoCaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:expertUserInfoCaseCellid forIndexPath:indexPath];
         
         cell.caseModel = _bigModel.expertCaseModel;
@@ -233,15 +250,14 @@ static NSString *expertUserInfoCaseCellid = @"expertUserInfoCaseCellid";
         [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoRewardAskTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoRewardCellid];
         //
 
-        //        [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoRewardVoiceTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoRewardVoiceCellid];
-        
+               
         [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoRewardContentTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoRewardContntCellid];
         
         [_tableView registerNib:[UINib nibWithNibName:@"ZHExpertUserInfoCaseTableViewCell" bundle:nil] forCellReuseIdentifier:expertUserInfoCaseCellid];
         //
-        //        [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoNoModelTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoNoModelCellid];
-        //
-        //        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+        
+        [_tableView registerClass:[businessCellViewCell class] forCellReuseIdentifier:businessCellid];
+
         
     }
     
