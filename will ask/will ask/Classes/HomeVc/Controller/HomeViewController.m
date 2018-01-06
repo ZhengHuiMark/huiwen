@@ -57,6 +57,9 @@
     [self loadData];
     
     _tagContainer =  [ZHBtnContainer new];
+    
+    
+    [self loadDataz];
 
 }
 
@@ -179,6 +182,24 @@
     
     [self.view addSubview:button1];
 
+}
+
+
+- (void)loadDataz{
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/expert/getExpertTitles",kIP];
+    
+    NSMutableDictionary *dic = [ZHNetworkTools parameters];
+ 
+    
+    [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+        
+        if (error) {
+            NSLog(@"%@",error);
+        }
+        
+        NSLog(@"%@",response);
+    }];
 }
 
 

@@ -34,7 +34,7 @@
 }
 
 - (void)setupUI {
-    self.layer.contents = (__bridge id _Nullable)([UIImage imageNamed:@"liaotianbeijing2"].CGImage);
+    self.layer.contents = (__bridge id _Nullable)([UIImage imageNamed:@"voice3"].CGImage);
     [self addSubview:self.voiceIcon];
     [self addSubview:self.durationLabel];
     [self addSubview:self.voiceButton];
@@ -46,10 +46,10 @@
     NSString *voicePath = [self mediaPath:pathStr];
     self.durationLabel.text  = [NSString stringWithFormat:@"%ld''",[[ICRecordManager shareManager] durationWithVideo:[NSURL fileURLWithPath:voicePath]]];
     
-    self.voiceIcon.image = [UIImage imageNamed:@"right-3"];
-    UIImage *image1 = [UIImage imageNamed:@"right-1"];
-    UIImage *image2 = [UIImage imageNamed:@"right-2"];
-    UIImage *image3 = [UIImage imageNamed:@"right-3"];
+    self.voiceIcon.image = [UIImage imageNamed:@"voice3"];
+    UIImage *image1 = [UIImage imageNamed:@"voice1"];
+    UIImage *image2 = [UIImage imageNamed:@"voice2"];
+    UIImage *image3 = [UIImage imageNamed:@"voice3"];
     self.voiceIcon.animationImages = @[image1, image2, image3];
     self.voiceIcon.animationDuration = 0.8;
     
@@ -89,7 +89,7 @@
     if (nil == _durationLabel ) {
         _durationLabel = [[UILabel alloc] init];
         _durationLabel.font = [UIFont systemFontOfSize:20];
-        _durationLabel.frame = CGRectMake(5, self.bounds.size.height/2-10, 30, 20);
+        _durationLabel.frame = CGRectMake(self.bounds.size.width + 10, self.bounds.size.height/2-10, 30, 20);
     }
     return _durationLabel;
 }
@@ -99,7 +99,7 @@
     if (nil == _voiceIcon) {
         _voiceIcon = [[UIImageView alloc] init];
         
-        _voiceIcon.frame = CGRectMake(self.bounds.size.width-50, self.bounds.size.height/2-10, 30, 20);
+        _voiceIcon.frame = CGRectMake(0,0, self.bounds.size.width, self.bounds.size.height);
     }
     return _voiceIcon;
 }

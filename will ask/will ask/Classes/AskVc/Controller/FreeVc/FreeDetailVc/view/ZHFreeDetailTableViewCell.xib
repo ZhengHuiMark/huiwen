@@ -71,14 +71,14 @@
                             <constraint firstAttribute="width" constant="60" id="kKP-W9-RLk"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wG2-Ne-Tlq">
+                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wG2-Ne-Tlq">
                         <rect key="frame" x="87" y="119" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="ER0-F7-N7B"/>
                             <constraint firstAttribute="height" constant="60" id="WaD-Wv-siW"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RvI-qu-y9P">
+                    <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RvI-qu-y9P">
                         <rect key="frame" x="154" y="119" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="LmO-PF-xJF"/>
@@ -92,7 +92,7 @@
                             <constraint firstAttribute="height" constant="1" id="H91-Vh-EXl"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vdc-eF-hex">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="read" translatesAutoresizingMaskIntoConstraints="NO" id="vdc-eF-hex">
                         <rect key="frame" x="166" y="214" width="16" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="11.5" id="u3A-6W-cYk"/>
@@ -204,4 +204,7 @@
             <point key="canvasLocation" x="-62" y="-53"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="read" width="16" height="12"/>
+    </resources>
 </document>

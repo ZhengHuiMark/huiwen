@@ -3876,7 +3876,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "will ask/will ask.entitlements";
 				DEVELOPMENT_TEAM = 3N27RE33NW;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/will\\ ask/ShareSDK",
@@ -3903,6 +3903,7 @@
 					"$(PROJECT_DIR)/will\\ ask/Tools/voiceBtn/VoiceConvert/lib",
 					"$(PROJECT_DIR)/will\\ ask/Tools/voiceBtn/VoiceConvert/lib",
 					"$(PROJECT_DIR)/will\\ ask/Tools/voiceBtn/VoiceConvert/lib/libopencore-amrwb.a",
+					"$(PROJECT_DIR)/will\\ ask/Tools/voiceBtn/VoiceConvert/lib/libopencore-amrnb.a",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				OTHER_LDFLAGS = (
@@ -3923,7 +3924,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "will ask/will ask.entitlements";
 				DEVELOPMENT_TEAM = 3N27RE33NW;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/will\\ ask/ShareSDK",
@@ -3950,6 +3951,7 @@
 					"$(PROJECT_DIR)/will\\ ask/Tools/voiceBtn/VoiceConvert/lib",
 					"$(PROJECT_DIR)/will\\ ask/Tools/voiceBtn/VoiceConvert/lib",
 					"$(PROJECT_DIR)/will\\ ask/Tools/voiceBtn/VoiceConvert/lib/libopencore-amrwb.a",
+					"$(PROJECT_DIR)/will\\ ask/Tools/voiceBtn/VoiceConvert/lib/libopencore-amrnb.a",
 				);
 				LINK_WITH_STANDARD_LIBRARIES = YES;
 				OTHER_LDFLAGS = (

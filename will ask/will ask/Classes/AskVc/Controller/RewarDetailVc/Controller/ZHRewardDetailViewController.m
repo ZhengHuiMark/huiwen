@@ -16,12 +16,12 @@
 #import "ZHFreeDetailModel.h"
 #import "YYModel.h"
 
-//#import "VoiceConverter.h"
-//#import "ICChatBox.h"
-//#import "ICRecordManager.h"
-//#import "alertString.h"
-//#import "ICVoiceHud.h"
-//#import "yuyinView.h"
+#import "VoiceConverter.h"
+#import "ICChatBox.h"
+#import "ICRecordManager.h"
+#import "alertString.h"
+#import "ICVoiceHud.h"
+#import "yuyinView.h"
 #import "MLImageCell.h"
 #import "LBViewController+ImagePicker.h"
 
@@ -93,6 +93,7 @@ static NSInteger kMaxCount = 3;
     [self setupUI];
     
     [self loadData];
+    
     
     
     [self.view addSubview:self.tableView];
@@ -273,49 +274,49 @@ static NSInteger kMaxCount = 3;
     [btnUp setImage:[UIImage imageNamed:@"expert"] forState:UIControlStateNormal];
     
     btnUp.frame = CGRectMake(0,CGRectGetMaxY(self.view.frame)- 50 ,[UIScreen mainScreen].bounds.size.width, 50);
+//    
+//    [btnUp addTarget:self action:@selector(UPUP) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:btnUp];
     
-    [btnUp addTarget:self action:@selector(UPUP) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:btnUp];
+    [self.view addSubview:self.AllView];
+    [_AllView addSubview:self.ControlsView];
+    [_AllView addSubview:self.ContentView];
+    //    [_AllView addSubview:self.speakView];
+    [_AllView addSubview:self.ImageView];
     
-//    [self.view addSubview:self.AllView];
-//    [_AllView addSubview:self.ControlsView];
-//    [_AllView addSubview:self.ContentView];
-//    //    [_AllView addSubview:self.speakView];
-//    [_AllView addSubview:self.ImageView];
+    
+    [self.ContentView addSubview:self.ContentTextView];
+    [self.ControlsView addSubview:self.downBtn];
+    [self.ControlsView addSubview:self.textBtn];
+    [self.ControlsView addSubview:self.speakBtn];
+    [self.ControlsView addSubview:self.ReleaseBtn];
+    
+    [self.ContentTextView addSubview:self.PlaceholderLabel];
+    [self.ContentTextView addSubview:self.LinkageLabel];
+    //    [self.speakView addSubview:self.VoiceBtn];
+    
+    self.ContentTextView.delegate = self;
+    
+    CGFloat VoiceBtnWidth = 75;
+    CGFloat VoiceBtnHeight = VoiceBtnWidth;
 //    
-//    
-//    [self.ContentView addSubview:self.ContentTextView];
-//    [self.ControlsView addSubview:self.downBtn];
-//    [self.ControlsView addSubview:self.textBtn];
-//    [self.ControlsView addSubview:self.speakBtn];
-//    [self.ControlsView addSubview:self.ReleaseBtn];
-//    
-//    [self.ContentTextView addSubview:self.PlaceholderLabel];
-//    [self.ContentTextView addSubview:self.LinkageLabel];
-//    //    [self.speakView addSubview:self.VoiceBtn];
-//    
-//    self.ContentTextView.delegate = self;
-//    
-//    CGFloat VoiceBtnWidth = 75;
-//    CGFloat VoiceBtnHeight = VoiceBtnWidth;
-////    
-//    ICChatBox *btn = [[ICChatBox alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - VoiceBtnWidth ) / 2, 42.5, VoiceBtnWidth, VoiceBtnHeight)];
+//    ICChatBox *button1 = [[ICChatBox alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - VoiceBtnWidth ) / 2, 42.5, VoiceBtnWidth, VoiceBtnHeight)];
 //    btn.delegate = self;
-//    [self.speakView addSubview:btn];
+//    [self.speakView addSubview:button1];
     
-//    _collectionView = [[UICollectionView alloc] initWithFrame: CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50) collectionViewLayout: self.layout];
-//    _collectionView.delegate = self;
-//    _collectionView.dataSource = self;
-//    _collectionView.contentInset = UIEdgeInsetsMake(0,18, 0, 0);
-//    [_collectionView registerNib:[UINib nibWithNibName: NSStringFromClass([MLImageCell class])
-//                                                bundle: [NSBundle mainBundle]]
-//      forCellWithReuseIdentifier: NSStringFromClass([MLImageCell class])];
-//    _collectionView.backgroundColor = [UIColor whiteColor];
-//    _collectionView.showsHorizontalScrollIndicator = NO;
-//    _collectionView.showsVerticalScrollIndicator = NO;
-//    
-//    [self.ImageView addSubview:self.collectionView];
-//    
+    _collectionView = [[UICollectionView alloc] initWithFrame: CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50) collectionViewLayout: self.layout];
+    _collectionView.delegate = self;
+    _collectionView.dataSource = self;
+    _collectionView.contentInset = UIEdgeInsetsMake(0,18, 0, 0);
+    [_collectionView registerNib:[UINib nibWithNibName: NSStringFromClass([MLImageCell class])
+                                                bundle: [NSBundle mainBundle]]
+      forCellWithReuseIdentifier: NSStringFromClass([MLImageCell class])];
+    _collectionView.backgroundColor = [UIColor whiteColor];
+    _collectionView.showsHorizontalScrollIndicator = NO;
+    _collectionView.showsVerticalScrollIndicator = NO;
+    
+    [self.ImageView addSubview:self.collectionView];
+//
 }
 
 - (UIButton *)VoiceBtn{
@@ -392,230 +393,230 @@ static NSInteger kMaxCount = 3;
     
 }
 
+//
+//- (UIView *)speakView{
+//    
+//    if (!_speakView) {
+//        
+//        CGFloat SpeakViewHeight = 190;
+//        
+//        _speakView = [UIView new];
+//        
+//        _speakView.backgroundColor = [UIColor greenColor];
+//        
+//        _speakView.frame = CGRectMake(0, CGRectGetMaxY(self.ControlsView.frame), [UIScreen mainScreen].bounds.size.width, SpeakViewHeight);
+//        
+//    }
+//    
+//    return _speakView;
+//}
+//
+//- (UIView *)ImageView{
+//    
+//    if (!_ImageView) {
+//        
+//        CGFloat SpeakViewHeight = 45;
+//        
+//        _ImageView = [UIView new];
+//        
+//        _ImageView.backgroundColor = [UIColor blueColor];
+//        
+//        _ImageView.frame = CGRectMake(0, CGRectGetMaxY(self.ContentView.frame), [UIScreen mainScreen].bounds.size.width, SpeakViewHeight);
+//        
+//    }
+//    return _ImageView;
+//}
+//
+//
+//
+//- (UITextView *)ContentTextView{
+//    
+//    if (!_ContentTextView) {
+//        
+//        CGFloat ContentTextViewHeight = 190;
+//        
+//        _ContentTextView = [UITextView new];
+//        
+//        
+//        _ContentTextView.backgroundColor = [UIColor yellowColor];
+//        _ContentTextView.alpha = .8;
+//        
+//        
+//        _ContentTextView.frame = CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, ContentTextViewHeight);
+//    }
+//    return _ContentTextView;
+//}
+//
+//
+//- (UILabel *)PlaceholderLabel {
+//    
+//    if (!_PlaceholderLabel) {
+//        _PlaceholderLabel = [UILabel new];
+//        
+//        _PlaceholderLabel.text = @"请输入您的回答";
+//        _PlaceholderLabel.font = [UIFont systemFontOfSize:14];
+//        
+//        _PlaceholderLabel.frame = CGRectMake(5, 7, 100, 15);
+//        
+//    }
+//    return _PlaceholderLabel;
+//}
+//
+//- (UILabel *)LinkageLabel {
+//    
+//    if (!_LinkageLabel) {
+//        
+//        _LinkageLabel = [UILabel new];
+//        
+//        _LinkageLabel.text = @"0/200";
+//        _LinkageLabel.font = [UIFont systemFontOfSize:14];
+//        
+//        _LinkageLabel.frame = CGRectMake(CGRectGetMaxX(self.ContentTextView.frame) - 64, CGRectGetMaxY(self.ContentTextView.frame) - 30.5, 80, 13.5);
+//    }
+//    return _LinkageLabel;
+//}
+//
+//
+//- (UIButton *)ReleaseBtn {
+//    
+//    CGFloat ReleaseBtnHeight = 14;
+//    CGFloat ReleaseBtnWidth = 35;
+//    
+//    _ReleaseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    
+//    [_ReleaseBtn setTitle:@"发布" forState:UIControlStateNormal];
+//    _ReleaseBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+//    
+//    _ReleaseBtn.frame = CGRectMake(CGRectGetMaxX(self.ControlsView.frame) - 18 - ReleaseBtnWidth, 18, ReleaseBtnWidth, ReleaseBtnHeight);
+//    
+//    
+//    return _ReleaseBtn;
+//}
+//
+//
+//- (UIButton *)downBtn {
+//    
+//    
+//    CGFloat DownBtnHeight = 22.5;
+//    CGFloat DownBtnWidth = DownBtnHeight;
+//    
+//    if (!_downBtn) {
+//        _downBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        
+//        [_downBtn setImage:[UIImage imageNamed:@"home"] forState:UIControlStateNormal];
+//        
+//        _downBtn.frame = CGRectMake(18, 11, DownBtnWidth, DownBtnHeight);
+//        
+//        
+//        [_downBtn addTarget:self action:@selector(downControl) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    
+//    
+//    
+//    
+//    return _downBtn;
+//}
+//
+//- (UIButton *)speakBtn {
+//    
+//    
+//    if (!_speakBtn) {
+//        
+//        CGFloat DownBtnHeight = 22.5;
+//        CGFloat DownBtnWidth = DownBtnHeight;
+//        
+//        _speakBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        
+//        [_speakBtn setImage:[UIImage imageNamed:@"book-1"] forState:UIControlStateNormal];
+//        [_speakBtn setImage:[UIImage imageNamed:@"free"] forState:UIControlStateSelected];
+//        
+//        _speakBtn.frame = CGRectMake(CGRectGetMaxX(self.textBtn.frame) + 10, 11, DownBtnWidth, DownBtnHeight);
+//        [_speakBtn addTarget:self action:@selector(gogo) forControlEvents:UIControlEventTouchUpInside];
+//        
+//    }
+//    
+//    return _speakBtn;
+//    
+//}
 
-- (UIView *)speakView{
-    
-    if (!_speakView) {
-        
-        CGFloat SpeakViewHeight = 190;
-        
-        _speakView = [UIView new];
-        
-        _speakView.backgroundColor = [UIColor greenColor];
-        
-        _speakView.frame = CGRectMake(0, CGRectGetMaxY(self.ControlsView.frame), [UIScreen mainScreen].bounds.size.width, SpeakViewHeight);
-        
-    }
-    
-    return _speakView;
-}
+//- (void)gogo {
+//    [self.AllView addSubview:self.speakView];
+//    //        [self.ContentTextView removeFromSuperview];
+//    _speakBtn.selected = YES;
+//    self.textBtn.selected = NO;
+//    
+//}
+//
+//- (UIButton *)textBtn {
+//    if (!_textBtn) {
+//        
+//        CGFloat DownBtnHeight = 22.5;
+//        CGFloat DownBtnWidth = DownBtnHeight;
+//        
+//        _textBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        
+//        [_textBtn setImage:[UIImage imageNamed:@"book-1"] forState:UIControlStateNormal];
+//        [_textBtn setImage:[UIImage imageNamed:@"bonus"] forState:UIControlStateSelected];
+//        
+//        _textBtn.selected = YES;
+//        _textBtn.frame = CGRectMake(CGRectGetMaxX(self.downBtn.frame) + 10, 11, DownBtnWidth, DownBtnHeight);
+//        [_textBtn addTarget:self action:@selector(nono) forControlEvents:UIControlEventTouchUpInside];
+//        
+//    }
+//    return _textBtn;
+//}
+//
+//- (void)nono {
+//    
+//    [self.speakView removeFromSuperview];
+//    
+//    _speakBtn.selected = NO;
+//    self.textBtn.selected = YES;
+//    
+//    
+//    
+//}
+//
+//- (void)downControl {
+//    
+//    [UIView animateWithDuration: .5 animations:^{
+//        CGRect currentFrame = self.AllView.frame;
+//        currentFrame.origin.y = self.AllView.frame.origin.y + CGRectGetHeight(currentFrame) + 64;
+//        self.AllView.frame = currentFrame;
+//    } completion:^(BOOL finished) {
+//        
+//    }];
+//    
+//    
+//}
 
-- (UIView *)ImageView{
-    
-    if (!_ImageView) {
-        
-        CGFloat SpeakViewHeight = 45;
-        
-        _ImageView = [UIView new];
-        
-        _ImageView.backgroundColor = [UIColor blueColor];
-        
-        _ImageView.frame = CGRectMake(0, CGRectGetMaxY(self.ContentView.frame), [UIScreen mainScreen].bounds.size.width, SpeakViewHeight);
-        
-    }
-    return _ImageView;
-}
+//- (void)UPUP {
+//    
+//    
+//    [UIView animateWithDuration: .5 animations:^{
+//        CGRect currentFrame = self.AllView.frame;
+//        currentFrame.origin.y = self.AllView.frame.origin.y - CGRectGetHeight(currentFrame) - 64;
+//        self.AllView.frame = currentFrame;
+//    } completion:^(BOOL finished) {
+//        
+//    }];
+//    
+//}
 
-
-
-- (UITextView *)ContentTextView{
-    
-    if (!_ContentTextView) {
-        
-        CGFloat ContentTextViewHeight = 190;
-        
-        _ContentTextView = [UITextView new];
-        
-        
-        _ContentTextView.backgroundColor = [UIColor yellowColor];
-        _ContentTextView.alpha = .8;
-        
-        
-        _ContentTextView.frame = CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, ContentTextViewHeight);
-    }
-    return _ContentTextView;
-}
-
-
-- (UILabel *)PlaceholderLabel {
-    
-    if (!_PlaceholderLabel) {
-        _PlaceholderLabel = [UILabel new];
-        
-        _PlaceholderLabel.text = @"请输入您的回答";
-        _PlaceholderLabel.font = [UIFont systemFontOfSize:14];
-        
-        _PlaceholderLabel.frame = CGRectMake(5, 7, 100, 15);
-        
-    }
-    return _PlaceholderLabel;
-}
-
-- (UILabel *)LinkageLabel {
-    
-    if (!_LinkageLabel) {
-        
-        _LinkageLabel = [UILabel new];
-        
-        _LinkageLabel.text = @"0/200";
-        _LinkageLabel.font = [UIFont systemFontOfSize:14];
-        
-        _LinkageLabel.frame = CGRectMake(CGRectGetMaxX(self.ContentTextView.frame) - 64, CGRectGetMaxY(self.ContentTextView.frame) - 30.5, 80, 13.5);
-    }
-    return _LinkageLabel;
-}
-
-
-- (UIButton *)ReleaseBtn {
-    
-    CGFloat ReleaseBtnHeight = 14;
-    CGFloat ReleaseBtnWidth = 35;
-    
-    _ReleaseBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    [_ReleaseBtn setTitle:@"发布" forState:UIControlStateNormal];
-    _ReleaseBtn.titleLabel.font = [UIFont systemFontOfSize:15];
-    
-    _ReleaseBtn.frame = CGRectMake(CGRectGetMaxX(self.ControlsView.frame) - 18 - ReleaseBtnWidth, 18, ReleaseBtnWidth, ReleaseBtnHeight);
-    
-    
-    return _ReleaseBtn;
-}
-
-
-- (UIButton *)downBtn {
-    
-    
-    CGFloat DownBtnHeight = 22.5;
-    CGFloat DownBtnWidth = DownBtnHeight;
-    
-    if (!_downBtn) {
-        _downBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-        [_downBtn setImage:[UIImage imageNamed:@"home"] forState:UIControlStateNormal];
-        
-        _downBtn.frame = CGRectMake(18, 11, DownBtnWidth, DownBtnHeight);
-        
-        
-        [_downBtn addTarget:self action:@selector(downControl) forControlEvents:UIControlEventTouchUpInside];
-    }
-    
-    
-    
-    
-    return _downBtn;
-}
-
-- (UIButton *)speakBtn {
-    
-    
-    if (!_speakBtn) {
-        
-        CGFloat DownBtnHeight = 22.5;
-        CGFloat DownBtnWidth = DownBtnHeight;
-        
-        _speakBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-        [_speakBtn setImage:[UIImage imageNamed:@"book-1"] forState:UIControlStateNormal];
-        [_speakBtn setImage:[UIImage imageNamed:@"free"] forState:UIControlStateSelected];
-        
-        _speakBtn.frame = CGRectMake(CGRectGetMaxX(self.textBtn.frame) + 10, 11, DownBtnWidth, DownBtnHeight);
-        [_speakBtn addTarget:self action:@selector(gogo) forControlEvents:UIControlEventTouchUpInside];
-        
-    }
-    
-    return _speakBtn;
-    
-}
-
-- (void)gogo {
-    [self.AllView addSubview:self.speakView];
-    //        [self.ContentTextView removeFromSuperview];
-    _speakBtn.selected = YES;
-    self.textBtn.selected = NO;
-    
-}
-
-- (UIButton *)textBtn {
-    if (!_textBtn) {
-        
-        CGFloat DownBtnHeight = 22.5;
-        CGFloat DownBtnWidth = DownBtnHeight;
-        
-        _textBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-        [_textBtn setImage:[UIImage imageNamed:@"book-1"] forState:UIControlStateNormal];
-        [_textBtn setImage:[UIImage imageNamed:@"bonus"] forState:UIControlStateSelected];
-        
-        _textBtn.selected = YES;
-        _textBtn.frame = CGRectMake(CGRectGetMaxX(self.downBtn.frame) + 10, 11, DownBtnWidth, DownBtnHeight);
-        [_textBtn addTarget:self action:@selector(nono) forControlEvents:UIControlEventTouchUpInside];
-        
-    }
-    return _textBtn;
-}
-
-- (void)nono {
-    
-    [self.speakView removeFromSuperview];
-    
-    _speakBtn.selected = NO;
-    self.textBtn.selected = YES;
-    
-    
-    
-}
-
-- (void)downControl {
-    
-    [UIView animateWithDuration: .5 animations:^{
-        CGRect currentFrame = self.AllView.frame;
-        currentFrame.origin.y = self.AllView.frame.origin.y + CGRectGetHeight(currentFrame) + 64;
-        self.AllView.frame = currentFrame;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    
-}
-
-- (void)UPUP {
-    
-    
-    [UIView animateWithDuration: .5 animations:^{
-        CGRect currentFrame = self.AllView.frame;
-        currentFrame.origin.y = self.AllView.frame.origin.y - CGRectGetHeight(currentFrame) - 64;
-        self.AllView.frame = currentFrame;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-}
-
-- (void)textViewDidChange:(UITextView *)textView{
-    
-    if ([textView.text length] == 0) {
-        
-        [_PlaceholderLabel setHidden:NO];
-        
-    }else{
-        
-        [_PlaceholderLabel setHidden:YES];
-        
-    }
-    NSInteger wordCount = textView.text.length;
-    self.LinkageLabel.text = [NSString stringWithFormat:@"%ld/200",  (long)wordCount];
-}
+//- (void)textViewDidChange:(UITextView *)textView{
+//    
+//    if ([textView.text length] == 0) {
+//        
+//        [_PlaceholderLabel setHidden:NO];
+//        
+//    }else{
+//        
+//        [_PlaceholderLabel setHidden:YES];
+//        
+//    }
+//    NSInteger wordCount = textView.text.length;
+//    self.LinkageLabel.text = [NSString stringWithFormat:@"%ld/200",  (long)wordCount];
+//}
 //
 //#pragma mark - ICChatBoxDelegate
 //- (void)chatBoxDidStartRecordingVoice:(ICChatBox *)chatBox {
