@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 /** 内容  */
-@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 
 /** 字数  */
 @property (weak, nonatomic) IBOutlet UILabel *numberOfWords;

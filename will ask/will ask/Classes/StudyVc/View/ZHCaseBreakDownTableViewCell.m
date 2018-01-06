@@ -28,11 +28,11 @@
     
     self.titleLabel.text = self.model.title;
     
-    self.contentLabel.text = self.model.content;
+//    self.contentLabel.text = self.model.content;
     
-    self.numberOfWords.text = self.model.words;
+    self.numberOfWords.text = [NSString stringWithFormat:@"字数:%@字",self.model.words];
     
-    self.time.text = self.model.readingTime;
+    self.time.text = [NSString stringWithFormat:@"预计阅读时间:%@分钟",self.model.readingTime];
     
     if ([self.model.type  isEqual: @"审计"]) {
         [self.typeImg setImage:[UIImage imageNamed:@"shenji"]];

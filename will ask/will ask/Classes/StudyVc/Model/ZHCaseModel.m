@@ -16,7 +16,17 @@
 
 + (NSDictionary *)modelCustomPropertyMapper {
     return @{
-             @"subCaseModels" : @" analyses"
+                @"subCaseModels":@"analyses"
              };
 }
+
+
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    
+    return @{
+             @"subCaseModels":[ZHSubCaseModel class]
+             };
+}
+
+
 @end

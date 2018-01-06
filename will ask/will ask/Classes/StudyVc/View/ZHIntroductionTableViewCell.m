@@ -32,7 +32,9 @@
 }
 
 - (void)setModel:(ZHSubCaseModel *)model {
+    
     _model = model;
+    
     
     self.expertName.text = self.model.nickname;
     
