@@ -30,6 +30,7 @@
         case ReviewStatusWaitPayFor:{
             
                     self.closeTime.hidden = YES;
+                    self.payForBtn.hidden = NO;
                     [self.payForBtn setTitle:@"支付" forState:UIControlStateNormal];
                     [self.payForBtn.layer setBorderColor:[UIColor redColor].CGColor];
                     [self.payForBtn.layer setBorderWidth:1];
@@ -45,6 +46,7 @@
                     self.orderDetailL.text = @"订单详情";
             
                     self.payForBtn.hidden = YES;
+            self.payLabel.hidden = NO;
                     self.payLabel.text = self.orderModel.payMode;
                     self.closeTime.text = self.orderModel.payTime;
                     self.PayStatus.text = @"已完成";

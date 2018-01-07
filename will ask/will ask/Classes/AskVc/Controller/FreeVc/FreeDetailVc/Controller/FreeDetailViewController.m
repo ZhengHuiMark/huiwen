@@ -68,6 +68,9 @@ static NSInteger kMaxCount = 3;
 @property(nonatomic,strong)UILabel *LinkageLabel;
 
 @property(nonatomic,strong)UIButton *VoiceBtn;
+//删除按钮
+@property (nonatomic, strong) UIButton    *deleteButton;
+
 
 /** 录音文件名 */
 @property (nonatomic, copy) NSString *recordName;
@@ -381,6 +384,31 @@ static NSInteger kMaxCount = 3;
     return _VoiceBtn;
 }
 
+- (UIButton *)deleteButton{
+    
+    if (!_deleteButton) {
+        
+        _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        
+//        _deleteButton.titleLabel.text = @"删除";
+        [_deleteButton setTitle:@"删除" forState:UIControlStateNormal];
+        _deleteButton.titleLabel.font = [UIFont systemFontOfSize:14];
+        [_deleteButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        
+//        _deleteButton.center = self.VoiceView.center;
+        _deleteButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width / 2 - 14 , 150, 50, 13);
+        [_deleteButton addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    
+    return _deleteButton;
+}
+#pragma mark - 删除语音消息
+- (void)deleteAction{
+    
+    [self.VoiceView removeFromSuperview];
+    
+}
 
 - (UIView *)ControlsView{
     
@@ -451,6 +479,7 @@ static NSInteger kMaxCount = 3;
     
     return _VoiceView;
 }
+
 
 - (UIView *)speakView{
     
@@ -598,6 +627,7 @@ static NSInteger kMaxCount = 3;
 }
 
 - (void)gogo {
+    
     [self.AllView addSubview:self.speakView];
     //        [self.ContentTextView removeFromSuperview];
     _speakBtn.selected = YES;
@@ -626,6 +656,11 @@ static NSInteger kMaxCount = 3;
 
 - (void)nono {
     
+    if (self.VoiceView) {
+        UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"标题" message:@"请问确定放弃语音内容，转换为文字输入？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好的", nil];
+    
+        [alertview show];
+    }
     [self.speakView removeFromSuperview];
     
     _speakBtn.selected = NO;
@@ -726,6 +761,7 @@ static NSInteger kMaxCount = 3;
             _VoiceBtn.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - VoiceBtnWidth ) / 2, 42.5, VoiceBtnWidth, VoiceBtnHeight);
             
             [self.AllView addSubview:self.VoiceView];
+            [self.VoiceView addSubview:self.deleteButton];
             
             yuyinView *yuyin = [[yuyinView alloc] initWithFrame:CGRectMake(55,(self.VoiceView.frame.size.height / 2) - 25,[UIScreen mainScreen].bounds.size.width - 55 - 88, 50)];
             yuyin.pathStr = recordPath;

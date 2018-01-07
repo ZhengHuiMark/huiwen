@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+@class UserInfoModel;
+@interface ZHPersonalInformationVc : UIViewController
 
-@interface ZHPersonalInformationVc : UITableViewController
+@property (nonatomic, strong) UserInfoModel *UserInfoModel;
+
 
 @end

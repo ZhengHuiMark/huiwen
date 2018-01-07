@@ -28,48 +28,57 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 
     [_NameTextF setBorderStyle:UITextBorderStyleNone];
+    
 }
 
-#pragma mark - Override Setter/Getter Methods
-- (void)setValidationModel:(UserInfoModel *)UserInfoModel {
+- (void)setUserInfoModel:(UserInfoModel *)UserInfoModel{
+    
     _UserInfoModel = UserInfoModel;
     
     switch (self.indexPath.row) {
         case kValidationViewControllerRow_NickName: {
-            self.labelTitle.text = UserInfoModel.UserNickName;
+            self.NameTextF.text = UserInfoModel.nickname;
         }
             break;
             
         case kValidationViewControllerRow_RealName: {
-            self.labelTitle.text = UserInfoModel.RealName;
+            self.NameTextF.text = UserInfoModel.realname;
         }
             break;
             
         case kValidationViewControllerRow_Gender: {
-            self.labelTitle.text = UserInfoModel.Gender;
+            if ([UserInfoModel.sex isEqualToString:@"1"] || [UserInfoModel.sex isEqualToString:@"男"]) {
+                self.NameTextF.text = @"男";
+            }else{
+                self.NameTextF.text = @"女";
+            }
+            
+//            self.NameTextF.text = UserInfoModel.sex;
         }
             break;
         case kValidationViewControllerRow_Location: {
-            self.labelTitle.text = UserInfoModel.Place;
+            self.NameTextF.text = UserInfoModel.locus;
         }
             break;
         case kValidationViewControllerRow_Date: {
-            self.labelTitle.text = UserInfoModel.Date;
+            self.NameTextF.text = UserInfoModel.birthdate;
         }
             break;
             
         case kValidationViewControllerRow_Company: {
-            self.labelTitle.text = UserInfoModel.Company;
+            self.NameTextF.text = UserInfoModel.company;
         }
             break;
         case kValidationViewControllerRow_Position: {
-            self.labelTitle.text = UserInfoModel.Position;
+            self.NameTextF.text = UserInfoModel.duty;
         }
             break;
         default:
             break;
     }
+
 }
+
 
 - (void)setIndexPath:(NSIndexPath *)indexPath {
 
@@ -186,4 +195,32 @@
     }
     return YES;
 }
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    
+    NSString *tempStr = @"";
+    switch (self.indexPath.row) {
+            
+        case kValidationViewControllerRow_NickName:
+            tempStr = @"nickname";
+            break;
+            
+        case kValidationViewControllerRow_RealName:
+            tempStr = @"realname";
+            break;
+            
+        case kValidationViewControllerRow_Company:
+            tempStr = @"company";
+            break;
+            
+        case kValidationViewControllerRow_Position:
+            tempStr = @"duty";
+            break;
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"textName" object:self userInfo:@{tempStr:textField.text}];
+    
+    return YES;
+}
+
 @end

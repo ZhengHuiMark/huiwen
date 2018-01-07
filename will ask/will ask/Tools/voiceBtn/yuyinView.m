@@ -16,7 +16,6 @@
 @property (nonatomic, strong) UILabel     *durationLabel;
 @property (nonatomic, strong) UIImageView *voiceIcon;
 
-
 @property (nonatomic, strong) UIImageView *currentVoiceIcon;
 
 
@@ -84,6 +83,7 @@
     return _voiceButton;
 }
 
+
 - (UILabel *)durationLabel
 {
     if (nil == _durationLabel ) {
@@ -103,6 +103,8 @@
     }
     return _voiceIcon;
 }
+
+
 
 // play voice
 - (void)chatVoiceTapedMediaPath:(NSString *)path

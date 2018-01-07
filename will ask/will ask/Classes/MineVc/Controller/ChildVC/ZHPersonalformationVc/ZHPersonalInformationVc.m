@@ -23,6 +23,8 @@
 #import "Macro.h"
 #import "SVProgressHUD.h"
 
+#import "YYModel.h"
+
 // HeaderCellid
 static NSString *HeaderCellid = @"HeaderCellid";
 //
@@ -31,22 +33,25 @@ static NSString *nameCellid = @"nameCellid";
 
 
 
-@interface ZHPersonalInformationVc ()<UIActionSheetDelegate,UIPickerViewDelegate,UINavigationControllerDelegate>
+@interface ZHPersonalInformationVc ()<UIActionSheetDelegate,UIPickerViewDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     OssService * service;
     NSString * uploadFilePath;
+    
+    NSMutableDictionary *_tempDict;
     
 }
 @property(nonatomic,strong)NSData *imageData;
 
 
-@property (nonatomic, strong) UserInfoModel *UserInfoModel;
 
 @property (nonatomic, weak)ZHPersonalHeaderTableViewCell *PersonalHeadlerCell;
 
-
+@property (nonatomic, strong)UITableView *tableView;
 
 @property (nonatomic, weak)ZHEditTableViewCell *EditCell;
+
+@property (nonatomic, weak)ZHEditTableViewCell *sex;
 
 
 @end
@@ -56,7 +61,9 @@ static NSString *nameCellid = @"nameCellid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    self.view.backgroundColor = [UIColor blueColor];
+
+    [self.view addSubview:self.tableView];
+
     
     UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 62, 20)] ;
     titleLabel.text  = @"个人信息";
@@ -75,7 +82,6 @@ static NSString *nameCellid = @"nameCellid";
     
     self.navigationItem.backBarButtonItem = backBtn;
     
-    [self configurUI];
     self.view.backgroundColor = [UIColor lightGrayColor];
     
     NSString * const endPoint = @"http://oss-cn-qingdao.aliyuncs.com";
@@ -84,10 +90,36 @@ static NSString *nameCellid = @"nameCellid";
     service = [[OssService alloc] initWithViewController:self withEndPoint:endPoint];
     [service setCallbackAddress:callbackAddress];
     
-
-  
+    [self loadUserInfo];
+ 
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveTextName:) name:@"textName" object:nil];
+    _tempDict = [NSMutableDictionary dictionary];
 }
 
+
+- (void)loadUserInfo{
+    
+    NSMutableDictionary *dic = [ZHNetworkTools parameters];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/ut/user/getUserInfo",kIP];
+    
+    [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+        
+        if (error) {
+            NSLog(@"%@",error);
+        }
+        
+        NSLog(@"%@",response);
+        
+        _UserInfoModel = [UserInfoModel yy_modelWithJSON:response[@"data"]];
+        
+        
+        [self.tableView reloadData];
+    }];
+    
+    
+}
 
 - (void)clickButton{
     
@@ -103,10 +135,7 @@ static NSString *nameCellid = @"nameCellid";
                 
                 [dict setObject: objectKey
                          forKey: @"avatar"];
-                [dict setObject: self.EditCell.NameTextF.text
-                         forKey: @"nickname"];
-                [dict setObject: self.EditCell.NameTextF.text
-                         forKey: @"duty"];
+                [dict addEntriesFromDictionary:_tempDict];
                 
                 NSString *url = [NSString stringWithFormat:@"%@/api/ut/user/saveUserInfo",kIP];
                 
@@ -126,12 +155,27 @@ static NSString *nameCellid = @"nameCellid";
         }];
         
     }else{
-      
+        
+        NSMutableDictionary *dict = [ZHNetworkTools parameters];
+        
+        [dict addEntriesFromDictionary:_tempDict];
+        
+        NSString *url = [NSString stringWithFormat:@"%@/api/ut/user/saveUserInfo",kIP];
+        
+        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dict andCallBlock:^(id response, NSError *error) {
+            // 2. 判断错误
+            if (error) {
+                NSLog(@"网络请求异常: %@", error);
+                
+                return;
+            }
+            NSLog(@"%@",response);
+            //        [UserManager sharedManager].userModel = [UserModel yy_modelWithJSON:response[@"data"]];
+            //        [[UserManager sharedManager]saveUserModel];
+            
+        }];
     }
-    
- 
-   
-    
+
 }
 
 - (void)saveImage:(UIImage *)currentImage withName:(NSString *)imageName {
@@ -159,25 +203,11 @@ static NSString *nameCellid = @"nameCellid";
 }
 
 
-- (void)configurUI{
-    
-    [self.tableView registerNib:[UINib nibWithNibName:@"ZHPersonalHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:HeaderCellid];
-    [self.tableView registerNib:[UINib nibWithNibName:@"ZHEditTableViewCell" bundle:nil] forCellReuseIdentifier:nameCellid];
-
-    
-    self.tableView.rowHeight = 50;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-
-}
-
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
     return 2;
-    
-    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -211,11 +241,9 @@ static NSString *nameCellid = @"nameCellid";
     if (indexPath.section == 0) {
         ZHPersonalHeaderTableViewCell *HeadCell = self.PersonalHeadlerCell =  [tableView dequeueReusableCellWithIdentifier:HeaderCellid forIndexPath:indexPath];// 不写这句直接崩掉，找不到循环引用的cell
         
-        if (HeadCell == nil) {
-            HeadCell = [[ZHPersonalHeaderTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:HeaderCellid];
-        }
+
         HeadCell.indexPath = indexPath;
-        HeadCell.UserInfoModel = self.UserInfoModel;
+        HeadCell.UserInfoModel = _UserInfoModel;
         
         
         HeadCell.AvatarClick = ^(NSIndexPath *indexPath){
@@ -233,19 +261,21 @@ static NSString *nameCellid = @"nameCellid";
 
         };
         
-    }else if (indexPath.section == 1){
+    }
+    
+    if (indexPath.section == 1){
         
         ZHEditTableViewCell *nameCell =[tableView dequeueReusableCellWithIdentifier:nameCellid forIndexPath:indexPath];    // 不写这句直接崩掉，找不到循环引用的cell
-        if (indexPath.row == kValidationViewControllerRow_Gender) self.EditCell = nameCell;
+//        if (indexPath.row == kValidationViewControllerRow_Gender) self.EditCell = nameCell;
         
-        if (nameCell == nil) {
-            nameCell = [[ZHEditTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nameCellid];
-        }
+
         nameCell.indexPath = indexPath;
-        nameCell.UserInfoModel = self.UserInfoModel;
+        nameCell.UserInfoModel = _UserInfoModel;
         
 
         __weak __typeof(&*self)weakSelf = self;
+        
+        
         nameCell.didClick = ^(NSIndexPath *indexPath){
             // End editing
             [weakSelf.view endEditing: YES];
@@ -256,7 +286,7 @@ static NSString *nameCellid = @"nameCellid";
                                           delegate:self
                                           cancelButtonTitle:@"取消"
                                           destructiveButtonTitle:nil
-                                          otherButtonTitles:@"男", @"女",nil];
+                                          otherButtonTitles:@"女", @"男",nil];
             
             
             actionSheet.actionSheetStyle = UIBarStyleDefault;
@@ -268,6 +298,7 @@ static NSString *nameCellid = @"nameCellid";
             [weakSelf.view endEditing: YES];
             [BRDatePickerView showDatePickerWithTitle:@"出生年月" dateType:UIDatePickerModeDate defaultSelValue:nameCell.NameTextF.text minDateStr:@"" maxDateStr:@"" isAutoSelect:YES resultBlock:^(NSString *selectValue) {
                 nameCell.NameTextF.text = selectValue;
+                [_tempDict setValue:selectValue forKey:@"birthdate"];
                 
             }];
 
@@ -277,6 +308,7 @@ static NSString *nameCellid = @"nameCellid";
           
             [BRAddressPickerView showAddressPickerWithDefaultSelected:@[@10, @0, @3] isAutoSelect:YES resultBlock:^(NSArray *selectAddressArr) {
                 nameCell.NameTextF.text = [NSString stringWithFormat:@"%@-%@-%@", selectAddressArr[0], selectAddressArr[1], selectAddressArr[2]];
+                [_tempDict setValue:nameCell.NameTextF.text forKey:@"locus"];
             }];
             
         };
@@ -294,10 +326,15 @@ static NSString *nameCellid = @"nameCellid";
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    self.UserInfoModel.Gender= [actionSheet buttonTitleAtIndex: buttonIndex];
-    _EditCell.NameTextF.text = self.UserInfoModel.Gender;
+    if (buttonIndex != 2) {
+        self.UserInfoModel.sex = [actionSheet buttonTitleAtIndex: buttonIndex];
+        _EditCell.NameTextF.text = self.UserInfoModel.sex;
+        
+        [_tempDict setValue:@(buttonIndex) forKey:@"sex"];
+    }
     
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:kValidationViewControllerRow_Gender inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 
@@ -311,6 +348,32 @@ static NSString *nameCellid = @"nameCellid";
 }
 
 
+#pragma mark - Lazy load
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame: CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height )
+                                                  style: UITableViewStyleGrouped];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.tableFooterView = [UIView new];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        
+        [_tableView registerNib:[UINib nibWithNibName:@"ZHPersonalHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:HeaderCellid];
+        [_tableView registerNib:[UINib nibWithNibName:@"ZHEditTableViewCell" bundle:nil] forCellReuseIdentifier:nameCellid];
+        
+        
+        _tableView.rowHeight = 50;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    }
+    return _tableView;
+}
+
+
+
+
+
 - (UserInfoModel *)UserInfoModel {
     if (!_UserInfoModel) {
         _UserInfoModel = [UserInfoModel new];
@@ -318,5 +381,15 @@ static NSString *nameCellid = @"nameCellid";
     return _UserInfoModel;
 }
 
+- (void)saveTextName:(NSNotification *)user {
+    
+    NSLog(@"user %@",user.userInfo);
+    [_tempDict addEntriesFromDictionary:user.userInfo];
+    NSLog(@"tempDictionary %@",_tempDict);
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end

@@ -12,21 +12,21 @@
 
 @interface UserInfoModel : NSObject
 
-@property(nonatomic,copy)NSString *userAvatar;
+@property(nonatomic,copy)NSString *avatar;
 
-@property(nonatomic,copy)NSString *UserNickName;
+@property(nonatomic,copy)NSString *nickname;
 
-@property(nonatomic,copy)NSString *RealName;
+@property(nonatomic,copy)NSString *realname;
 
-@property(nonatomic,copy)NSString *Gender;
+@property(nonatomic,copy)NSString *sex;
 
-@property(nonatomic,copy)NSString *Place;
+@property(nonatomic,copy)NSString *locus;
 
-@property(nonatomic,copy)NSString *Date;
+@property(nonatomic,copy)NSString *birthdate;
 
-@property(nonatomic,copy)NSString *Company;
+@property(nonatomic,copy)NSString *company;
 
-@property(nonatomic,copy)NSString *Position;
+@property(nonatomic,copy)NSString *duty;
 
 
 @end

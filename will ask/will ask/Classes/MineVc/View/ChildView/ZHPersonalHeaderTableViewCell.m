@@ -19,7 +19,7 @@
     [super awakeFromNib];
     // Initialization code
     
-    [self.userAvatarImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,[UserManager sharedManager].userModel.avatar]]];
+    
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -38,7 +38,7 @@
 - (void)setUserInfoModel:(UserInfoModel *)UserInfoModel {
     _UserInfoModel = UserInfoModel;
     
-    
+    [self.userAvatarImageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,[UserManager sharedManager].userModel.avatar]]];
     
 }
 
