@@ -31,6 +31,7 @@
 /** 抢答次数 */
 @property(nonatomic,copy)NSString *vieAnswerNumber;
 
-
+//首页照片
+@property(nonatomic,copy)NSString *picture;
 
 @end

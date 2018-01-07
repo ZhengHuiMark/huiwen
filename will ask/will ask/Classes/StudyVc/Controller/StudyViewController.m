@@ -152,6 +152,8 @@ static NSString *typeCellid = @"typeCellid";
     }else {
         return [UIView new];
     }
+    
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -182,8 +184,9 @@ static NSString *typeCellid = @"typeCellid";
     if (section == 1) {
         return _TodayExpetsModel.count;
     }
-    NSLog(@"_caseModels[section-2].subCaseModels.count = %lu",_caseModels[section-2].subCaseModels.count);
-    return _caseModels[section-2].subCaseModels.count+1;
+//    NSLog(@"_caseModels[section-2].subCaseModels.count = %lu",_caseModels[section-2].subCaseModels.count);
+//       section -2 (2代表减去固定组数)   +1 1是代表回答的标题
+    return _caseModels[section-2].subCaseModels.count + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -119,9 +119,8 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     
 //    if (section == 1) {
         UIView *headerView = [[UIView alloc] init];
-        headerView.backgroundColor = [UIColor redColor];
-        //    headerView.frame = self.view.frame;
-        
+        headerView.backgroundColor = [UIColor whiteColor];
+    
         UILabel *nameLa = [[UILabel alloc]init];
         
         nameLa.frame = CGRectMake(20, 10 ,[UIScreen mainScreen].bounds.size.width, 20);

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class ZHStudyModel;
 @interface ZHSpecialExpertTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *expertAvatar;
@@ -19,5 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *cerTitle;
 
 @property (weak, nonatomic) IBOutlet UILabel *intro;
+
+@property (nonatomic,strong)ZHStudyModel *stuModel;
 
 @end

@@ -118,55 +118,6 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
         headerView.backgroundColor = [UIColor whiteColor];
         
         
-        
-//        // Setup buttons
-//        CGFloat maxX = 0;
-//        NSInteger index = 0;
-//        CGFloat buttonWidth = [UIScreen mainScreen].bounds.size.width / 3.0f;
-//        
-//        for (NSString *buttonTitle in self.buttonTitles) {
-//            
-//            // Create button
-//            CGPoint origin = CGPointMake(maxX, 0);
-//            ZHButton *button = [ZHButton buttonWithTitle: buttonTitle
-//                                                  origin: origin
-//                                                  inView: headerView];
-//            NSLog(@"%@",buttonTitle);
-////            button.BtnImage.image = [UIImage imageNamed: self.buttonImages[index]];
-//            
-//            
-//            button.buttonAction = ^(ZHButton *button , AModel *model){
-//                
-//                button.aModel.selected = NO;
-//                
-//                
-//                
-////                _selectedButton.aModel.selected = NO;
-//                _selectedButton = button;
-//                button.aModel.selected = YES;
-//
-////                _selectedButton.aModel.selected = YES;
-////                
-//                //            [self.tableScrollView setContentOffset: CGPointMake(kTableViewWidth * button.tag,  0) animated: YES];
-//            };
-//            button.tag = index;
-//            button.aModel.selected = index==0;
-//            
-////            button.backgroundColor = [UIColor blueColor];
-//            [self.buttons addObject: button];
-//            
-//            // Save first button
-//            if (index ==0) {
-//                _selectedButton = button;
-//            }
-//            
-//            // Change button width
-//            button.frame = (CGRect){button.frame.origin, {buttonWidth,1}};
-//            
-//            // Configure frame and index
-//            maxX+=button.frame.size.width;
-//            index++;
-//        }
         NSArray * array = [NSArray arrayWithObjects:@"抢答",@"接受咨询",@"发布案例", nil];
 
         for (NSInteger i = 0; i < 3; i++) {
@@ -179,6 +130,7 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
             [btn addTarget:self action:@selector(btnActions:) forControlEvents:UIControlEventTouchUpInside];
             [headerView addSubview:btn];
             [btn setTitle:[array objectAtIndex:i] forState:UIControlStateNormal];
+            [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
            
         }
 

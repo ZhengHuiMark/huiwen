@@ -7,6 +7,10 @@
 //
 
 #import "ZHSpecialExpertTableViewCell.h"
+#import "ZHStudyModel.h"
+#import "Macro.h"
+#import "UIImageView+WebCache.h"
+#import "ImageTools.h"
 
 @implementation ZHSpecialExpertTableViewCell
 
@@ -15,10 +19,10 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)setStuModel:(ZHStudyModel *)stuModel{
+    _stuModel = stuModel;
+    
+    [self.expertAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameDwsoftLoad,OSS,self.stuModel.picture]]];
+    
 }
-
 @end

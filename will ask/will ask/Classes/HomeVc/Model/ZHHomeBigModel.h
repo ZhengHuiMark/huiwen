@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class ZHBtnModel,ZHStudyModel,ZHCaseModel,ZHBannerListModel;
+@class ZHBtnModel,ZHStudyModel,ZHCaseModel,ZHBannerListModel,ZHSubCaseModel;
 @interface ZHHomeBigModel : NSObject
 
 @property(nonatomic,strong)NSArray <ZHBtnModel *> *btnModel;
@@ -16,7 +16,18 @@
 
 @property(nonatomic,strong)NSArray <ZHCaseModel *> *caseModel;
 
-@property(nonatomic,strong)NSArray <ZHBannerListModel *> *bannerModel;
+@property(nonatomic,strong)NSArray <ZHSubCaseModel *> *subCaseModel;
 
+@property(nonatomic,strong)NSArray <ZHBannerListModel *> *bannerModel;
+//
+//@property(nonatomic,strong)ZHBtnModel *btnModel;
+//
+//@property(nonatomic,strong)ZHStudyModel *studyModel;
+//
+//@property(nonatomic,strong)ZHCaseModel *caseModel;
+//
+//@property(nonatomic,strong)ZHSubCaseModel *subCaseModel;
+//
+//@property(nonatomic,strong)ZHBannerListModel *bannerModel;
 
 @end
