@@ -15,6 +15,7 @@
 
 
 @interface ZHBtn ()
+
 @property (nonatomic, assign) MLTagButtonType btnType;
 
 @property(strong,nonatomic)UIView *placeholderView;
@@ -67,10 +68,12 @@
 
     [_placeholderView addSubview:_jjjLabel];
     [_placeholderView addSubview:_UserNameLabel];
-    [_placeholderView addSubview:_clickBtn];
+    [self addSubview:_clickBtn];
 
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchesViewClickAction:)];
     
- 
+    self.userInteractionEnabled = YES;
+    [self addGestureRecognizer:tap];
 }
 
 - (void)setTagModel:(ZHBtnModel *)tagModel {
@@ -95,7 +98,7 @@
     }
     self.RewardMoneyImgV.text = [NSString stringWithFormat:@"赏金%@",tagModel.amount];
     
-    
+    self.clickBtn.tag = [self.tagModel.rewardAskId integerValue];
     
     self.frame = tagModel.frame;
 }
@@ -120,7 +123,7 @@
     
     self.UserNameLabel.frame = CGRectMake(CGRectGetMaxX(self.jjjLabel.frame) + 3, CGRectGetMaxY(self.placeholderView.frame) - 13 , 60, 13);
     
-    self.clickBtn.frame = CGRectMake(17,CGRectGetMaxY(self.placeholderView.frame) + 15 , 75, 25);
+    self.clickBtn.frame = CGRectMake( CGRectGetWidth(self.placeholderView.frame)/2-75/2,CGRectGetMaxY(self.placeholderView.frame)+10 , 75, 25);
 
 }
 
@@ -212,11 +215,12 @@
         [_clickBtn setTitle:@"我要揭榜" forState:UIControlStateNormal];
         [_clickBtn setTitleColor:[UIColor redColor]forState:UIControlStateNormal];
         _clickBtn.titleLabel.font = [UIFont systemFontOfSize: 12.0];
-        //        [_clickBtn setBackgroundColor:[UIColor blueColor]];
+                [_clickBtn setBackgroundColor:[UIColor blueColor]];
         _clickBtn.layer.cornerRadius = 10;
         [_clickBtn.layer setBorderColor:[UIColor redColor].CGColor];
         [_clickBtn.layer setBorderWidth:1];
         [_clickBtn.layer setMasksToBounds:YES];
+
     }
     return _clickBtn;
 }
@@ -229,6 +233,11 @@
         return rect.size.height;
     }
     return 0;
+}
+
+- (void)touchesViewClickAction:(UITapGestureRecognizer *)tap {
+    
+    NSLog(@"touches %ld",self.clickBtn.tag);
 }
 
 @end

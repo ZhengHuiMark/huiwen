@@ -16,6 +16,8 @@
 #import "UserManager.h"
 #import "Macro.h"
 #import "MLTextField.h"
+#import "ZHTabBarViewController.h"
+#import "ZHNavigationVC.h"
 
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
@@ -117,12 +119,24 @@
         [UserManager sharedManager].userModel = [UserModel yy_modelWithJSON:response[@"data"]];
         [[UserManager sharedManager]saveUserModel];
         
-//        // 个人中心
-//        NSDictionary *responseObject = @{@"userName":@"Zhenghui"};
-//        [UserManager sharedManager].userModel.nickname = responseObject[@"userName"];
-//        [[UserManager sharedManager]saveUserModel];
-        
+
+
         !self.loginCompletion?:self.loginCompletion(NO);
+        
+        
+        if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass: [ZHNavigationVC class]]) {
+            ZHTabBarViewController *ZHTabController = [[ZHTabBarViewController alloc]init];
+            [UIApplication sharedApplication].keyWindow.rootViewController = ZHTabController;
+        } else {
+            ZHLoginViewController *tabBarVC = [[ZHLoginViewController alloc]initWithNibName:[NSString stringWithFormat:@"ZHLoginInViewController"] bundle:[NSBundle mainBundle]];
+            
+            ZHNavigationVC *nav = [[ZHNavigationVC alloc] initWithRootViewController:tabBarVC];
+            [nav.navigationBar setTintColor:[UIColor whiteColor]];
+            [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
+                                                                 forBarMetrics:UIBarMetricsDefault];
+        }
+
+        
         [[NSNotificationCenter defaultCenter] postNotificationName: @"loginSuccess"
                                                             object: nil];
         
@@ -203,16 +217,7 @@
             //                            [[NSNotificationCenter defaultCenter] postNotificationName: @"loginSuccess"
             //                                                                                object: nil];
             !self.loginCompletion?:self.loginCompletion(NO);
-//            NSInteger code = [response[@"code"] integerValue];
-//            if (!(code == 0)) {
-//                
-//                [SVProgressHUD showInfoWithStatus: response[@"message"]];
-//            }else if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass: [ZHNavigtaionController class]]) {
-//                ZHTabBarController *ZHTabController = [[ZHTabBarController alloc]init];
-//                [UIApplication sharedApplication].keyWindow.rootViewController = ZHTabController;
-//            } else {
-//                [self dismissViewControllerAnimated: YES completion: nil];
-//            }
+
             
         }];
         

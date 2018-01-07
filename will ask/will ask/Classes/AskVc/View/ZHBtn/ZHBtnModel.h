@@ -23,12 +23,13 @@
 
 @property(nonatomic,copy)NSString *type;
 
-@property(nonatomic,copy)NSString* amount;
+@property(nonatomic,copy)NSString *amount;
 
 @property(nonatomic,copy)NSString *uid;
 
 @property(nonatomic,copy)NSString *userId;
 
+@property(nonatomic,copy)NSString *rewardAskId;
 
 @property(nonatomic,strong)NSArray *subArray;
 

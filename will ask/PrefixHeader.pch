@@ -1,0 +1,32 @@
+//
+//  PrefixHeader.pch
+//  will ask
+//
+//  Created by 郑晖 on 2018/1/7.
+//  Copyright © 2018年 Hui Zheng. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+#define ScreenHeight [UIScreen mainScreen].bounds.size.height
+
+/** 适配iOS 11 根据系统版本号 来输出0或0.1 */
+#define iOS11Later ([UIDevice currentDevice].systemVersion.floatValue >= 11.0f ? 0:0.1)
+
+/** IphoneX Height iPhone X width = 375, height = 812 */
+#define iPhoneXHeight ([UIScreen mainScreen].bounds.size.height == 812)
+
+/** 距离top的距离 88 : 64 */
+#define SafeAreaTopHeight (ScreenHeight == 812.0 ? 88 : 64)
+
+/** 距离top的距离 88 : 64 */
+#define SafeAreaTabBarHeight (ScreenHeight == 812.0 ? 83 : 49)
+
+/** Tabbar safe bottom margin 34.f : 0.f */
+#define TabbarSafeBottomMargin (ScreenHeight == 812.0 ? 34.f : 0.f)
+
+
+
+#endif /* PrefixHeader_pch */

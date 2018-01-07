@@ -67,7 +67,6 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     
 
 
-
     
 }
 
@@ -108,14 +107,17 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 }
 
+- (instancetype)initWithStyle:(UITableViewStyle)style {
+    
+    return [super initWithStyle:UITableViewStyleGrouped];
+}
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     
-    UIView * view = nil;
     
-    if (section == 1) {
+//    if (section == 1) {
         UIView *headerView = [[UIView alloc] init];
         headerView.backgroundColor = [UIColor redColor];
         //    headerView.frame = self.view.frame;
@@ -133,32 +135,16 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
         lineView.backgroundColor = [UIColor grayColor];
         
         [headerView addSubview:lineView];
+    
+    if (section == 1) {
+        nameLa.text = @"最新悬赏榜";
+    }else if (section == 2) {
+        nameLa.text = @"最新免费问";
+    }else {
+        return [UIView new];
     }
     
-    if (section == 2) {
-        
-        UIView *headerView = [[UIView alloc] init];
-        headerView.backgroundColor = [UIColor whiteColor];
-        //    headerView.frame = self.view.frame;
-        //
-        UILabel *nameLa = [[UILabel alloc]init];
-        
-            nameLa.frame = CGRectMake(20, 10 ,[UIScreen mainScreen].bounds.size.width, 20);
-        
-            nameLa.text = @"最新免费问";
-        
-        [headerView addSubview:nameLa];
-        
-        UIView * lineView = [[UIView alloc]init];
-        lineView.frame = CGRectMake(0, 43, [UIScreen mainScreen].bounds.size.width, 1);
-        lineView.backgroundColor = [UIColor grayColor];
-        
-        [headerView addSubview:lineView];
-        
-        return headerView;
-    }
-
-    return view;
+    return headerView;
 }
 
 

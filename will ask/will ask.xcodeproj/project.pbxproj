@@ -117,6 +117,7 @@
 		4410188E1F4EAEF000EBA751 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4410188D1F4EAEF000EBA751 /* libstdc++.tbd */; };
 		441018901F4EAEF900EBA751 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4410188F1F4EAEF900EBA751 /* libz.tbd */; };
 		441018921F4EAF0400EBA751 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 441018911F4EAF0400EBA751 /* libicucore.tbd */; };
+		4410C5102002123F0085086C /* ZHStudyBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4410C50F2002123F0085086C /* ZHStudyBannerModel.m */; };
 		4411EF441F78EC7E003AAF1C /* ZHJumpTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4411EF421F78EC7E003AAF1C /* ZHJumpTableViewCell.m */; };
 		4411EF451F78EC7E003AAF1C /* ZHJumpTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4411EF431F78EC7E003AAF1C /* ZHJumpTableViewCell.xib */; };
 		4411EF491F79FE26003AAF1C /* ZHLatestPriceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4411EF471F79FE26003AAF1C /* ZHLatestPriceTableViewCell.m */; };
@@ -564,6 +565,9 @@
 		4410188D1F4EAEF000EBA751 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		4410188F1F4EAEF900EBA751 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		441018911F4EAF0400EBA751 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		4410C50D2001F4E80085086C /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		4410C50E2002123F0085086C /* ZHStudyBannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHStudyBannerModel.h; sourceTree = "<group>"; };
+		4410C50F2002123F0085086C /* ZHStudyBannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHStudyBannerModel.m; sourceTree = "<group>"; };
 		4411EF411F78EC7E003AAF1C /* ZHJumpTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHJumpTableViewCell.h; sourceTree = "<group>"; };
 		4411EF421F78EC7E003AAF1C /* ZHJumpTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHJumpTableViewCell.m; sourceTree = "<group>"; };
 		4411EF431F78EC7E003AAF1C /* ZHJumpTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHJumpTableViewCell.xib; sourceTree = "<group>"; };
@@ -1807,6 +1811,7 @@
 		441ADE851F3ABBED00ECD63E = {
 			isa = PBXGroup;
 			children = (
+				4410C50D2001F4E80085086C /* PrefixHeader.pch */,
 				4410184C1F4EADC700EBA751 /* ShareSDK */,
 				441ADE901F3ABBED00ECD63E /* will ask */,
 				441ADE8F1F3ABBED00ECD63E /* Products */,
@@ -2071,6 +2076,8 @@
 				44C7ACAC1FB3F88900F42616 /* ZHCaseModel.m */,
 				44C7ACAE1FB3F8A300F42616 /* ZHSubCaseModel.h */,
 				44C7ACAF1FB3F8A300F42616 /* ZHSubCaseModel.m */,
+				4410C50E2002123F0085086C /* ZHStudyBannerModel.h */,
+				4410C50F2002123F0085086C /* ZHStudyBannerModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3721,6 +3728,7 @@
 				444D4A031FF351C600D82736 /* ZHOrderDetailConsultModel.m in Sources */,
 				440770A41FE24C830000C20E /* ZHInvoiceMailTableViewCell.m in Sources */,
 				44C952021FB97AA9002B5509 /* ZHChooseTypeBtn.m in Sources */,
+				4410C5102002123F0085086C /* ZHStudyBannerModel.m in Sources */,
 				4407706B1FDE69FF0000C20E /* ZHMyConsultModel.m in Sources */,
 				44827BCF1F9DBB6B0097F1E7 /* BRAddressModel.m in Sources */,
 				444D49DB1FF3382200D82736 /* ZHPaymentOptionsTableViewCell.m in Sources */,
@@ -3891,6 +3899,8 @@
 					"$(PROJECT_DIR)/will\\ ask/ShareSDK/Support/Required",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = "/Users/zhenghui/huiwen/will ask/will ask/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -3939,6 +3949,8 @@
 					"$(PROJECT_DIR)/will\\ ask/ShareSDK/Support/Required",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
 				INFOPLIST_FILE = "/Users/zhenghui/huiwen/will ask/will ask/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

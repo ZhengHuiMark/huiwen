@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ZHStudyModel,ZHCaseModel,ZHSubCaseModel;
+@class ZHStudyModel,ZHCaseModel,ZHSubCaseModel,ZHStudyBannerModel;
 
 @interface StudyViewController : UIViewController
 
-
+@property(nonatomic,strong)ZHStudyBannerModel *bannerModel;
 
 @property(nonatomic,strong)ZHStudyModel *todayExpertModel;
 

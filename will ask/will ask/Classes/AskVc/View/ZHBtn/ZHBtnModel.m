@@ -27,6 +27,7 @@
 
         self.uid = [dict objectForKey: @"uid"];
         self.userId = [dict objectForKey: @"userId"];
+        self.rewardAskId = [dict objectForKey:@"rewardAskId"];
 
         // SubTags
         
