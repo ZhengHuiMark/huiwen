@@ -10,9 +10,7 @@
 @class ZHBannerListModel,ZHStudyModel,ZHCaseModel,ZHSubCaseModel,ZHHomeBigModel;
 @interface HomeViewController : UIViewController
 
-//@property(nonatomic,strong)ZHBannerListModel *bannerModel;
-//
-//@property(nonatomic,strong)ZHStudyModel *studyModel;
+
 //
 @property(nonatomic,strong)ZHCaseModel *caseModel;
 //

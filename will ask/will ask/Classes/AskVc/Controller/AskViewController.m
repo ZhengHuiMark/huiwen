@@ -33,7 +33,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 
 
-@interface AskViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface AskViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 
 @property (nonatomic, strong)ZHBtnModel *model;
 @property (nonatomic, strong) NSMutableArray<ZHBtn *> *tagButtons;
@@ -43,8 +43,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 @property (nonatomic, strong) ZHBtnContainer *tagContainer;
 
-
-
+@property(nonatomic,strong) UISearchBar *searchBar;
 
 @end
 
@@ -69,8 +68,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mingzizijiqi:) name:@"postVc" object:nil];
 
-
-    
+    [self.navigationController.navigationBar addSubview:self.searchBar];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -93,18 +91,16 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 - (void)configUI{
     
-    UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 62, 20)] ;
-    
-    titleLabel.text  = @"提问";
-    //    titleLabel.backgroundColor  = [UIColor blueColor]   ;
-    
-    titleLabel.textColor = [UIColor blackColor];
-    
-    titleLabel.font= [UIFont systemFontOfSize:18];
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.navigationItem.titleView = titleLabel;
-    
+ 
+    UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [editorBtn addTarget:self action:@selector(toMessage) forControlEvents:UIControlEventTouchUpInside];
+    [editorBtn setImage:[UIImage imageNamed:@"news"] forState:UIControlStateNormal];
+    [editorBtn sizeToFit];
 
+    UIBarButtonItem *editBtnItem = [[UIBarButtonItem alloc] initWithCustomView:editorBtn];
+    self.navigationItem.rightBarButtonItem = editBtnItem;
+
+    
     self.tableView.delegate = self;
 
     [self.tableView registerNib:[UINib nibWithNibName:@"ZHJumpTableViewCell" bundle:nil] forCellReuseIdentifier:JumpCellid];
@@ -160,6 +156,68 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     return headerView;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+
+//    if (section == 1) {
+        UIView *headerView = [[UIView alloc] init];
+        headerView.backgroundColor = [UIColor whiteColor];
+    
+    
+    
+    UIButton *button = [[UIButton alloc]init];
+    
+    button.frame = CGRectMake(0, 1, [UIScreen mainScreen].bounds.size.width, 44);
+    [button setTitle:@"dadas" forState:UIControlStateNormal];
+//    [button setBackgroundColor:[UIColor redColor]];
+    
+        [headerView addSubview:button];
+        
+        UIView * lineView = [[UIView alloc]init];
+        lineView.frame = CGRectMake(0, 45, [UIScreen mainScreen].bounds.size.width, 5 );
+        lineView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
+        
+        [headerView addSubview:lineView];
+    
+        UIView * lineView1 = [[UIView alloc]init];
+        lineView1.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 1);
+        lineView1.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
+    
+        [headerView addSubview:lineView1];
+
+    
+        if (section == 1) {
+            [button setTitle:@"查看全部悬赏榜 >" forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(toReward) forControlEvents:UIControlEventTouchUpInside];
+
+        }else if (section == 2) {
+            [button setTitle:@"查看全部免费问 >" forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(toFree) forControlEvents:UIControlEventTouchUpInside];
+
+
+        }else {
+            return [UIView new];
+        }
+        
+        return headerView;
+
+   
+
+}
+
+- (void)toReward{
+    ZHRewardViewController *rewardVc = [[ZHRewardViewController alloc]init];
+    
+    [self.navigationController pushViewController:rewardVc animated:YES];
+
+}
+- (void)toFree{
+    ZHFreeQuestionViewController *freeVc = [[ZHFreeQuestionViewController alloc]init];
+    
+    [self.navigationController pushViewController:freeVc animated:YES];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
@@ -268,9 +326,9 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
         case 0:
             return 10;
         case 1:
-            return 20;
+            return 50;
         case 2:
-            return 20;
+            return 50;
     }
     return 0;
 }
@@ -364,5 +422,24 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     return _tagButtons;
 }
 
+
+- (UISearchBar *)searchBar {
+    if (!_searchBar) {
+        _searchBar = [[UISearchBar alloc] initWithFrame: CGRectMake(13, 0, [UIScreen mainScreen].bounds.size.width-60, 44)];
+        
+        _searchBar.delegate = self;
+        
+        _searchBar.placeholder = @"搜索案例,资讯,问答";
+        
+        _searchBar.searchBarStyle = UISearchBarStyleMinimal;
+        
+        _searchBar.layer.cornerRadius = 3;
+        _searchBar.layer.masksToBounds = YES;
+        _searchBar.layer.borderColor = [UIColor whiteColor].CGColor;
+        
+        
+    }
+    return _searchBar;
+}
 
 @end

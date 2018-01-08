@@ -66,7 +66,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0N0-Tb-yEF">
-                        <rect key="frame" x="329" y="119" width="30" height="15"/>
+                        <rect key="frame" x="329" y="124" width="30" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="hYv-Lm-Tv2"/>
                         </constraints>
@@ -76,7 +76,7 @@
                         </state>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qa6-4i-Fr5">
-                        <rect key="frame" x="237" y="119" width="42" height="15"/>
+                        <rect key="frame" x="237" y="124" width="42" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="Ynr-of-me9"/>
                         </constraints>
@@ -86,10 +86,10 @@
                         </state>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uja-bh-8Zp">
-                        <rect key="frame" x="0.0" y="144" width="375" height="10"/>
+                        <rect key="frame" x="0.0" y="149" width="375" height="5"/>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="10" id="ECt-jb-dhD"/>
+                            <constraint firstAttribute="height" constant="5" id="ECt-jb-dhD"/>
                         </constraints>
                     </view>
                 </subviews>

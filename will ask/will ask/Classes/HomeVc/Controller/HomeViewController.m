@@ -12,6 +12,7 @@
 #import "OssService.h"
 #import "LBViewController+ImagePicker.h"
 #import "ImageModel.h"
+#import "ZHRewardDetailViewController.h"
 
 #import "ZHBtn.h"
 #import "ZHBtnModel.h"
@@ -83,6 +84,17 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
 
 @implementation HomeViewController
 
+- (void)viewWillDisappear:(BOOL)animated{
+    
+    self.navigationController.navigationBar.hidden = NO;
+
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.hidden = YES;
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -117,11 +129,23 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
 
     editorBtn.frame = CGRectMake(CGRectGetMaxX(self.searchBar.frame) + 16, 30.5, 20, 17);
     [view addSubview:editorBtn];
+ 
     
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mingzizijiqi:) name:@"postVc" object:nil];
 }
 
 
-
+- (void)mingzizijiqi:(NSNotification *)user{
+    
+    ZHRewardDetailViewController *rewardDVc = [[ZHRewardDetailViewController alloc]init];
+    rewardDVc.uidStringz = user.userInfo[@"rewardAskId"];
+    
+    [self.navigationController pushViewController:rewardDVc animated:YES];
+    
+}
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 //// 测试用 跳转登录页
 - (void)actionModal{
     
@@ -194,6 +218,25 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath: indexPath animated: YES];
+
+    if (indexPath.section == 0) {
+        return;
+    }
+    
+    if (indexPath.section == 1) {
+        return;
+    }
+    if (indexPath.section == 2) {
+        return;
+    }
+    
+    if (indexPath.section > 2) {
+        return;
+    }
+    
+}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     

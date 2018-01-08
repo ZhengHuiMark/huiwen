@@ -24,5 +24,13 @@
     
     [self.expertAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameDwsoftLoad,OSS,self.stuModel.picture]]];
     
+    self.expertName.text = self.stuModel.nickname;
+    
+    self.hoor.text = self.stuModel.honor;
+    
+    self.cerTitle.text = self.stuModel.certifiedNames;
+    
+    self.intro.text = self.stuModel.intro;
+    
 }
 @end
