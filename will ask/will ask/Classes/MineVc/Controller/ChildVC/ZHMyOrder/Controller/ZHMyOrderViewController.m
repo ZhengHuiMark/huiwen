@@ -175,7 +175,7 @@ static NSString *myOrderCellid = @"myOrderCellid";
 
 - (void)setupUI{
     
-    UIView *HeaderView = [[UIView  alloc]initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, 50)];
+    UIView *HeaderView = [[UIView  alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50)];
     
     HeaderView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:HeaderView];
@@ -320,7 +320,7 @@ static NSString *myOrderCellid = @"myOrderCellid";
 #pragma mark - Lazy load
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame: CGRectMake(0, 114, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 114)
+        _tableView = [[UITableView alloc] initWithFrame: CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 114)
                                                             style: UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;

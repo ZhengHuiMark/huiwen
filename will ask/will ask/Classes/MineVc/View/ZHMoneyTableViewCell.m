@@ -27,12 +27,23 @@
 - (void)setUsermodel:(UserModel *)usermodel {
     _usermodel = usermodel;
     
-    [self.memberCardBtn setTitle:self.usermodel.cardBalance forState:UIControlStateNormal];
+    [self.memberCardBtn setTitle:[UserManager sharedManager].userModel.cardBalance forState:UIControlStateNormal];
     
-    [self.incomeBtn setTitle:self.usermodel.myEarnings forState:UIControlStateNormal];
-
-    
-    
+    [self.incomeBtn setTitle:[UserManager sharedManager].userModel.myEarnings forState:UIControlStateNormal];
 }
+
+
+- (IBAction)cardAction:(UIButton *)sender {
+    
+    !self.cardClick?:self.cardClick();
+
+}
+
+- (IBAction)myWalletAction:(UIButton *)sender {
+    
+    !self.walletClick?:self.walletClick();
+
+}
+
 
 @end

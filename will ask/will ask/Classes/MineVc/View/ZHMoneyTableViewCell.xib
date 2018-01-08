@@ -54,19 +54,39 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7zr-jZ-4uI">
+                        <rect key="frame" x="0.0" y="0.0" width="187" height="64.5"/>
+                        <connections>
+                            <action selector="cardAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="www-ke-zMk"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRA-kN-AAb">
+                        <rect key="frame" x="188" y="0.0" width="187" height="64.5"/>
+                        <connections>
+                            <action selector="myWalletAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Eyq-Sd-nxM"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="jrM-8v-lZa" firstAttribute="top" secondItem="Ugf-VD-IYs" secondAttribute="bottom" constant="6" id="2MQ-bV-X9a"/>
+                    <constraint firstAttribute="bottom" secondItem="gRA-kN-AAb" secondAttribute="bottom" id="3Bq-Ir-qR0"/>
                     <constraint firstItem="UQf-X5-bNv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="76" id="6SP-N8-oQx"/>
                     <constraint firstItem="hd0-HS-1zb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="6" id="9mf-x8-M1f"/>
                     <constraint firstItem="UQf-X5-bNv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="EDJ-mr-rfb"/>
+                    <constraint firstItem="gRA-kN-AAb" firstAttribute="leading" secondItem="hd0-HS-1zb" secondAttribute="trailing" id="F7p-1Z-Lzc"/>
                     <constraint firstItem="Ugf-VD-IYs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="JM2-vC-lgi"/>
+                    <constraint firstItem="gRA-kN-AAb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="PhN-wS-ro5"/>
                     <constraint firstAttribute="bottomMargin" secondItem="hd0-HS-1zb" secondAttribute="bottom" constant="2.5" id="QGd-iZ-OUH"/>
                     <constraint firstItem="uUp-6M-cxe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="62" id="Qck-XB-660"/>
+                    <constraint firstAttribute="bottom" secondItem="7zr-jZ-4uI" secondAttribute="bottom" id="XRz-nl-UCl"/>
                     <constraint firstAttribute="trailing" secondItem="Ugf-VD-IYs" secondAttribute="trailing" constant="73" id="ax5-ef-doO"/>
                     <constraint firstItem="uUp-6M-cxe" firstAttribute="top" secondItem="UQf-X5-bNv" secondAttribute="bottom" constant="6" id="ayd-92-WnC"/>
                     <constraint firstItem="hd0-HS-1zb" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="ec1-91-Hto"/>
+                    <constraint firstAttribute="trailing" secondItem="gRA-kN-AAb" secondAttribute="trailing" id="iUL-bI-rjx"/>
+                    <constraint firstItem="7zr-jZ-4uI" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="jhe-Yl-Bw3"/>
                     <constraint firstAttribute="trailing" secondItem="jrM-8v-lZa" secondAttribute="trailing" constant="63" id="syR-Kf-F8K"/>
+                    <constraint firstItem="7zr-jZ-4uI" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="xGH-QR-SDw"/>
+                    <constraint firstItem="hd0-HS-1zb" firstAttribute="leading" secondItem="7zr-jZ-4uI" secondAttribute="trailing" id="z2p-Cf-Yjt"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

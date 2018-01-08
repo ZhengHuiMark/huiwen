@@ -7,6 +7,8 @@
 //
 
 #import "ZHExpertsListTableViewCell.h"
+#import "UserManager.h"
+#import "UserModel.h"
 
 @implementation ZHExpertsListTableViewCell
 
@@ -15,10 +17,29 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)setUserModel:(UserModel *)userModel{
+    _userModel = userModel;
+    
+    self.foucsMeLabel.text = [NSString stringWithFormat:@"%@",[UserManager sharedManager].userModel.concernNum];
+    
+    self.incomeNumber.text = [NSString stringWithFormat:@"%@",[UserManager sharedManager].userModel.myEarnings];
+    
+    self.NewConsultingNumber.text = [NSString stringWithFormat:@"%@",[UserManager sharedManager].userModel.consults];
 }
+
+
+- (IBAction)foucsBtnAction:(UIButton *)sender {
+    
+}
+
+- (IBAction)myWalletAction:(UIButton *)sender {
+    
+}
+
+
+- (IBAction)newAskAction:(UIButton *)sender {
+    
+}
+
 
 @end

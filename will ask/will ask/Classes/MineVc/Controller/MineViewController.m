@@ -22,6 +22,7 @@
 #import "ZHMyOrderViewController.h"
 #import "UserInfoModel.h"
 #import "YYModel.h"
+#import "ZHExpertsListTableViewCell.h"
 
 #import "ZHExpertServiceViewController.h"
 #import "ZHExpertUserInfoHomePageViewController.h"
@@ -35,6 +36,8 @@ static NSString *MoneyCellid = @"MoneyCellid";
 static NSString *ExpertsCellid = @"ExpertsCellid";
 //列表cell
 static NSString *MineListCellid = @"MineListCellid";
+// 专家模式下显示的cellid
+static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 
 @interface MineViewController ()
 
@@ -51,6 +54,8 @@ static NSString *MineListCellid = @"MineListCellid";
 -(void)viewWillAppear:(BOOL)animated{
 
     self.navigationController.navigationBar.hidden = YES;
+    
+        [self loadUserInfo];
     
     [[NSNotificationCenter defaultCenter] postNotificationName: @"loginSuccess"
                                                         object: nil];
@@ -136,6 +141,8 @@ static NSString *MineListCellid = @"MineListCellid";
     [self.tableView registerNib:[UINib nibWithNibName:@"ZHMoneyTableViewCell" bundle:nil] forCellReuseIdentifier:MoneyCellid];
     [self.tableView registerNib:[UINib nibWithNibName:@"ZHExpertsTableViewCell" bundle:nil] forCellReuseIdentifier:ExpertsCellid];
     [self.tableView registerNib:[UINib nibWithNibName:@"ZHMineTableViewCell" bundle:nil] forCellReuseIdentifier:MineListCellid];
+    [self.tableView registerNib:[UINib nibWithNibName:@"ZHExpertsListTableViewCell" bundle:nil] forCellReuseIdentifier:ExpertBtnCellid];
+    
 
     self.tableView.rowHeight = 50;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -272,24 +279,77 @@ static NSString *MineListCellid = @"MineListCellid";
 
         
         return HeadCell;
-    }else if (indexPath.section == 1){
+    }
+    
+    if (indexPath.section == 1){
         
-        ZHMoneyTableViewCell *mCell = [tableView dequeueReusableCellWithIdentifier:MoneyCellid forIndexPath:indexPath];
-        if (mCell == nil) {
-            mCell = [[ZHMoneyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MoneyCellid];
+        if ([[UserManager sharedManager].userModel.expertCertified isEqual:@(1)]) {
+        
+            ZHExpertsListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ExpertBtnCellid forIndexPath:indexPath];
+            if (cell == nil) {
+                cell = [[ZHExpertsListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ExpertBtnCellid];
+            }
+            
+            cell.userModel = [UserManager sharedManager].userModel;
+            
+            return cell;
+        }
+        if ([[UserManager sharedManager].userModel.expertCertified isEqual:@(0)]){
+            
+            ZHMoneyTableViewCell *mCell = [tableView dequeueReusableCellWithIdentifier:MoneyCellid forIndexPath:indexPath];
+            if (mCell == nil) {
+                mCell = [[ZHMoneyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MoneyCellid];
+            }
+            
+            mCell.usermodel = [UserManager sharedManager].userModel;
+            
+            mCell.cardClick = ^(){
+                
+                NSString *className = @"ZHMyVipCardViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                
+            };
+            
+            mCell.walletClick = ^(){
+                
+                NSString *className = @"ZHMyWalletViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
+            };
+            
+            return mCell;
+            
         }
         
-        mCell.usermodel = [UserManager sharedManager].userModel;
-        
-        
-        return mCell;
-    }else if (indexPath.section == 2){
-        
-    ZHExpertsTableViewCell *eCell = [tableView dequeueReusableCellWithIdentifier:ExpertsCellid forIndexPath:indexPath];
-    if (eCell == nil) {
-        eCell = [[ZHExpertsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ExpertsCellid];
+       
     }
-    return eCell;
+    if (indexPath.section == 2){
+        
+        if ([[UserManager sharedManager].userModel.expertCertified isEqual:@(1)]) {
+            
+            ZHExpertsTableViewCell *eCell = [tableView dequeueReusableCellWithIdentifier:ExpertsCellid forIndexPath:indexPath];
+            if (eCell == nil) {
+                eCell = [[ZHExpertsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ExpertsCellid];
+            }
+            
+            [eCell.expertsBtn setTitle:@"专家服务" forState:UIControlStateNormal];
+            return eCell;
+
+        }
+        
+        if ([[UserManager sharedManager].userModel.expertCertified isEqual:@(0)]) {
+            
+            ZHExpertsTableViewCell *eCell = [tableView dequeueReusableCellWithIdentifier:ExpertsCellid forIndexPath:indexPath];
+            if (eCell == nil) {
+                eCell = [[ZHExpertsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ExpertsCellid];
+            }
+            
+            [eCell.expertsBtn setTitle:@"认证专家" forState:UIControlStateNormal];
+            return eCell;
+            
+        }
+        
+        
+        
     }
     
     
