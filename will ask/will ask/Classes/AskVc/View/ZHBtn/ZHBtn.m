@@ -12,7 +12,7 @@
 #import "ImageTools.h"
 #import "UIView+LayerEffects.h"
 
-
+#import "ZHRewardDetailViewController.h"
 
 @interface ZHBtn ()
 
@@ -238,6 +238,11 @@
 - (void)touchesViewClickAction:(UITapGestureRecognizer *)tap {
     
     NSLog(@"touches %ld",self.clickBtn.tag);
+    /** 发送的通知 */
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"postVc" object:self userInfo:@{@"rewardAskId":self.tagModel.rewardAskId}];
+
+
+
 }
 
 @end

@@ -90,7 +90,7 @@ static NSInteger kMaxCount = 3;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self setupUI];
+//    [self setupUI];
     
     [self loadData];
     
@@ -267,131 +267,131 @@ static NSInteger kMaxCount = 3;
 }
 
 
-- (void)setupUI{
-    
-    UIButton *btnUp = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    [btnUp setImage:[UIImage imageNamed:@"expert"] forState:UIControlStateNormal];
-    
-    btnUp.frame = CGRectMake(0,CGRectGetMaxY(self.view.frame)- 50 ,[UIScreen mainScreen].bounds.size.width, 50);
+//- (void)setupUI{
 //    
-//    [btnUp addTarget:self action:@selector(UPUP) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:btnUp];
-    
-    [self.view addSubview:self.AllView];
-    [_AllView addSubview:self.ControlsView];
-    [_AllView addSubview:self.ContentView];
-    //    [_AllView addSubview:self.speakView];
-    [_AllView addSubview:self.ImageView];
-    
-    
-    [self.ContentView addSubview:self.ContentTextView];
-    [self.ControlsView addSubview:self.downBtn];
-    [self.ControlsView addSubview:self.textBtn];
-    [self.ControlsView addSubview:self.speakBtn];
-    [self.ControlsView addSubview:self.ReleaseBtn];
-    
-    [self.ContentTextView addSubview:self.PlaceholderLabel];
-    [self.ContentTextView addSubview:self.LinkageLabel];
-    //    [self.speakView addSubview:self.VoiceBtn];
-    
-    self.ContentTextView.delegate = self;
-    
-    CGFloat VoiceBtnWidth = 75;
-    CGFloat VoiceBtnHeight = VoiceBtnWidth;
+//    UIButton *btnUp = [UIButton buttonWithType:UIButtonTypeCustom];
 //    
-//    ICChatBox *button1 = [[ICChatBox alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - VoiceBtnWidth ) / 2, 42.5, VoiceBtnWidth, VoiceBtnHeight)];
-//    btn.delegate = self;
-//    [self.speakView addSubview:button1];
-    
-    _collectionView = [[UICollectionView alloc] initWithFrame: CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50) collectionViewLayout: self.layout];
-    _collectionView.delegate = self;
-    _collectionView.dataSource = self;
-    _collectionView.contentInset = UIEdgeInsetsMake(0,18, 0, 0);
-    [_collectionView registerNib:[UINib nibWithNibName: NSStringFromClass([MLImageCell class])
-                                                bundle: [NSBundle mainBundle]]
-      forCellWithReuseIdentifier: NSStringFromClass([MLImageCell class])];
-    _collectionView.backgroundColor = [UIColor whiteColor];
-    _collectionView.showsHorizontalScrollIndicator = NO;
-    _collectionView.showsVerticalScrollIndicator = NO;
-    
-    [self.ImageView addSubview:self.collectionView];
+//    [btnUp setImage:[UIImage imageNamed:@"expert"] forState:UIControlStateNormal];
+//    
+//    btnUp.frame = CGRectMake(0,CGRectGetMaxY(self.view.frame)- 50 ,[UIScreen mainScreen].bounds.size.width, 50);
+////    
+////    [btnUp addTarget:self action:@selector(UPUP) forControlEvents:UIControlEventTouchUpInside];
+////    [self.view addSubview:btnUp];
+//    
+//    [self.view addSubview:self.AllView];
+//    [_AllView addSubview:self.ControlsView];
+//    [_AllView addSubview:self.ContentView];
+//    //    [_AllView addSubview:self.speakView];
+//    [_AllView addSubview:self.ImageView];
+//    
+//    
+//    [self.ContentView addSubview:self.ContentTextView];
+//    [self.ControlsView addSubview:self.downBtn];
+//    [self.ControlsView addSubview:self.textBtn];
+//    [self.ControlsView addSubview:self.speakBtn];
+//    [self.ControlsView addSubview:self.ReleaseBtn];
+//    
+//    [self.ContentTextView addSubview:self.PlaceholderLabel];
+//    [self.ContentTextView addSubview:self.LinkageLabel];
+//    //    [self.speakView addSubview:self.VoiceBtn];
+//    
+//    self.ContentTextView.delegate = self;
+//    
+//    CGFloat VoiceBtnWidth = 75;
+//    CGFloat VoiceBtnHeight = VoiceBtnWidth;
+////    
+////    ICChatBox *button1 = [[ICChatBox alloc] initWithFrame:CGRectMake(([UIScreen mainScreen].bounds.size.width - VoiceBtnWidth ) / 2, 42.5, VoiceBtnWidth, VoiceBtnHeight)];
+////    btn.delegate = self;
+////    [self.speakView addSubview:button1];
+//    
+//    _collectionView = [[UICollectionView alloc] initWithFrame: CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50) collectionViewLayout: self.layout];
+//    _collectionView.delegate = self;
+//    _collectionView.dataSource = self;
+//    _collectionView.contentInset = UIEdgeInsetsMake(0,18, 0, 0);
+//    [_collectionView registerNib:[UINib nibWithNibName: NSStringFromClass([MLImageCell class])
+//                                                bundle: [NSBundle mainBundle]]
+//      forCellWithReuseIdentifier: NSStringFromClass([MLImageCell class])];
+//    _collectionView.backgroundColor = [UIColor whiteColor];
+//    _collectionView.showsHorizontalScrollIndicator = NO;
+//    _collectionView.showsVerticalScrollIndicator = NO;
+//    
+//    [self.ImageView addSubview:self.collectionView];
+////
+//}
 //
-}
-
-- (UIButton *)VoiceBtn{
-    if (!_VoiceBtn) {
-        
-        CGFloat VoiceBtnWidth = 75;
-        CGFloat VoiceBtnHeight = VoiceBtnWidth;
-        
-        
-        _VoiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-        [_VoiceBtn setImage:[UIImage imageNamed:@"record"] forState:UIControlStateNormal];
-        [_VoiceBtn setImage:[UIImage imageNamed:@"record1"] forState:UIControlStateSelected];
-        
-        _VoiceBtn.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - VoiceBtnWidth ) / 2, 42.5, VoiceBtnWidth, VoiceBtnHeight);
-    }
-    
-    return _VoiceBtn;
-}
-
-
-- (UIView *)ControlsView{
-    
-    if (!_ControlsView) {
-        
-        CGFloat ControlsViewHeight = 50;
-        
-        _ControlsView = [UIView new];
-        
-        _ControlsView.backgroundColor = [UIColor lightGrayColor];
-        
-        _ControlsView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, ControlsViewHeight);
-        
-    }
-    
-    
-    return _ControlsView;
-    
-}
-
-- (UIView *)ContentView{
-    
-    if (!_ContentView) {
-        
-        CGFloat ContentViewHeight = 190;
-        
-        _ContentView = [UIView new];
-        
-        _ContentView.backgroundColor = [UIColor redColor];
-        
-        _ContentView.frame = CGRectMake(0, CGRectGetMaxY(self.ControlsView.frame), [UIScreen mainScreen].bounds.size.width, ContentViewHeight);
-        
-    }
-    
-    
-    return _ContentView;
-}
-
-- (UIView *)AllView{
-    
-    if (!_AllView) {
-        CGFloat AllViewHeight = 285;
-        
-        _AllView = [UIView new];
-        
-        _AllView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-        _AllView.frame = (CGRect){CGPointMake(0, [UIScreen mainScreen].bounds.size.height - AllViewHeight
-                                              ), CGSizeMake([UIScreen mainScreen].bounds.size.width, AllViewHeight)};
-        
-    }
-    
-    
-    return _AllView;
-    
-}
+//- (UIButton *)VoiceBtn{
+//    if (!_VoiceBtn) {
+//        
+//        CGFloat VoiceBtnWidth = 75;
+//        CGFloat VoiceBtnHeight = VoiceBtnWidth;
+//        
+//        
+//        _VoiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        
+//        [_VoiceBtn setImage:[UIImage imageNamed:@"record"] forState:UIControlStateNormal];
+//        [_VoiceBtn setImage:[UIImage imageNamed:@"record1"] forState:UIControlStateSelected];
+//        
+//        _VoiceBtn.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - VoiceBtnWidth ) / 2, 42.5, VoiceBtnWidth, VoiceBtnHeight);
+//    }
+//    
+//    return _VoiceBtn;
+//}
+//
+//
+//- (UIView *)ControlsView{
+//    
+//    if (!_ControlsView) {
+//        
+//        CGFloat ControlsViewHeight = 50;
+//        
+//        _ControlsView = [UIView new];
+//        
+//        _ControlsView.backgroundColor = [UIColor lightGrayColor];
+//        
+//        _ControlsView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, ControlsViewHeight);
+//        
+//    }
+//    
+//    
+//    return _ControlsView;
+//    
+//}
+//
+//- (UIView *)ContentView{
+//    
+//    if (!_ContentView) {
+//        
+//        CGFloat ContentViewHeight = 190;
+//        
+//        _ContentView = [UIView new];
+//        
+//        _ContentView.backgroundColor = [UIColor redColor];
+//        
+//        _ContentView.frame = CGRectMake(0, CGRectGetMaxY(self.ControlsView.frame), [UIScreen mainScreen].bounds.size.width, ContentViewHeight);
+//        
+//    }
+//    
+//    
+//    return _ContentView;
+//}
+//
+//- (UIView *)AllView{
+//    
+//    if (!_AllView) {
+//        CGFloat AllViewHeight = 285;
+//        
+//        _AllView = [UIView new];
+//        
+//        _AllView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+//        _AllView.frame = (CGRect){CGPointMake(0, [UIScreen mainScreen].bounds.size.height - AllViewHeight
+//                                              ), CGSizeMake([UIScreen mainScreen].bounds.size.width, AllViewHeight)};
+//        
+//    }
+//    
+//    
+//    return _AllView;
+//    
+//}
 
 //
 //- (UIView *)speakView{

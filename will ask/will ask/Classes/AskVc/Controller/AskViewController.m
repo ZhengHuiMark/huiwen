@@ -22,7 +22,8 @@
 #import "ZHFreeQuestionViewController.h"
 #import "ZHRewardViewController.h"
 #import "MJRefresh.h"
-
+#import "FreeDetailViewController.h"
+#import "ZHRewardDetailViewController.h"
 
 static NSString *JumpCellid = @"JumpCellid";
 
@@ -66,6 +67,8 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     _tagContainer =  [ZHBtnContainer new];
     
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mingzizijiqi:) name:@"postVc" object:nil];
+
 
     
 }
@@ -76,6 +79,17 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 }
 
+- (void)mingzizijiqi:(NSNotification *)user{
+    
+    ZHRewardDetailViewController *rewardDVc = [[ZHRewardDetailViewController alloc]init];
+    rewardDVc.uidStringz = user.userInfo[@"rewardAskId"];
+    
+    [self.navigationController pushViewController:rewardDVc animated:YES];
+    
+}
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)configUI{
     
@@ -188,6 +202,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
         }
         cell.tagContainer = self.tagContainer;
         
+        
         return cell;
         
     }
@@ -260,7 +275,27 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     return 0;
 }
 
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+      [tableView deselectRowAtIndexPath: indexPath animated: YES];
+    
+    if (indexPath.section == 0) {
+        return;
+    }
+    
+    if (indexPath.section == 1) {
+        return;
+    }
+    
+    if (indexPath.section == 2) {
+        FreeDetailViewController *freeDVc = [[FreeDetailViewController alloc]init];
+        freeDVc.uidString = self.Freemodels[indexPath.row].freeAskId;
+        
+        [self.navigationController pushViewController:freeDVc animated:YES];
+        
+    }
+    
+    
+}
 
 
 

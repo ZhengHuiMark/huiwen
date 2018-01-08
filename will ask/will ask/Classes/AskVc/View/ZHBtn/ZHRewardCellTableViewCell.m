@@ -62,8 +62,7 @@
         
         tagButton.tagModel = [arrTagModels objectAtIndex: index];
         
-     
-        
+             
     }
 }
 

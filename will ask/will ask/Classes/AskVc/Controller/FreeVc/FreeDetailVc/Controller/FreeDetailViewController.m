@@ -25,6 +25,10 @@
 #import "MLImageCell.h"
 #import "LBViewController+ImagePicker.h"
 #import "VoiceConverter.h"
+#import "OSSService.h"
+#import "ImageTools.h"
+#import "UserManager.h"
+#import "UserModel.h"
 
 static NSString *FreeDetailCellid = @"FreeDetailCellid";
 
@@ -36,7 +40,11 @@ static NSString *AnswerContentCellid = @"AnswerContentCellid";
 static NSInteger kMaxCount = 3;
 
 @interface FreeDetailViewController ()<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,ICChatBoxDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
-
+{
+    OssService * service;
+    NSString * uploadFilePath;
+    
+}
 
 
 /** 控件view */
@@ -88,6 +96,9 @@ static NSInteger kMaxCount = 3;
 
 @property(nonatomic,strong)NSData *VoiceData;
 
+@property(nonatomic,strong)NSMutableArray *mArray;
+
+
 /** --------------------------------- */
 @property(nonatomic,strong)UITableView *tableView;
 
@@ -108,6 +119,13 @@ static NSInteger kMaxCount = 3;
     [self.view addSubview:self.tableView];
 
     [self setupUI];
+
+    
+    NSString * const endPoint = @"http://oss-cn-qingdao.aliyuncs.com";
+    NSString * const callbackAddress = @"http://oss-demo.aliyuncs.com:23450";
+    
+    service = [[OssService alloc] initWithViewController:self withEndPoint:endPoint];
+    [service setCallbackAddress:callbackAddress];
 
 }
 
@@ -317,6 +335,87 @@ static NSInteger kMaxCount = 3;
     }
     
     return _tableView;
+}
+
+#pragma mark - 发布回答
+- (void)releaseAnswer{
+    /* 
+     content	回答内容	string
+     freeAskId	免费问ID	number	必填
+     photos	回答图片（URL逗号分隔）	string
+     voice	回答语音（URL）	string
+     */
+    
+    
+    NSMutableDictionary *dic = [ZHNetworkTools parameters];
+//    if (self.ContentTextView.text) {
+//        [dic setObject:self.ContentTextView.text forKey:@"content"];
+//    }
+    
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/freeask/ut/answer",kIP];
+    
+    
+    
+    
+    NSInteger index=0;
+    NSInteger __block imgCount = 0;
+    for (MLImageModel *imgModel in self.imageModels) {
+        if (imgModel.modelType == MLImageModelTypePlaceholder) continue;
+        imgCount++;
+    }
+    
+    for (MLImageModel *imageModel in self.imageModels) {
+        if (imageModel.modelType == MLImageModelTypePlaceholder) continue;{
+            
+            
+            NSData *imageData = UIImageJPEGRepresentation(imageModel.image, 0.5);
+            NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"123"];
+            [imageData writeToFile:fullPath atomically:NO];
+            uploadFilePath = fullPath;
+            //                NSLog(@"uploadFilePath : %@", uploadFilePath);
+            
+            
+            NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
+            
+            NSString * objectKey = [NSString stringWithFormat:@"%@%@%f%ld",[UserManager sharedManager].userModel.resourceId,@"RP",interval,(long)index];
+            index++;
+//            NSLog(@"2131312321323  ===%@",objectKey);
+            
+            NSString *bucketName = bucketNameFree;
+//            NSLog(@"%@",bucketName);
+            
+            [service asyncPutImage:objectKey localFilePath:uploadFilePath bucketName:bucketName comletion:^(BOOL isSuccess) {
+                
+                if (isSuccess) {
+                    [self.mArray addObject:objectKey];
+                    
+                    if (self.mArray.count >= imgCount) {
+                        [dic setObject: [_mArray componentsJoinedByString:@","] forKey: @"photos"];
+                        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                            
+                            if (error) {
+                                //                NSLog(@"%@",error);
+                            }
+                            
+                            //            NSLog(@"response = %@",response);
+                            
+                            
+                        }];
+                    }
+            
+                    
+                    
+                } else {
+                    imgCount--;
+                }
+            }];
+            
+            
+            
+        }
+    }
+    
 }
 
 - (void)setupUI{
@@ -575,6 +674,7 @@ static NSInteger kMaxCount = 3;
     _ReleaseBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     
     _ReleaseBtn.frame = CGRectMake(CGRectGetMaxX(self.ControlsView.frame) - 18 - ReleaseBtnWidth, 18, ReleaseBtnWidth, ReleaseBtnHeight);
+    [_ReleaseBtn addTarget:self action:@selector(releaseAnswer) forControlEvents:UIControlEventTouchUpInside];
     
     
     return _ReleaseBtn;
@@ -943,6 +1043,15 @@ static NSInteger kMaxCount = 3;
 }
 
 
+- (NSMutableArray *)mArray {
+    
+    if (!_mArray) {
+        
+        _mArray = [[NSMutableArray alloc]init];
+    }
+    
+    return _mArray;
+}
 
 
 

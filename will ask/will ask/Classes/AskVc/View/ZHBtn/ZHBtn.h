@@ -14,6 +14,8 @@ typedef NS_ENUM(NSUInteger, MLTagButtonType) {
     MLTagButtonTypeTitleOnly,
 };
 
+typedef void(^btnClick)();
+
 @interface ZHBtn : UIView
 
 
@@ -21,5 +23,7 @@ typedef NS_ENUM(NSUInteger, MLTagButtonType) {
 
 @property (nonatomic, strong) ZHBtnModel *tagModel;
 
+
+@property(nonatomic,copy)btnClick didClick;
 
 @end
