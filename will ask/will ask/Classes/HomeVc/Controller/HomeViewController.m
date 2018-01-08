@@ -52,7 +52,7 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
 
 
-@interface HomeViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface HomeViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 {
     NSArray <ZHBannerListModel *> *_bannerModelArray;
     NSMutableArray *_bannerImageUrlMarry;
@@ -71,7 +71,9 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
 
 @property(nonatomic,strong)UITableView *tableView;
 
-@property (nonatomic, strong) SDCycleScrollView *bannerView;
+@property(nonatomic,strong) SDCycleScrollView *bannerView;
+
+@property(nonatomic,strong) UISearchBar *searchBar;
 
 
 
@@ -87,14 +89,12 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
     
     self.navigationController.navigationBar.hidden = YES;
     
-//    self.view.backgroundColor = [UIColor yellowColor];
     
     _bannerImageUrlMarry = [NSMutableArray array];
 
     [self.view addSubview:self.tableView];
     [self configUI];
 
-//    [self loadData];
     
     _tagContainer =  [ZHBtnContainer new];
     
@@ -108,13 +108,15 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
     view.backgroundColor = [UIColor clearColor];
     [self.view addSubview:view];
     
-    
-    UIImageView *imageV = [[UIImageView alloc] init];
-    imageV.image = [UIImage imageNamed:@"ask"];
-    imageV.bounds = CGRectMake(0, 0, 36, 36);
-    imageV.center = CGPointMake(28, 42);
-    [view addSubview:imageV];
+    [view addSubview:self.searchBar];
 
+    UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [editorBtn addTarget:self action:@selector(toMessage) forControlEvents:UIControlEventTouchUpInside];
+    [editorBtn setImage:[UIImage imageNamed:@"news"] forState:UIControlStateNormal];
+    [editorBtn sizeToFit];
+
+    editorBtn.frame = CGRectMake(CGRectGetMaxX(self.searchBar.frame) + 16, 30.5, 20, 17);
+    [view addSubview:editorBtn];
     
 }
 
@@ -134,17 +136,7 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
 
 - (void)configUI{
     
-    
 
-
-
-//    UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [editorBtn addTarget:self action:@selector(toMessage) forControlEvents:UIControlEventTouchUpInside];
-//    [editorBtn setImage:[UIImage imageNamed:@"news"] forState:UIControlStateNormal];
-//    [editorBtn sizeToFit];
-//    UIBarButtonItem *editBtnItem = [[UIBarButtonItem alloc] initWithCustomView:editorBtn];
-//    self.navigationItem.rightBarButtonItem = editBtnItem;
-    
     UIButton *button  = [[UIButton alloc]initWithFrame:CGRectMake(100, 100, 100, 100)];
     
     button.backgroundColor = [UIColor redColor];
@@ -202,35 +194,6 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
 }
 
 
-//- (void)loadData{
-//    
-//    NSString *url = [NSString stringWithFormat:@"%@/api/rewardask/getRewardAskByLatest",kIP];
-//    
-//    NSMutableDictionary *dic = [ZHNetworkTools parameters];
-//    
-//    [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
-//        if (error) {
-//            NSLog(@"%@",error);
-//        }
-//        
-//        NSLog(@"response = %@",response);
-//        
-//        NSArray<ZHBtnModel *> *models = [NSArray yy_modelArrayWithClass:[ZHBtnModel class] json:response[@"data"]];
-//        NSMutableArray<ZHBtnModel *> *tagModels = [NSMutableArray array];
-//        
-//        NSInteger index=0;
-//        for (NSDictionary *dict in response[@"data"]) {
-//            [tagModels addObject: [ZHBtnModel tagModelWithDictionary: dict
-//                                                             atIndex: index]];
-//            index++;
-//        }
-//        self.tagContainer.BtnTagModels = [NSMutableArray arrayWithArray: tagModels];
-//        
-//        [self.tableView reloadData];
-//        
-//    }];
-//    
-//}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
@@ -377,7 +340,7 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
     
     if (!_tableView) {
         
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, -20, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, -15, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
@@ -411,6 +374,55 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
     return _tagButtons;
 }
 
+
+- (UISearchBar *)searchBar {
+    if (!_searchBar) {
+        _searchBar = [[UISearchBar alloc] initWithFrame: CGRectMake(0, 17, [UIScreen mainScreen].bounds.size.width-60, 44)];
+        
+        _searchBar.delegate = self;
+        
+        _searchBar.placeholder = @"搜索案例,资讯,问答";
+        
+        _searchBar.searchBarStyle = UISearchBarStyleMinimal;
+        
+        _searchBar.layer.cornerRadius = 3;
+        _searchBar.layer.masksToBounds = YES;
+        _searchBar.layer.borderColor = [UIColor whiteColor].CGColor;
+
+        
+    }
+    return _searchBar;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    CGFloat offset = scrollView.contentOffset.y;
+    UIColor *color = [UIColor whiteColor];
+    
+    if (offset > 50) {
+        
+        if (offset >= 100) {
+            
+            offset = 100;
+        }
+        CGFloat alpha = (offset - 50)/50;
+        
+        _headerView.backgroundColor = [color colorWithAlphaComponent:alpha];
+        
+    }else {
+        
+        _headerView.backgroundColor = [UIColor clearColor];
+    }
+    
+    if (offset < -80) {
+        
+        _headerView.hidden = YES;
+    }else {
+        
+        _headerView.hidden = NO;
+    }
+    
+}
 
 
 @end

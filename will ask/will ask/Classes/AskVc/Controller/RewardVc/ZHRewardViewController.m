@@ -450,7 +450,7 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
 
 - (UISearchBar *)searchBar {
     if (!_searchBar) {
-        _searchBar = [[UISearchBar alloc] initWithFrame: CGRectMake(20, 0, [UIScreen mainScreen].bounds.size.width-40, 44)];
+        _searchBar = [[UISearchBar alloc] initWithFrame: CGRectMake(10, 0, [UIScreen mainScreen].bounds.size.width-40, 44)];
         
         _searchBar.delegate = self;
         

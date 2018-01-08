@@ -47,6 +47,8 @@ static NSString *typeCellid = @"typeCellid";
 
 @property (nonatomic, strong) SDCycleScrollView *bannerView;
 
+
+
 @end
 
 @implementation StudyViewController {
@@ -313,5 +315,9 @@ static NSString *typeCellid = @"typeCellid";
     
     return _tableView;
 }
+
+
+
+
 
 @end

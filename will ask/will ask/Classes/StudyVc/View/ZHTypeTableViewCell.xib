@@ -69,15 +69,19 @@
                     <constraint firstAttribute="trailing" secondItem="FDN-GN-Opq" secondAttribute="trailing" constant="105" id="2Fy-s8-7Ej"/>
                     <constraint firstItem="GyS-M7-V1Y" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="3OJ-fX-V5M"/>
                     <constraint firstItem="UQ0-i1-XbS" firstAttribute="top" secondItem="Spd-Wz-nzA" secondAttribute="bottom" constant="6.5" id="4hD-DL-khN"/>
+                    <constraint firstItem="FDN-GN-Opq" firstAttribute="height" secondItem="GyS-M7-V1Y" secondAttribute="height" id="5Ml-em-Fvq"/>
                     <constraint firstItem="Bxy-Bd-YfH" firstAttribute="top" secondItem="ITR-2e-VRo" secondAttribute="bottom" constant="6.5" id="6oS-yo-5zr"/>
                     <constraint firstItem="Bxy-Bd-YfH" firstAttribute="centerX" secondItem="ITR-2e-VRo" secondAttribute="centerX" id="9oI-Nk-xzP"/>
                     <constraint firstItem="ITR-2e-VRo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="116" id="HSE-gz-DE4"/>
                     <constraint firstItem="ITR-2e-VRo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Iug-ma-Ivr"/>
+                    <constraint firstItem="FDN-GN-Opq" firstAttribute="width" secondItem="GyS-M7-V1Y" secondAttribute="width" id="PKP-KK-unH"/>
                     <constraint firstItem="Spd-Wz-nzA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="R2Y-Ay-9Oz"/>
                     <constraint firstItem="GyS-M7-V1Y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="103" id="W2v-9m-UNc"/>
                     <constraint firstItem="UQ0-i1-XbS" firstAttribute="centerX" secondItem="Spd-Wz-nzA" secondAttribute="centerX" id="cOp-4G-1WP"/>
                     <constraint firstAttribute="trailing" secondItem="Spd-Wz-nzA" secondAttribute="trailing" constant="120.5" id="dDb-jY-wta"/>
                     <constraint firstItem="FDN-GN-Opq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="qjB-ZX-w5Q"/>
+                    <constraint firstItem="FDN-GN-Opq" firstAttribute="leading" secondItem="GyS-M7-V1Y" secondAttribute="trailing" constant="47" id="vKZ-az-CQa"/>
+                    <constraint firstItem="Spd-Wz-nzA" firstAttribute="leading" secondItem="GyS-M7-V1Y" secondAttribute="trailing" constant="66" id="x1f-1a-j86"/>
                 </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="24.5" y="52"/>
