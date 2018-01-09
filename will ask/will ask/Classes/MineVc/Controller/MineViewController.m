@@ -27,6 +27,7 @@
 #import "ZHExpertServiceViewController.h"
 #import "ZHExpertUserInfoHomePageViewController.h"
 #import "ZHSetupViewController.h"
+#import "ZHSearchViewController.h"
 
 //头部cell
 static NSString *HeaderCellid = @"HeaderCellid";
@@ -107,21 +108,17 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
             
             NSLog(@"%@",error);
         }
-        
-        
-//        _UserInfoModel = [UserInfoModel yy_modelWithJSON:response[@"data"]];
-        
-//        [UserManager sharedManager].userModel.cardBalance = response[@"data"][@"cardBalance"];
-//        [UserManager sharedManager].userModel.concernNum = response[@"data"][@"concernNum"];
+        [UserManager sharedManager].userModel.cardBalance = response[@"data"][@"cardBalance"];
+        [UserManager sharedManager].userModel.concernNum = response[@"data"][@"concernNum"];
         [UserManager sharedManager].userModel.avatar = response[@"data"][@"avatar"];
         [UserManager sharedManager].userModel.expertCertified = response[@"data"][@"expertCertified"];
         [UserManager sharedManager].userModel.expertCheckStatus = response[@"data"][@"expertCheckStatus"];
         [UserManager sharedManager].userModel.expertCheckStatus = response[@"data"][@"expertCheckStatus"];
         [UserManager sharedManager].userModel.expertNickname = response[@"data"][@"expertNickname"];
-//        [UserManager sharedManager].userModel.myEarnings = response[@"data"][@"myEarnings"];
-//        [UserManager sharedManager].userModel.consults = response[@"data"][@"consults"];
+        [UserManager sharedManager].userModel.myEarnings = response[@"data"][@"myEarnings"];
+        [UserManager sharedManager].userModel.consults = response[@"data"][@"consults"];
         [UserManager sharedManager].userModel.nickname = response[@"data"][@"nickname"];
-//        [UserManager sharedManager].userModel.realPhoto = response[@"data"][@"realPhoto"];
+        [UserManager sharedManager].userModel.realPhoto = response[@"data"][@"realPhoto"];
 
         NSLog(@"response = %@",response);
         [[UserManager sharedManager]saveUserModel];
@@ -220,10 +217,13 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 //                // 测试
 //                NSString *className = @"ZHUserHomePageViewController";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
-                
-                NSString *className = @"ZHExpertUserInfoHomePageViewController";
+//                
+//                NSString *className = @"ZHExpertUserInfoHomePageViewController";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                NSString *className = @"ZHSearchViewController";
                 [self pushToSetControllerWithIndexPath:indexPath className:className];
-//
+
+//ZHSearchViewController
 //                    NSString *className = @"ZHExpertServiceViewController";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
 //                NSString *className = @"ZHSetupViewController";
