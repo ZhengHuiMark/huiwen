@@ -20,11 +20,11 @@
 - (void)setUserModel:(UserModel *)userModel{
     _userModel = userModel;
     
-    self.foucsMeLabel.text = [NSString stringWithFormat:@"%@",[UserManager sharedManager].userModel.concernNum];
+//    self.foucsMeLabel.text = [NSString stringWithFormat:@"%@",[UserManager sharedManager].userModel.concernNum];
     
-    self.incomeNumber.text = [NSString stringWithFormat:@"%@",[UserManager sharedManager].userModel.myEarnings];
+//    self.incomeNumber.text = [NSString stringWithFormat:@"%@",[UserManager sharedManager].userModel.myEarnings];
     
-    self.NewConsultingNumber.text = [NSString stringWithFormat:@"%@",[UserManager sharedManager].userModel.consults];
+//    self.NewConsultingNumber.text = [NSString stringWithFormat:@"%@",[UserManager sharedManager].userModel.consults];
 }
 
 

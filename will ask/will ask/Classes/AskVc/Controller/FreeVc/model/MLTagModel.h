@@ -18,6 +18,7 @@
 @property (nonatomic, copy) NSString *code;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *imgUrlString;
+@property (nonatomic, copy) NSString *imgName;
 @property (nonatomic, strong) NSArray<MLSubTagModel *> *subTags;
 
 

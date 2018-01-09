@@ -43,7 +43,7 @@ static NSInteger kMaxCount = 3;
 {
     OssService * service;
     NSString * uploadFilePath;
-    
+    NSString * _voicePath;
 }
 
 
@@ -395,10 +395,10 @@ static NSInteger kMaxCount = 3;
                         [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
                             
                             if (error) {
-                                //                NSLog(@"%@",error);
+                                                NSLog(@"%@",error);
                             }
                             
-                            //            NSLog(@"response = %@",response);
+                                        NSLog(@"response = %@",response);
                             
                             
                         }];
@@ -414,6 +414,36 @@ static NSInteger kMaxCount = 3;
             
             
         }
+    }
+    
+    
+    if (_voicePath) {
+        
+        NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
+
+         NSString * objectKey = [NSString stringWithFormat:@"%@%@%f",[UserManager sharedManager].userModel.resourceId,@"RV",interval];
+        uploadFilePath = _voicePath;
+        NSString *bucketName = bucketNameFree;
+
+        [service asyncPutImage:objectKey localFilePath:uploadFilePath bucketName:bucketName comletion:^(BOOL isSuccess) {
+            
+            if (isSuccess) {
+                    [dic setObject:objectKey forKey:@"voice"];
+                    [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                        
+                        if (error) {
+                                            NSLog(@"%@",error);
+                        }
+                        
+                                    NSLog(@"response = %@",response);
+                        
+                        
+                    }];
+                }
+                
+                
+                
+        }];
     }
     
 }
@@ -877,10 +907,11 @@ static NSInteger kMaxCount = 3;
             
             NSLog(@"amr = %@",amrPath);
             //获取链接数据转成Data
-            _VoiceData = [NSData dataWithContentsOfFile:recordPath];
+            _VoiceData = [NSData dataWithContentsOfFile:amrPath];
             NSLog(@"_VoiceData = %@",_VoiceData);
             
-            [_VoiceData writeToFile:[NSTemporaryDirectory() stringByAppendingPathComponent:@"AudioTempFile"] atomically:YES];
+            _voicePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"456"];;
+            [_VoiceData writeToFile:_voicePath atomically:YES];
             
             
             

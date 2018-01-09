@@ -145,7 +145,9 @@
     switch (_btnType) {
         case MLTagButtonTypeImage: {
             // 设置图片
-            
+//            [self.btn setImage: [UIImage imageNamed: tagModel.imgName]
+//                      forState: UIControlStateNormal];
+            self.imgView.image = [UIImage imageNamed:tagModel.imgName];
         }
             break;
             
@@ -188,7 +190,7 @@
 - (UIImageView *)imgView {
     if (!_imgView) {
         _imgView = [UIImageView new];
-        _imgView.backgroundColor = [UIColor lightGrayColor];
+//        _imgView.backgroundColor = [UIColor lightGrayColor];
     }
     return _imgView;
 }

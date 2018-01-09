@@ -80,7 +80,7 @@ static UserManager *_instance = nil;
     id obj = [[NSUserDefaults standardUserDefaults] objectForKey: @"userModel"];
     if (!obj) return nil;
     
-    _userModel = [NSKeyedUnarchiver unarchiveObjectWithData: [[NSUserDefaults standardUserDefaults] objectForKey: @"UserModel"]];
+    _userModel = [NSKeyedUnarchiver unarchiveObjectWithData: [[NSUserDefaults standardUserDefaults] objectForKey: @"userModel"]];
     
     //    BOOL islogin = [[[NSUserDefaults standardUserDefaults] objectForKey: @"userModel"] boolValue];
     //    if (islogin) {

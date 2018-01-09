@@ -27,9 +27,9 @@
 - (void)setUsermodel:(UserModel *)usermodel {
     _usermodel = usermodel;
     
-    [self.memberCardBtn setTitle:[UserManager sharedManager].userModel.cardBalance forState:UIControlStateNormal];
+//    [self.memberCardBtn setTitle:[UserManager sharedManager].userModel.cardBalance forState:UIControlStateNormal];
     
-    [self.incomeBtn setTitle:[UserManager sharedManager].userModel.myEarnings forState:UIControlStateNormal];
+//    [self.incomeBtn setTitle:[UserManager sharedManager].userModel.myEarnings forState:UIControlStateNormal];
 }
 
 

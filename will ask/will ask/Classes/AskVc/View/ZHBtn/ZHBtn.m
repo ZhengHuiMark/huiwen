@@ -80,7 +80,7 @@
     _tagModel = tagModel;
     
     self.ContentLaebl.text = tagModel.content;
-    self.UserNameLabel.text = tagModel.nickname;
+    self.jjjLabel.text = [NSString stringWithFormat:@"悬赏人:%@",tagModel.nickname];
     if ([tagModel.type  isEqual: @"审计"]) {
         [self.typeImgV setImage:[UIImage imageNamed:@"shenji-1"]];
     }else if ([tagModel.type isEqual:@"税务"]){
@@ -110,20 +110,20 @@
     
     self.typeImgV.frame = CGRectMake(0, 14.5, 40, 20);
 
-    self.imgView.frame = (CGRect){CGRectGetMaxX(self.typeImgV.frame ) + 22.5, 8,39.5 , 34.5};
+    self.imgView.frame = (CGRect){CGRectGetWidth(self.placeholderView.frame) -39.5, 8,39.5 , 34.5};
     
-    self.RewardMoneyImgV.frame = (CGRect){CGRectGetMaxX(self.typeImgV.frame ) + 23.5 , 20,50 , 10};
+    self.RewardMoneyImgV.frame = (CGRect){CGRectGetWidth(self.placeholderView.frame) -39.5 , 20,50 , 10};
     
     CGSize size = CGSizeMake(_placeholderView.bounds.size.width - 20, 80);
     CGRect rectSize = [_ContentLaebl.text boundingRectWithSize:size options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading  attributes:@{ NSFontAttributeName : [UIFont systemFontOfSize:12] } context:nil];
     
     self.ContentLaebl.frame = CGRectMake(6, CGRectGetMaxY(self.imgView.frame) + 6,self.frame.size.width - 20,rectSize.size.height);
     
-    self.jjjLabel.frame = CGRectMake(6, CGRectGetMaxY(self.placeholderView.frame) - 13, 40, 13);
+    self.jjjLabel.frame = CGRectMake(6, CGRectGetMaxY(self.placeholderView.frame) - 13,CGRectGetWidth(self.placeholderView.frame), 13);
     
-    self.UserNameLabel.frame = CGRectMake(CGRectGetMaxX(self.jjjLabel.frame) + 3, CGRectGetMaxY(self.placeholderView.frame) - 13 , 60, 13);
+//    self.UserNameLabel.frame = CGRectMake(CGRectGetMaxX(self.jjjLabel.frame) + 3, CGRectGetMaxY(self.placeholderView.frame) - 13 , 60, 13);
     
-    self.clickBtn.frame = CGRectMake( CGRectGetWidth(self.placeholderView.frame)/2-75/2,CGRectGetMaxY(self.placeholderView.frame)+10 , 75, 25);
+    self.clickBtn.frame = CGRectMake( CGRectGetWidth(self.placeholderView.frame)/ 2-75/2,CGRectGetMaxY(self.placeholderView.frame)+10 , 75, 25);
 
 }
 
@@ -190,24 +190,15 @@
 - (UILabel *)jjjLabel {
     if (!_jjjLabel) {
         _jjjLabel = [UILabel new];
-        _jjjLabel.text = @"悬赏人:";
-        _jjjLabel.textAlignment = NSTextAlignmentCenter;
+//        _jjjLabel.text = @"悬赏人:";
+        _jjjLabel.textAlignment = NSTextAlignmentLeft;
         _jjjLabel.font = [UIFont systemFontOfSize: 10];
         _jjjLabel.textColor = [UIColor blackColor];
+//        _jjjLabel.backgroundColor = [UIColor redColor];
     }
     return _jjjLabel;
 }
 
-- (UILabel *)UserNameLabel {
-    if (!_UserNameLabel) {
-        _UserNameLabel = [UILabel new];
-        _UserNameLabel.text = @"测试人员";
-        _UserNameLabel.textAlignment = NSTextAlignmentCenter;
-        _UserNameLabel.font = [UIFont systemFontOfSize: 10];
-        _UserNameLabel.textColor = [UIColor blackColor];
-    }
-    return _UserNameLabel;
-}
 
 - (UIButton *)clickBtn {
     if (!_clickBtn) {

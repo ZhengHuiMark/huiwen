@@ -113,6 +113,7 @@
         }
         
         NSLog(@"%@",response);
+        [UserManager sharedManager].userModel;
         
         // 创建用户数据模型
         // 登录成功

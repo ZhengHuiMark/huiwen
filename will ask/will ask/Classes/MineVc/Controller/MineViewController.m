@@ -111,17 +111,17 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
         
 //        _UserInfoModel = [UserInfoModel yy_modelWithJSON:response[@"data"]];
         
-        [UserManager sharedManager].userModel.cardBalance = response[@"data"][@"cardBalance"];
-        [UserManager sharedManager].userModel.concernNum = response[@"data"][@"concernNum"];
+//        [UserManager sharedManager].userModel.cardBalance = response[@"data"][@"cardBalance"];
+//        [UserManager sharedManager].userModel.concernNum = response[@"data"][@"concernNum"];
         [UserManager sharedManager].userModel.avatar = response[@"data"][@"avatar"];
         [UserManager sharedManager].userModel.expertCertified = response[@"data"][@"expertCertified"];
         [UserManager sharedManager].userModel.expertCheckStatus = response[@"data"][@"expertCheckStatus"];
         [UserManager sharedManager].userModel.expertCheckStatus = response[@"data"][@"expertCheckStatus"];
         [UserManager sharedManager].userModel.expertNickname = response[@"data"][@"expertNickname"];
-        [UserManager sharedManager].userModel.myEarnings = response[@"data"][@"myEarnings"];
-        [UserManager sharedManager].userModel.consults = response[@"data"][@"consults"];
+//        [UserManager sharedManager].userModel.myEarnings = response[@"data"][@"myEarnings"];
+//        [UserManager sharedManager].userModel.consults = response[@"data"][@"consults"];
         [UserManager sharedManager].userModel.nickname = response[@"data"][@"nickname"];
-        [UserManager sharedManager].userModel.realPhoto = response[@"data"][@"realPhoto"];
+//        [UserManager sharedManager].userModel.realPhoto = response[@"data"][@"realPhoto"];
 
         NSLog(@"response = %@",response);
         [[UserManager sharedManager]saveUserModel];
