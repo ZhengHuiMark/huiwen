@@ -14,7 +14,7 @@
 /** 用户昵称 */
 @property(nonatomic , copy)NSString *nickname;
 /** 性别 */
-//@property(nonatomic , copy)NSString *sex;
+@property(nonatomic , copy)NSString *sex;
 /** token */
 @property (nonatomic, copy) NSString *token;
 /** 资源上传id*/
@@ -22,9 +22,9 @@
 
 @property(nonatomic,assign) NSNumber *tokenExpires;
 /** 会员卡余额 */
-//@property(nonatomic,  copy)NSString *cardBalance;
+@property(nonatomic,  copy)NSString *cardBalance;
 /** 有多少人关注 */
-//@property(nonatomic,  copy)NSString *concernNum;
+@property(nonatomic,  copy)NSString *concernNum;
 /** 是否是专家 */
 @property(nonatomic,  copy)NSString *expertCertified;
 /** 专家审核状态 */
@@ -32,11 +32,13 @@
 /** 专家昵称 */
 @property(nonatomic,  copy)NSString *expertNickname;
 /** 会员卡余额 */
-//@property(nonatomic,  copy)NSString *myEarnings;
+@property(nonatomic,  copy)NSString *myEarnings;
 /** 真实照片 */
-//@property(nonatomic,  copy)NSString *realPhoto;
+@property(nonatomic,  copy)NSString *realPhoto;
 /** 新增资讯 */
-//@property(nonatomic,  copy)NSString *consults;
+@property(nonatomic,  copy)NSString *consults;
+/** 设备别名 */
+@property(nonatomic,  copy)NSString *deviceAlias;
 
 
 

@@ -37,6 +37,15 @@
 #import "ImageTools.h"
 
 
+// 引入JPush功能所需头文件
+#import "JPUSHService.h"
+// iOS10注册APNs所需头文件
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
+// 如果需要使用idfa功能所需要引入的头文件（可选）
+#import <AdSupport/AdSupport.h>
+
 static NSString *jumpCellid = @"jumpCellid";
 
 static NSString *specialCellid = @"specialCellid";
@@ -92,7 +101,12 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
 
 - (void)viewWillAppear:(BOOL)animated{
     self.navigationController.navigationBar.hidden = YES;
-
+//    [JPUSHService getAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+//        
+//        NSLog(@"123 = %ld 456 = %@ 789 = %ld",(long)iResCode,iAlias,(long)seq);
+//    } seq:2];
+ 
+    
 }
 
 - (void)viewDidLoad {
@@ -109,6 +123,7 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
 
     
     _tagContainer =  [ZHBtnContainer new];
+    
     
     
     [self loadDataz];
@@ -379,7 +394,6 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
 }
 
 - (UITableView *)tableView {
-    //
     
     if (!_tableView) {
         
@@ -389,13 +403,10 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
         _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
         
         
-        //    NSBundle *bundle = [NSBundle mainBundle];
-        
-//        
         [_tableView registerNib:[UINib nibWithNibName:@"ZHJumpFourTableViewCell" bundle:nil] forCellReuseIdentifier:jumpCellid];
         
         [_tableView registerNib:[UINib nibWithNibName:@"ZHSpecialExpertTableViewCell" bundle:nil] forCellReuseIdentifier:specialCellid];
-//
+
         [_tableView registerNib:[UINib nibWithNibName:@"ZHExpertTodayTableViewCell" bundle:nil] forCellReuseIdentifier:ExpertsCellid];
         
         [_tableView registerNib:[UINib nibWithNibName:@"ZHCaseBreakDownTableViewCell" bundle:nil] forCellReuseIdentifier:CaseBreakDownCellid];

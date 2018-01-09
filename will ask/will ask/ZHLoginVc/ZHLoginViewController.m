@@ -29,6 +29,16 @@
 #import "WXApi.h"
 #import "AppDelegate.h"
 
+// 引入JPush功能所需头文件
+#import "JPUSHService.h"
+// iOS10注册APNs所需头文件
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
+// 如果需要使用idfa功能所需要引入的头文件（可选）
+#import <AdSupport/AdSupport.h>
+
+
 #define kWXAPPID wxc264c5d4f565c692
 #define kWXAppSecret db5c2c9660c35df6859bbd86d81e9b83
 
@@ -113,15 +123,25 @@
         }
         
         NSLog(@"%@",response);
-        [UserManager sharedManager].userModel;
+//        [UserManager sharedManager].userModel;
         
         // 创建用户数据模型
         // 登录成功
         [UserManager sharedManager].userModel = [UserModel yy_modelWithJSON:response[@"data"]];
         [[UserManager sharedManager]saveUserModel];
         
+        /** 极光推送set绑定设备号 */
+        NSInteger code = 1;
+            [JPUSHService setAlias:[UserManager sharedManager].userModel.deviceAlias completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                
+                NSLog(@"123 = %ld 456 = %@ 798 = %ld",(long)iResCode,iAlias,(long)seq);
+                
+                
+            } seq:code ];
+        
 
-
+        
+        
         !self.loginCompletion?:self.loginCompletion(NO);
         
         
