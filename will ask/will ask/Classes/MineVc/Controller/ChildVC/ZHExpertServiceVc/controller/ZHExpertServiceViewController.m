@@ -174,8 +174,8 @@ static NSString *expertServiceCellid = @"expertServiceCellid";
             }
             case 3:{
                 
-//                NSString *className = @"ValidationViewController";
-//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                NSString *className = @"ZHLearnToMeViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 
                 break;
                 

@@ -337,6 +337,10 @@
 		449A0C69200617B40003196A /* ZHFocusMeListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 449A0C67200617B40003196A /* ZHFocusMeListTableViewCell.xib */; };
 		449A0C6C2006235E0003196A /* ZHFocusMeUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C6B2006235E0003196A /* ZHFocusMeUserModel.m */; };
 		449A0C6F200627BA0003196A /* ZHFocusMeUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C6E200627BA0003196A /* ZHFocusMeUserViewController.m */; };
+		449A0C7720062C1F0003196A /* ZHLearnToMeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C7520062C1F0003196A /* ZHLearnToMeTableViewCell.m */; };
+		449A0C7820062C1F0003196A /* ZHLearnToMeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 449A0C7620062C1F0003196A /* ZHLearnToMeTableViewCell.xib */; };
+		449A0C7B20062C400003196A /* ZHLearnToMeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C7A20062C400003196A /* ZHLearnToMeModel.m */; };
+		449A0C7E20062C500003196A /* ZHLearnToMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C7D20062C500003196A /* ZHLearnToMeViewController.m */; };
 		44AF4AEF20049E500022B237 /* ZHFocusButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AF4AEA20049E500022B237 /* ZHFocusButton.m */; };
 		44AF4AF020049E500022B237 /* ZHFocusButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44AF4AEB20049E500022B237 /* ZHFocusButton.xib */; };
 		44AF4AF120049E500022B237 /* ZHFoucsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AF4AED20049E500022B237 /* ZHFoucsTableView.m */; };
@@ -958,6 +962,13 @@
 		449A0C6B2006235E0003196A /* ZHFocusMeUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHFocusMeUserModel.m; sourceTree = "<group>"; };
 		449A0C6D200627BA0003196A /* ZHFocusMeUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHFocusMeUserViewController.h; sourceTree = "<group>"; };
 		449A0C6E200627BA0003196A /* ZHFocusMeUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHFocusMeUserViewController.m; sourceTree = "<group>"; };
+		449A0C7420062C1F0003196A /* ZHLearnToMeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHLearnToMeTableViewCell.h; sourceTree = "<group>"; };
+		449A0C7520062C1F0003196A /* ZHLearnToMeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHLearnToMeTableViewCell.m; sourceTree = "<group>"; };
+		449A0C7620062C1F0003196A /* ZHLearnToMeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHLearnToMeTableViewCell.xib; sourceTree = "<group>"; };
+		449A0C7920062C400003196A /* ZHLearnToMeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHLearnToMeModel.h; sourceTree = "<group>"; };
+		449A0C7A20062C400003196A /* ZHLearnToMeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHLearnToMeModel.m; sourceTree = "<group>"; };
+		449A0C7C20062C500003196A /* ZHLearnToMeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHLearnToMeViewController.h; sourceTree = "<group>"; };
+		449A0C7D20062C500003196A /* ZHLearnToMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHLearnToMeViewController.m; sourceTree = "<group>"; };
 		44AF4AE920049E500022B237 /* ZHFocusButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHFocusButton.h; sourceTree = "<group>"; };
 		44AF4AEA20049E500022B237 /* ZHFocusButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHFocusButton.m; sourceTree = "<group>"; };
 		44AF4AEB20049E500022B237 /* ZHFocusButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHFocusButton.xib; sourceTree = "<group>"; };
@@ -3139,6 +3150,8 @@
 		449A0C7120062BDE0003196A /* controller */ = {
 			isa = PBXGroup;
 			children = (
+				449A0C7C20062C500003196A /* ZHLearnToMeViewController.h */,
+				449A0C7D20062C500003196A /* ZHLearnToMeViewController.m */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -3146,6 +3159,8 @@
 		449A0C7220062BDE0003196A /* model */ = {
 			isa = PBXGroup;
 			children = (
+				449A0C7920062C400003196A /* ZHLearnToMeModel.h */,
+				449A0C7A20062C400003196A /* ZHLearnToMeModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -3153,6 +3168,9 @@
 		449A0C7320062BDE0003196A /* view */ = {
 			isa = PBXGroup;
 			children = (
+				449A0C7420062C1F0003196A /* ZHLearnToMeTableViewCell.h */,
+				449A0C7520062C1F0003196A /* ZHLearnToMeTableViewCell.m */,
+				449A0C7620062C1F0003196A /* ZHLearnToMeTableViewCell.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3591,6 +3609,7 @@
 				448DC9961FFB2EBE004F4F2A /* ZHSetupListTableViewCell.xib in Resources */,
 				440770A01FE24B2B0000C20E /* ZHInvoiceTableViewCell.xib in Resources */,
 				440770FC1FE79FF90000C20E /* ZHExpertAnswerTableViewCell.xib in Resources */,
+				449A0C7820062C1F0003196A /* ZHLearnToMeTableViewCell.xib in Resources */,
 				441018821F4EADC700EBA751 /* WeiboSDK.bundle in Resources */,
 				44C12D6F1F6A65D400E48FED /* ZHHeaderTableViewCell.xib in Resources */,
 				448DC9B61FFDBF6F004F4F2A /* ZHLearnTableViewCell.xib in Resources */,
@@ -3764,6 +3783,7 @@
 				449957131F678F6A0087503B /* ZHMD5.m in Sources */,
 				44827B3A1F971EEE0097F1E7 /* ZHBtn.m in Sources */,
 				444D49831FF1193F00D82736 /* ZHExpertServiceListTableViewCell.m in Sources */,
+				449A0C7B20062C400003196A /* ZHLearnToMeModel.m in Sources */,
 				440770401FD8DDD10000C20E /* ZHMyFreeAskViewController.m in Sources */,
 				44C7AC871FAAF22500F42616 /* XLCircleProgress.m in Sources */,
 				440770481FD8E9820000C20E /* ZHMyFreeAskModel.m in Sources */,
@@ -3831,6 +3851,7 @@
 				4445F7E12000FD680027EB1B /* businessCellViewCell.m in Sources */,
 				4435A6CA1F8B166D00C1744E /* ZHValidationCertificateCell.m in Sources */,
 				44C952031FB97AA9002B5509 /* ZHChooseTypeBtnContainer.m in Sources */,
+				449A0C7E20062C500003196A /* ZHLearnToMeViewController.m in Sources */,
 				447674931F8DC9AB007162AC /* ZHAllRewardTableViewCell.m in Sources */,
 				44827BFC1FAAB2B90097F1E7 /* ZHRewardListTableViewCell.m in Sources */,
 				44827BF41FA869C30097F1E7 /* ZHAnswerVoiceTableViewCell.m in Sources */,
@@ -3873,6 +3894,7 @@
 				444D49971FF1FC4000D82736 /* ZHSetUpIdentityTableViewCell.m in Sources */,
 				440770EF1FE76D520000C20E /* ZHMyConsultingAnswerVoiceTableViewCell.m in Sources */,
 				4411EF441F78EC7E003AAF1C /* ZHJumpTableViewCell.m in Sources */,
+				449A0C7720062C1F0003196A /* ZHLearnToMeTableViewCell.m in Sources */,
 				441ADE931F3ABBED00ECD63E /* main.m in Sources */,
 				449A0C68200617B40003196A /* ZHFocusMeListTableViewCell.m in Sources */,
 				447674E21F8F682C007162AC /* ZHReleaseTableViewCell.m in Sources */,
