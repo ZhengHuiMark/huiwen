@@ -14,6 +14,7 @@
 #import "YYModel.h"
 #import "ZHExpertServicePriceTableViewCell.h"
 #import "ZHExpertAskIdentityViewController.h"
+#import "ZHToAnswerViewController.h"
 
 static NSString *expertServicePriceCellid = @"expertServicePriceCellid";
 static NSString *expertServiceCellid = @"expertServiceCellid";
@@ -104,7 +105,7 @@ static NSString *expertServiceCellid = @"expertServiceCellid";
     if (section == 0) {
         return 1;
     }
-    return 6;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -149,8 +150,8 @@ static NSString *expertServiceCellid = @"expertServiceCellid";
         switch (indexPath.row) {
             case 0:{
                 
-//                NSString *className = @"ValidationViewController";
-//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                NSString *className = @"ZHToAnswerViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 
                 break;
    

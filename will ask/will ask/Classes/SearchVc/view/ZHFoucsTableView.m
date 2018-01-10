@@ -113,21 +113,7 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    ZHModel *model = _dataSouse[indexPath.row];
-    
-//    if (model.cellType == CellTypeText) {
-//        return UITableViewAutomaticDimension;
-//    }else if (model.cellType == CellTypeReward){
-//        return UITableViewAutomaticDimension;
-//    }else if (model.cellType == CellTypeZHGraphic){
-//        return UITableViewAutomaticDimension;
-//    }else if (model.cellType == CellTypePeep) {
-//        return UITableViewAutomaticDimension;
-//    }
-//    else{
-//        return 250;
-//    }
-    
+
     return 200;
     
 }
@@ -141,34 +127,34 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = nil;
+
+    ZHAllModel *model = _dataSouse[indexPath.row];
     
-//    ZHModel *model = self.dataSouse[indexPath.row];
-   
+    if (model.rewardAskId) {
+        ZHRewardListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ZHRewardListTableViewCellid forIndexPath:indexPath];
+        
+        return cell;
+    }
+    
+    if (model.freeAskId) {
+        ZHFreeListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FreeListTableViewCellid forIndexPath:indexPath];
+        
+        return cell;
+    }
+    
+    if (model.expertId) {
+        ZHExpertTodayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ExpertsCellid forIndexPath:indexPath];
+        
+        return cell;
+    }
+    
+    if (model.caseId) {
+        ZHExpertTodayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CaseListCellid forIndexPath:indexPath];
+        
+        return cell;
+    }
     
     
-//    switch (model.cellType) {
-//        case CellTypeReward:
-//            cell = [tableView dequeueReusableCellWithIdentifier:rewardCellID forIndexPath:indexPath];
-//            [(ZHRewardTableViewCell *)cell setZh_model:model];
-//            break;
-//        case CellTypeInvitation:
-//            cell = [tableView dequeueReusableCellWithIdentifier:InvitationCellId forIndexPath:indexPath];
-//            [(ZHExpertsInvitationTableViewCell *)cell setExpertsModel:model];
-//        case CellTypePeep:
-//            cell = [tableView dequeueReusableCellWithIdentifier:PeepCellID forIndexPath:indexPath];
-//            [(ZHPeepTableViewCell *)cell setZh_model:model];
-//        case CellTypeZHGraphic:
-//            cell = [tableView dequeueReusableCellWithIdentifier:contentCellID forIndexPath:indexPath];
-//            [(ZHGraphicTableViewCell *)cell setZh_model:model];
-//        case CellTypeText:
-//            cell = [tableView dequeueReusableCellWithIdentifier:textCellID forIndexPath:indexPath];
-//            [(ZHTextTableViewCell *)cell setZh_model:model];
-//        
-//        default: {
-//        
-//        }
-//            break;
-//    }
     
     return cell;
 }
@@ -199,14 +185,14 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
         }
         NSLog(@"%@",response);
         // 3. 解析数据模型
-        //  3.1 从 JSON 中解析数据
-//        NSArray<ZHModel *> *models = [NSArray yy_modelArrayWithClass:[ZHModel class] json:response[@"data"]];
+//          3.1 从 JSON 中解析数据
+        NSArray<ZHAllModel *> *models = [NSArray yy_modelArrayWithClass:[ZHAllModel class] json:response[@"data"]];
         
         //  3.2 刷新数据源
-//        _dataSouse = [NSMutableArray arrayWithArray: models];
+        _dataSouse = [NSMutableArray arrayWithArray: models];
         
         // 4. 刷新TableView
-//        [self.tableView reloadData];
+        [self.tableView reloadData];
         
         
     }];

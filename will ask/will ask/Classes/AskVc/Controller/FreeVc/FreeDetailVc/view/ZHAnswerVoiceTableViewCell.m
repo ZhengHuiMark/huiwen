@@ -27,11 +27,6 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 
 - (void)setDetailModel:(ZHFreeDetailModel *)detailModel {
@@ -45,7 +40,11 @@
     
     self.answerName.text = answerVoiceModel.nickname;
     [self.userAvatarImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,answerVoiceModel.avatar]]];
-    //    self.answerExpert.text = answerModel.
+    self.answerExpert.text = answerVoiceModel.certifiedNames;
+    
+    self.answerTime.text = answerVoiceModel.time;
+    
+ 
     
     NSArray *PhotoArray = [self.answerVoiceModel.photos componentsSeparatedByString:@","];
     

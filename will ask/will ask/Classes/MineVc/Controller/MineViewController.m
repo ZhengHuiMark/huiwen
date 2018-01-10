@@ -220,12 +220,12 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 //                
 //                NSString *className = @"ZHExpertUserInfoHomePageViewController";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
-                NSString *className = @"ZHSearchViewController";
-                [self pushToSetControllerWithIndexPath:indexPath className:className];
+//                NSString *className = @"ZHSearchViewController";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
 
 //ZHSearchViewController
-//                    NSString *className = @"ZHExpertServiceViewController";
-//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                    NSString *className = @"ZHExpertServiceViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
 //                NSString *className = @"ZHSetupViewController";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 break;
@@ -289,8 +289,18 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
             if (cell == nil) {
                 cell = [[ZHExpertsListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ExpertBtnCellid];
             }
-            
             cell.userModel = [UserManager sharedManager].userModel;
+            
+            cell.didClick = ^(){
+                
+            };
+            cell.incomeDidClick = ^(){
+                NSString *className = @"ZHMyWalletViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
+            };
+            cell.newConultDidClick = ^(){
+                
+            };
             
             return cell;
         }

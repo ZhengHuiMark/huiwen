@@ -323,6 +323,12 @@
 		449957101F67787A0087503B /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4499570F1F67787A0087503B /* UserManager.m */; };
 		449957131F678F6A0087503B /* ZHMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 449957121F678F6A0087503B /* ZHMD5.m */; };
 		449A0C3D2004A4170003196A /* ZHAllModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C3C2004A4170003196A /* ZHAllModel.m */; };
+		449A0C442005C2CE0003196A /* ZHToAnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C432005C2CE0003196A /* ZHToAnswerViewController.m */; };
+		449A0C482005C35F0003196A /* ZHToAnswerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C462005C35F0003196A /* ZHToAnswerTableViewCell.m */; };
+		449A0C492005C35F0003196A /* ZHToAnswerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 449A0C472005C35F0003196A /* ZHToAnswerTableViewCell.xib */; };
+		449A0C4D2005C3790003196A /* ZHHaveToAnswerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C4B2005C3790003196A /* ZHHaveToAnswerTableViewCell.m */; };
+		449A0C4E2005C3790003196A /* ZHHaveToAnswerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 449A0C4C2005C3790003196A /* ZHHaveToAnswerTableViewCell.xib */; };
+		449A0C512005C6E60003196A /* ZHToAnsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C502005C6E60003196A /* ZHToAnsModel.m */; };
 		44AF4AEF20049E500022B237 /* ZHFocusButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AF4AEA20049E500022B237 /* ZHFocusButton.m */; };
 		44AF4AF020049E500022B237 /* ZHFocusButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44AF4AEB20049E500022B237 /* ZHFocusButton.xib */; };
 		44AF4AF120049E500022B237 /* ZHFoucsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AF4AED20049E500022B237 /* ZHFoucsTableView.m */; };
@@ -920,6 +926,16 @@
 		449957121F678F6A0087503B /* ZHMD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHMD5.m; sourceTree = "<group>"; };
 		449A0C3B2004A4170003196A /* ZHAllModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHAllModel.h; sourceTree = "<group>"; };
 		449A0C3C2004A4170003196A /* ZHAllModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHAllModel.m; sourceTree = "<group>"; };
+		449A0C422005C2CE0003196A /* ZHToAnswerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHToAnswerViewController.h; sourceTree = "<group>"; };
+		449A0C432005C2CE0003196A /* ZHToAnswerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHToAnswerViewController.m; sourceTree = "<group>"; };
+		449A0C452005C35F0003196A /* ZHToAnswerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHToAnswerTableViewCell.h; sourceTree = "<group>"; };
+		449A0C462005C35F0003196A /* ZHToAnswerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHToAnswerTableViewCell.m; sourceTree = "<group>"; };
+		449A0C472005C35F0003196A /* ZHToAnswerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHToAnswerTableViewCell.xib; sourceTree = "<group>"; };
+		449A0C4A2005C3790003196A /* ZHHaveToAnswerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHHaveToAnswerTableViewCell.h; sourceTree = "<group>"; };
+		449A0C4B2005C3790003196A /* ZHHaveToAnswerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHHaveToAnswerTableViewCell.m; sourceTree = "<group>"; };
+		449A0C4C2005C3790003196A /* ZHHaveToAnswerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHHaveToAnswerTableViewCell.xib; sourceTree = "<group>"; };
+		449A0C4F2005C6E60003196A /* ZHToAnsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHToAnsModel.h; sourceTree = "<group>"; };
+		449A0C502005C6E60003196A /* ZHToAnsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHToAnsModel.m; sourceTree = "<group>"; };
 		44AF4AE920049E500022B237 /* ZHFocusButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHFocusButton.h; sourceTree = "<group>"; };
 		44AF4AEA20049E500022B237 /* ZHFocusButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHFocusButton.m; sourceTree = "<group>"; };
 		44AF4AEB20049E500022B237 /* ZHFocusButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHFocusButton.xib; sourceTree = "<group>"; };
@@ -2280,6 +2296,7 @@
 		444D49791FF112B900D82736 /* ZHExpertServiceVc */ = {
 			isa = PBXGroup;
 			children = (
+				449A0C3E2005C2B70003196A /* ZHToAnswerVc */,
 				444D498D1FF1F99300D82736 /* ZHAskIdVc */,
 				444D497A1FF112B900D82736 /* controller */,
 				444D497B1FF112B900D82736 /* model */,
@@ -2967,6 +2984,47 @@
 			path = model;
 			sourceTree = "<group>";
 		};
+		449A0C3E2005C2B70003196A /* ZHToAnswerVc */ = {
+			isa = PBXGroup;
+			children = (
+				449A0C3F2005C2B70003196A /* controller */,
+				449A0C402005C2B70003196A /* model */,
+				449A0C412005C2B70003196A /* view */,
+			);
+			path = ZHToAnswerVc;
+			sourceTree = "<group>";
+		};
+		449A0C3F2005C2B70003196A /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				449A0C422005C2CE0003196A /* ZHToAnswerViewController.h */,
+				449A0C432005C2CE0003196A /* ZHToAnswerViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		449A0C402005C2B70003196A /* model */ = {
+			isa = PBXGroup;
+			children = (
+				449A0C4F2005C6E60003196A /* ZHToAnsModel.h */,
+				449A0C502005C6E60003196A /* ZHToAnsModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		449A0C412005C2B70003196A /* view */ = {
+			isa = PBXGroup;
+			children = (
+				449A0C452005C35F0003196A /* ZHToAnswerTableViewCell.h */,
+				449A0C462005C35F0003196A /* ZHToAnswerTableViewCell.m */,
+				449A0C472005C35F0003196A /* ZHToAnswerTableViewCell.xib */,
+				449A0C4A2005C3790003196A /* ZHHaveToAnswerTableViewCell.h */,
+				449A0C4B2005C3790003196A /* ZHHaveToAnswerTableViewCell.m */,
+				449A0C4C2005C3790003196A /* ZHHaveToAnswerTableViewCell.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		44AF4AE520049D140022B237 /* SearchVc */ = {
 			isa = PBXGroup;
 			children = (
@@ -3363,6 +3421,7 @@
 				4435A6CB1F8B166D00C1744E /* ZHValidationCertificateCell.xib in Resources */,
 				447674D41F8F5F50007162AC /* ZHTitleTypeTableViewCell.xib in Resources */,
 				441ADEA11F3ABBED00ECD63E /* LaunchScreen.storyboard in Resources */,
+				449A0C492005C35F0003196A /* ZHToAnswerTableViewCell.xib in Resources */,
 				440770541FD930730000C20E /* ZHMyRewardListTableViewCell.xib in Resources */,
 				44C12D741F6A7DE400E48FED /* ZHMoneyTableViewCell.xib in Resources */,
 				44827BEB1FA851330097F1E7 /* ZHFreeDetailTableViewCell.xib in Resources */,
@@ -3419,6 +3478,7 @@
 				442C03851F6BBE6C0078CDC7 /* ZHExpertsListTableViewCell.xib in Resources */,
 				44BB65E51FCD3549003C3A6E /* ZHCaseListTableViewCell.xib in Resources */,
 				44827BFD1FAAB2B90097F1E7 /* ZHRewardListTableViewCell.xib in Resources */,
+				449A0C4E2005C3790003196A /* ZHHaveToAnswerTableViewCell.xib in Resources */,
 				4435A5631F87A1F800C1744E /* ZHHeaderAvatarTableViewCell.xib in Resources */,
 				441ADE9E1F3ABBED00ECD63E /* Assets.xcassets in Resources */,
 				440770CC1FE37EA00000C20E /* ZHContentTextViewTableViewCell.xib in Resources */,
@@ -3578,6 +3638,7 @@
 				44C952061FB97AA9002B5509 /* ZHChooseTypeTableViewCell.m in Sources */,
 				44827BD31F9DBB6B0097F1E7 /* BRDatePickerView.m in Sources */,
 				448DC9D01FFE07F7004F4F2A /* ZHWithdrawalModel.m in Sources */,
+				449A0C4D2005C3790003196A /* ZHHaveToAnswerTableViewCell.m in Sources */,
 				440771281FE8B6C70000C20E /* ZHUserInfoFreeAskTableViewCell.m in Sources */,
 				4411EF491F79FE26003AAF1C /* ZHLatestPriceTableViewCell.m in Sources */,
 				440771461FE8EB010000C20E /* ZHUserInfoModel.m in Sources */,
@@ -3623,6 +3684,7 @@
 				440771541FE929880000C20E /* ZHMoreRewardListViewController.m in Sources */,
 				44BB65E41FCD3549003C3A6E /* ZHCaseListTableViewCell.m in Sources */,
 				4435A5621F87A1F800C1744E /* ZHHeaderAvatarTableViewCell.m in Sources */,
+				449A0C442005C2CE0003196A /* ZHToAnswerViewController.m in Sources */,
 				444D49CB1FF23FC700D82736 /* UIView+LayerEffects.m in Sources */,
 				447674D81F8F6031007162AC /* ZHAskTextViewTableViewCell.m in Sources */,
 				442C03371F6B6FC70078CDC7 /* MineModel.m in Sources */,
@@ -3665,6 +3727,7 @@
 				4435A5671F87AD5500C1744E /* ZHExpertsEditTableViewCell.m in Sources */,
 				44827B521F974D2C0097F1E7 /* MLTagModel.m in Sources */,
 				444D49FD1FF3517B00D82736 /* ZHOrderDetailModel.m in Sources */,
+				449A0C482005C35F0003196A /* ZHToAnswerTableViewCell.m in Sources */,
 				44BB65F51FD0101E003C3A6E /* ZHCaseDetailsModel.m in Sources */,
 				44827BD21F9DBB6B0097F1E7 /* BaseView.m in Sources */,
 				448DC9D92000E7C0004F4F2A /* ZHBannerListModel.m in Sources */,
@@ -3676,6 +3739,7 @@
 				4411EF441F78EC7E003AAF1C /* ZHJumpTableViewCell.m in Sources */,
 				441ADE931F3ABBED00ECD63E /* main.m in Sources */,
 				447674E21F8F682C007162AC /* ZHReleaseTableViewCell.m in Sources */,
+				449A0C512005C6E60003196A /* ZHToAnsModel.m in Sources */,
 				440770C71FE37A240000C20E /* ZHMyConsultDetailViewController.m in Sources */,
 				44827C181FAAC5C20097F1E7 /* ZHRewardAnswerVoiceTableViewCell.m in Sources */,
 				444D4A101FF37A1E00D82736 /* ZHOrderDetailVipCardTableViewCell.m in Sources */,

@@ -36,27 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "will ask/Classes/MineVc/Controller/ChildVC/ZHMyRewardVc/Controller/ZHMyRewardAskViewController.m"
-            timestampString = "536726667.530906"
+            timestampString = "537263040.803556"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
-            landmarkName = "-selectItem:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "will ask/Classes/MineVc/Controller/ChildVC/ZHMyRewardVc/Controller/ZHMyRewardAskViewController.m"
-            timestampString = "536726667.530906"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "-initTableView"
             landmarkType = "7">
          </BreakpointContent>
@@ -272,7 +256,7 @@
                   moduleName = "will ask"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/baseVc/ZHUserHomePageVc/Controller/ZHFreeListVc/view/ZHMoreFreeListTableViewCell.h"
-                  timestampString = "537184993.495168"
+                  timestampString = "537266127.0017"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -287,7 +271,7 @@
                   moduleName = "will ask"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/baseVc/ZHUserHomePageVc/Controller/ZHFreeListVc/view/ZHMoreFreeListTableViewCell.h"
-                  timestampString = "537184993.496613"
+                  timestampString = "537266127.0031641"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
@@ -304,11 +288,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "will ask/Classes/MineVc/Controller/ChildVC/ZHExpertServiceVc/controller/ZHExpertServiceViewController.m"
-            timestampString = "535966275.8828"
+            timestampString = "537260843.813205"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "-viewWillDisappear:"
             landmarkType = "7">
          </BreakpointContent>
@@ -382,11 +366,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "will ask/Classes/MineVc/Controller/ChildVC/ZHExpertServiceVc/controller/ZHExpertServiceViewController.m"
-            timestampString = "536554933.778038"
+            timestampString = "537260843.813205"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "-viewWillAppear:"
             landmarkType = "7">
          </BreakpointContent>
@@ -526,11 +510,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "will ask/Classes/AskVc/Controller/FreeVc/FreeDetailVc/Controller/FreeDetailViewController.m"
-            timestampString = "537106933.247551"
+            timestampString = "537244430.524489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "834"
-            endingLineNumber = "834"
+            startingLineNumber = "835"
+            endingLineNumber = "835"
             landmarkName = "-textViewDidChange:"
             landmarkType = "7">
          </BreakpointContent>
@@ -542,11 +526,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "will ask/Classes/AskVc/Controller/FreeVc/FreeDetailVc/Controller/FreeDetailViewController.m"
-            timestampString = "537106933.247551"
+            timestampString = "537244430.524489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "477"
-            endingLineNumber = "477"
+            startingLineNumber = "478"
+            endingLineNumber = "478"
             landmarkName = "-setupUI"
             landmarkType = "7">
          </BreakpointContent>
@@ -558,11 +542,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "will ask/Classes/AskVc/Controller/FreeVc/FreeDetailVc/Controller/FreeDetailViewController.m"
-            timestampString = "537106933.247551"
+            timestampString = "537244430.524489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "489"
-            endingLineNumber = "489"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
             landmarkName = "-setupUI"
             landmarkType = "7">
          </BreakpointContent>
@@ -574,11 +558,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "will ask/Classes/AskVc/Controller/FreeVc/FreeDetailVc/Controller/FreeDetailViewController.m"
-            timestampString = "537106933.247551"
+            timestampString = "537244430.524489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "511"
-            endingLineNumber = "511"
+            startingLineNumber = "512"
+            endingLineNumber = "512"
             landmarkName = "-VoiceBtn"
             landmarkType = "7">
          </BreakpointContent>
@@ -590,11 +574,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "will ask/Classes/AskVc/Controller/FreeVc/FreeDetailVc/Controller/FreeDetailViewController.m"
-            timestampString = "537106933.247551"
+            timestampString = "537244430.524489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "760"
-            endingLineNumber = "760"
+            startingLineNumber = "761"
+            endingLineNumber = "761"
             landmarkName = "-gogo"
             landmarkType = "7">
          </BreakpointContent>
@@ -798,11 +782,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "will ask/Classes/AskVc/Controller/FreeVc/FreeDetailVc/Controller/FreeDetailViewController.m"
-            timestampString = "537107055.541925"
+            timestampString = "537244430.524489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "432"
-            endingLineNumber = "432"
+            startingLineNumber = "433"
+            endingLineNumber = "433"
             landmarkName = "-releaseAnswer"
             landmarkType = "7">
             <Locations>
@@ -814,11 +798,11 @@
                   moduleName = "will ask"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/Classes/AskVc/Controller/FreeVc/FreeDetailVc/Controller/FreeDetailViewController.m"
-                  timestampString = "537184993.590022"
+                  timestampString = "537266127.0830081"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "432"
-                  endingLineNumber = "432"
+                  startingLineNumber = "433"
+                  endingLineNumber = "433"
                   offsetFromSymbolStart = "94">
                </Location>
                <Location
@@ -829,11 +813,11 @@
                   moduleName = "will ask"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/Classes/AskVc/Controller/FreeVc/FreeDetailVc/Controller/FreeDetailViewController.m"
-                  timestampString = "537184993.592242"
+                  timestampString = "537266127.084426"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "434"
-                  endingLineNumber = "434"
+                  startingLineNumber = "435"
+                  endingLineNumber = "435"
                   offsetFromSymbolStart = "75">
                </Location>
             </Locations>
@@ -846,11 +830,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "will ask/Classes/AskVc/Controller/FreeVc/FreeDetailVc/Controller/FreeDetailViewController.m"
-            timestampString = "537107058.456085"
+            timestampString = "537244430.524489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "440"
-            endingLineNumber = "440"
+            startingLineNumber = "441"
+            endingLineNumber = "441"
             landmarkName = "-releaseAnswer"
             landmarkType = "7">
          </BreakpointContent>
@@ -862,11 +846,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "will ask/Classes/AskVc/Controller/FreeVc/FreeDetailVc/Controller/FreeDetailViewController.m"
-            timestampString = "537107621.639939"
+            timestampString = "537244430.524489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "912"
-            endingLineNumber = "912"
+            startingLineNumber = "913"
+            endingLineNumber = "913"
             landmarkName = "-chatBoxDidStopRecordingVoice:"
             landmarkType = "7">
          </BreakpointContent>
@@ -942,7 +926,7 @@
                   moduleName = "will ask"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/ZHLoginVc/ZHLoginViewController.m"
-                  timestampString = "537184993.6022511"
+                  timestampString = "537266127.093946"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "140"
@@ -957,7 +941,7 @@
                   moduleName = "will ask"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/ZHLoginVc/ZHLoginViewController.m"
-                  timestampString = "537184993.603645"
+                  timestampString = "537266127.095605"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "140"
@@ -980,6 +964,102 @@
             startingLineNumber = "106"
             endingLineNumber = "106"
             landmarkName = "-setRequestType:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "will ask/Classes/MineVc/Controller/ChildVC/ZHMyRewardVc/Controller/ZHMyRewardAskViewController.m"
+            timestampString = "537263040.803556"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "505"
+            endingLineNumber = "505"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "will ask/Classes/MineVc/Controller/ChildVC/ZHMyRewardVc/Controller/ZHMyRewardAskViewController.m"
+            timestampString = "537261251.721644"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "-requestFormNetWorkanswered:pageNo:typeCode:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ZHMyRewardAskViewController requestFormNetWorkanswered:pageNo:typeCode:]"
+                  moduleName = "will ask"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/Classes/MineVc/Controller/ChildVC/ZHMyRewardVc/Controller/ZHMyRewardAskViewController.m"
+                  timestampString = "537266127.105286"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "115"
+                  endingLineNumber = "115"
+                  offsetFromSymbolStart = "389">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__74-[ZHMyRewardAskViewController requestFormNetWorkanswered:pageNo:typeCode:]_block_invoke"
+                  moduleName = "will ask"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/Classes/MineVc/Controller/ChildVC/ZHMyRewardVc/Controller/ZHMyRewardAskViewController.m"
+                  timestampString = "537266127.106685"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "117"
+                  endingLineNumber = "117"
+                  offsetFromSymbolStart = "78">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "will ask/Classes/MineVc/Controller/ChildVC/ZHExpertServiceVc/ZHToAnswerVc/view/ZHHaveToAnswerTableViewCell.m"
+            timestampString = "537266166.583093"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "-setModel:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "will ask/Classes/MineVc/Controller/ChildVC/ZHExpertServiceVc/ZHToAnswerVc/view/ZHHaveToAnswerTableViewCell.m"
+            timestampString = "537266167.438532"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "-setModel:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

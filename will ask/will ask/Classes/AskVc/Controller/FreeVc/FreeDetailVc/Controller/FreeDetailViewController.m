@@ -348,6 +348,7 @@ static NSInteger kMaxCount = 3;
     
     
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
+    [dic setObject:_uidString forKey:@"freeAskId"];
 //    if (self.ContentTextView.text) {
 //        [dic setObject:self.ContentTextView.text forKey:@"content"];
 //    }
