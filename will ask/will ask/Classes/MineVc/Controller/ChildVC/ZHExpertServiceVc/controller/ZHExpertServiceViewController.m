@@ -158,17 +158,17 @@ static NSString *expertServiceCellid = @"expertServiceCellid";
             }
             case 1:{
 //                
-//                NSString *className = @"ValidationViewController";
-//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                NSString *className = @"ZHMyRewardAnswerFirstViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 
                 break;
                 
             }
             case 2:{
                 
-//                NSString *className = @"ValidationViewController";
-//                [self pushToSetControllerWithIndexPath:indexPath className:className];
-//                
+                NSString *className = @"ZHFocusMeUserViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
+//
                 break;
                 
             }

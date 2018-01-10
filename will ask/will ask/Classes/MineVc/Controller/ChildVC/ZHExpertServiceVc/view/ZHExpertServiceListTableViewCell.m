@@ -24,24 +24,24 @@
             self.variableLabel.text =self.expertServiceModel.consultWaitNumber;
         }
             break;
-        case 1:{
-            self.variableLabel.hidden = YES;
-        }
+//        case 1:{
+//            self.variableLabel.hidden = YES;
+//        }
             break;
-        case 2:{
+        case 1:{
             self.variableLabel.text = self.expertServiceModel.rewardAnswerIncome;
 
         }
             break;
-        case 3:{
+        case 2:{
             self.variableLabel.hidden = YES;
         }
             break;
-        case 4:{
+        case 3:{
             self.variableLabel.text = self.expertServiceModel.rewardLearningIncome;
         }
             break;
-        case 5:{
+        case 4:{
             self.variableLabel.hidden = YES;
 
         }
