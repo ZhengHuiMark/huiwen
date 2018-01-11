@@ -344,6 +344,17 @@
 		449A0C812006FB1A0003196A /* ZHAskIdModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C802006FB1A0003196A /* ZHAskIdModel.m */; };
 		449A0C85200744F60003196A /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C84200744F60003196A /* WXApiManager.m */; };
 		449A0C88200749790003196A /* ZHTheThirdPartyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C87200749790003196A /* ZHTheThirdPartyModel.m */; };
+		449A0C8B200757E10003196A /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 449A0C89200757E10003196A /* AlipaySDK.bundle */; };
+		449A0C8C200757E10003196A /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449A0C8A200757E10003196A /* AlipaySDK.framework */; };
+		449A0C8E200758780003196A /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 449A0C8D200758780003196A /* libc++.tbd */; };
+		449A0C90200758950003196A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449A0C8F200758950003196A /* CoreTelephony.framework */; };
+		449A0C92200758A00003196A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449A0C91200758A00003196A /* QuartzCore.framework */; };
+		449A0C94200758A90003196A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449A0C93200758A90003196A /* CoreText.framework */; };
+		449A0C96200758B70003196A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449A0C95200758B70003196A /* CoreGraphics.framework */; };
+		449A0C98200758C30003196A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449A0C97200758C30003196A /* UIKit.framework */; };
+		449A0C9A200758CE0003196A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449A0C99200758CE0003196A /* Foundation.framework */; };
+		449A0C9C200758D90003196A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449A0C9B200758D90003196A /* CFNetwork.framework */; };
+		449A0C9E200758E20003196A /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 449A0C9D200758E20003196A /* CoreMotion.framework */; };
 		44AF4AEF20049E500022B237 /* ZHFocusButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AF4AEA20049E500022B237 /* ZHFocusButton.m */; };
 		44AF4AF020049E500022B237 /* ZHFocusButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44AF4AEB20049E500022B237 /* ZHFocusButton.xib */; };
 		44AF4AF120049E500022B237 /* ZHFoucsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AF4AED20049E500022B237 /* ZHFoucsTableView.m */; };
@@ -978,6 +989,17 @@
 		449A0C84200744F60003196A /* WXApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiManager.m; sourceTree = "<group>"; };
 		449A0C86200749790003196A /* ZHTheThirdPartyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHTheThirdPartyModel.h; sourceTree = "<group>"; };
 		449A0C87200749790003196A /* ZHTheThirdPartyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHTheThirdPartyModel.m; sourceTree = "<group>"; };
+		449A0C89200757E10003196A /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AlipaySDK.bundle; path = "will ask/AlipaySDK.bundle"; sourceTree = "<group>"; };
+		449A0C8A200757E10003196A /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlipaySDK.framework; path = "will ask/AlipaySDK.framework"; sourceTree = "<group>"; };
+		449A0C8D200758780003196A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		449A0C8F200758950003196A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		449A0C91200758A00003196A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		449A0C93200758A90003196A /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		449A0C95200758B70003196A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		449A0C97200758C30003196A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		449A0C99200758CE0003196A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		449A0C9B200758D90003196A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		449A0C9D200758E20003196A /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		44AF4AE920049E500022B237 /* ZHFocusButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHFocusButton.h; sourceTree = "<group>"; };
 		44AF4AEA20049E500022B237 /* ZHFocusButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHFocusButton.m; sourceTree = "<group>"; };
 		44AF4AEB20049E500022B237 /* ZHFocusButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHFocusButton.xib; sourceTree = "<group>"; };
@@ -1079,12 +1101,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				442C03D31F754F430078CDC7 /* libxml2.2.tbd in Frameworks */,
+				449A0C9E200758E20003196A /* CoreMotion.framework in Frameworks */,
+				449A0C9C200758D90003196A /* CFNetwork.framework in Frameworks */,
+				449A0C9A200758CE0003196A /* Foundation.framework in Frameworks */,
+				449A0C98200758C30003196A /* UIKit.framework in Frameworks */,
+				449A0C96200758B70003196A /* CoreGraphics.framework in Frameworks */,
+				449A0C94200758A90003196A /* CoreText.framework in Frameworks */,
+				449A0C92200758A00003196A /* QuartzCore.framework in Frameworks */,
+				449A0C90200758950003196A /* CoreTelephony.framework in Frameworks */,
 				442C038B1F6FB6DB0078CDC7 /* SystemConfiguration.framework in Frameworks */,
+				441018901F4EAEF900EBA751 /* libz.tbd in Frameworks */,
+				449A0C8E200758780003196A /* libc++.tbd in Frameworks */,
+				442C03D31F754F430078CDC7 /* libxml2.2.tbd in Frameworks */,
 				442C03891F6FB6D10078CDC7 /* libresolv.tbd in Frameworks */,
 				449956C21F6291340087503B /* Security.framework in Frameworks */,
 				441018921F4EAF0400EBA751 /* libicucore.tbd in Frameworks */,
-				441018901F4EAEF900EBA751 /* libz.tbd in Frameworks */,
+				449A0C8C200757E10003196A /* AlipaySDK.framework in Frameworks */,
 				4410188E1F4EAEF000EBA751 /* libstdc++.tbd in Frameworks */,
 				4410188C1F4EAEE500EBA751 /* libsqlite3.tbd in Frameworks */,
 				4410188A1F4EAED000EBA751 /* JavaScriptCore.framework in Frameworks */,
@@ -1870,6 +1902,8 @@
 			isa = PBXGroup;
 			children = (
 				4410C50D2001F4E80085086C /* PrefixHeader.pch */,
+				449A0C89200757E10003196A /* AlipaySDK.bundle */,
+				449A0C8A200757E10003196A /* AlipaySDK.framework */,
 				4410184C1F4EADC700EBA751 /* ShareSDK */,
 				441ADE901F3ABBED00ECD63E /* will ask */,
 				441ADE8F1F3ABBED00ECD63E /* Products */,
@@ -3466,6 +3500,15 @@
 		B9A3B2499B19FAF8A71BFAD7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				449A0C9D200758E20003196A /* CoreMotion.framework */,
+				449A0C9B200758D90003196A /* CFNetwork.framework */,
+				449A0C99200758CE0003196A /* Foundation.framework */,
+				449A0C97200758C30003196A /* UIKit.framework */,
+				449A0C95200758B70003196A /* CoreGraphics.framework */,
+				449A0C93200758A90003196A /* CoreText.framework */,
+				449A0C91200758A00003196A /* QuartzCore.framework */,
+				449A0C8F200758950003196A /* CoreTelephony.framework */,
+				449A0C8D200758780003196A /* libc++.tbd */,
 				442C03D21F754F430078CDC7 /* libxml2.2.tbd */,
 				442C038A1F6FB6DB0078CDC7 /* SystemConfiguration.framework */,
 				442C03881F6FB6D10078CDC7 /* libresolv.tbd */,
@@ -3601,6 +3644,7 @@
 				44827BEB1FA851330097F1E7 /* ZHFreeDetailTableViewCell.xib in Resources */,
 				4410187A1F4EADC700EBA751 /* ShareSDKUI.bundle in Resources */,
 				442C03A11F73532C0078CDC7 /* ZHPersonalHeaderTableViewCell.xib in Resources */,
+				449A0C8B200757E10003196A /* AlipaySDK.bundle in Resources */,
 				444D49ED1FF350CF00D82736 /* ZHOrderDetailLearnTableViewCell.xib in Resources */,
 				44827BF01FA868BA0097F1E7 /* ZHAnswerTableViewCell.xib in Resources */,
 				440770451FD8E21D0000C20E /* ZHMyFreeAskTableViewCell.xib in Resources */,
@@ -4121,6 +4165,7 @@
 					"$(PROJECT_DIR)/will\\ ask/ShareSDK/Support/Required",
 					"$(PROJECT_DIR)/will\\ ask/ShareSDK/Support/Required",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/will\\ ask",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";
@@ -4171,6 +4216,7 @@
 					"$(PROJECT_DIR)/will\\ ask/ShareSDK/Support/Required",
 					"$(PROJECT_DIR)/will\\ ask/ShareSDK/Support/Required",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/will\\ ask",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/PrefixHeader.pch";

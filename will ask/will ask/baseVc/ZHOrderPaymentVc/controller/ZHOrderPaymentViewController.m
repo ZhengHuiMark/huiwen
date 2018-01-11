@@ -12,6 +12,7 @@
 #import "ZHOrderPayModel.h"
 #import "ZHTheThirdPartyModel.h"
 #import "WXApi.h"
+#import <AlipaySDK/AlipaySDK.h>
 static NSString *payContentCellid = @"payContentCellid";
 static NSString *paymentOptionsCellid = @"paymentOptionsCellid";
 
@@ -118,6 +119,37 @@ static NSString *paymentOptionsCellid = @"paymentOptionsCellid";
             // 支付宝
             case 1:{
                 
+                self.payModel.payMode = @"2";
+                NSMutableDictionary *dic = [ZHNetworkTools parameters];
+                [dic setObject:self.payModel.payMode forKey:@"payMode"];
+                [dic setObject:self.payModel.orderNum forKey:@"orderNum"];
+                NSString *url = [NSString stringWithFormat:@"%@/api/ut/orderPay/payment",kIP];
+                
+                [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                    if (error) {
+                        NSLog(@"%@",error);
+                    }
+                    NSLog(@"%@",response);
+                    NSString *data = response[@"data"];
+                    
+                    [[AlipaySDK defaultService]payOrder:data fromScheme:@"2017102009403828" callback:^(NSDictionary *resultDic) {
+                        
+                        NSLog(@"reslut = %@",resultDic);
+                        NSString * memo = resultDic[@"memo"];
+                        NSLog(@"===memo:%@", memo);
+                        if ([resultDic[@"ResultStatus"] isEqualToString:@"9000"]) {
+                            
+                            //            [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+                        }else{
+                            //            [SVProgressHUD showErrorWithStatus:memo];
+                        }
+                        
+                    }];
+
+                  
+                }];
+
+                
             }
                 break;
                 
@@ -138,6 +170,7 @@ static NSString *paymentOptionsCellid = @"paymentOptionsCellid";
     
     
 }
+
 
 
 #pragma mark 微信支付方法

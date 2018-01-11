@@ -240,12 +240,12 @@
                   moduleName = "will ask"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/baseVc/ZHUserHomePageVc/Controller/ZHFreeListVc/view/ZHMoreFreeListTableViewCell.h"
-                  timestampString = "537349702.729198"
+                  timestampString = "537359768.715566"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
                   endingLineNumber = "15"
-                  offsetFromSymbolStart = "20">
+                  offsetFromSymbolStart = "16">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -255,12 +255,12 @@
                   moduleName = "will ask"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/baseVc/ZHUserHomePageVc/Controller/ZHFreeListVc/view/ZHMoreFreeListTableViewCell.h"
-                  timestampString = "537349702.7310801"
+                  timestampString = "537359768.717065"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "15"
                   endingLineNumber = "15"
-                  offsetFromSymbolStart = "64">
+                  offsetFromSymbolStart = "49">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -608,12 +608,12 @@
                   moduleName = "will ask"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/Classes/AskVc/Controller/FreeVc/FreeDetailVc/Controller/FreeDetailViewController.m"
-                  timestampString = "537349702.806408"
+                  timestampString = "537359768.7687809"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "439"
                   endingLineNumber = "439"
-                  offsetFromSymbolStart = "100">
+                  offsetFromSymbolStart = "94">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -623,12 +623,12 @@
                   moduleName = "will ask"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/Classes/AskVc/Controller/FreeVc/FreeDetailVc/Controller/FreeDetailViewController.m"
-                  timestampString = "537349702.8085459"
+                  timestampString = "537359768.770226"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "441"
                   endingLineNumber = "441"
-                  offsetFromSymbolStart = "80">
+                  offsetFromSymbolStart = "75">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -736,12 +736,12 @@
                   moduleName = "will ask"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/ZHLoginVc/ZHLoginViewController.m"
-                  timestampString = "537349702.820658"
+                  timestampString = "537359768.8326271"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "140"
                   endingLineNumber = "140"
-                  offsetFromSymbolStart = "584">
+                  offsetFromSymbolStart = "562">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -751,12 +751,12 @@
                   moduleName = "will ask"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/ZHLoginVc/ZHLoginViewController.m"
-                  timestampString = "537349702.822655"
+                  timestampString = "537359768.834728"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "140"
                   endingLineNumber = "140"
-                  offsetFromSymbolStart = "116">
+                  offsetFromSymbolStart = "102">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -816,12 +816,12 @@
                   moduleName = "will ask"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/Classes/MineVc/Controller/ChildVC/ZHMyRewardVc/Controller/ZHMyRewardAskViewController.m"
-                  timestampString = "537349702.837744"
+                  timestampString = "537359768.923012"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "115"
                   endingLineNumber = "115"
-                  offsetFromSymbolStart = "524">
+                  offsetFromSymbolStart = "389">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -831,12 +831,12 @@
                   moduleName = "will ask"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/Classes/MineVc/Controller/ChildVC/ZHMyRewardVc/Controller/ZHMyRewardAskViewController.m"
-                  timestampString = "537349702.8401771"
+                  timestampString = "537359768.924684"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "117"
                   endingLineNumber = "117"
-                  offsetFromSymbolStart = "84">
+                  offsetFromSymbolStart = "78">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1104,11 +1104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "will ask/baseVc/ZHOrderPaymentVc/controller/ZHOrderPaymentViewController.m"
-            timestampString = "537349050.070177"
+            timestampString = "537353917.728363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1120,11 +1120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "will ask/baseVc/ZHOrderPaymentVc/controller/ZHOrderPaymentViewController.m"
-            timestampString = "537349361.590889"
+            timestampString = "537353917.728363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1136,27 +1136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "will ask/baseVc/ZHOrderPaymentVc/controller/ZHOrderPaymentViewController.m"
-            timestampString = "537349462.761184"
+            timestampString = "537353917.728363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
-            landmarkName = "-WXPay"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "will ask/baseVc/ZHOrderPaymentVc/controller/ZHOrderPaymentViewController.m"
-            timestampString = "537349477.692919"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
             <Locations>
@@ -1168,12 +1152,12 @@
                   moduleName = "will ask"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/baseVc/ZHOrderPaymentVc/controller/ZHOrderPaymentViewController.m"
-                  timestampString = "537349702.940945"
+                  timestampString = "537359769.245483"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "107"
-                  endingLineNumber = "107"
-                  offsetFromSymbolStart = "748">
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
+                  offsetFromSymbolStart = "705">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1183,12 +1167,12 @@
                   moduleName = "will ask"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/baseVc/ZHOrderPaymentVc/controller/ZHOrderPaymentViewController.m"
-                  timestampString = "537349702.944018"
+                  timestampString = "537359769.2468981"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "108"
-                  endingLineNumber = "108"
-                  offsetFromSymbolStart = "80">
+                  startingLineNumber = "109"
+                  endingLineNumber = "109"
+                  offsetFromSymbolStart = "75">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1200,11 +1184,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "will ask/AppDelegate.m"
-            timestampString = "537349965.507558"
+            timestampString = "537353917.728363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "284"
-            endingLineNumber = "284"
+            startingLineNumber = "288"
+            endingLineNumber = "288"
             landmarkName = "-onResp:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1216,13 +1200,61 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "will ask/AppDelegate.m"
-            timestampString = "537349965.507558"
+            timestampString = "537353917.728363"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
             landmarkName = "-onResp:"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "will ask/baseVc/ZHOrderPaymentVc/controller/ZHOrderPaymentViewController.m"
+            timestampString = "537353821.914109"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "134"
+            endingLineNumber = "134"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__66-[ZHOrderPaymentViewController tableView:didSelectRowAtIndexPath:]_block_invoke.109"
+                  moduleName = "will ask"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/baseVc/ZHOrderPaymentVc/controller/ZHOrderPaymentViewController.m"
+                  timestampString = "537359769.26116"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "174">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__66-[ZHOrderPaymentViewController tableView:didSelectRowAtIndexPath:]_block_invoke_2"
+                  moduleName = "will ask"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/zhenghui/huiwen/will%20ask/will%20ask/baseVc/ZHOrderPaymentVc/controller/ZHOrderPaymentViewController.m"
+                  timestampString = "537359769.262749"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "137"
+                  endingLineNumber = "137"
+                  offsetFromSymbolStart = "51">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
