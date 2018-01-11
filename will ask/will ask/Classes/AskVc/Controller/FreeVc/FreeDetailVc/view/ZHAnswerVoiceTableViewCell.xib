@@ -63,6 +63,9 @@
                         <state key="normal" title="点击播放">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="actionBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="WCc-ax-3Ty"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvZ-Ll-Z1D">
                         <rect key="frame" x="314.5" y="102" width="35.5" height="12.5"/>

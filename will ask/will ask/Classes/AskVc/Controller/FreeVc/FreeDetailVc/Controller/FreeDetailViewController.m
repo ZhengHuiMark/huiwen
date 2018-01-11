@@ -146,7 +146,7 @@ static NSInteger kMaxCount = 3;
             NSLog(@"%@",error);
         }
         
-//        NSLog(@"response = %@",response);
+        NSLog(@"response = %@",response);
         
         _detailModel = [ZHFreeDetailModel yy_modelWithJSON:response[@"data"]];
         
@@ -259,6 +259,12 @@ static NSInteger kMaxCount = 3;
     cell.detailModel = self.detailModel;
     
     cell.answerVoiceModel = self.detailModel.anserModels[indexPath.row];
+        
+        cell.didClick = ^(){
+          
+            
+            
+        };
         
         return cell;
     

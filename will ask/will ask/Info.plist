@@ -23,6 +23,8 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>wx</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>wxc264c5d4f565c692</string>

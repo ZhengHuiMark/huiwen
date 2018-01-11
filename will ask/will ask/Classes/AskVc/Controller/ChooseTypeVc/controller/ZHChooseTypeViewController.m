@@ -79,6 +79,7 @@ static NSInteger kIsSubTag = 1;
     
     askVc.titleSubTypeLabel = self.SubTypeTitle;
     
+    askVc.AskType = _typeString;
     
     [self.navigationController pushViewController:askVc animated:YES];
     

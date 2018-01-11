@@ -147,14 +147,9 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
             [headerView addSubview:lineView];
             
             return headerView;
-            
-            
-        
         
     }
-    
-    
-    
+
     return view;
     
     

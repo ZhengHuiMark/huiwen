@@ -154,7 +154,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 - (void)toAskQuestion {
     
-    _stringType = @"2";
+    _stringType = @"1";
     
     ZHChooseTypeViewController *AskQuestionVc = [[ZHChooseTypeViewController alloc]init];
     

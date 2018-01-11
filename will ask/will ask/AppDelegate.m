@@ -41,7 +41,9 @@
 // 如果需要使用idfa功能所需要引入的头文件（可选）
 #import <AdSupport/AdSupport.h>
 
-@interface AppDelegate ()<JPUSHRegisterDelegate>
+#import "WXApiManager.h"
+
+@interface AppDelegate ()<JPUSHRegisterDelegate,WXApiDelegate>
 
 @end
 
@@ -114,6 +116,8 @@
          }
          
      }];
+    //注册微信支付
+    [WXApi registerApp:@"wxc264c5d4f565c692"];
     
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
@@ -262,6 +266,53 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
    
     
 }
+
+
+// iOS9.0及9.0以后调用此方法
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    // 在此方法中做如下判断，因为还有可能有其他的支付，如支付宝就是@"safepay"
+    if ([url.host isEqualToString:@"pay"]) {
+        return [WXApi handleOpenURL:url delegate:self];
+    }
+    return YES;
+}
+
+
+//微信SDK自带的方法，处理从微信客户端完成操作后返回程序之后的回调方法,显示支付结果的
+-(void)onResp:(BaseResp*)resp
+{
+    //启动微信支付的response
+    NSString *payResoult = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+    if([resp isKindOfClass:[PayResp class]]){
+        //支付返回结果，实际支付结果需要去微信服务器端查询
+        switch (resp.errCode) {
+            case 0:
+                payResoult = @"支付结果：成功！";
+                break;
+            case -1:
+                payResoult = @"支付结果：失败！";
+                break;
+            case -2:
+                payResoult = @"用户已经退出支付！";
+                break;
+            default:
+                payResoult = [NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@, resp.errCode,resp.errStr"];
+                break;
+        }
+    }
+    
+}
+
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    
+    return [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
+}
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    
+    return [WXApi handleOpenURL:url delegate:[WXApiManager sharedManager]];
+}
+
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     

@@ -205,7 +205,7 @@ static NSString *myOrderCellid = @"myOrderCellid";
         [_btnMutableArray addObject:_allBtn];
  
         UIView *view = [UIView new];
-        view.frame = (CGRect){CGRectGetMinX(_allBtn.frame), CGRectGetMaxY(_allBtn.frame)-1, CGRectGetWidth(_allBtn.frame), 1};
+        view.frame = (CGRect){CGRectGetMinX(_allBtn.frame) + 35 , CGRectGetMaxY(_allBtn.frame)-1, CGRectGetWidth(_allBtn.frame) / 2, 1};
         view.hidden = YES;
         [view setBackgroundColor: [UIColor redColor]];
         [HeaderView addSubview: view];
@@ -320,16 +320,15 @@ static NSString *myOrderCellid = @"myOrderCellid";
 #pragma mark - Lazy load
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame: CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 114)
-                                                            style: UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame: CGRectMake(0,50, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)
+                                                            style: UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableFooterView = [UIView new];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         self.tableView.rowHeight = 222;
-        //        self.tableView.sectionHeaderHeight = 43;
-        //        NSLog(@"self.tableview.height = %f",self.tableView.sectionHeaderHeight);
+    
         
         [_tableView registerNib:[UINib nibWithNibName:@"ZHMyorderTableViewCell" bundle:nil] forCellReuseIdentifier:myOrderCellid];
     }

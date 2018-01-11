@@ -223,8 +223,8 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 //                NSString *className = @"ZHSearchViewController";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
 
-//ZHSearchViewController
-                    NSString *className = @"ZHExpertServiceViewController";
+//  ZHOrderPaymentViewController  ZHExpertServiceViewController
+                    NSString *className = @"ZHOrderPaymentViewController";
                 [self pushToSetControllerWithIndexPath:indexPath className:className];
 //                NSString *className = @"ZHSetupViewController";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
@@ -292,7 +292,8 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
             cell.userModel = [UserManager sharedManager].userModel;
             
             cell.didClick = ^(){
-                
+                NSString *className = @"ZHFocusMeUserViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
             };
             cell.incomeDidClick = ^(){
                 NSString *className = @"ZHMyWalletViewController";
@@ -300,6 +301,8 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
             };
             cell.newConultDidClick = ^(){
                 
+                NSString *className = @"ZHToAnswerViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
             };
             
             return cell;
@@ -312,7 +315,7 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
             }
             
             mCell.usermodel = [UserManager sharedManager].userModel;
-            
+  
             mCell.cardClick = ^(){
                 
                 NSString *className = @"ZHMyVipCardViewController";
@@ -325,6 +328,9 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
                 NSString *className = @"ZHMyWalletViewController";
                 [self pushToSetControllerWithIndexPath:indexPath className:className];
             };
+            
+           
+            
             
             return mCell;
             

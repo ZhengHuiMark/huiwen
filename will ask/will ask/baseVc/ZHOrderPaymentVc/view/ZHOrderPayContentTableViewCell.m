@@ -7,7 +7,7 @@
 //
 
 #import "ZHOrderPayContentTableViewCell.h"
-
+#import "ZHOrderPayModel.h"
 @implementation ZHOrderPayContentTableViewCell
 
 - (void)awakeFromNib {
@@ -15,10 +15,16 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+-(void)setModel:(ZHOrderPayModel *)model{
+    _model = model;
+    
+    self.orderState.text = self.model.goodsName;
+    
+    self.orderTitle.text = self.model.descriptions;
+    
+    self.priceNumber.text = self.model.amount;
+    
+    self.creatTime.text = self.model.createTime;
 }
 
 @end

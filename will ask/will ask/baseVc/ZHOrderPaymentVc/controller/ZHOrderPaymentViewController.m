@@ -10,7 +10,8 @@
 #import "ZHOrderPayContentTableViewCell.h"
 #import "ZHPaymentOptionsTableViewCell.h"
 #import "ZHOrderPayModel.h"
-
+#import "ZHTheThirdPartyModel.h"
+#import "WXApi.h"
 static NSString *payContentCellid = @"payContentCellid";
 static NSString *paymentOptionsCellid = @"paymentOptionsCellid";
 
@@ -83,6 +84,92 @@ static NSString *paymentOptionsCellid = @"paymentOptionsCellid";
     
     return cell?cell:[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
                                             reuseIdentifier: @"Cell"];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath: indexPath animated: YES];
+
+    if (indexPath.section == 0) {
+        return;
+    }
+    
+    if (indexPath.section == 1) {
+        switch (indexPath.row) {
+            // 微信
+            case 0:{
+//                [self WXPay];
+                self.payModel.payMode = @"1";
+                NSMutableDictionary *dic = [ZHNetworkTools parameters];
+                [dic setObject:self.payModel.payMode forKey:@"payMode"];
+                [dic setObject:self.payModel.orderNum forKey:@"orderNum"];
+                NSString *url = [NSString stringWithFormat:@"%@/api/ut/orderPay/payment",kIP];
+                
+                [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                    if (error) {
+                        NSLog(@"%@",error);
+                    }
+                        NSLog(@"%@",response);
+                    _model = [ZHTheThirdPartyModel yy_modelWithJSON:response[@"data"]];
+                    
+                    [self WXPay];
+                }];
+            }
+                break;
+            // 支付宝
+            case 1:{
+                
+            }
+                break;
+                
+            case 2:{
+                
+            }
+                break;
+                
+            case 3:{
+                
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+    
+    
+}
+
+
+#pragma mark 微信支付方法
+- (void)WXPay{
+    
+    //需要创建这个支付对象
+    PayReq *req   = [[PayReq alloc] init];
+    //由用户微信号和AppID组成的唯一标识，用于校验微信用户
+    req.openID = _model.appid;
+    
+    // 商家id，在注册的时候给的
+    req.partnerId = _model.partnerid;
+    
+    // 预支付订单这个是后台跟微信服务器交互后，微信服务器传给你们服务器的，你们服务器再传给你
+    req.prepayId  = _model.prepayid;
+    
+    // 根据财付通文档填写的数据和签名
+    //这个比较特殊，是固定的，只能是即req.package = Sign=WXPay
+    req.package   = _model.packageValue;
+    
+    // 随机编码，为了防止重复的，在后台生成
+    req.nonceStr  = _model.noncestr;
+    
+    // 这个是时间戳，也是在后台生成的，为了验证支付的
+    NSString * stamp = _model.timestamp;
+    req.timeStamp = stamp.intValue;
+    
+    // 这个签名也是后台做的
+    req.sign = _model.sign;
+    
+    //发送请求到微信，等待微信返回onResp
+    [WXApi sendReq:req];
 }
 
 

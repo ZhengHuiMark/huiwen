@@ -162,7 +162,9 @@ static NSString *normalUserCellid = @"normalUserCellid";
         [actionSheet showInView:self.view];
 
     }
-
+    
+    if (indexPath.section == 1)return;
+    if (indexPath.section == 2)return;
 }
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {

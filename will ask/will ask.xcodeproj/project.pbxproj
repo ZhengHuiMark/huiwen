@@ -342,6 +342,8 @@
 		449A0C7B20062C400003196A /* ZHLearnToMeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C7A20062C400003196A /* ZHLearnToMeModel.m */; };
 		449A0C7E20062C500003196A /* ZHLearnToMeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C7D20062C500003196A /* ZHLearnToMeViewController.m */; };
 		449A0C812006FB1A0003196A /* ZHAskIdModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C802006FB1A0003196A /* ZHAskIdModel.m */; };
+		449A0C85200744F60003196A /* WXApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C84200744F60003196A /* WXApiManager.m */; };
+		449A0C88200749790003196A /* ZHTheThirdPartyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0C87200749790003196A /* ZHTheThirdPartyModel.m */; };
 		44AF4AEF20049E500022B237 /* ZHFocusButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AF4AEA20049E500022B237 /* ZHFocusButton.m */; };
 		44AF4AF020049E500022B237 /* ZHFocusButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44AF4AEB20049E500022B237 /* ZHFocusButton.xib */; };
 		44AF4AF120049E500022B237 /* ZHFoucsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AF4AED20049E500022B237 /* ZHFoucsTableView.m */; };
@@ -972,6 +974,10 @@
 		449A0C7D20062C500003196A /* ZHLearnToMeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHLearnToMeViewController.m; sourceTree = "<group>"; };
 		449A0C7F2006FB1A0003196A /* ZHAskIdModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHAskIdModel.h; sourceTree = "<group>"; };
 		449A0C802006FB1A0003196A /* ZHAskIdModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHAskIdModel.m; sourceTree = "<group>"; };
+		449A0C83200744F60003196A /* WXApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiManager.h; sourceTree = "<group>"; };
+		449A0C84200744F60003196A /* WXApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXApiManager.m; sourceTree = "<group>"; };
+		449A0C86200749790003196A /* ZHTheThirdPartyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHTheThirdPartyModel.h; sourceTree = "<group>"; };
+		449A0C87200749790003196A /* ZHTheThirdPartyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHTheThirdPartyModel.m; sourceTree = "<group>"; };
 		44AF4AE920049E500022B237 /* ZHFocusButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHFocusButton.h; sourceTree = "<group>"; };
 		44AF4AEA20049E500022B237 /* ZHFocusButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHFocusButton.m; sourceTree = "<group>"; };
 		44AF4AEB20049E500022B237 /* ZHFocusButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHFocusButton.xib; sourceTree = "<group>"; };
@@ -2443,6 +2449,8 @@
 			children = (
 				444D49DD1FF33F7C00D82736 /* ZHOrderPayModel.h */,
 				444D49DE1FF33F7C00D82736 /* ZHOrderPayModel.m */,
+				449A0C86200749790003196A /* ZHTheThirdPartyModel.h */,
+				449A0C87200749790003196A /* ZHTheThirdPartyModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -2966,6 +2974,7 @@
 		449956B01F6275160087503B /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				449A0C82200744F60003196A /* WeChatMannager */,
 				4445F7E3200103D50027EB1B /* voiceBtn */,
 				44C9521B1FC420AD002B5509 /* MLAvatarDisplayView */,
 				44827BDB1FA01FA80097F1E7 /* TextFiled */,
@@ -3178,6 +3187,15 @@
 				449A0C7620062C1F0003196A /* ZHLearnToMeTableViewCell.xib */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		449A0C82200744F60003196A /* WeChatMannager */ = {
+			isa = PBXGroup;
+			children = (
+				449A0C83200744F60003196A /* WXApiManager.h */,
+				449A0C84200744F60003196A /* WXApiManager.m */,
+			);
+			path = WeChatMannager;
 			sourceTree = "<group>";
 		};
 		44AF4AE520049D140022B237 /* SearchVc */ = {
@@ -3733,6 +3751,7 @@
 				442C032C1F6A85DF0078CDC7 /* ZHExpertsTableViewCell.m in Sources */,
 				4422893B1F4BD5040084EB83 /* StudyViewController.m in Sources */,
 				442C03841F6BBE6C0078CDC7 /* ZHExpertsListTableViewCell.m in Sources */,
+				449A0C85200744F60003196A /* WXApiManager.m in Sources */,
 				444D4A001FF3519100D82736 /* ZHOrderDetailCaseModel.m in Sources */,
 				448DC9D62000E5CA004F4F2A /* ZHHomeBigModel.m in Sources */,
 				444D49DF1FF33F7C00D82736 /* ZHOrderPayModel.m in Sources */,
@@ -3782,6 +3801,7 @@
 				4476748E1F8DC8C4007162AC /* ZHLatestTableViewCell.m in Sources */,
 				44827BDE1FA01FA80097F1E7 /* MLTextField.m in Sources */,
 				440280B41F7E2B250020BD47 /* ValidationViewController.m in Sources */,
+				449A0C88200749790003196A /* ZHTheThirdPartyModel.m in Sources */,
 				44BB65F91FD01189003C3A6E /* ZHCaseDetailTableViewCell.m in Sources */,
 				440771491FE908430000C20E /* ZHUserInfoBigModel.m in Sources */,
 				4435A6C51F8B144C00C1744E /* ZHExpertChooseTableViewCell.m in Sources */,

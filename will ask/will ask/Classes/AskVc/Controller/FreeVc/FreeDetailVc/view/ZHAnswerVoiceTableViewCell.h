@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 @class ZHFreeAnswerModel,ZHFreeDetailModel;
 
+typedef void(^btnClick)();
+
 @interface ZHAnswerVoiceTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *userAvatarImg;
@@ -33,4 +35,7 @@
 
 @property(nonatomic, strong)ZHFreeAnswerModel *answerVoiceModel;
 
+@property(nonatomic,strong)NSString *pathStr;
+
+@property(nonatomic,copy)btnClick didClick;
 @end
