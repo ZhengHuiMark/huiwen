@@ -18,6 +18,14 @@
 - (void)setModel:(ZHLearnToMeModel *)model {
     _model = model;
     
+    [self.userAvtar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.model.avatar]]];
+    
+    self.userName.text = self.model.nickname;
+    
+    self.cerTitle.text = self.model.certifiedNames;
+    
+    self.time.text = self.model.time;
+    
 }
 
 @end

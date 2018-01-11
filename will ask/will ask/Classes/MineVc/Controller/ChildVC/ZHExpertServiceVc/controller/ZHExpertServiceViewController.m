@@ -182,21 +182,23 @@ static NSString *expertServiceCellid = @"expertServiceCellid";
             }
             case 4:{
                 
-//                NSString *className = @"ValidationViewController";
-//                [self pushToSetControllerWithIndexPath:indexPath className:className];
-                
-                break;
-                
-            }
-            case 5:{
-                
+                //
                 NSString *className = @"ZHExpertAskIdentityViewController";
                 [self pushToSetControllerWithIndexPath:indexPath className:className];
+
                 
                 break;
                 
             }
-            break;
+//            case 5:{
+//                
+//                NSString *className = @"ZHExpertAskIdentityViewController";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+//                
+//                break;
+//                
+//            }
+//            break;
             
         default:
             break;

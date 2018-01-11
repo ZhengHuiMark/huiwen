@@ -7,7 +7,7 @@
 //
 
 #import "ZHSetUpIdentityTableViewCell.h"
-
+#import "ZHAskIdModel.h"
 @implementation ZHSetUpIdentityTableViewCell
 
 - (void)awakeFromNib {
@@ -15,10 +15,16 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)setModel:(ZHAskIdModel *)model{
+    _model = model;
+    
+    if ([model.data isEqualToString:@"1"] || [model.data isEqualToString:@"普通用户"]) {
+        self.userTitle.text = @"普通用户";
+    }else{
+        self.userTitle.text = @"专家用户";
+    }
+    
 }
+
 
 @end

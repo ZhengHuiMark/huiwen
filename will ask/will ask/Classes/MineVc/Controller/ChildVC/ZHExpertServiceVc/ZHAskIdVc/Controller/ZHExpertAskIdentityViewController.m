@@ -10,13 +10,19 @@
 #import "ZHSetUpIdentityTableViewCell.h"
 #import "ZHTitleLabelTableViewCell.h"
 #import "ZHNormalUserTableViewCell.h"
+#import "UserModel.h"
+#import "UserManager.h"
+#import "ZHAskIdModel.h"
 
 static NSString *setUpCellid = @"setUpCellid";
 static NSString *titleLabelCellid = @"titleLabelCellid";
 static NSString *normalUserCellid = @"normalUserCellid";
 
 
-@interface ZHExpertAskIdentityViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ZHExpertAskIdentityViewController ()<UITableViewDelegate,UITableViewDataSource,UIActionSheetDelegate>{
+    NSMutableDictionary *_tempDict;
+
+}
 
 @property(nonatomic,strong)UITableView *tableView;
 
@@ -24,11 +30,59 @@ static NSString *normalUserCellid = @"normalUserCellid";
 
 @implementation ZHExpertAskIdentityViewController
 
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
+    
+        NSMutableDictionary *dic = [ZHNetworkTools parameters];
+        [dic addEntriesFromDictionary:_tempDict];
+    
+        NSString *url = [NSString stringWithFormat:@"%@/api/ut/expert/saveQuestionerIdentity",kIP];
+        
+        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+            if (error) {
+                NSLog(@"%@",error);
+            }
+            
+            NSLog(@"%@",response);
+        }];
+    
+    
+    
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self loadData];
     [self.view addSubview:self.tableView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveName:) name:@"textName" object:nil];
+    _tempDict = [NSMutableDictionary dictionary];
+    
+}
+
+
+- (void)loadData{
+    NSMutableDictionary *dic = [ZHNetworkTools parameters];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/ut/expert/getQuestionerIdentity",kIP];
+    
+    [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+        if (error) {
+            NSLog(@"%@",response);
+        }
+        
+        NSLog(@"response = %@",response);
+        _model = [ZHAskIdModel yy_modelWithJSON:response];
+        
+        [self.tableView reloadData];
+       
+        
+    }];
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -47,19 +101,26 @@ static NSString *normalUserCellid = @"normalUserCellid";
     UITableViewCell *cell = nil;
     
     if (indexPath.section == 0) {
-        ZHSetUpIdentityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:setUpCellid forIndexPath:indexPath];
         
+        ZHSetUpIdentityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:setUpCellid forIndexPath:indexPath];
+        cell.model = _model;
         return cell;
+        
     }
    
     if (indexPath.section == 1) {
         ZHTitleLabelTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:titleLabelCellid forIndexPath:indexPath];
         
+        
+        
         return cell;
     }
     
     if (indexPath.section == 2) {
+        UserModel *model = [UserManager sharedManager].userModel;
         ZHNormalUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:normalUserCellid forIndexPath:indexPath];
+        cell.model = model;
+        
         
         return cell;
     }
@@ -84,6 +145,38 @@ static NSString *normalUserCellid = @"normalUserCellid";
     
     return 30;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self.tableView deselectRowAtIndexPath: indexPath animated: YES];
+
+    if (indexPath.section == 0) {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                      initWithTitle:@""
+                                      delegate:self
+                                      cancelButtonTitle:@"取消"
+                                      destructiveButtonTitle:nil
+                                      otherButtonTitles:@"普通用户",@"专家用户",nil];
+        
+        
+        actionSheet.actionSheetStyle = UIBarStyleDefault;
+        [actionSheet showInView:self.view];
+
+    }
+
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex != 2) {
+        _model.data = [actionSheet buttonTitleAtIndex: buttonIndex];
+        
+        [_tempDict setValue:@(buttonIndex+1) forKey:@"identity"];
+    
+    }
+    
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+}
+
 
 - (UITableView *)tableView {
     //
@@ -112,5 +205,24 @@ static NSString *normalUserCellid = @"normalUserCellid";
     return _tableView;
 }
 
+//- (ZHAskIdModel *)model {
+//    
+//    if (!_model) {
+//        _model = [ZHAskIdModel new];
+//    }
+//    return _model;
+//}
+
+
+- (void)saveName:(NSNotification *)user {
+    
+    NSLog(@"user %@",user.userInfo);
+    [_tempDict addEntriesFromDictionary:user.userInfo];
+    NSLog(@"tempDictionary %@",_tempDict);
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end

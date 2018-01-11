@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class ZHAskIdModel;
 @interface ZHSetUpIdentityTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *userTitle;
+
+@property (nonatomic,strong)ZHAskIdModel *model;
 
 @end
