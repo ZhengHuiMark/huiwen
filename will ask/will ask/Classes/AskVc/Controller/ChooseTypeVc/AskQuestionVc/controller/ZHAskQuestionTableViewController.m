@@ -459,7 +459,7 @@ static NSInteger kMaxCount = 3;
         self.model.timeLimit = [self.model.timeLimit stringByReplacingOccurrencesOfString:@"小时" withString:@""];
         NSMutableDictionary *dic = [ZHNetworkTools parameters];
         [dic setObject:@"1234567890" forKey:@"content"];
-        [dic setObject:self.titleSubTypeLabel forKey:@"typeCode"];
+        [dic setObject:self.CodeSubType forKey:@"typeCode"];
         [dic setObject:self.model.timeLimit forKey:@"timeLimit"];
 //        [dic setObject:self.model.amount forKey:@"amount"];
         [dic setObject:@"0.01" forKey:@"amount"];
