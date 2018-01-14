@@ -128,6 +128,11 @@
                         <rect key="frame" x="153" y="162" width="60" height="60"/>
                         <state key="normal" title="Button"/>
                     </button>
+                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lZO-Er-bbV" customClass="yuyinView">
+                        <rect key="frame" x="31" y="90" width="291" height="45"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.95826099537037035" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="FmQ-gB-ImS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="3B6-gj-QzN"/>
@@ -180,6 +185,7 @@
                 <outlet property="answerTime" destination="TIP-gz-M4R" id="8mW-pu-WiG"/>
                 <outlet property="playVoiceBtn" destination="0EN-qF-wRe" id="NDS-lf-wTO"/>
                 <outlet property="userAvatarImg" destination="sPj-d4-jzx" id="DsP-jh-qtt"/>
+                <outlet property="voiceView" destination="lZO-Er-bbV" id="k6k-eS-l9m"/>
                 <outletCollection property="answerImage" destination="ddd-io-07t" id="nkw-zg-LHC"/>
                 <outletCollection property="answerImgBtn" destination="JTi-b0-ZqV" id="ZJZ-oK-xvN"/>
                 <outletCollection property="answerImgBtn" destination="d94-3q-BcD" id="onV-fA-yzn"/>

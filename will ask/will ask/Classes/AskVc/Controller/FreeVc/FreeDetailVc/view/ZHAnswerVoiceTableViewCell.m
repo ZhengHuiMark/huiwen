@@ -14,12 +14,20 @@
 #import "MLAvatarDisplayView.h"
 #import "ICRecordManager.h"
 #import "VoiceConverter.h"
+#import "yuyinView.h"
+#import <AVFoundation/AVFoundation.h>
+#import "OSSService.h"
 
-@interface ZHAnswerVoiceTableViewCell ()<ICRecordManagerDelegate>
+
+@interface ZHAnswerVoiceTableViewCell ()<ICRecordManagerDelegate>{
+    OssService * service;
+
+}
 
 @property (nonatomic, strong) MLAvatarDisplayView *avatarDisplayView;
 @property (nonatomic, strong) UIImageView *currentVoiceIcon;
 
+@property (strong, nonatomic) IBOutlet yuyinView *voiceView;
 
 
 @end
@@ -29,6 +37,14 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    
+    NSString * const endPoint = @"http://oss-cn-qingdao.aliyuncs.com";
+    NSString * const callbackAddress = @"http://oss-demo.aliyuncs.com:23450";
+    
+    service = [[OssService alloc] initWithViewController:self withEndPoint:endPoint];
+    [service setCallbackAddress:callbackAddress];
+    
 }
 
 
@@ -49,6 +65,13 @@
     self.answerTime.text = answerVoiceModel.time;
 //    self.playVoiceBtn
     
+    self.pathStr = [NSString stringWithFormat:@"%@%@%@",bucketNameFreeLoad,OSS,answerVoiceModel.voice];
+    NSLog(@"%@",self.pathStr);
+    
+//    self.voiceView = [yuyinView new];
+//    self.voiceView.pathStr = self.pathStr;
+
+    [service getFileObjectKey:answerVoiceModel.voice buckName:bucketNameFree];
     
     
     NSArray *PhotoArray = [self.answerVoiceModel.photos componentsSeparatedByString:@","];

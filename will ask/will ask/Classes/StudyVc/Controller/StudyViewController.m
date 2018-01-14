@@ -22,6 +22,7 @@
 #import "SDCycleScrollView.h"
 #import "ZHStudyBannerModel.h"
 #import "ImageTools.h"
+#import "ZHExpertUserInfoHomePageViewController.h"
 
 static NSString *ExpertsCellid = @"ExpertsCellid";
 
@@ -84,10 +85,7 @@ static NSString *typeCellid = @"typeCellid";
         if (error) {
             NSLog(@"%@",error);
         }
-        
 //        NSLog(@"response = %@",response);
-        
-//        _todayExpertModel = [ZHStudyModel yy_modelWithJSON:response[@"data"]];
         _TodayExpetsModel = [NSArray yy_modelArrayWithClass:[ZHStudyModel class] json:response[@"data"]];
         
         
@@ -174,11 +172,12 @@ static NSString *typeCellid = @"typeCellid";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    NSLog(@"_caseModels.count = %lu",_caseModels.count+2);
+//    NSLog(@"_caseModels.count = %lu",_caseModels.count+2);
     return _caseModels.count+2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     
     if (section == 0) {
         return 1;
@@ -186,9 +185,9 @@ static NSString *typeCellid = @"typeCellid";
     if (section == 1) {
         return _TodayExpetsModel.count;
     }
-//    NSLog(@"_caseModels[section-2].subCaseModels.count = %lu",_caseModels[section-2].subCaseModels.count);
-//       section -2 (2代表减去固定组数)   +1 1是代表回答的标题
+    
     return _caseModels[section-2].subCaseModels.count + 1;
+
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -229,14 +228,11 @@ static NSString *typeCellid = @"typeCellid";
         cell = [[ZHExpertTodayTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ExpertsCellid];
     }
     cell.model = _todayExpertModel;
-    
-    
-    
+
         return cell;
 
     }
     
-
     if (indexPath.section > 1) {
         
         
@@ -287,6 +283,29 @@ static NSString *typeCellid = @"typeCellid";
     }
     
     return 310;
+}
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    [tableView deselectRowAtIndexPath: indexPath animated: YES];
+
+    if (indexPath.section == 0)return;
+    
+    
+    if (indexPath.section == 1) {
+        
+        ZHExpertUserInfoHomePageViewController  *expertVc = [[ZHExpertUserInfoHomePageViewController alloc]init];
+        
+        expertVc.expertID = _TodayExpetsModel[indexPath.row].expertId;
+        
+        [self.navigationController pushViewController:expertVc animated:YES];
+        
+    }
+    
+    if (indexPath.section == 2)return;
+    
+    
 }
 
 - (UITableView *)tableView {

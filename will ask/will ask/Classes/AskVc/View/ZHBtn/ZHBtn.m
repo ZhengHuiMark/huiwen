@@ -229,11 +229,20 @@
 - (void)touchesViewClickAction:(UITapGestureRecognizer *)tap {
     
     NSLog(@"touches %ld",self.clickBtn.tag);
+    NSString *Notification_postVc = @"postVc";
+    
     /** 发送的通知 */
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"postVc" object:self userInfo:@{@"rewardAskId":self.tagModel.rewardAskId}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:Notification_postVc object:[self viewController] userInfo:@{@"rewardAskId":self.tagModel.rewardAskId}];
+}
 
-
-
+- (UIViewController *)viewController {
+    for (UIView *view = self; view; view = view.superview) {
+        UIResponder *nextResponder = [view nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
 }
 
 @end

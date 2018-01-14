@@ -26,4 +26,6 @@ typedef void(^btnClick)();
 
 @property(nonatomic,copy)btnClick didClick;
 
+
+
 @end

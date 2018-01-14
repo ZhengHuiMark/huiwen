@@ -134,9 +134,9 @@ static NSInteger kMaxCount = 3;
     if ([_AskType isEqualToString:@"1"]) {
         return kZHAskQuestionTableViewControllerSectionCount;
     }else {
-    return kZHAskQuestionTableViewControllerSectionRewardCount;
+        return kZHAskQuestionTableViewControllerSectionRewardCount;
     }
-    return 0;
+//    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -148,60 +148,58 @@ static NSInteger kMaxCount = 3;
             case kValidationViewControllerSection_TypeTitle:{
                 return kZHAskQuestionTableViewControllerSectionRowCountInSectionTypeTitle;
             }
-                break;
+//                break;
                 
             case kValidationViewControllerSection_TextView:{
                 return kZHAskQuestionTableViewControllerSectionRowCountInSectionContentTextView;
             }
-                break;
+//                break;
                 
             case kValidationViewControllerSection_UpLoadImage:{
                 return kZHAskQuestionTableViewControllerSectionRowCountInSectionUpLoadImage;
             }
                 
-                break;
+//                break;
                 
             case kValidationViewControllerSectionRewardMoneyAndDate:{
                 return kZHAskQuestionTableViewControllerSectionRowCountInSectionRelease;
             }
-                break;
+//                break;
                 
             default:
                 break;
         }
     }else{
-    
-    switch (section) {
-            
-        case kValidationViewControllerSection_TypeTitle:{
-            return kZHAskQuestionTableViewControllerSectionRowCountInSectionTypeTitle;
+        
+        switch (section) {
+                
+            case kValidationViewControllerSection_TypeTitle:{
+                return kZHAskQuestionTableViewControllerSectionRowCountInSectionTypeTitle;
+            }
+//                break;
+                
+            case kValidationViewControllerSection_TextView:{
+                return kZHAskQuestionTableViewControllerSectionRowCountInSectionContentTextView;
+            }
+//                break;
+                
+            case kValidationViewControllerSection_UpLoadImage:{
+                return kZHAskQuestionTableViewControllerSectionRowCountInSectionUpLoadImage;
+            }
+            case kValidationViewControllerSectionRewardMoneyAndDate:{
+                return kZHAskQuestionTableViewControllerSectionRowCountInSectionRewardMoneyAndDate;
+            }
+//                break;
+                
+            case kValidationViewControllerSection_Release:{
+                return kZHAskQuestionTableViewControllerSectionRowCountInSectionRelease;
+            }
+//                break;
+            default:
+                break;
         }
-            break;
-            
-        case kValidationViewControllerSection_TextView:{
-            return kZHAskQuestionTableViewControllerSectionRowCountInSectionContentTextView;
-        }
-            break;
-            
-        case kValidationViewControllerSection_UpLoadImage:{
-            return kZHAskQuestionTableViewControllerSectionRowCountInSectionUpLoadImage;
-        }
-        case kValidationViewControllerSectionRewardMoneyAndDate:{
-            return kZHAskQuestionTableViewControllerSectionRowCountInSectionRewardMoneyAndDate;
-        }
-            break;
-            
-        case kValidationViewControllerSection_Release:{
-            return kZHAskQuestionTableViewControllerSectionRowCountInSectionRelease;
-        }
-            break;
-            
-       
-        default:
-            break;
+        
     }
-    
-        }
     return 0;
 
     
@@ -548,24 +546,26 @@ static NSInteger kMaxCount = 3;
             case kValidationViewControllerSection_TypeTitle: {
                 return 50;
             }
-                break;
+//                break;
                 
             case kValidationViewControllerSection_TextView: {
                 return 150;
             }
-                break;
+//                break;
                 
             case kValidationViewControllerSection_UpLoadImage:{
                 return 50;
                 
             }
-                break;
+//                break;
                 
-            case kValidationViewControllerSection_Release: {
+            case kValidationViewControllerSectionRewardMoneyAndDate: {
                 
                 return 45;
             }
-                break;
+//                break;
+            default:
+                return 300;
         }
     }else{
     

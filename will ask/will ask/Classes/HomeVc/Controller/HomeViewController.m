@@ -150,12 +150,16 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
 }
 
 
-- (void)mingzizijiqi:(NSNotification *)user{
+- (void)mingzizijiqi:(NSNotification *)notification{
     
-    ZHRewardDetailViewController *rewardDVc = [[ZHRewardDetailViewController alloc]init];
-    rewardDVc.uidStringz = user.userInfo[@"rewardAskId"];
     
-    [self.navigationController pushViewController:rewardDVc animated:YES];
+    if([notification.object isKindOfClass:[self class]]) {
+        
+        ZHRewardDetailViewController *rewardDVc = [[ZHRewardDetailViewController alloc]init];
+        rewardDVc.uidStringz = notification.userInfo[@"rewardAskId"];
+        
+        [self.navigationController pushViewController:rewardDVc animated:YES];
+    }
     
 }
 - (void)dealloc {

@@ -220,6 +220,29 @@ NSString * const STSServer = @"http://119.57.140.230:7000/aliyun/oss/getAccessTo
     }];
 }
 
+- (void)getFileObjectKey:(NSString *)ObjectKey buckName:(NSString *)buckName filePath:(NSString *)filePath{
+    
+    OSSGetObjectRequest * request = [OSSGetObjectRequest new];
+
+    request.bucketName = buckName;
+    request.objectKey = ObjectKey;
+//    request.downloadToFileURL = [NSURL URLWithString:filePath];
+    
+    
+    OSSTask * getTask = [client getObject:request];
+    [getTask continueWithBlock:^id(OSSTask *task) {
+        if (!task.error) {
+            NSLog(@"download object success!");
+            OSSGetObjectResult * getResult = task.result;
+            NSLog(@"download result: %@", getResult.downloadedData);
+        } else {
+            NSLog(@"download object failed, error: %@" ,task.error);
+        }
+        return nil;
+    }];
+}
+
+
 ///**
 // *	@brief	下载图片
 // *

@@ -33,6 +33,8 @@ typedef void(^UploadImageCompletion)(BOOL isSuccess);
 - (void)resumableUpload:(NSString *)objectKey
           localFilePath:(NSString *)filePath
                partSize:(int)size;
+// 文件下载
+- (void)getFileObjectKey:(NSString *)ObjectKey buckName:(NSString *)buckName ;
 
 - (void)normalRequestCancel;
 - (void)ResumableUploadCancel;
