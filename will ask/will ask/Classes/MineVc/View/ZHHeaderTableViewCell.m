@@ -11,7 +11,7 @@
 #import "ImageTools.h"
 #import "UserModel.h"
 #import <SDWebImage/UIButton+WebCache.h>
-
+#import "UserManager.h"
 
 @implementation ZHHeaderTableViewCell
 
@@ -34,8 +34,13 @@
     
     _usermodel = usermodel;
     
-    [self.touXiangBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.usermodel.avatar]] forState:UIControlStateNormal];
-    self.userIDLabel.text = self.usermodel.nickname;
+    if ([usermodel.expertCertified isEqual:@(1)]) {
+        [self.touXiangBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,usermodel.realPhoto]] forState:UIControlStateNormal];
+        self.userIDLabel.text = usermodel.expertNickname;
+    }else{
+        [self.touXiangBtn sd_setBackgroundImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,usermodel.avatar]] forState:UIControlStateNormal];
+        self.userIDLabel.text = usermodel.nickname;
+    }
 }
 
 

@@ -70,6 +70,8 @@
 /** 是否已点赞 */
 @property(nonatomic,assign)BOOL praise;
 
+@property(nonatomic,assign)BOOL owner;
+
 
 
 @end

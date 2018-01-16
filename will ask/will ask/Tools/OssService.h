@@ -10,11 +10,15 @@
 #define OssService_h
 #import <AliyunOSSiOS/OSSService.h>
 #import "ViewController.h"
+#import <AudioToolbox/AudioToolbox.h>
+
+#import <AVFoundation/AVFoundation.h>
 
 typedef void(^UploadImageCompletion)(BOOL isSuccess);
 
-@interface OssService : NSObject
+@interface OssService : NSObject<AVAudioRecorderDelegate,AVAudioPlayerDelegate>
 
+@property(nonatomic,strong) AVAudioPlayer *player;
 - (id)initWithViewController:(UIViewController *)view
                 withEndPoint:(NSString *)enpoint;
 
@@ -34,7 +38,7 @@ typedef void(^UploadImageCompletion)(BOOL isSuccess);
           localFilePath:(NSString *)filePath
                partSize:(int)size;
 // 文件下载
-- (void)getFileObjectKey:(NSString *)ObjectKey buckName:(NSString *)buckName ;
+- (void)getFileObjectKey:(NSString *)ObjectKey buckName:(NSString *)buckName filePath:(NSString *)filePath;
 
 - (void)normalRequestCancel;
 - (void)ResumableUploadCancel;

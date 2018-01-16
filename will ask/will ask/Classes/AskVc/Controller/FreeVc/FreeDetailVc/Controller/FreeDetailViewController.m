@@ -77,7 +77,7 @@ static NSInteger kMaxCount = 3;
 
 @property(nonatomic,strong)UIButton *VoiceBtn;
 //删除按钮
-@property (nonatomic, strong) UIButton    *deleteButton;
+@property (nonatomic, strong) UIButton *deleteButton;
 
 
 /** 录音文件名 */
@@ -102,7 +102,8 @@ static NSInteger kMaxCount = 3;
 /** --------------------------------- */
 @property(nonatomic,strong)UITableView *tableView;
 
-@property (nonatomic, strong) UIButton *answerButton;
+@property(nonatomic, strong) UIButton *answerButton;
+@property(nonatomic, strong) UIView *footerView;
 
 @end
 
@@ -111,7 +112,6 @@ static NSInteger kMaxCount = 3;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
 
     [self loadData];
     
@@ -120,7 +120,7 @@ static NSInteger kMaxCount = 3;
 
     [self setupUI];
 
-    
+    [self configUI];
     NSString * const endPoint = @"http://oss-cn-qingdao.aliyuncs.com";
     NSString * const callbackAddress = @"http://oss-demo.aliyuncs.com:23450";
     
@@ -129,16 +129,31 @@ static NSInteger kMaxCount = 3;
 
 }
 
+- (void)configUI{
+    
+    _footerView = [UIView new];
+    _footerView.clipsToBounds = YES;
+    _footerView.frame = CGRectMake(0,CGRectGetMaxY(self.tableView.frame) - 50, [UIScreen mainScreen].bounds.size.width, 50);
+    _footerView.backgroundColor = [UIColor redColor];
+    _answerButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, _footerView.bounds.size.height)];
+    [_answerButton setTitle:@"回答问题" forState:UIControlStateNormal];
+    _answerButton.layer.masksToBounds = YES;
+    _answerButton.layer.cornerRadius = 10;
+    [_answerButton setBackgroundColor:[UIColor colorWithRed:195/255.0 green:226/255.0 blue:237/255.0 alpha:1]];
+    [_answerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    [self.answerButton addTarget:self action:@selector(UPUP) forControlEvents:UIControlEventTouchUpInside];
+
+    [_footerView addSubview:self.answerButton];
+    [self.view addSubview:_footerView];
+}
+
 - (void)loadData {
     
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
     [dic setObject:_uidString forKey:@"freeAskId"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/freeask/getFreeAskDetail",kIP];
-    
-//    NSLog(@"url = %@",url);
-//    
-//    NSLog(@"231231 = %@",dic);
     
     [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
         
@@ -161,45 +176,6 @@ static NSInteger kMaxCount = 3;
 }
 
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
-//    UIView *view= nil;
-    if (section == 1) {
-        UIView *footerView = [UIView new];
-        footerView.clipsToBounds = YES;
-        footerView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 80);
-        footerView.backgroundColor = [UIColor redColor];
-        _answerButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, [UIScreen mainScreen].bounds.size.width - 20, 40)];
-        [_answerButton setTitle:@"立即抢答" forState:UIControlStateNormal];
-        _answerButton.layer.masksToBounds = YES;
-        _answerButton.layer.cornerRadius = 10;
-        [_answerButton setBackgroundColor:[UIColor colorWithRed:195/255.0 green:226/255.0 blue:237/255.0 alpha:1]];
-        [_answerButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        
-//         立即抢答按钮点击事件
-        [self.answerButton addTarget:self action:@selector(UPUP) forControlEvents:UIControlEventTouchUpInside];
-//
-        [footerView addSubview:self.answerButton];
-        
-        
-            UILabel *noteLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_answerButton.frame) - 60,CGRectGetMaxY(_answerButton.frame) + 10, [UIScreen mainScreen].bounds.size.width - 300, 15)];
-            noteLabel.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
-//        noteLabel.backgroundColor = [UIColor redColor];
-            noteLabel.text = @"抢答规则";
-            noteLabel.numberOfLines = 0;
-            noteLabel.font = [UIFont systemFontOfSize:13];
-            
-            [footerView addSubview:noteLabel];
-            
-        //
-        return footerView;
-    }
-   
-
-    return [UIView new];
-}
-
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
@@ -208,7 +184,7 @@ static NSInteger kMaxCount = 3;
         return 0.1;
     }
     
-    return 80;
+    return .1;
 }
 
 
@@ -235,7 +211,7 @@ static NSInteger kMaxCount = 3;
     
     if (indexPath.section == 0) {
         ZHFreeDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FreeDetailCellid forIndexPath:indexPath];
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.model = _detailModel;
         
         return cell;
@@ -243,7 +219,7 @@ static NSInteger kMaxCount = 3;
     
     if (self.detailModel.anserModels[indexPath.row].content) {
         ZHAnswerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:AnswerContentCellid forIndexPath:indexPath];
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.detailModel = self.detailModel;
         cell.answerModel = self.detailModel.anserModels[indexPath.row];
 //
@@ -255,15 +231,19 @@ static NSInteger kMaxCount = 3;
 //   (self.detailModel.anserModels[indexPath.row].voice)
     ZHAnswerVoiceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:AnswerVoiceCellid forIndexPath:indexPath];
     
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.detailModel = self.detailModel;
-    
+
     cell.answerVoiceModel = self.detailModel.anserModels[indexPath.row];
         
         cell.didClick = ^(){
-          
+            
+
+            NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.amr",self.detailModel.anserModels[indexPath.row].voice]];
             
             
+            [service getFileObjectKey:self.detailModel.anserModels[indexPath.row].voice buckName:bucketNameFree filePath:fullPath];
+//            cell.VoiceTimeL.text = [NSString stringWithFormat:@"%ld''",[[ICRecordManager shareManager] durationWithVideo:[NSURL fileURLWithPath:fullPath]]];
         };
         
         return cell;
@@ -275,17 +255,9 @@ static NSInteger kMaxCount = 3;
     
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    
-//    
-//    return 80;
-//}
-
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0 ) {
+    if (indexPath.section == 0) {
 
 
         
@@ -312,7 +284,7 @@ static NSInteger kMaxCount = 3;
                                                attributes: @{NSFontAttributeName : [UIFont systemFontOfSize: 14]}
                                                   context: nil].size.height;
         
-        return 219 + labelHeight;
+        return 219 + labelHeight - 65;
     }
 
     return  290;
@@ -320,12 +292,20 @@ static NSInteger kMaxCount = 3;
 }
 
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+
+    
+    
+    return;
+}
+
 - (UITableView *)tableView {
 //
     
     if (!_tableView) {
         
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
@@ -356,7 +336,7 @@ static NSInteger kMaxCount = 3;
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
     [dic setObject:_uidString forKey:@"freeAskId"];
 //    if (self.ContentTextView.text) {
-//        [dic setObject:self.ContentTextView.text forKey:@"content"];
+        [dic setObject:self.ContentTextView.text forKey:@"content"];
 //    }
     
     
@@ -406,8 +386,10 @@ static NSInteger kMaxCount = 3;
                             }
                             
                                         NSLog(@"response = %@",response);
+                            [self downControl];
                             
                             
+                            [self loadData];
                         }];
                     }
             
@@ -808,6 +790,8 @@ static NSInteger kMaxCount = 3;
 }
 
 - (void)downControl {
+    self.footerView.hidden = NO;
+    self.answerButton.hidden = NO;
     
     [UIView animateWithDuration: .5 animations:^{
         CGRect currentFrame = self.AllView.frame;
@@ -822,7 +806,8 @@ static NSInteger kMaxCount = 3;
 
 - (void)UPUP {
     
-    
+    self.answerButton.hidden = YES;
+    self.footerView.hidden = YES;
     [UIView animateWithDuration: .5 animations:^{
         CGRect currentFrame = self.AllView.frame;
         currentFrame.origin.y = self.AllView.frame.origin.y - CGRectGetHeight(currentFrame);
@@ -987,6 +972,8 @@ static NSInteger kMaxCount = 3;
     AVAudioRecorder *recorder = [[ICRecordManager shareManager] recorder] ;
     [recorder updateMeters];
     float power= [recorder averagePowerForChannel:0];//取得第一个通道的音频，注意音频强度范围时-160到0,声音越大power绝对值越小
+//   float lowPassResults = pow(10, (0.05 * [recorder peakPowerForChannel:0]));
+
     CGFloat progress = (1.0/160)*(power + 160);
     self.voiceHud.progress = progress;
 }

@@ -12,6 +12,9 @@
 #import "HomeViewController.h"
 #import "Macro.h"
 #import "ImageTools.h"
+#import "VoiceConverter.h"
+#import "ICRecordManager.h"
+
 
 NSString * const bucketName = @"dwsoft";
 NSString * const STSServer = @"http://119.57.140.230:7000/aliyun/oss/getAccessToken";
@@ -32,6 +35,7 @@ NSString * const STSServer = @"http://119.57.140.230:7000/aliyun/oss/getAccessTo
     BOOL isCancelled;
     BOOL isResumeUpload;
 }
+
 
 - (id)initWithViewController:(UIViewController *)view
                 withEndPoint:(NSString *)enpoint {
@@ -235,11 +239,51 @@ NSString * const STSServer = @"http://119.57.140.230:7000/aliyun/oss/getAccessTo
             NSLog(@"download object success!");
             OSSGetObjectResult * getResult = task.result;
             NSLog(@"download result: %@", getResult.downloadedData);
+            
+            
+            
+          BOOL written = [getResult.downloadedData writeToFile:filePath atomically:NO];
+            if (!written) {
+                NSLog(@"write failed: %@",  NSLocalizedDescriptionKey);
+            }
+            NSLog(@"success!");
+
+
+            
+            NSString *wavPath =  [[filePath stringByDeletingPathExtension] stringByAppendingPathExtension:@"wav"];
+            [VoiceConverter ConvertAmrToWav:filePath wavSavePath:wavPath];
+            NSLog(@"wav = %@",wavPath);
+
+//
+
+//            NSLog(@"%@",data);
+//            [self initPlayer:wavPath];
+            [[ICRecordManager shareManager] startPlayRecorder:wavPath];
+
         } else {
             NSLog(@"download object failed, error: %@" ,task.error);
         }
         return nil;
     }];
+}
+
+-(void)initPlayer:(NSString *)filepath
+
+{
+
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    NSError *err = nil;  // 加上这两句，否则声音会很小
+    [audioSession setCategory :AVAudioSessionCategoryPlayback error:&err];
+    
+    
+    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:filepath] error:nil];
+    self.player.numberOfLoops = 0;
+    [self.player setVolume:1];
+    [self.player prepareToPlay];
+    self.player.delegate = self;
+    
+    [self.player play];
+
 }
 
 

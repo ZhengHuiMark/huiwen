@@ -38,7 +38,7 @@
 
 - (void)setProgress:(CGFloat)progress
 {
-    _progress         = MIN(MAX(progress, 0.f),1.f);
+    _progress   = MIN(MAX(progress, 0.f),1.f);
     [self updateImages];
 }
 
@@ -50,7 +50,7 @@
         [self stopAnimating];
         return;
     }
-    if (_progress >= 0.8 ) {
+    if (_progress <= 0.55 ) {
         self.animationImages = @[_images[3],_images[4],_images[5],_images[4],_images[3]];
     } else {
         self.animationImages = @[_images[0],_images[1],_images[2],_images[1]];

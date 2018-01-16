@@ -176,6 +176,8 @@
     _window.rootViewController = tabBarVC;
     
     [_window makeKeyAndVisible];
+    
+       [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
 
     return YES;
 }
@@ -187,10 +189,13 @@
     NSString *content = [userInfo valueForKey:@"content"];
     NSDictionary *extras = [userInfo valueForKey:@"extras"];
     NSString *customizeField1 = [extras valueForKey:@"customizeField1"]; //服务端传递的Extras附加字段，key是自己定义的
+    NSString *title = [userInfo valueForKey:@"title"];
+    
     
     NSLog(@"自定义message:%@",userInfo);
     
-    NSLog(@"推%@",content);
+    NSLog(@"content = %@",content);
+    NSLog(@"title = %@",title);
     
     NSLog(@"推%@",extras);
     

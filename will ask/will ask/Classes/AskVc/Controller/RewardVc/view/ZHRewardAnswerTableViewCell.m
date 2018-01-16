@@ -13,6 +13,7 @@
 #import "Macro.h"
 #import "MLAvatarDisplayView.h"
 #import "UIImageView+WebCache.h"
+#import "UIView+LayerEffects.h"
 
 @interface ZHRewardAnswerTableViewCell ()
 
@@ -27,6 +28,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    [self.learnButton setCornerRadius:22.5];
 }
 
 - (void)setDetailModel:(ZHFreeDetailModel *)detailModel {
@@ -51,10 +53,32 @@
     
     self.clickNumber.text = self.answerModel.praiseNumber;
     
-    
     self.learnNumber.text = self.answerModel.learnNumber;
     
     self.releaseTime.text = self.answerModel.time;
+    
+    
+    if (self.answerModel.owner == YES) {
+        self.learnButton.hidden = YES;
+        self.backGroundImg.hidden = YES;
+    }else{
+        self.learnButton.hidden = NO;
+        self.backGroundImg.hidden = NO;
+    }
+    
+    if (self.answerModel.learned || self.answerModel.owner == YES) {
+        self.learnButton.hidden = YES;
+        self.backGroundImg.hidden = YES;
+    }else{
+        self.learnButton.hidden = NO;
+        self.backGroundImg.hidden = NO;
+    }
+    
+    if (self.answerModel.best == YES) {
+        self.best.hidden = NO;
+    }else{
+        self.best.hidden = YES;
+    }
     
     NSArray *PhotoArray = [self.answerModel.photos componentsSeparatedByString:@","];
     
@@ -84,6 +108,11 @@
     
 }
 
+- (IBAction)learnBtnAction:(UIButton *)sender {
+    
+    !self.didClick?:self.didClick();
+    
+}
 
 
 #pragma mark - Lazy load

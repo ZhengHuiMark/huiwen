@@ -22,7 +22,7 @@
 }
 
 - (UIImage *)image {
-    if (!_image) return [UIImage imageNamed:@"xswen"];
+    if (!_image) return [UIImage imageNamed:@"add"];
     return _image;
 }
 

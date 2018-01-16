@@ -450,17 +450,17 @@ static NSInteger kMaxCount = 3;
                                                                     forIndexPath: indexPath];
     cell.releaseBtnClick = ^(){
         
-//        NSString *url = [NSString stringWithFormat:@"%@/api/freeask/ut/submit",kIP];
+        NSString *url = [NSString stringWithFormat:@"%@/api/freeask/ut/submit",kIP];
         
-        NSString *url = [NSString stringWithFormat:@"%@/api/rewardask/ut/submit",kIP];
+//        NSString *url = [NSString stringWithFormat:@"%@/api/rewardask/ut/submit",kIP];
         self.model.amount = [self.model.amount stringByReplacingOccurrencesOfString:@"￥" withString:@""];
         self.model.timeLimit = [self.model.timeLimit stringByReplacingOccurrencesOfString:@"小时" withString:@""];
         NSMutableDictionary *dic = [ZHNetworkTools parameters];
         [dic setObject:@"1234567890" forKey:@"content"];
         [dic setObject:self.CodeSubType forKey:@"typeCode"];
-        [dic setObject:self.model.timeLimit forKey:@"timeLimit"];
+//        [dic setObject:self.model.timeLimit forKey:@"timeLimit"];
 //        [dic setObject:self.model.amount forKey:@"amount"];
-        [dic setObject:@"0.01" forKey:@"amount"];
+//        [dic setObject:@"0.01" forKey:@"amount"];
 
 //        if (self.imageModels) {
         

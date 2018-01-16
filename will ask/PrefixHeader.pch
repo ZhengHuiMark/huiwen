@@ -34,5 +34,8 @@
 #import "ImageTools.h"
 #import "MJRefresh.h"
 #import "WXApi.h"
+#import "UserManager.h"
+#import "UserModel.h"
+#import "SVProgressHUD.h"
 
 #endif /* PrefixHeader_pch */
