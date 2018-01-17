@@ -25,21 +25,8 @@
     if (model.content) {
         self.content.text = model.content;
         
-        NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
-        paraStyle.lineBreakMode = NSLineBreakByCharWrapping;
-        paraStyle.alignment = NSTextAlignmentLeft;
-        paraStyle.lineSpacing = UILABEL_LINE_SPACE; //设置行间距
-        paraStyle.hyphenationFactor = 1.0;
-        paraStyle.firstLineHeadIndent = 0.0;
-        paraStyle.paragraphSpacingBefore = 0.0;
-        paraStyle.headIndent = 0;
-        paraStyle.tailIndent = 0;
-        //设置字间距 NSKernAttributeName:@1.5f
-        NSDictionary *dic = @{NSFontAttributeName:[UIFont systemFontOfSize:17], NSParagraphStyleAttributeName:paraStyle, NSKernAttributeName:@1.5f
-                              };
+        [self setLabelSpace:self.content withValue:self.model.content withFont:[UIFont systemFontOfSize:17]];
         
-        NSAttributedString *attributeStr = [[NSAttributedString alloc] initWithString:self.model.content attributes:dic];
-        self.content.attributedText = attributeStr;
     }
    
 
@@ -47,7 +34,7 @@
 
 //给UILabel设置行间距和字间距
 
-+ (void)setLabelSpace:(UILabel *)label withValue:(NSString*)str withFont:(UIFont*)font {
+- (void)setLabelSpace:(UILabel *)label withValue:(NSString*)str withFont:(UIFont*)font {
     NSMutableParagraphStyle *paraStyle = [[NSMutableParagraphStyle alloc] init];
     paraStyle.lineBreakMode = NSLineBreakByCharWrapping;
     paraStyle.alignment = NSTextAlignmentLeft;

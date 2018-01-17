@@ -55,16 +55,9 @@ static NSString *caseDetailCellid = @"caseDetailCellid";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    NSString *wenzi = _model.content;
     CGFloat marin = 17.5;
     CGFloat labelWidth = [UIScreen mainScreen].bounds.size.width - marin * 2;
-    CGFloat labelHeight = [wenzi boundingRectWithSize: CGSizeMake(labelWidth,MAXFLOAT)
-                                              options: NSStringDrawingUsesLineFragmentOrigin
-                                           attributes: @{NSFontAttributeName : [UIFont systemFontOfSize: 17]}
-                                              context: nil].size.height;
-    
-    
-    
+
     return 142 + [ZHCaseDetailTableViewCell getSpaceLabelHeight:_model.content withFont:[UIFont systemFontOfSize:17] withWidth:labelWidth];
 }
 

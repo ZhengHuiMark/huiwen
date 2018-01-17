@@ -18,6 +18,7 @@
 #import "MLTextField.h"
 #import "ZHTabBarViewController.h"
 #import "ZHNavigationVC.h"
+#import "ZHForgetViewController.h"
 
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
@@ -94,11 +95,13 @@
     if (_AccordingBtn.selected == NO) {
         _AccordingBtn.selected = YES;
         [_AccordingBtn setBackgroundImage:[UIImage imageNamed:@"eyelash"] forState:UIControlStateSelected];
-        [_PasswordNumberL.ml_textfiled setSecureTextEntry:NO];
+//        [_PasswordNumberL.ml_textfiled setSecureTextEntry:NO];
+        [_PasswordNumberL.ml_textfiled setSecureTextEntry:YES];
     }else{
         _AccordingBtn.selected = NO;
-        [_AccordingBtn setBackgroundImage:[UIImage imageNamed:@"look"] forState:UIControlStateSelected];
-        [_PasswordNumberL.ml_textfiled setSecureTextEntry:YES];
+        [_AccordingBtn setBackgroundImage:[UIImage imageNamed:@"look"] forState:UIControlStateNormal];
+//        [_PasswordNumberL.ml_textfiled setSecureTextEntry:YES];
+                [_PasswordNumberL.ml_textfiled setSecureTextEntry:NO];
 
     }
 }
@@ -187,12 +190,27 @@
 
 
 
-
+#pragma mark - 点击方法
 - (void)clickButton{
     ZHRegisteredViewController *registVc = [[ZHRegisteredViewController alloc]init];
     
     [self.navigationController pushViewController:registVc animated:YES];
 
+}
+
+- (void)delegatePhoneNumber{
+    
+    self.PhoneNumberL.ml_textfiled.text = nil;
+
+}
+
+- (void)forgetPassword{
+    
+    
+    ZHForgetViewController *forgetVc = [[ZHForgetViewController alloc]init];
+    
+    [self.navigationController pushViewController:forgetVc animated:YES];
+    
 }
 
 
@@ -304,6 +322,7 @@
     _DeleteNumberBtn = [[UIButton alloc]init];
     _DeleteNumberBtn.frame = CGRectMake(DeleteX, DeleteY , DeleteBtnWidth, DeleteBtnHeight);
     [_DeleteNumberBtn setBackgroundImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
+    [_DeleteNumberBtn addTarget:self action:@selector(delegatePhoneNumber) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_DeleteNumberBtn];
     
     
@@ -335,7 +354,9 @@
     
     _AccordingBtn = [[UIButton alloc]init];
     _AccordingBtn.frame = CGRectMake(AccordingX, AccordingY, AccordingBtnWidth, AccordingBtnHeight);
-    [_AccordingBtn setBackgroundImage:[UIImage imageNamed:@"look"] forState:UIControlStateNormal];
+    _AccordingBtn.selected = YES;
+    [_AccordingBtn setBackgroundImage:[UIImage imageNamed:@"eyelash"] forState:UIControlStateSelected];
+    [_PasswordNumberL.ml_textfiled setSecureTextEntry:YES];
     [_AccordingBtn addTarget:self action:@selector(clickBtnShow) forControlEvents:UIControlEventTouchUpInside];
     
     

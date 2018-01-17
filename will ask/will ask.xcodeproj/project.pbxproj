@@ -359,6 +359,7 @@
 		449A0CD8200EF4320003196A /* ZHCaseDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0CD7200EF4320003196A /* ZHCaseDetailModel.m */; };
 		449A0CDC200EFB000003196A /* ZHCaseDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0CDA200EFB000003196A /* ZHCaseDetailTableViewCell.m */; };
 		449A0CDD200EFB000003196A /* ZHCaseDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 449A0CDB200EFB000003196A /* ZHCaseDetailTableViewCell.xib */; };
+		449A0CE0200F51440003196A /* ZHForgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0CDF200F51440003196A /* ZHForgetViewController.m */; };
 		44AF4AEF20049E500022B237 /* ZHFocusButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AF4AEA20049E500022B237 /* ZHFocusButton.m */; };
 		44AF4AF020049E500022B237 /* ZHFocusButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44AF4AEB20049E500022B237 /* ZHFocusButton.xib */; };
 		44AF4AF120049E500022B237 /* ZHFoucsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AF4AED20049E500022B237 /* ZHFoucsTableView.m */; };
@@ -1007,6 +1008,8 @@
 		449A0CD9200EFB000003196A /* ZHCaseDetailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHCaseDetailTableViewCell.h; sourceTree = "<group>"; };
 		449A0CDA200EFB000003196A /* ZHCaseDetailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHCaseDetailTableViewCell.m; sourceTree = "<group>"; };
 		449A0CDB200EFB000003196A /* ZHCaseDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHCaseDetailTableViewCell.xib; sourceTree = "<group>"; };
+		449A0CDE200F51440003196A /* ZHForgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHForgetViewController.h; sourceTree = "<group>"; };
+		449A0CDF200F51440003196A /* ZHForgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHForgetViewController.m; sourceTree = "<group>"; };
 		44AF4AE920049E500022B237 /* ZHFocusButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHFocusButton.h; sourceTree = "<group>"; };
 		44AF4AEA20049E500022B237 /* ZHFocusButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHFocusButton.m; sourceTree = "<group>"; };
 		44AF4AEB20049E500022B237 /* ZHFocusButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHFocusButton.xib; sourceTree = "<group>"; };
@@ -3001,6 +3004,8 @@
 				449956AE1F6128D80087503B /* ZHRegisteredViewController.m */,
 				44827BDF1FA17F490097F1E7 /* ZHBindingViewController.h */,
 				44827BE01FA17F490097F1E7 /* ZHBindingViewController.m */,
+				449A0CDE200F51440003196A /* ZHForgetViewController.h */,
+				449A0CDF200F51440003196A /* ZHForgetViewController.m */,
 			);
 			path = ZHLoginVc;
 			sourceTree = "<group>";
@@ -4030,6 +4035,7 @@
 				4407707B1FDE86DE0000C20E /* ZHVipCardDetailTableViewCell.m in Sources */,
 				4445F800200103D50027EB1B /* ICChatBox.m in Sources */,
 				4445F804200103D50027EB1B /* amrFileCodec.mm in Sources */,
+				449A0CE0200F51440003196A /* ZHForgetViewController.m in Sources */,
 				449957101F67787A0087503B /* UserManager.m in Sources */,
 				44BB65F21FCFE9A2003C3A6E /* ZHLIstsModel.m in Sources */,
 				440770121FD24E490000C20E /* ReviewModel.m in Sources */,
