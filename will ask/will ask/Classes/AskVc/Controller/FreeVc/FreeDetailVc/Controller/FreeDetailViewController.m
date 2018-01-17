@@ -175,7 +175,7 @@ static NSInteger kMaxCount = 3;
     
 }
 
-
+#pragma mark - UITableViewDeledate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
@@ -184,7 +184,7 @@ static NSInteger kMaxCount = 3;
         return 0.1;
     }
     
-    return .1;
+    return 20;
 }
 
 
@@ -992,6 +992,8 @@ static NSInteger kMaxCount = 3;
 
 #pragma mark - UICollectionView Delegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
     
     // 获取 Model
     MLImageModel *imageModel = self.imageModels[indexPath.item];

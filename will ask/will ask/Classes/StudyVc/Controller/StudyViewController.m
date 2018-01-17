@@ -23,6 +23,7 @@
 #import "ZHStudyBannerModel.h"
 #import "ImageTools.h"
 #import "ZHExpertUserInfoHomePageViewController.h"
+#import "ZHCaseDetaiPageleViewController.h"
 
 static NSString *ExpertsCellid = @"ExpertsCellid";
 
@@ -303,7 +304,16 @@ static NSString *typeCellid = @"typeCellid";
         
     }
     
-    if (indexPath.section == 2)return;
+    if (indexPath.section == 2){
+        ZHCaseDetaiPageleViewController *caseDetailVc = [[ZHCaseDetaiPageleViewController alloc]init];
+        caseDetailVc.urlId = _caseModels[indexPath.row].caseId;
+        caseDetailVc.time = _caseModels[indexPath.row].readingTime;
+        caseDetailVc.title = _caseModels[indexPath.row].title;
+        caseDetailVc.words = _caseModels[indexPath.row].words;
+        
+        [self.navigationController pushViewController:caseDetailVc animated:YES];
+    }
+
     
     
 }
