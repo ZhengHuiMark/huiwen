@@ -32,7 +32,7 @@
 }
 
 - (void)setAllCornerWithRoundedCornersSize:(CGFloat)cornersSize pathSize:(CGSize)pathSize strokeColor:(UIColor *)strokeColor {
-    [self setAllCornerWithRoundedCornersSize:cornersSize pathSize:pathSize lineWidth:1 strokeColor:strokeColor backColor:[UIColor redColor]];
+    [self setAllCornerWithRoundedCornersSize:cornersSize pathSize:pathSize lineWidth:1 strokeColor:strokeColor backColor:[UIColor whiteColor]];
 }
 
 - (void)setAllCornerWithRoundedCornersSize:(CGFloat)cornersSize pathSize:(CGSize)pathSize lineWidth:(CGFloat)lineWidth strokeColor:(UIColor *)strokeColor {
@@ -71,6 +71,16 @@
         self.layer.backgroundColor = backColor.CGColor;
     }
     self.layer.mask = maskLayer;
+}
+
+- (UIViewController *)viewController {
+    for (UIView *view = self; view; view = view.superview) {
+        UIResponder *nextResponder = [view nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
 }
 
 @end

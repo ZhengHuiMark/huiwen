@@ -13,7 +13,7 @@
 @interface yuyinView () <ICRecordManagerDelegate>
 
 @property (nonatomic, strong) UIButton    *voiceButton;
-@property (nonatomic, strong) UILabel     *durationLabel;
+
 @property (nonatomic, strong) UIImageView *voiceIcon;
 
 @property (nonatomic, strong) UIImageView *currentVoiceIcon;

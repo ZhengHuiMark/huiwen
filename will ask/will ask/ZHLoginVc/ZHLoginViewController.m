@@ -91,6 +91,10 @@
     
 }
 
+- (BOOL)navigationShouldPopOnBackButton {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    return YES;
+}
 
 - (void)clickBtnShow{
     if (_AccordingBtn.selected == NO) {
@@ -148,21 +152,21 @@
         
         !self.loginCompletion?:self.loginCompletion(NO);
         
-        
-        if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass: [ZHNavigationVC class]]) {
-            ZHTabBarViewController *ZHTabController = [[ZHTabBarViewController alloc]init];
-            [UIApplication sharedApplication].keyWindow.rootViewController = ZHTabController;
-        } else {
-            ZHLoginViewController *tabBarVC = [[ZHLoginViewController alloc]initWithNibName:[NSString stringWithFormat:@"ZHLoginInViewController"] bundle:[NSBundle mainBundle]];
-            
-            ZHNavigationVC *nav = [[ZHNavigationVC alloc] initWithRootViewController:tabBarVC];
-            [nav.navigationBar setTintColor:[UIColor whiteColor]];
-            [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
-                                                                 forBarMetrics:UIBarMetricsDefault];
-        }
+//        
+//        if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass: [ZHNavigationVC class]]) {
+//            ZHTabBarViewController *ZHTabController = [[ZHTabBarViewController alloc]init];
+//            [UIApplication sharedApplication].keyWindow.rootViewController = ZHTabController;
+//        } else {
+//            ZHLoginViewController *tabBarVC = [[ZHLoginViewController alloc]initWithNibName:[NSString stringWithFormat:@"ZHLoginInViewController"] bundle:[NSBundle mainBundle]];
+//            
+//            ZHNavigationVC *nav = [[ZHNavigationVC alloc] initWithRootViewController:tabBarVC];
+//            [nav.navigationBar setTintColor:[UIColor whiteColor]];
+//            [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
+//                                                                 forBarMetrics:UIBarMetricsDefault];
+//        }
 
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName: @"loginSuccess"
+        // loginSuccess
+        [[NSNotificationCenter defaultCenter] postNotificationName: @"NSNotification_LoginSuccess"
                                                             object: nil];
         
         [self.navigationController popViewControllerAnimated:YES];

@@ -11,7 +11,7 @@
 @interface yuyinView : UIView
 
 @property(nonatomic,strong) NSString *pathStr;
-
+@property (nonatomic, strong) UILabel *durationLabel;
 
 - (NSString *)mediaPath:(NSString *)originPath;
 

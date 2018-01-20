@@ -91,7 +91,7 @@
         }
         imageView.hidden = NO;
         [self.answerImgBtn[index] setHidden: NO];
-        [imageView sd_setImageWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@",bucketNameRewardLoad,OSS,PhotoArray[index]]]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@",bucketNameFreeLoad,OSS,PhotoArray[index]]]];
     }
     
 }

@@ -159,7 +159,7 @@
                             <constraint firstAttribute="height" constant="10" id="pDU-1E-iXE"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="book-bj" translatesAutoresizingMaskIntoConstraints="NO" id="PrA-b8-Dkp">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PrA-b8-Dkp">
                         <rect key="frame" x="0.0" y="71" width="375" height="117"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YH7-x4-bou">
@@ -248,18 +248,17 @@
                 <outlet property="releaseTime" destination="426-0t-Dmm" id="roW-gd-r8m"/>
                 <outlet property="userAvatar" destination="gwd-BO-Vty" id="zKq-gT-PsA"/>
                 <outlet property="userName" destination="lxW-kG-U7D" id="X6p-Fr-fbO"/>
-                <outletCollection property="answerImgs" destination="Cj9-32-bQQ" id="Wtr-iL-oSE"/>
-                <outletCollection property="answerImgs" destination="1aS-m2-TJh" id="kW2-0h-SRj"/>
-                <outletCollection property="answerImgs" destination="kgL-c7-o9Z" id="1T6-AD-IXG"/>
                 <outletCollection property="ansImgButtons" destination="h1h-Wc-jhn" id="8Nz-yl-who"/>
                 <outletCollection property="ansImgButtons" destination="lZu-wT-rXj" id="TFU-Uh-AQ2"/>
                 <outletCollection property="ansImgButtons" destination="9MU-oG-5d8" id="6If-MY-khv"/>
+                <outletCollection property="answerImgs" destination="kgL-c7-o9Z" id="1f4-iA-4NH"/>
+                <outletCollection property="answerImgs" destination="1aS-m2-TJh" id="KfF-2T-BmZ"/>
+                <outletCollection property="answerImgs" destination="Cj9-32-bQQ" id="W6c-qR-gkE"/>
             </connections>
             <point key="canvasLocation" x="24.5" y="9"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="book-bj" width="375" height="155"/>
         <image name="optimum" width="64" height="50"/>
         <image name="zan-" width="14" height="14"/>
     </resources>

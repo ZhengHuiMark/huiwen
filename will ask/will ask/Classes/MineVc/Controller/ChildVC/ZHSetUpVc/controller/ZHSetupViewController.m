@@ -10,6 +10,7 @@
 #import "ZHSetupListTableViewCell.h"
 #import "ZHSetupPushTableViewCell.h"
 #import "ZHExitAccountTableViewCell.h"
+#import "ZHLoginViewController.h"
 
 static NSString *setUpPushCellid = @"setUpPushCellid";
 
@@ -18,7 +19,7 @@ static NSString *setupListCellid = @"setupListCellid";
 static NSString *exitCellid = @"exitCellid";
 
 
-@interface ZHSetupViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ZHSetupViewController ()<UITableViewDelegate,UITableViewDataSource, UINavigationControllerDelegate>
 
 @property(nonatomic,strong)UITableView *tableView;
 
@@ -75,8 +76,9 @@ static NSString *exitCellid = @"exitCellid";
         ZHExitAccountTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:exitCellid forIndexPath:indexPath];
         
         cell.didClick = ^(){
-          
-            
+            [[UserManager sharedManager]removeUserModel];
+            NSString *className = @"ZHLoginViewController";
+            [self pushToSetControllerWithIndexPath:indexPath className:className];
         };
         
         return cell;

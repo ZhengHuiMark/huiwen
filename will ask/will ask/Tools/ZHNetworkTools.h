@@ -18,6 +18,7 @@ typedef enum : NSUInteger {
     POST
 } RequestType;
 
+@class expert;
 @interface ZHNetworkTools : AFHTTPSessionManager
 
 @property(nonatomic,assign)NSInteger timestamp;
@@ -42,4 +43,8 @@ typedef enum : NSUInteger {
 
 
 - (void)expertsUpLoad:(NSString *)url asyncPutImage:(NSString *)objectKey localFilePath:(NSString *)filePath parameters:(NSDictionary *)parameter imageArray:(NSArray<ZHImageModel*> *)uploadImages;
+
+- (void)imageChangeParameter:(NSMutableArray *)parameter hander:(void (^)(NSString *, NSString *))hander;
+
+- (BOOL)chectInfomationIsCorrect:(expert *)model;
 @end

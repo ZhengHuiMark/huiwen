@@ -105,6 +105,9 @@ static NSInteger kMaxCount = 3;
 @property(nonatomic, strong) UIButton *answerButton;
 @property(nonatomic, strong) UIView *footerView;
 
+/** 语音时间 */
+@property(nonatomic,copy)NSString *voiceSecondTime;
+
 @end
 
 @implementation FreeDetailViewController
@@ -284,7 +287,7 @@ static NSInteger kMaxCount = 3;
                                                attributes: @{NSFontAttributeName : [UIFont systemFontOfSize: 14]}
                                                   context: nil].size.height;
         
-        return 219 + labelHeight - 65;
+        return 219 + labelHeight;
     }
 
     return  290;
@@ -346,62 +349,83 @@ static NSInteger kMaxCount = 3;
     
     
     NSInteger index=0;
-    NSInteger __block imgCount = 0;
+    __block NSInteger  imgCount = 0;
+    __block NSInteger taskCount = 0;
     for (MLImageModel *imgModel in self.imageModels) {
         if (imgModel.modelType == MLImageModelTypePlaceholder) continue;
         imgCount++;
     }
     
-    for (MLImageModel *imageModel in self.imageModels) {
-        if (imageModel.modelType == MLImageModelTypePlaceholder) continue;{
+    if (self.imageModels.count == 1) {
+        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
             
+            if (error) {
+                NSLog(@"%@",error);
+            }
             
-            NSData *imageData = UIImageJPEGRepresentation(imageModel.image, 0.5);
-            NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"123"];
-            [imageData writeToFile:fullPath atomically:NO];
-            uploadFilePath = fullPath;
-            //                NSLog(@"uploadFilePath : %@", uploadFilePath);
+            NSLog(@"response = %@",response);
+            [self downControl];
+            taskCount += 1;
+            if (taskCount == 2) {
+                [self loadData];
+            }
             
-            
-            NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
-            
-            NSString * objectKey = [NSString stringWithFormat:@"%@%@%f%ld",[UserManager sharedManager].userModel.resourceId,@"RP",interval,(long)index];
-            index++;
-//            NSLog(@"2131312321323  ===%@",objectKey);
-            
-            NSString *bucketName = bucketNameFree;
-//            NSLog(@"%@",bucketName);
-            
-            [service asyncPutImage:objectKey localFilePath:uploadFilePath bucketName:bucketName comletion:^(BOOL isSuccess) {
+        }];
+
+    } else {
+        for (MLImageModel *imageModel in self.imageModels) {
+            if (imageModel.modelType == MLImageModelTypePlaceholder) continue;{
                 
-                if (isSuccess) {
-                    [self.mArray addObject:objectKey];
+                
+                NSData *imageData = UIImageJPEGRepresentation(imageModel.image, 0.5);
+                NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"123"];
+                [imageData writeToFile:fullPath atomically:NO];
+                uploadFilePath = fullPath;
+                //                NSLog(@"uploadFilePath : %@", uploadFilePath);
+                
+                
+                NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
+                
+                NSString * objectKey = [NSString stringWithFormat:@"%@%@%f%ld",[UserManager sharedManager].userModel.resourceId,@"RP",interval,(long)index];
+                index++;
+                //            NSLog(@"2131312321323  ===%@",objectKey);
+                
+                NSString *bucketName = bucketNameFree;
+                //            NSLog(@"%@",bucketName);
+                
+                [service asyncPutImage:objectKey localFilePath:uploadFilePath bucketName:bucketName comletion:^(BOOL isSuccess) {
                     
-                    if (self.mArray.count >= imgCount) {
-                        [dic setObject: [_mArray componentsJoinedByString:@","] forKey: @"photos"];
-                        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
-                            
-                            if (error) {
-                                                NSLog(@"%@",error);
-                            }
-                            
-                                        NSLog(@"response = %@",response);
-                            [self downControl];
-                            
-                            
-                            [self loadData];
-                        }];
+                    if (isSuccess) {
+                        [self.mArray addObject:objectKey];
+                        
+                        if (self.mArray.count >= imgCount) {
+                            [dic setObject: [_mArray componentsJoinedByString:@","] forKey: @"photos"];
+                            [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                                
+                                if (error) {
+                                    NSLog(@"%@",error);
+                                }
+                                
+                                NSLog(@"response = %@",response);
+                                [self downControl];
+                                taskCount += 1;
+                                if (taskCount == 2) {
+                                    [self loadData];
+                                }
+                                
+                            }];
+                        }
+                        
+                        
+                        
+                    } else {
+                        imgCount--;
                     }
-            
-                    
-                    
-                } else {
-                    imgCount--;
-                }
-            }];
-            
-            
-            
+                }];
+                
+                
+                
+            }
         }
     }
     
@@ -410,7 +434,7 @@ static NSInteger kMaxCount = 3;
         
         NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
 
-         NSString * objectKey = [NSString stringWithFormat:@"%@%@%f",[UserManager sharedManager].userModel.resourceId,@"RV",interval];
+         NSString * objectKey = [NSString stringWithFormat:@"%@%@%f_%@",[UserManager sharedManager].userModel.resourceId,@"RV",interval,_voiceSecondTime];
         uploadFilePath = _voicePath;
         NSString *bucketName = bucketNameFree;
 
@@ -421,10 +445,13 @@ static NSInteger kMaxCount = 3;
                     [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
                         
                         if (error) {
-                                            NSLog(@"%@",error);
+                            NSLog(@"%@",error);
                         }
-                        
-                                    NSLog(@"response = %@",response);
+                        taskCount += 1;
+                        if (taskCount == 2) {
+                            [self loadData];
+                        }
+                        NSLog(@"response = %@",response);
                         
                         
                     }];
@@ -887,6 +914,7 @@ static NSInteger kMaxCount = 3;
             
             yuyinView *yuyin = [[yuyinView alloc] initWithFrame:CGRectMake(55,(self.VoiceView.frame.size.height / 2) - 25,[UIScreen mainScreen].bounds.size.width - 55 - 88, 50)];
             yuyin.pathStr = recordPath;
+            _voiceSecondTime = yuyin.durationLabel.text;
             //
             NSLog(@"yuyin path = %@", yuyin.pathStr);
             

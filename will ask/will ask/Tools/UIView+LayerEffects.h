@@ -63,4 +63,5 @@
  */
 - (void)setAllCornerWithRoundedCornersSize:(CGFloat)cornersSize pathSize:(CGSize)pathSize strokeColor:(UIColor *)strokeColor backColor:(UIColor *)backColor;
 
+- (UIViewController *)viewController;
 @end

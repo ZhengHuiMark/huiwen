@@ -171,6 +171,7 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
     [dic setObject:@"什么" forKey:@"content"];
     [dic setObject:@(1) forKey:@"pageNo"];
+    
  
     [SVProgressHUD show];
     [[ZHNetworkTools sharedTools]requestWithType:GET andUrl: _baseUrl andParams:dic andCallBlock:^(id response, NSError *error) {

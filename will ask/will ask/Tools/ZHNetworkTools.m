@@ -16,6 +16,7 @@
 #import "OssService.h"
 #import "ZHMD5.h"
 #import "ZHRegisteredViewController.h"
+#import "expert.h"
 
 
 //static NSString *json = @"application/json";
@@ -378,7 +379,54 @@
   
 }
 
+- (void)imageChangeParameter:(NSMutableArray *)parameter hander:(void (^)(NSString *, NSString *))hander {
+    UIImage *image = parameter[0];
+    [parameter removeObjectAtIndex:0];
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"123"];
+    [imageData writeToFile:fullPath atomically:NO];
+    NSString *uploadFilePath = fullPath;
+    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
+    NSString *objectKey = [NSString stringWithFormat:@"%@",[UserManager sharedManager].userModel.resourceId];
+    
+    for (NSInteger i = 0 ; i < parameter.count; i ++) {
+        objectKey = [NSString stringWithFormat:@"%@%@",objectKey,parameter[i]];
+    }
+    objectKey = [NSString stringWithFormat:@"%@%f",objectKey,interval];
+    hander(objectKey,uploadFilePath);
+}
 
+- (BOOL)chectInfomationIsCorrect:(expert *)model {
+    [SVProgressHUD dismissWithDelay:1.0f];
+    if (!(model.realname.length > 0)) {
+        [SVProgressHUD showInfoWithStatus:@"请填写您的真实姓名!"];return NO;
+    } else if (!(model.nickname.length > 0)) {
+        [SVProgressHUD showInfoWithStatus:@"请您为自己起个昵称!"];return NO;
+    } else if (model.sex != 0 && model.sex != 1) {
+        [SVProgressHUD showInfoWithStatus:@"请选择性别!"];return NO;
+    } else if (!(model.locus.length > 0)) {
+        [SVProgressHUD showInfoWithStatus:@"请填写现居住地!"];return NO;
+    } else if (!(model.birthdate.length > 0)) {
+        [SVProgressHUD showInfoWithStatus:@"请填写出生日期!"];return NO;
+    } else if (!(model.company.length > 0)) {
+        [SVProgressHUD showInfoWithStatus:@"请填写公司名称!"];return NO;
+    } else if (!(model.duty.length > 0)) {
+        [SVProgressHUD showInfoWithStatus:@"请填写所在公司职务(前任公司)!"];return NO;
+    } else if (!(model.business.length > 0)) {
+        [SVProgressHUD showInfoWithStatus:@"请填写擅长业务!"];return NO;
+    } else if (!(model.intro.length > 0)) {
+        [SVProgressHUD showInfoWithStatus:@"请填写个人简介!"];return NO;
+    } else if (!(model.identityCardFront.length > 0)) {
+        [SVProgressHUD showInfoWithStatus:@"请上传清晰身份证正面照片,以便我们快速审核!"];return NO;
+    } else if (!(model.identityCardReverse.length > 0)) {
+        [SVProgressHUD showInfoWithStatus:@"请上传清晰身份证背面照片,以便我们快速审核!"];return NO;
+    } else if (!(model.realPhoto.length > 0)) {
+        [SVProgressHUD showInfoWithStatus:@"请上传您的真实照片(两年以内)!"];return NO;
+    } else if (!(model.certifications.count > 0)) {
+        [SVProgressHUD showInfoWithStatus:@"请填写至少一项身份认证!"];return NO;
+    }
+    return YES;
+}
 
 
 //for (ZHImageModel *imageModel in uploadImages) {

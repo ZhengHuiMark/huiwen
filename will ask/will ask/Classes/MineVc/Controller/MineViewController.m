@@ -23,11 +23,12 @@
 #import "UserInfoModel.h"
 #import "YYModel.h"
 #import "ZHExpertsListTableViewCell.h"
-
+#import "Masonry.h"
 #import "ZHExpertServiceViewController.h"
 #import "ZHExpertUserInfoHomePageViewController.h"
 #import "ZHSetupViewController.h"
 #import "ZHSearchViewController.h"
+#import "UIView+LayerEffects.h"
 
 //头部cell
 static NSString *HeaderCellid = @"HeaderCellid";
@@ -44,6 +45,8 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 
 @property(nonatomic,strong)UITableView *tableView;
 
+@property(nonatomic,strong)UIImageView *BackgroundImageView;
+
 @end
 
 @implementation MineViewController
@@ -53,13 +56,24 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-
-    self.navigationController.navigationBar.hidden = YES;
+//    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
         [self loadUserInfo];
-    
+    self.navigationController.navigationBar.hidden = YES;
     [[NSNotificationCenter defaultCenter] postNotificationName: @"loginSuccess"
                                                         object: nil];
+    if ([UserManager sharedManager].userModel) {
+        _BackgroundImageView.hidden = YES;
+        [self configUI];
+        
+    }else{
+        [self.view addSubview:self.BackgroundImageView];
+        _BackgroundImageView.hidden =NO;
+
+        [_BackgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(self.view);
+        }];
+    }
     [self.tableView reloadData];
 
 }
@@ -71,9 +85,11 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
                                                         object: nil];
     [self.tableView reloadData];
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadSucess) name:@"NSNotification_LoginSuccess" object:nil];
 //    [self.view addSubview: [UIView new]];
     
     if (self.tableView.style == UITableViewStylePlain) {
@@ -82,21 +98,23 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
         [self.tableView setContentInset:contentInset];
     }
     [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(self.view);
+    }];
     
     [self loadData];
     
     [self loadUserInfo];
 
-    if ([UserManager sharedManager].userModel) {
-            [self configUI];
-
-    }else{
-        [self noUserModelUI];
-    }
+   
     
     
 }
 
+
+- (void)loadSucess {
+    self.tabBarController.selectedIndex = 1;
+}
 
 - (void)loadUserInfo {
     
@@ -138,15 +156,47 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 - (void)noUserModelUI{
     
     
+    
+}
+
+- (UIImageView *)BackgroundImageView {
     self.tableView.hidden = YES;
-    UIImageView *BackgroundImageView = [[UIImageView alloc]init];
-    
-    BackgroundImageView.frame = self.view.frame;
-    
-    BackgroundImageView.image = [UIImage imageNamed:@"bj"];
-    
-    [self.view addSubview:BackgroundImageView];
-    
+    if (!_BackgroundImageView) {
+        _BackgroundImageView = [[UIImageView alloc]init];
+        _BackgroundImageView.image = [UIImage imageNamed:@"bj"];
+        UIImageView *iconImg = [[UIImageView alloc] init];
+        [_BackgroundImageView addSubview:iconImg];
+        iconImg.backgroundColor = [UIColor redColor];
+        [iconImg mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(198);
+            make.centerX.mas_equalTo(_BackgroundImageView);
+            make.width.height.mas_equalTo(80);
+        }];
+        
+        UIButton *loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_BackgroundImageView addSubview:loginBtn];
+        loginBtn.backgroundColor = [UIColor orangeColor];
+        [loginBtn setTitle:@"登录" forState:UIControlStateNormal];
+        [loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [loginBtn setCornerRadius:20];
+        [loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(ScreenWidth-57.5*2, 40));
+            make.centerX.mas_equalTo(iconImg);
+            make.top.mas_equalTo(iconImg.mas_bottom).offset(93);
+        }];
+        
+        UIButton *regisBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_BackgroundImageView addSubview:regisBtn];
+        [regisBtn setTitle:@"注册" forState:UIControlStateNormal];
+        [regisBtn setTitleColor:[UIColor colorWithRed:59.0/255.0 green:189.0/255.0 blue:234.0/255.0 alpha:1] forState:UIControlStateNormal];
+        [regisBtn setAllCornerWithRoundedCornersSize:20 pathSize:CGSizeMake(ScreenWidth-57.5*2, 40) strokeColor:[UIColor colorWithRed:59.0/255.0 green:189.0/255.0 blue:234.0/255.0 alpha:1]];
+        [regisBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(ScreenWidth-57.5*2, 40));
+            make.centerX.mas_equalTo(loginBtn);
+            make.top.mas_equalTo(loginBtn.mas_bottom).offset(28);
+        }];
+    }
+    return _BackgroundImageView;
 }
 
 
@@ -186,7 +236,7 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (indexPath.section == 0) {
         
-            NSString *className = @"ZHPersonalInformationVc";
+            NSString *className = @"ZHCertifiedExpertsVC";
             
             [self pushToSetControllerWithIndexPath:indexPath className:className];
         
@@ -455,7 +505,7 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
     
     if (!_tableView) {
         
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - SafeAreaTopHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
