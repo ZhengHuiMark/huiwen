@@ -225,11 +225,15 @@
     [audioSession setCategory :AVAudioSessionCategoryPlayback error:&err];
     
     
-    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:recorderPath] error:nil];
+
+    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:recorderPath] error:&err];
+    // 音量检测
+    self.player.meteringEnabled = YES;
     self.player.numberOfLoops = 0;
     [self.player prepareToPlay];
     self.player.delegate = self;
     [self.player play];
+    
 }
 
 - (void)stopPlayRecorder:(NSString *)recorderPath
@@ -271,9 +275,6 @@
     second = urlAsset.duration.value / urlAsset.duration.timescale; // 获取视频总时长,单位秒
     return second;
 }
-
-
-
 
 
 

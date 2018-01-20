@@ -27,16 +27,16 @@
     
     self.wordNumber.text = self.caseModel.caseWords;
     
-    //    self.releasePerson.text = self.
-    self.caseContent.text = self.caseModel.intro;
-    
-    self.salesNumber.text = self.caseModel.salesVolume;
-    
-    self.priceNumber.text = self.caseModel.price;
-    
-    self.clickNumber.text = self.caseModel.praiseNumber;
-
-    
+//    //    self.releasePerson.text = self.
+//    self.caseContent.text = self.caseModel.intro;
+//    
+//    self.salesNumber.text = self.caseModel.salesVolume;
+//    
+//    self.priceNumber.text = self.caseModel.price;
+//    
+//    self.clickNumber.text = self.caseModel.praiseNumber;
+//
+//    
     
 }
 @end

@@ -161,8 +161,7 @@
 ////    NSString *tokenStr = [NSString stringWithFormat:@"%@",UserModel.token];
 ////    _access_token = [NSString stringWithFormat:@"%@",_access_token];
     NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
-//    _timestamp = interval;
-    
+
     NSString *inStr = [NSString stringWithFormat: @"%ld", (long)interval];
     NSLog(@"%@",inStr);
     

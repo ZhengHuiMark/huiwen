@@ -24,24 +24,24 @@
             self.variableLabel.text =self.expertServiceModel.consultWaitNumber;
         }
             break;
-        case 1:{
-            self.variableLabel.hidden = YES;
-        }
+//        case 1:{
+//            self.variableLabel.hidden = YES;
+//        }
             break;
-        case 2:{
+        case 1:{
             self.variableLabel.text = self.expertServiceModel.rewardAnswerIncome;
 
         }
             break;
-        case 3:{
+        case 2:{
             self.variableLabel.hidden = YES;
         }
             break;
-        case 4:{
+        case 3:{
             self.variableLabel.text = self.expertServiceModel.rewardLearningIncome;
         }
             break;
-        case 5:{
+        case 4:{
             self.variableLabel.hidden = YES;
 
         }
@@ -61,40 +61,40 @@
         case 0:{
             self.titleLabel.text = @"咨询我的问题";
             self.arrowLabel.text = @">";
-//            self.detailedLabel.text = @"";
+            self.detailedLabel.text = @"待回答";
         }
+            break;
+//        case 1:{
+//            self.titleLabel.text = @"我的案例详解";
+//            self.arrowLabel.text = @">";
+//
+//            self.detailedLabel.hidden = YES;
+//        }
             break;
         case 1:{
-            self.titleLabel.text = @"我的案例详解";
-            self.arrowLabel.text = @">";
-
-            self.detailedLabel.hidden = YES;
-        }
-            break;
-        case 2:{
             self.titleLabel.text = @"我的悬赏抢答";
             self.arrowLabel.text = @">";
 
-//            self.detailedLabel.text = @"";
+            self.detailedLabel.text = @"昨日新增收入";
 
         }
             break;
-        case 3:{
+        case 2:{
             self.titleLabel.text = @"关注我的用户";
             self.arrowLabel.text = @">";
 
             self.detailedLabel.hidden = YES;
         }
             break;
-        case 4:{
+        case 3:{
             self.titleLabel.text = @"想我学习的用户";
             self.arrowLabel.text = @">";
 
-//            self.detailedLabel.text = @"";
+            self.detailedLabel.text = @"昨日新增收入";
 
         }
             break;
-        case 5:{
+        case 4:{
             self.titleLabel.text = @"提问时身份";
             self.arrowLabel.text = @">";
 

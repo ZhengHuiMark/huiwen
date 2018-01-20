@@ -26,7 +26,7 @@
 
 @property(nonatomic,copy)NSString *number;
 
-
+//订单号
 @property(nonatomic,copy)NSString *orderNum;
 
 @property(nonatomic,copy)NSString *payTime;

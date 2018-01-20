@@ -13,6 +13,11 @@
 @property(nonatomic,copy)NSString *titleTypeLabel;
 // 选择界面传过来的小分类
 @property(nonatomic,copy)NSString *titleSubTypeLabel;
+@property(nonatomic,copy)NSString *CodeSubType;
+
+
+/** 选择界面传过来的类型 1 免费问 2 悬赏问 3 咨询 */
+@property(nonatomic,copy)NSString *AskType;
 
 @property (nonatomic,copy) NSString *label123;
 

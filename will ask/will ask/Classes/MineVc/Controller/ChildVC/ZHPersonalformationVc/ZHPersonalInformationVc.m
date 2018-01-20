@@ -352,7 +352,7 @@ static NSString *nameCellid = @"nameCellid";
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame: CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height )
-                                                  style: UITableViewStyleGrouped];
+                                                  style: UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableFooterView = [UIView new];

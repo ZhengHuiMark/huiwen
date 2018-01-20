@@ -74,6 +74,11 @@ static NSString *exitCellid = @"exitCellid";
     if (indexPath.section == 2) {
         ZHExitAccountTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:exitCellid forIndexPath:indexPath];
         
+        cell.didClick = ^(){
+          
+            
+        };
+        
         return cell;
     }
     
@@ -122,6 +127,12 @@ static NSString *exitCellid = @"exitCellid";
             default:
                 break;
         }
+    }
+    
+    if (indexPath.section == 2) {
+        
+        
+        
     }
 }
 

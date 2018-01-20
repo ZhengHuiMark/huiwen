@@ -18,5 +18,7 @@
 
 @property(nonatomic,strong)ZHExpertCaseModel *expertCaseModel;
 
+@property(nonatomic,copy)NSString *expertID;
+
 
 @end

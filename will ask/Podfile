@@ -15,5 +15,6 @@ pod 'YYText'
 pod 'IQKeyboardManager'
 pod 'AliyunOSSiOS'
 pod 'SDCycleScrollView'
+pod 'JPush'
 
 end

@@ -80,9 +80,9 @@ static NSString *businessCellid = @"businessCellid";
 
 - (void)loadData{
 
-        NSString *expertID = @"92282645588742144";
+//        NSString *expertID = @"92282645588742144";
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
-    [dic setObject:expertID forKey:@"userId"];
+    [dic setObject:_expertID forKey:@"userId"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/user/uto/getExpertHomePage",kIP];
     
@@ -158,7 +158,7 @@ static NSString *businessCellid = @"businessCellid";
         }
     }
 //
-    return 370;
+    return 118;
 }
 
 

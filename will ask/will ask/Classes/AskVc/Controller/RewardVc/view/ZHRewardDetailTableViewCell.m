@@ -54,38 +54,108 @@
     
     self.rewardMoney.clipsToBounds = YES;
     
-    if ([self.detailModel.type  isEqual: @"审计"]) {
-        [self.typeImg setImage:[UIImage imageNamed:@"shenji"]];
-    }else if ([self.detailModel.type isEqual:@"税务"]){
-        [self.typeImg setImage:[UIImage imageNamed:@"shuiwu"]];
+    if ([self.detailModel.type  isEqual: @"涉税实务"]) {
+        [self.typeImg setImage:[UIImage imageNamed:@"sssw"]];
+    }else if ([self.detailModel.type isEqual:@"税收优惠"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"ssyh"]];
         
-    }else if  ([self.detailModel.type isEqual:@"软件"]){
-        [self.typeImg setImage:[UIImage imageNamed:@"ruanjian"]];
+    }else if  ([self.detailModel.type isEqual:@"发票管理"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"fpgl"]];
         
-    }else if  ([self.detailModel.type isEqual:@"评估"]){
-        [self.typeImg setImage:[UIImage imageNamed:@"pinggu"]];
+    }else if  ([self.detailModel.type isEqual:@"税收筹划"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"ssch"]];
         
-    }else if  ([self.detailModel.type isEqual:@"会计"]){
+    }else if  ([self.detailModel.type isEqual:@"纳税申报"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"nssb"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"跨境税收"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"kjss"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"税务其他"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"qtsw"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"年报审计"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"nbsj"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"上市审计"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"sssj"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"债券审计"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"zqsj"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"验资审计"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"yzsj"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"内容审计"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"nksj"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"其他审计"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"qtsj"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"会计核算"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"kjhs"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"政策咨询"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"zczx"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"财务管理"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"cwgl"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"报表编制"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"bbbz"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"会计其他"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"qtkj"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"资产评估"]){
         [self.typeImg setImage:[UIImage imageNamed:@"kuaiji"]];
         
+    }else if  ([self.detailModel.type isEqual:@"单项评估"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"kuaiji"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"整体评估"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"kuaiji"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"价值评估"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"kuaiji"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"其他评估"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"kuaiji"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"财务软件"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"cwrj"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"审计软件"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"sjrj"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"office软件"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"office"]];
+        
+    }else if  ([self.detailModel.type isEqual:@"其他软件"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"qtrj"]];
+        
     }
     
-    
-    NSArray *PhotoArray = [self.detailModel.photos componentsSeparatedByString:@","];
-    
-    NSInteger index = -1;
-    NSLog(@"%zd",index);
-    for (UIImageView *imageView in self.contentImgs) {
-        index++;
-        if (PhotoArray.count <= index) {
-            imageView.hidden = YES;
-            [self.contentBtn[index] setHidden: YES];
-            continue;
+    if (!self.detailModel.photos) {
+        NSArray *PhotoArray = [self.detailModel.photos componentsSeparatedByString:@","];
+        
+        
+        
+        NSInteger index = -1;
+        NSLog(@"%zd",index);
+        for (UIImageView *imageView in self.contentImgs) {
+            index++;
+            if (PhotoArray.count <= index) {
+                imageView.hidden = YES;
+                [self.contentBtn[index] setHidden: YES];
+                continue;
+            }
+            imageView.hidden = NO;
+            [self.contentBtn[index] setHidden: NO];
+            [imageView sd_setImageWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@",bucketNameReward,OSS,PhotoArray[index]]]];
         }
-        imageView.hidden = NO;
-        [self.contentBtn[index] setHidden: NO];
-        [imageView sd_setImageWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@",bucketNameReward,OSS,PhotoArray[index]]]];
     }
+   
     
     
 }

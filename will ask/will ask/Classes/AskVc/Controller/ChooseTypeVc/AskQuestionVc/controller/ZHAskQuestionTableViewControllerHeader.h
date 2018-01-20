@@ -12,7 +12,7 @@
 
 
 /** 免费问页面 Section 数量*/
-static NSInteger const kZHAskQuestionTableViewControllerSectionCount = 5;
+static NSInteger const kZHAskQuestionTableViewControllerSectionCount = 4;
 
 /** 悬赏问页面 Section 数量*/
 static NSInteger const kZHAskQuestionTableViewControllerSectionRewardCount = 5;

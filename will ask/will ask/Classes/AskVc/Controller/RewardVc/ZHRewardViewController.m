@@ -85,7 +85,7 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
     [self.view addSubview: self.tableView];
     
     
-    UIView *PlaceHolderView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, 44)];
+    UIView *PlaceHolderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
     PlaceHolderView.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:PlaceHolderView];
@@ -147,26 +147,17 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
             [headerView addSubview:lineView];
             
             return headerView;
-            
-            
-        
         
     }
-    
-    
-    
+
     return view;
     
     
 }
 
-
-
-
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     
 //    if (indexPath.section == 0) {
 //        
@@ -341,7 +332,7 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
 #pragma mark - Lazy load
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame: self.view.bounds
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 64)
                                                   style: UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -363,22 +354,6 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
     }
     return _tagContainer;
 }
-
-//#pragma mark - Test methods
-//- (void)testData {
-//
-//    _title = @"未选中标签";
-//    NSArray<NSDictionary *> *JSONArray = [self JSONArray];
-//    NSMutableArray<MLTagModel *> *tagModels = [NSMutableArray array];
-//
-//    NSInteger index=0;
-//    for (NSDictionary *dict in JSONArray) {
-//        [tagModels addObject: [MLTagModel tagModelWithDictionary: dict
-//                                                         atIndex: index]];
-//        index++;
-//    }
-//    self.tagContainer.tagModels = [NSArray arrayWithArray: tagModels];
-//}
 
 - (void)LoadFreeAskData {
     

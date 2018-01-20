@@ -44,10 +44,10 @@
         
     
     self.answerName.text = self.answerModel.nickname;
-    [self.answerAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUser,OSS,self.answerModel.avatar]]];
-//    self.answerExpert.text = answerModel.
+    [self.answerAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.answerModel.avatar]]];
+    self.answerExpert.text = answerModel.certifiedNames;
     self.answerContent.text = self.answerModel.content;
-    
+    self.answerTime.text = self.answerModel.time;
     
     NSArray *PhotoArray = [self.answerModel.photos componentsSeparatedByString:@","];
     
@@ -62,7 +62,7 @@
         }
         imageView.hidden = NO;
         [self.answerimgBtns[index] setHidden: NO];
-        [imageView sd_setImageWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@",bucketNameReward,OSS,PhotoArray[index]]]];
+        [imageView sd_setImageWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@",bucketNameFreeLoad,OSS,PhotoArray[index]]]];
     }
     
 }

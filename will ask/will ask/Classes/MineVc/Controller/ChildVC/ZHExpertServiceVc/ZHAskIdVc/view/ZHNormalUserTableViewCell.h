@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class UserModel;
 @interface ZHNormalUserTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *normalAvatar;
@@ -17,5 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *cardNumber;
 
 @property (weak, nonatomic) IBOutlet UILabel *incomeNumber;
+
+@property (nonatomic,strong)UserModel *model;
 
 @end

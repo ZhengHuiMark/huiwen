@@ -68,7 +68,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mingzizijiqi:) name:@"postVc" object:nil];
 
-    [self.navigationController.navigationBar addSubview:self.searchBar];
+//    [self.navigationController.navigationBar addSubview:self.searchBar];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -77,14 +77,19 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 }
 
-- (void)mingzizijiqi:(NSNotification *)user{
+- (void)mingzizijiqi:(NSNotification *)notification{
     
-    ZHRewardDetailViewController *rewardDVc = [[ZHRewardDetailViewController alloc]init];
-    rewardDVc.uidStringz = user.userInfo[@"rewardAskId"];
     
-    [self.navigationController pushViewController:rewardDVc animated:YES];
+    if([notification.object isKindOfClass:[self class]]) {
+        
+        ZHRewardDetailViewController *rewardDVc = [[ZHRewardDetailViewController alloc]init];
+        rewardDVc.uidStringz = notification.userInfo[@"rewardAskId"];
+        
+        [self.navigationController pushViewController:rewardDVc animated:YES];
+    }
     
 }
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

@@ -23,6 +23,8 @@
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>wx</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>wxc264c5d4f565c692</string>
@@ -50,6 +52,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>QQ060B19FD</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>ali</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>2017102009403828</string>
 			</array>
 		</dict>
 	</array>
@@ -103,6 +115,10 @@
 	<string>是否允许此App访问你的麦克风</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>是否允许此App访问你的媒体资料库</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

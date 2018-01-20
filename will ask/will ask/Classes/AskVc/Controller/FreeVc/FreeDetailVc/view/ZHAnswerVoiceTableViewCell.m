@@ -12,10 +12,22 @@
 #import "ImageTools.h"
 #import "UIImageView+WebCache.h"
 #import "MLAvatarDisplayView.h"
+#import "ICRecordManager.h"
+#import "VoiceConverter.h"
+#import "yuyinView.h"
+#import <AVFoundation/AVFoundation.h>
+#import "OSSService.h"
 
-@interface ZHAnswerVoiceTableViewCell ()
+
+@interface ZHAnswerVoiceTableViewCell ()<ICRecordManagerDelegate>{
+    OssService * service;
+
+}
 
 @property (nonatomic, strong) MLAvatarDisplayView *avatarDisplayView;
+@property (nonatomic, strong) UIImageView *currentVoiceIcon;
+
+@property (strong, nonatomic) IBOutlet yuyinView *voiceView;
 
 
 @end
@@ -25,13 +37,16 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    
+    NSString * const endPoint = @"http://oss-cn-qingdao.aliyuncs.com";
+    NSString * const callbackAddress = @"http://oss-demo.aliyuncs.com:23450";
+    
+    service = [[OssService alloc] initWithViewController:self withEndPoint:endPoint];
+    [service setCallbackAddress:callbackAddress];
+    
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 
 - (void)setDetailModel:(ZHFreeDetailModel *)detailModel {
@@ -45,7 +60,23 @@
     
     self.answerName.text = answerVoiceModel.nickname;
     [self.userAvatarImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,answerVoiceModel.avatar]]];
-    //    self.answerExpert.text = answerModel.
+    self.answerExpert.text = answerVoiceModel.certifiedNames;
+    
+    self.answerTime.text = answerVoiceModel.time;
+//    self.playVoiceBtn
+    
+    self.pathStr = [NSString stringWithFormat:@"%@%@%@",bucketNameFreeLoad,OSS,answerVoiceModel.voice];
+    NSLog(@"%@",self.pathStr);
+    
+
+//    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"444.amr"];
+
+//    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.amr",answerVoiceModel.voice]];
+
+//   [service getFileObjectKey:answerVoiceModel.voice buckName:bucketNameFree filePath:fullPath];
+    
+
+
     
     NSArray *PhotoArray = [self.answerVoiceModel.photos componentsSeparatedByString:@","];
     
@@ -72,6 +103,10 @@
     [self.avatarDisplayView showFromImageView: imageView];
 }
 
+- (IBAction)actionBtn:(UIButton *)sender {
+    
+    !self.didClick?:self.didClick();
+}
 
 
 #pragma mark - Lazy load
@@ -81,5 +116,7 @@
     }
     return _avatarDisplayView;
 }
+
+
 
 @end

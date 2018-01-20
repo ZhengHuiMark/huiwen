@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class ZHOrderPayModel;
 @interface ZHOrderPayContentTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *orderState;
 @property (weak, nonatomic) IBOutlet UILabel *orderTitle;
 @property (weak, nonatomic) IBOutlet UILabel *priceNumber;
 @property (weak, nonatomic) IBOutlet UILabel *creatTime;
+
+@property (nonatomic,strong) ZHOrderPayModel *model ;
+
 
 @end

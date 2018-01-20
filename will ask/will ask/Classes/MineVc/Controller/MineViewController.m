@@ -27,6 +27,7 @@
 #import "ZHExpertServiceViewController.h"
 #import "ZHExpertUserInfoHomePageViewController.h"
 #import "ZHSetupViewController.h"
+#import "ZHSearchViewController.h"
 
 //头部cell
 static NSString *HeaderCellid = @"HeaderCellid";
@@ -39,9 +40,9 @@ static NSString *MineListCellid = @"MineListCellid";
 // 专家模式下显示的cellid
 static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 
-@interface MineViewController ()
+@interface MineViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-
+@property(nonatomic,strong)UITableView *tableView;
 
 @end
 
@@ -80,14 +81,18 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
         contentInset.top = -22;
         [self.tableView setContentInset:contentInset];
     }
-
+    [self.view addSubview:self.tableView];
     
     [self loadData];
     
     [self loadUserInfo];
 
-    
-    [self configUI];
+    if ([UserManager sharedManager].userModel) {
+            [self configUI];
+
+    }else{
+        [self noUserModelUI];
+    }
     
     
 }
@@ -107,21 +112,17 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
             
             NSLog(@"%@",error);
         }
-        
-        
-//        _UserInfoModel = [UserInfoModel yy_modelWithJSON:response[@"data"]];
-        
-//        [UserManager sharedManager].userModel.cardBalance = response[@"data"][@"cardBalance"];
-//        [UserManager sharedManager].userModel.concernNum = response[@"data"][@"concernNum"];
+        [UserManager sharedManager].userModel.cardBalance = response[@"data"][@"cardBalance"];
+        [UserManager sharedManager].userModel.concernNum = response[@"data"][@"concernNum"];
         [UserManager sharedManager].userModel.avatar = response[@"data"][@"avatar"];
         [UserManager sharedManager].userModel.expertCertified = response[@"data"][@"expertCertified"];
         [UserManager sharedManager].userModel.expertCheckStatus = response[@"data"][@"expertCheckStatus"];
         [UserManager sharedManager].userModel.expertCheckStatus = response[@"data"][@"expertCheckStatus"];
         [UserManager sharedManager].userModel.expertNickname = response[@"data"][@"expertNickname"];
-//        [UserManager sharedManager].userModel.myEarnings = response[@"data"][@"myEarnings"];
-//        [UserManager sharedManager].userModel.consults = response[@"data"][@"consults"];
+        [UserManager sharedManager].userModel.myEarnings = response[@"data"][@"myEarnings"];
+        [UserManager sharedManager].userModel.consults = response[@"data"][@"consults"];
         [UserManager sharedManager].userModel.nickname = response[@"data"][@"nickname"];
-//        [UserManager sharedManager].userModel.realPhoto = response[@"data"][@"realPhoto"];
+        [UserManager sharedManager].userModel.realPhoto = response[@"data"][@"realPhoto"];
 
         NSLog(@"response = %@",response);
         [[UserManager sharedManager]saveUserModel];
@@ -133,20 +134,26 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 }
 
 
+#pragma mark - 根据模型状态显示UI
+- (void)noUserModelUI{
+    
+    
+    self.tableView.hidden = YES;
+    UIImageView *BackgroundImageView = [[UIImageView alloc]init];
+    
+    BackgroundImageView.frame = self.view.frame;
+    
+    BackgroundImageView.image = [UIImage imageNamed:@"bj"];
+    
+    [self.view addSubview:BackgroundImageView];
+    
+}
+
+
 - (void)configUI{
     
     
-    
-    [self.tableView registerNib:[UINib nibWithNibName:@"ZHHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:HeaderCellid];
-    [self.tableView registerNib:[UINib nibWithNibName:@"ZHMoneyTableViewCell" bundle:nil] forCellReuseIdentifier:MoneyCellid];
-    [self.tableView registerNib:[UINib nibWithNibName:@"ZHExpertsTableViewCell" bundle:nil] forCellReuseIdentifier:ExpertsCellid];
-    [self.tableView registerNib:[UINib nibWithNibName:@"ZHMineTableViewCell" bundle:nil] forCellReuseIdentifier:MineListCellid];
-    [self.tableView registerNib:[UINib nibWithNibName:@"ZHExpertsListTableViewCell" bundle:nil] forCellReuseIdentifier:ExpertBtnCellid];
-    
-
-    self.tableView.rowHeight = 50;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.hidden = NO;
     
 }
 //
@@ -220,12 +227,15 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 //                // 测试
 //                NSString *className = @"ZHUserHomePageViewController";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
-                
-                NSString *className = @"ZHExpertUserInfoHomePageViewController";
-                [self pushToSetControllerWithIndexPath:indexPath className:className];
-//
-//                    NSString *className = @"ZHExpertServiceViewController";
+//                
+//                NSString *className = @"ZHExpertUserInfoHomePageViewController";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
+//                NSString *className = @"ZHSearchViewController";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+
+//  ZHOrderPaymentViewController  ZHExpertServiceViewController
+                    NSString *className = @"ZHOrderPaymentViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
 //                NSString *className = @"ZHSetupViewController";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 break;
@@ -276,7 +286,13 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
         HeadCell.placeholderView.backgroundColor = [UIColor orangeColor];
 
         HeadCell.usermodel = [UserManager sharedManager].userModel;
-
+        
+        HeadCell.didClick = ^(){
+            NSString *className = @"ZHSetupViewController";
+            [self pushToSetControllerWithIndexPath:indexPath className:className];
+            
+        };
+        
         
         return HeadCell;
     }
@@ -289,8 +305,21 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
             if (cell == nil) {
                 cell = [[ZHExpertsListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ExpertBtnCellid];
             }
-            
             cell.userModel = [UserManager sharedManager].userModel;
+            
+            cell.didClick = ^(){
+                NSString *className = @"ZHFocusMeUserViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
+            };
+            cell.incomeDidClick = ^(){
+                NSString *className = @"ZHMyWalletViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
+            };
+            cell.newConultDidClick = ^(){
+                
+                NSString *className = @"ZHToAnswerViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
+            };
             
             return cell;
         }
@@ -302,7 +331,7 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
             }
             
             mCell.usermodel = [UserManager sharedManager].userModel;
-            
+  
             mCell.cardClick = ^(){
                 
                 NSString *className = @"ZHMyVipCardViewController";
@@ -315,6 +344,9 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
                 NSString *className = @"ZHMyWalletViewController";
                 [self pushToSetControllerWithIndexPath:indexPath className:className];
             };
+            
+           
+            
             
             return mCell;
             
@@ -417,6 +449,37 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
     _arrList = arrM.copy;
     
 }
+
+- (UITableView *)tableView {
+    //
+    
+    if (!_tableView) {
+        
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - SafeAreaTopHeight) style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
+        
+        //    NSBundle *bundle = [NSBundle mainBundle];
+        
+        [self.tableView registerNib:[UINib nibWithNibName:@"ZHHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:HeaderCellid];
+        [self.tableView registerNib:[UINib nibWithNibName:@"ZHMoneyTableViewCell" bundle:nil] forCellReuseIdentifier:MoneyCellid];
+        [self.tableView registerNib:[UINib nibWithNibName:@"ZHExpertsTableViewCell" bundle:nil] forCellReuseIdentifier:ExpertsCellid];
+        [self.tableView registerNib:[UINib nibWithNibName:@"ZHMineTableViewCell" bundle:nil] forCellReuseIdentifier:MineListCellid];
+        [self.tableView registerNib:[UINib nibWithNibName:@"ZHExpertsListTableViewCell" bundle:nil] forCellReuseIdentifier:ExpertBtnCellid];
+        
+        
+        self.tableView.rowHeight = 50;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
+        self.automaticallyAdjustsScrollViewInsets = YES;
+    }
+    
+    return _tableView;
+}
+
+
 
 
 #pragma mark - 实现点击跳转到控制器

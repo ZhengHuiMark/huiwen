@@ -80,14 +80,14 @@
                             <constraint firstAttribute="width" constant="60" id="TLs-HU-1fi"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aF8-aI-vej">
+                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aF8-aI-vej">
                         <rect key="frame" x="85" y="162" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="C2r-cj-8Ei"/>
                             <constraint firstAttribute="height" constant="60" id="d8G-Z6-42L"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="34G-bk-Z9G">
+                    <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="34G-bk-Z9G">
                         <rect key="frame" x="153" y="162" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="QkK-ek-3pb"/>
@@ -120,10 +120,16 @@
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ewH-dp-Egk">
                         <rect key="frame" x="85.5" y="162" width="60" height="60"/>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="imgBtnAction:" destination="cm9-dU-PZZ" eventType="touchUpInside" id="1CY-5X-paC"/>
+                        </connections>
                     </button>
                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pbe-AB-chf">
                         <rect key="frame" x="153" y="162" width="60" height="60"/>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="imgBtnAction:" destination="cm9-dU-PZZ" eventType="touchUpInside" id="9tK-MJ-7He"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dm8-x7-tDX">
                         <rect key="frame" x="21" y="253.5" width="15" height="16.5"/>

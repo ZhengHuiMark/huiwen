@@ -64,14 +64,14 @@
                             <constraint firstAttribute="height" constant="60" id="gKa-9U-TAf"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Atj-ZP-pq7">
+                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Atj-ZP-pq7">
                         <rect key="frame" x="87" y="114" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="SwL-ja-Rbk"/>
                             <constraint firstAttribute="height" constant="60" id="whD-1L-xgW"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D2t-Ud-Hbc">
+                    <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D2t-Ud-Hbc">
                         <rect key="frame" x="154" y="114" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="BMr-iX-SUf"/>
@@ -102,9 +102,15 @@
                     </button>
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aSb-Fs-eFj">
                         <rect key="frame" x="87" y="114" width="60" height="60"/>
+                        <connections>
+                            <action selector="imageButtonAction:" destination="Vkb-jO-CWA" eventType="touchUpInside" id="xsc-7y-Ayr"/>
+                        </connections>
                     </button>
                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nLV-sN-tsk">
                         <rect key="frame" x="154" y="114" width="60" height="60"/>
+                        <connections>
+                            <action selector="imageButtonAction:" destination="Vkb-jO-CWA" eventType="touchUpInside" id="AmS-5w-Of3"/>
+                        </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="brF-Fb-4I6">
                         <rect key="frame" x="98" y="24" width="50" height="15"/>

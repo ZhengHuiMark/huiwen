@@ -18,7 +18,7 @@
 #import "ZHCaseListsModel.h"
 #import "MJRefresh.h"
 #import "ZHCaseListTableViewCell.h"
-#import "ZHCaseDetailViewController.h"
+#import "ZHCaseDetaiPageleViewController.h"
 
 static NSString *CaseListCellid = @"CaseListCellid";
 
@@ -163,15 +163,15 @@ static NSString *CaseListCellid = @"CaseListCellid";
         return;
     }
     
-    if (self.CaseListModels[indexPath.row].caseId) {
+//    if (self.CaseListModels[indexPath.row].caseId) {
+////        
+//        ZHCaseDetaiPageleViewController *detailCaseVc = [[ZHCaseDetaiPageleViewController alloc]init];
 //        
-        ZHCaseDetailViewController *detailCaseVc = [[ZHCaseDetailViewController alloc]init];
-        
-        detailCaseVc.model = self.CaseListModels[indexPath.row];
-        
-        [self.navigationController pushViewController:detailCaseVc animated:YES];
-        
-    }
+//        detailCaseVc.model = self.CaseListModels[indexPath.row];
+//        
+//        [self.navigationController pushViewController:detailCaseVc animated:YES];
+//        
+//    }
     
 }
 

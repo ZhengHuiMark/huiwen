@@ -26,7 +26,8 @@
 #import "UserModel.h"
 #import "ImageTools.h"
 
-
+#import "ZHOrderPaymentViewController.h"
+#import "ZHOrderPayModel.h"
 
 static NSInteger kMaxCount = 3;
 
@@ -61,7 +62,17 @@ static NSInteger kMaxCount = 3;
     [super viewDidLoad];
     
     UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 62, 20)] ;
-    titleLabel.text  = @"免费问";
+    if ([_AskType isEqualToString:@"1"]) {
+        titleLabel.text  = @"免费问提问";
+
+    }
+    if ([_AskType isEqualToString:@"2"]) {
+        titleLabel.text  = @"悬赏问提问";
+        
+    }
+    
+    
+//    titleLabel.text  = @"悬赏问提问";
     //    titleLabel.backgroundColor  = [UIColor blueColor]   ;
     
     titleLabel.textColor = [UIColor blackColor] ;
@@ -120,48 +131,75 @@ static NSInteger kMaxCount = 3;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    return kZHAskQuestionTableViewControllerSectionCount;
-//    return 3;
+    if ([_AskType isEqualToString:@"1"]) {
+        return kZHAskQuestionTableViewControllerSectionCount;
+    }else {
+        return kZHAskQuestionTableViewControllerSectionRewardCount;
+    }
+//    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
     
-    switch (section) {
-            
-        case kValidationViewControllerSection_TypeTitle:{
-            return kZHAskQuestionTableViewControllerSectionRowCountInSectionTypeTitle;
+    if ([_AskType isEqualToString:@"1"]) {
+        
+        switch (section) {
+            case kValidationViewControllerSection_TypeTitle:{
+                return kZHAskQuestionTableViewControllerSectionRowCountInSectionTypeTitle;
+            }
+//                break;
+                
+            case kValidationViewControllerSection_TextView:{
+                return kZHAskQuestionTableViewControllerSectionRowCountInSectionContentTextView;
+            }
+//                break;
+                
+            case kValidationViewControllerSection_UpLoadImage:{
+                return kZHAskQuestionTableViewControllerSectionRowCountInSectionUpLoadImage;
+            }
+                
+//                break;
+                
+            case kValidationViewControllerSectionRewardMoneyAndDate:{
+                return kZHAskQuestionTableViewControllerSectionRowCountInSectionRelease;
+            }
+//                break;
+                
+            default:
+                break;
         }
-            break;
-            
-        case kValidationViewControllerSection_TextView:{
-            return kZHAskQuestionTableViewControllerSectionRowCountInSectionContentTextView;
+    }else{
+        
+        switch (section) {
+                
+            case kValidationViewControllerSection_TypeTitle:{
+                return kZHAskQuestionTableViewControllerSectionRowCountInSectionTypeTitle;
+            }
+//                break;
+                
+            case kValidationViewControllerSection_TextView:{
+                return kZHAskQuestionTableViewControllerSectionRowCountInSectionContentTextView;
+            }
+//                break;
+                
+            case kValidationViewControllerSection_UpLoadImage:{
+                return kZHAskQuestionTableViewControllerSectionRowCountInSectionUpLoadImage;
+            }
+            case kValidationViewControllerSectionRewardMoneyAndDate:{
+                return kZHAskQuestionTableViewControllerSectionRowCountInSectionRewardMoneyAndDate;
+            }
+//                break;
+                
+            case kValidationViewControllerSection_Release:{
+                return kZHAskQuestionTableViewControllerSectionRowCountInSectionRelease;
+            }
+//                break;
+            default:
+                break;
         }
-            break;
-            
-        case kValidationViewControllerSection_UpLoadImage:{
-            return kZHAskQuestionTableViewControllerSectionRowCountInSectionUpLoadImage;
-        }
-        case kValidationViewControllerSectionRewardMoneyAndDate:{
-            return kZHAskQuestionTableViewControllerSectionRowCountInSectionRewardMoneyAndDate;
-        }
-            break;
-            
-        case kValidationViewControllerSection_Release:{
-            return kZHAskQuestionTableViewControllerSectionRowCountInSectionRelease;
-        }
-            break;
-            
-            //        case kValidationViewControllerSection_Certificate:{
-            //            return kValidationViewControllerSectionRowCountInSectionCertificate;
-            //        }
-            //            break;
-            
-        default:
-            break;
+        
     }
-    
-    
     return 0;
 
     
@@ -169,6 +207,20 @@ static NSInteger kMaxCount = 3;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
+    
+    if ([_AskType isEqualToString:@"1"]) {
+        switch (section) {
+            case 0:
+                return 0;
+            case 1:
+                return 10;
+            case 2:
+                return 10;
+            case 3:
+                return 10;
+           
+        }
+    }else {
     switch (section) {
         case 0:
             return 0;
@@ -180,6 +232,7 @@ static NSInteger kMaxCount = 3;
             return 10;
         case 4:
             return 10;
+        }
     }
     return 0;
 }
@@ -190,7 +243,41 @@ static NSInteger kMaxCount = 3;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = nil;
   
-
+    if ([_AskType isEqualToString:@"1"]) {
+        switch (indexPath.section) {
+            case kValidationViewControllerSection_TypeTitle: {
+                cell = [self obtainTitleTypeCellWithTableView: tableView atIndexPath: indexPath];
+                
+            }
+                break;
+                
+            case kValidationViewControllerSection_TextView: {
+                cell = [self obtainAskCellWithTableView:tableView atIndexPath:indexPath];
+            }
+                break;
+                
+            case kValidationViewControllerSection_UpLoadImage: {
+                cell = [self obtainUpLoadImgCellWithTableView:tableView atIndexPath:indexPath];
+                
+                
+                [cell addSubview:self.collectionView];
+            }
+                
+                break;
+       
+            case kValidationViewControllerSectionRewardMoneyAndDate: {
+                cell = [self obtainReleaseCellWithTableView:tableView atIndexPath:indexPath];
+                
+                break;
+                
+                
+                
+            default:
+                break;
+            }
+        }
+    }else{
+    
     switch (indexPath.section) {
         case kValidationViewControllerSection_TypeTitle: {
             cell = [self obtainTitleTypeCellWithTableView: tableView atIndexPath: indexPath];
@@ -233,7 +320,7 @@ static NSInteger kMaxCount = 3;
         }
 
 
-    
+    }
     
     
     return cell?cell:[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
@@ -365,73 +452,83 @@ static NSInteger kMaxCount = 3;
         
         NSString *url = [NSString stringWithFormat:@"%@/api/freeask/ut/submit",kIP];
         
+//        NSString *url = [NSString stringWithFormat:@"%@/api/rewardask/ut/submit",kIP];
+        self.model.amount = [self.model.amount stringByReplacingOccurrencesOfString:@"￥" withString:@""];
+        self.model.timeLimit = [self.model.timeLimit stringByReplacingOccurrencesOfString:@"小时" withString:@""];
         NSMutableDictionary *dic = [ZHNetworkTools parameters];
-        [dic setObject:@"123" forKey:@"content"];
-        [dic setObject:self.titleSubTypeLabel forKey:@"typeCode"];
+        [dic setObject:@"1234567890" forKey:@"content"];
+        [dic setObject:self.CodeSubType forKey:@"typeCode"];
+//        [dic setObject:self.model.timeLimit forKey:@"timeLimit"];
+//        [dic setObject:self.model.amount forKey:@"amount"];
+//        [dic setObject:@"0.01" forKey:@"amount"];
+
+//        if (self.imageModels) {
         
-//        NSMutableArray *images = [NSMutableArray array];
-        NSInteger index=0;
-        NSInteger __block imgCount = 0;
-        for (MLImageModel *imgModel in self.imageModels) {
-            if (imgModel.modelType == MLImageModelTypePlaceholder) continue;
-            imgCount++;
-        }
-        
-        for (MLImageModel *imageModel in self.imageModels) {
-            if (imageModel.modelType == MLImageModelTypePlaceholder) continue;{
-                
-                
-                NSData *imageData = UIImageJPEGRepresentation(imageModel.image, 0.5);
-                NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"123"];
-                [imageData writeToFile:fullPath atomically:NO];
-                uploadFilePath = fullPath;
-//                NSLog(@"uploadFilePath : %@", uploadFilePath);
-                
-                
-                NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
-                
-                NSString * objectKey = [NSString stringWithFormat:@"%@%@%f%ld",[UserManager sharedManager].userModel.resourceId,@"AQ",interval,(long)index];
-                index++;
-                NSLog(@"2131312321323  ===%@",objectKey);
-                
-                NSString *bucketName = bucketNameFree;
-                NSLog(@"%@",bucketName);
-                
-                [service asyncPutImage:objectKey localFilePath:uploadFilePath bucketName:bucketName comletion:^(BOOL isSuccess) {
-                    
-                    if (isSuccess) {
-                        [self.mArray addObject:objectKey];
-                        NSLog(@"marray = %@", _mArray);
-                        
-                        if (self.mArray.count >= imgCount) {
-                            [dic setObject: [_mArray componentsJoinedByString:@","] forKey: @"photos"];
-                            [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
-                    
-                                if (error) {
-                    //                NSLog(@"%@",error);
-                                }
-                    
-                    //            NSLog(@"response = %@",response);
-                    
-                    
-                            }];
-                        }
-//                        self.model.photos = [_mArray componentsJoinedByString:@","];
-//                        NSLog(@"self.model.photos = %@",self.model.photos);
-                        //
-                        
-                        
-                        
-                    } else {
-                        imgCount--;
-                    }
-                }];
-                
-                
-                
+            NSInteger index=0;
+            NSInteger __block imgCount = 0;
+            for (MLImageModel *imgModel in self.imageModels) {
+                if (imgModel.modelType == MLImageModelTypePlaceholder) continue;
+                imgCount++;
             }
+            
+            for (MLImageModel *imageModel in self.imageModels) {
+                if (imageModel.modelType == MLImageModelTypePlaceholder) continue;{
+                    
+                    
+                    NSData *imageData = UIImageJPEGRepresentation(imageModel.image, 0.5);
+                    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"123"];
+                    [imageData writeToFile:fullPath atomically:NO];
+                    uploadFilePath = fullPath;
+                    //                NSLog(@"uploadFilePath : %@", uploadFilePath);
+                    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
+                    
+                    NSString * objectKey = [NSString stringWithFormat:@"%@%@%f%ld",[UserManager sharedManager].userModel.resourceId,@"AQ",interval,(long)index];
+                    index++;
+                    NSLog(@"2131312321323  ===%@",objectKey);
+                    
+                    NSString *bucketName = bucketNameFree;
+                    NSLog(@"%@",bucketName);
+                    
+                    [service asyncPutImage:objectKey localFilePath:uploadFilePath bucketName:bucketName comletion:^(BOOL isSuccess) {
+                        
+                        if (isSuccess) {
+                            [self.mArray addObject:objectKey];
+                            NSLog(@"marray = %@", _mArray);
+                            
+                            if (self.mArray.count >= imgCount) {
+                                [dic setObject: [_mArray componentsJoinedByString:@","] forKey: @"photos"];
+                                [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                                    
+                                    if (error) {
+                                        NSLog(@"%@",error);
+                                    }
+                                    
+                                    NSLog(@"response = %@",response);
+                                    ZHOrderPayModel *model = [ZHOrderPayModel yy_modelWithJSON:response[@"data"]];
+                                    model.descriptions = @"悬赏问提问";
+                                    model.goodsName = @"悬赏订单";
+                                    model.amount = @"0.01";
+                                    
+                                    ZHOrderPaymentViewController *payVc = [[ZHOrderPaymentViewController alloc]init];
+                                    payVc.payModel = model;
+                                    
+                                    [self.navigationController pushViewController:payVc animated:YES];
+                                }];
+                            }
+                            
+                        } else {
+                            imgCount--;
+                        }
+                    }];
         }
-        
+   
+            }
+    
+//    else {
+    
+
+//        }
+    
 
         
     };
@@ -442,6 +539,35 @@ static NSInteger kMaxCount = 3;
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    if ([_AskType isEqualToString:@"1"]) {
+        switch (indexPath.section) {
+            case kValidationViewControllerSection_TypeTitle: {
+                return 50;
+            }
+//                break;
+                
+            case kValidationViewControllerSection_TextView: {
+                return 150;
+            }
+//                break;
+                
+            case kValidationViewControllerSection_UpLoadImage:{
+                return 50;
+                
+            }
+//                break;
+                
+            case kValidationViewControllerSectionRewardMoneyAndDate: {
+                
+                return 45;
+            }
+//                break;
+            default:
+                return 300;
+        }
+    }else{
     
     switch (indexPath.section) {
         case kValidationViewControllerSection_TypeTitle: {
@@ -471,7 +597,7 @@ static NSInteger kMaxCount = 3;
         }
             break;
     }
-    
+        }
     return 0;
 }
 

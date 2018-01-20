@@ -63,6 +63,9 @@
                         <state key="normal" title="点击播放">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="actionBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="WCc-ax-3Ty"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvZ-Ll-Z1D">
                         <rect key="frame" x="314.5" y="102" width="35.5" height="12.5"/>
@@ -80,14 +83,14 @@
                             <constraint firstAttribute="width" constant="60" id="ihv-4E-u2V"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XCb-rY-K7S">
+                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XCb-rY-K7S">
                         <rect key="frame" x="85.5" y="162" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="nb6-AX-Vo7"/>
                             <constraint firstAttribute="height" constant="60" id="sKR-aV-UcU"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qdg-IM-agi">
+                    <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qdg-IM-agi">
                         <rect key="frame" x="153" y="162" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="3P4-vu-cMx"/>
@@ -120,10 +123,16 @@
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d94-3q-BcD">
                         <rect key="frame" x="85.5" y="162" width="60" height="60"/>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="imgBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="kcv-vT-pX6"/>
+                        </connections>
                     </button>
                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofi-Vd-RWB">
                         <rect key="frame" x="153" y="162" width="60" height="60"/>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="imgBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="g9q-ez-pWz"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

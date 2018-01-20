@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class ZHAskIdModel;
 @interface ZHExpertAskIdentityViewController : UIViewController
+
+@property(nonatomic,strong)ZHAskIdModel *model;
 
 @end

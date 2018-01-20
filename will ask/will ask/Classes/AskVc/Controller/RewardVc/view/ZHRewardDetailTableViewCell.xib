@@ -44,10 +44,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bvi-1v-uee">
-                        <rect key="frame" x="338" y="0.0" width="20" height="40"/>
+                        <rect key="frame" x="328" y="0.0" width="30" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="Dho-8n-4Wl"/>
-                            <constraint firstAttribute="width" constant="20" id="qvU-v0-XOf"/>
+                            <constraint firstAttribute="width" constant="30" id="qvU-v0-XOf"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="        Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLD-HK-Lvt">
@@ -70,14 +70,14 @@
                             <constraint firstAttribute="height" constant="60" id="UMc-Dv-ycG"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DfO-FU-nGI">
+                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DfO-FU-nGI">
                         <rect key="frame" x="87" y="111" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="dmZ-pl-2kh"/>
                             <constraint firstAttribute="width" constant="60" id="p2m-au-928"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GpT-Ey-8Tf">
+                    <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GpT-Ey-8Tf">
                         <rect key="frame" x="154" y="111" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="2gQ-Nv-diB"/>
@@ -92,9 +92,15 @@
                     </button>
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="umd-lx-o70">
                         <rect key="frame" x="87" y="111" width="60" height="60"/>
+                        <connections>
+                            <action selector="imageButtonAction:" destination="I4U-Cw-1BU" eventType="touchUpInside" id="IlI-GZ-tcB"/>
+                        </connections>
                     </button>
                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NlC-nK-4s8">
                         <rect key="frame" x="154" y="111" width="60" height="60"/>
+                        <connections>
+                            <action selector="imageButtonAction:" destination="I4U-Cw-1BU" eventType="touchUpInside" id="d0b-C9-2vD"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Ds-ed-AzX">
                         <rect key="frame" x="21" y="200" width="31" height="12"/>

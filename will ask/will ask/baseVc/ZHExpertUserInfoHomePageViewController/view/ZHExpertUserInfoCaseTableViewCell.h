@@ -15,11 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *wordNumber;
 @property (weak, nonatomic) IBOutlet UILabel *readTime;
 @property (weak, nonatomic) IBOutlet UILabel *releaseTime;
-@property (weak, nonatomic) IBOutlet UILabel *caseContent;
-@property (weak, nonatomic) IBOutlet UILabel *clickNumber;
-@property (weak, nonatomic) IBOutlet UILabel *priceNumber;
-@property (weak, nonatomic) IBOutlet UILabel *contentWords;
-@property (weak, nonatomic) IBOutlet UILabel *salesNumber;
 
 @property(nonatomic,strong)ZHExpertCaseModel *caseModel;
 

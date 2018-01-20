@@ -31,6 +31,8 @@ static NSInteger kIsSubTag = 1;
 @property (nonatomic, copy) NSString *SubTypeTitle;
 // 大分类
 @property (nonatomic,copy) UILabel *typeTitle;
+// 小分类code
+@property (nonatomic,copy) NSString *subTypeCode;
 
 
 @property (nonatomic,copy) NSString *text1;
@@ -79,6 +81,9 @@ static NSInteger kIsSubTag = 1;
     
     askVc.titleSubTypeLabel = self.SubTypeTitle;
     
+    askVc.AskType = _typeString;
+    
+    askVc.CodeSubType = _subTypeCode;
     
     [self.navigationController pushViewController:askVc animated:YES];
     
@@ -193,6 +198,8 @@ static NSInteger kIsSubTag = 1;
 //                    NSLog(@"%@",[NSString stringWithFormat:@"%@", tagModel.title]);
                     _SubTypeTitle = tagModel.title;
                     
+                    
+                    _subTypeCode = tagModel.code;
                     
                     _text1 = self.tagContainer.tagModels[indexPath.section].title;
 //                    NSLog(@"text1 = %@", _text1);
