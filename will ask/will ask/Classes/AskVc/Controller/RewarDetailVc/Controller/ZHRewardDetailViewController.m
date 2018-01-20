@@ -400,16 +400,30 @@ static NSInteger kMaxCount = 3;
         cell.answerModel = self.detailModel.anserModels[indexPath.row];
         
         cell.didClick = ^(){
-            ZHOrderPayModel *model = [[ZHOrderPayModel alloc]init];
-            model.descriptions = @"悬赏问-学习一下";
-            model.goodsName = @"学习一下订单";
-            model.amount = @"1";
             
-            ZHOrderPaymentViewController *payVc = [[ZHOrderPaymentViewController alloc]init];
-            payVc.payModel = model;
+            NSMutableDictionary *dic = [ZHNetworkTools parameters];
+            [dic setObject:self.detailModel.anserModels[indexPath.row].answerId forKey:@"rewardAskAnswerId"];
             
-            [self.navigationController pushViewController:payVc animated:YES];
-            NSLog(@"创建订单");
+            NSString *url = [NSString stringWithFormat:@"%@/api/rewardask/ut/learn",kIP];
+            
+            [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                
+                
+                
+                ZHOrderPayModel *model = [ZHOrderPayModel yy_modelWithJSON:response[@"data"]];
+                model.descriptions = @"悬赏问-学习一下";
+                model.goodsName = @"学习一下订单";
+                model.amount = @"1";
+                
+                ZHOrderPaymentViewController *payVc = [[ZHOrderPaymentViewController alloc]init];
+                payVc.payModel = model;
+                
+                
+                
+                [self.navigationController pushViewController:payVc animated:YES];
+                NSLog(@"创建订单");
+            }];
+   
         };
         return cell;
         

@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef void(^exitActionDidClick)();
+
 
 @interface ZHExitAccountTableViewCell : UITableViewCell
+
+
+@property(nonatomic,copy)exitActionDidClick didClick;
+
 
 @end

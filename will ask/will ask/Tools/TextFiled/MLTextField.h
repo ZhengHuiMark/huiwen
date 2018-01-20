@@ -18,6 +18,11 @@
 + (instancetype)textFieldWithFrame:(CGRect)frame;
 + (instancetype)textFieldWithFrame:(CGRect)frame inView:(UIView *)superView;
 
++ (BOOL)validateCellPhoneNumber:(NSString *)cellNum;
+
++ (BOOL)validateChinese:(NSString *)str;
+
++(NSString *)FilterSpaceString:(NSString *)string;
 
 @property(nonatomic,weak)UITextField *ml_textfiled;
 @end

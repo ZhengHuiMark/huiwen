@@ -174,7 +174,8 @@ static NSString *typeCellid = @"typeCellid";
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
 //    NSLog(@"_caseModels.count = %lu",_caseModels.count+2);
-    return _caseModels.count+2;
+//    return _caseModels.count+2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -187,7 +188,8 @@ static NSString *typeCellid = @"typeCellid";
         return _TodayExpetsModel.count;
     }
     
-    return _caseModels[section-2].subCaseModels.count + 1;
+//    return _caseModels[section-2].subCaseModels.count + 1;
+    return _caseModels.count;
 
 }
 
@@ -237,9 +239,10 @@ static NSString *typeCellid = @"typeCellid";
     if (indexPath.section > 1) {
         
         
-        if (indexPath.row == 0) {
-            
-            self.caseModel = _caseModelsss[indexPath.section-2];
+//        if (indexPath.row == 0) {
+        
+//            self.caseModel = _caseModelsss[indexPath.section-2];
+            self.caseModel = _caseModelsss[indexPath.row];
             ZHCaseBreakDownTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CaseBreakDownCellid forIndexPath:indexPath];
             
             if (cell == nil) {
@@ -249,20 +252,20 @@ static NSString *typeCellid = @"typeCellid";
             cell.model = self.caseModel;
             
             return cell;
-        }else {
-            
-            self.subCaseModel = _caseModelsss[indexPath.section-2].subCaseModels[indexPath.row-1];
-
-            ZHIntroductionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:IntroductionCellid forIndexPath:indexPath];
-            
-            if (cell == nil) {
-                cell = [[ZHIntroductionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IntroductionCellid];
-            }
-           
-            cell.model = self.subCaseModel;
-            
-            return cell;
-        }
+//        }else {
+//            
+//            self.subCaseModel = _caseModelsss[indexPath.section-2].subCaseModels[indexPath.row-1];
+//
+//            ZHIntroductionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:IntroductionCellid forIndexPath:indexPath];
+//            
+//            if (cell == nil) {
+//                cell = [[ZHIntroductionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IntroductionCellid];
+//            }
+//           
+//            cell.model = self.subCaseModel;
+//            
+//            return cell;
+//        }
     }
     
     return cell?cell:[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: @"Cell"];
@@ -279,11 +282,11 @@ static NSString *typeCellid = @"typeCellid";
         return 160;
     }
     
-    if (indexPath.section > 1 && indexPath.row == 0) {
+//    if (indexPath.section > 1 && indexPath.row == 0) {
         return 110;
-    }
+//    }
     
-    return 310;
+//    return 310;
 }
 
 
@@ -313,9 +316,6 @@ static NSString *typeCellid = @"typeCellid";
         
         [self.navigationController pushViewController:caseDetailVc animated:YES];
     }
-
-    
-    
 }
 
 - (UITableView *)tableView {

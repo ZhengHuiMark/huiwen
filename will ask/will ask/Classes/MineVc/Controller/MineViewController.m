@@ -40,9 +40,9 @@ static NSString *MineListCellid = @"MineListCellid";
 // 专家模式下显示的cellid
 static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 
-@interface MineViewController ()
+@interface MineViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-
+@property(nonatomic,strong)UITableView *tableView;
 
 @end
 
@@ -81,14 +81,18 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
         contentInset.top = -22;
         [self.tableView setContentInset:contentInset];
     }
-
+    [self.view addSubview:self.tableView];
     
     [self loadData];
     
     [self loadUserInfo];
 
-    
-    [self configUI];
+    if ([UserManager sharedManager].userModel) {
+            [self configUI];
+
+    }else{
+        [self noUserModelUI];
+    }
     
     
 }
@@ -130,20 +134,26 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 }
 
 
+#pragma mark - 根据模型状态显示UI
+- (void)noUserModelUI{
+    
+    
+    self.tableView.hidden = YES;
+    UIImageView *BackgroundImageView = [[UIImageView alloc]init];
+    
+    BackgroundImageView.frame = self.view.frame;
+    
+    BackgroundImageView.image = [UIImage imageNamed:@"bj"];
+    
+    [self.view addSubview:BackgroundImageView];
+    
+}
+
+
 - (void)configUI{
     
     
-    
-    [self.tableView registerNib:[UINib nibWithNibName:@"ZHHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:HeaderCellid];
-    [self.tableView registerNib:[UINib nibWithNibName:@"ZHMoneyTableViewCell" bundle:nil] forCellReuseIdentifier:MoneyCellid];
-    [self.tableView registerNib:[UINib nibWithNibName:@"ZHExpertsTableViewCell" bundle:nil] forCellReuseIdentifier:ExpertsCellid];
-    [self.tableView registerNib:[UINib nibWithNibName:@"ZHMineTableViewCell" bundle:nil] forCellReuseIdentifier:MineListCellid];
-    [self.tableView registerNib:[UINib nibWithNibName:@"ZHExpertsListTableViewCell" bundle:nil] forCellReuseIdentifier:ExpertBtnCellid];
-    
-
-    self.tableView.rowHeight = 50;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.tableView.hidden = NO;
     
 }
 //
@@ -276,7 +286,13 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
         HeadCell.placeholderView.backgroundColor = [UIColor orangeColor];
 
         HeadCell.usermodel = [UserManager sharedManager].userModel;
-
+        
+        HeadCell.didClick = ^(){
+            NSString *className = @"ZHSetupViewController";
+            [self pushToSetControllerWithIndexPath:indexPath className:className];
+            
+        };
+        
         
         return HeadCell;
     }
@@ -433,6 +449,37 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
     _arrList = arrM.copy;
     
 }
+
+- (UITableView *)tableView {
+    //
+    
+    if (!_tableView) {
+        
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - SafeAreaTopHeight) style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
+        
+        //    NSBundle *bundle = [NSBundle mainBundle];
+        
+        [self.tableView registerNib:[UINib nibWithNibName:@"ZHHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:HeaderCellid];
+        [self.tableView registerNib:[UINib nibWithNibName:@"ZHMoneyTableViewCell" bundle:nil] forCellReuseIdentifier:MoneyCellid];
+        [self.tableView registerNib:[UINib nibWithNibName:@"ZHExpertsTableViewCell" bundle:nil] forCellReuseIdentifier:ExpertsCellid];
+        [self.tableView registerNib:[UINib nibWithNibName:@"ZHMineTableViewCell" bundle:nil] forCellReuseIdentifier:MineListCellid];
+        [self.tableView registerNib:[UINib nibWithNibName:@"ZHExpertsListTableViewCell" bundle:nil] forCellReuseIdentifier:ExpertBtnCellid];
+        
+        
+        self.tableView.rowHeight = 50;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+
+        self.automaticallyAdjustsScrollViewInsets = YES;
+    }
+    
+    return _tableView;
+}
+
+
 
 
 #pragma mark - 实现点击跳转到控制器

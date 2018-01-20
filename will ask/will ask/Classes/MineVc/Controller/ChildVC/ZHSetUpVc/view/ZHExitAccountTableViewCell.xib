@@ -23,6 +23,9 @@
                         <state key="normal" title="退出登录">
                             <color key="titleColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
+                        <connections>
+                            <action selector="exitAccountAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="iyM-TD-K9h"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

@@ -83,7 +83,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-//    self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     
 
     [self configUI];
@@ -165,6 +166,9 @@
                                                             object: nil];
         
         [self.navigationController popViewControllerAnimated:YES];
+        
+//        self.tabBarController.selectedIndex = 1;
+
         
     }];
 ////原始数据
@@ -309,7 +313,7 @@
     _PhoneNumberL.ml_textfiled.textColor = [UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1];
     _PhoneNumberL.ml_textfiled.font = [UIFont systemFontOfSize:15];
     [_PhoneNumberL.ml_textfiled setBorderStyle:UITextBorderStyleNone];
-
+ 
     
 
     

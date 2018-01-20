@@ -42,6 +42,11 @@
         self.userIDLabel.text = usermodel.nickname;
     }
 }
+- (IBAction)setupAction:(UIButton *)sender {
+    
+    !self.didClick?:self.didClick();
+    
+}
 
 
 @end

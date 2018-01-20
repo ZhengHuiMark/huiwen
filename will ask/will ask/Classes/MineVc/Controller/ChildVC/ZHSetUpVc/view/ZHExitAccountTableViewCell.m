@@ -7,6 +7,7 @@
 //
 
 #import "ZHExitAccountTableViewCell.h"
+#import "ZHLoginViewController.h"
 
 @implementation ZHExitAccountTableViewCell
 
@@ -19,6 +20,11 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+- (IBAction)exitAccountAction:(UIButton *)sender {
+   
+    !self.didClick?:self.didClick();
+    
 }
 
 @end

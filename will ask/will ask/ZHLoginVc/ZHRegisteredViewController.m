@@ -89,6 +89,25 @@
 - (void)ClickRegistered{
     
 
+    if ([_PhoneNumberL.ml_textfiled.text isEqualToString:@""] || [_PhoneNumberL.ml_textfiled.text length] == 0) {
+        [SVProgressHUD showInfoWithStatus:@"请输入手机号"];
+        [SVProgressHUD dismissWithDelay:2.0f];
+        
+        return;
+    }
+    if ([_validationTf.ml_textfiled.text isEqualToString:@""] || [_validationTf.ml_textfiled.text length] == 0) {
+        [SVProgressHUD showInfoWithStatus:@"请输入验证码"];
+        [SVProgressHUD dismissWithDelay:2.0f];
+
+        return;
+    }
+    
+    if ([_PasswordT.ml_textfiled.text isEqualToString:@""] || [_PasswordT.ml_textfiled.text length] == 0) {
+        [SVProgressHUD showInfoWithStatus:@"请输入密码"];
+        [SVProgressHUD dismissWithDelay:2.0f];
+
+        return;
+    }
     
     NSMutableDictionary *dict = [ZHNetworkTools parameters];
     [dict setObject: _validationTf.ml_textfiled.text
@@ -101,16 +120,24 @@
     NSString *url = [NSString stringWithFormat:@"%@/api/user/register",kIP];
     
     
+//    BOOL is
+    
     [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dict andCallBlock:^(id response, NSError *error) {
         // 2. 判断错误
         if (error) {
             NSLog(@"网络请求异常: %@", error);
-            
+            [SVProgressHUD showInfoWithStatus:@"请输入正确格式"];
+            [SVProgressHUD dismissWithDelay:2.0f];
             return;
         }
+        
+        
+        
         NSLog(@"%@",response);
+        [SVProgressHUD showInfoWithStatus:@"注册成功"];
         [UserManager sharedManager].userModel = [UserModel yy_modelWithJSON:response[@"data"]];
         [[UserManager sharedManager]saveUserModel];
+        [SVProgressHUD dismissWithDelay:2.0f];
         
     }];
     
@@ -177,8 +204,12 @@
                           @"nonce":net.nonce,
                           @"signature":net.signature
                           };
-    NSString *url = @"http://192.168.0.58:7000/api/sms/sendAuthcode";
+    NSString *url = [NSString stringWithFormat:@"%@/api/sms/sendAuthcode",kIP];
     
+    BOOL isPhoneNumber = [MLTextField validateCellPhoneNumber:_PhoneNumberL.ml_textfiled.text];
+    
+    if (isPhoneNumber) {
+
     [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
         // 2. 判断错误
         if (error) {
@@ -186,12 +217,19 @@
     
             return;
         }
-        
-      
-        
+        NSLog(@"%@",response);
+        [SVProgressHUD showInfoWithStatus:@"验证码已发送"];
+        [SVProgressHUD dismissWithDelay:2.0f];
+
+ 
     }];
 
-    
+    }else{
+        [SVProgressHUD showInfoWithStatus:@"您输入的手机号码格式不正确"];
+        [SVProgressHUD dismissWithDelay:2.0f];
+
+        return;
+    }
 }
 
 
