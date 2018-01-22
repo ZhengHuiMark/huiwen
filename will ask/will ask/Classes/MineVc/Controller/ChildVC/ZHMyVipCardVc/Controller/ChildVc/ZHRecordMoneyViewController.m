@@ -63,8 +63,10 @@ static NSString *recordListCellid = @"recordListCellid";
     [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
         
         if (error) {
-            NSLog(@"%@",response);
+            NSLog(@"%@",error);
         }
+        
+        NSLog(@"%@",response);
         
         NSArray<ZHRecordListModel *>* models = [NSArray yy_modelArrayWithClass:[ZHRecordListModel class] json:response[@"data"]];
        
@@ -104,10 +106,16 @@ static NSString *recordListCellid = @"recordListCellid";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    ZHRecordListModel *model = _listModels[indexPath.row];
     
     ZHRecordListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:recordListCellid forIndexPath:indexPath];
     
+    if (cell == nil) {
+        
+        cell = [[ZHRecordListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:recordListCellid];
+    }
+
+    ZHRecordListModel *model = _listModels[indexPath.row];
+
     cell.model = model;
     
     return cell;

@@ -41,6 +41,12 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
 
 @property(nonatomic,strong)UITableView *tableView;
 
+@property(nonatomic,strong)UIView *focusView;
+
+@property(nonatomic,strong)UIButton *focusBtn;
+
+@property(nonatomic,strong)UIButton *consultingBtn;
+
 @end
 
 @implementation ZHExpertUserInfoHomePageViewController
@@ -54,6 +60,8 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    
+    self.navigationController.navigationBar.backgroundColor = [UIColor orangeColor];
     
 }
 
@@ -71,13 +79,39 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+ 
     [self loadData];
     [self.view addSubview:self.tableView];
     
+//    [self.view addSubview:self.focusView];
+    [self setupUI];
+
+ 
+
+}
+
+- (void)setupUI{
     
+    _focusView = [UIView new];
+    _focusView.frame = CGRectMake(0,CGRectGetMaxY(self.view.frame)-110, ScreenHeight, 49);
+    _focusView.backgroundColor = [UIColor redColor];
 
+    [self.view addSubview:self.focusView];
+    
+    _focusBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _focusBtn.frame = CGRectMake(0, CGRectGetMinY(_focusView.frame), ScreenWidth / 2, 50);
+    [_focusBtn setTitle:@"关注" forState:UIControlStateNormal];
+    [_focusBtn setTitle:@"已关注" forState:UIControlStateSelected];
+    [_focusBtn setImage:[UIImage imageNamed:@"follow"] forState:UIControlStateNormal];
+    [_focusBtn setImage:[UIImage imageNamed:@"follow--1"] forState:UIControlStateSelected];
+    [_focusBtn setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
+    [_focusBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
 
+    
+    [self.focusView addSubview:self.focusBtn];
+
+    
+    
 }
 
 - (void)loadData{
@@ -339,6 +373,16 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
 }
 
 
-
+//- (UIView *)focusView {
+//    if (!_focusView) {
+//        
+//        _focusView = [UIView new];
+//        _focusView.frame = CGRectMake(0,CGRectGetMaxY(self.view.frame) - 49, ScreenHeight, 49);
+//        _focusView.backgroundColor = [UIColor redColor];
+//
+//    }
+//    
+//    return _focusView;
+//}
 
 @end

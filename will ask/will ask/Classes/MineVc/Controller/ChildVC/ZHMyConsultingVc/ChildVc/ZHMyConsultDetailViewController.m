@@ -22,7 +22,7 @@
 static NSInteger kMaxCount = 3;
 
 
-@interface ZHMyConsultDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UICollectionViewDelegate,UICollectionViewDataSource>
+@interface ZHMyConsultDetailViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITextViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -30,6 +30,14 @@ static NSInteger kMaxCount = 3;
 @property (nonatomic, strong) NSMutableArray<MLImageModel *> *imageModels;
 
 @property (nonatomic, strong) UICollectionViewFlowLayout *layout;
+
+@property (nonatomic, strong) UIButton *saveBtn;
+
+@property (nonatomic, strong) UITextView *textView;
+@property (nonatomic, strong) UIView *textBackView;
+@property (nonatomic, strong) UILabel *strNumLabel;
+@property (nonatomic, strong) UIView *imageBackView;
+
 
 @end
 
@@ -39,34 +47,62 @@ static NSInteger kMaxCount = 3;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self.view addSubview:self.tableView];
+    self.view.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
+    [self configUI];
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (void)configUI{
     
-    return 2;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return 1;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.section == 0) {
-        
-        ZHAskTextViewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: NSStringFromClass([ZHAskTextViewTableViewCell class])
-                                                                           forIndexPath: indexPath];
-        
-        
-        return cell;
-    }
+    self.saveBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.saveBtn.frame = CGRectMake(0, 0, 40, 40);
+    [self.saveBtn setTitle:@"发布" forState:UIControlStateNormal];
+    [self.saveBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [self.saveBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
+    [self.saveBtn addTarget:self action:@selector(saveBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:self.saveBtn];
+    self.navigationItem.rightBarButtonItem = rightItem;
     
     
-    ZHImageUploadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: NSStringFromClass([ZHImageUploadTableViewCell class])
-                                                                       forIndexPath: indexPath];
+    self.textBackView = [[UIView alloc] init];
+    self.textBackView.backgroundColor = [UIColor yellowColor];
+    [self.view addSubview:self.textBackView];
+    [self.textBackView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(13);
+        make.height.mas_equalTo(150);
+        make.right.left.mas_equalTo(self.view);
+    }];
     
+    _textView = [[UITextView alloc] init];
+    _textView.placeholder = @"请输入您的问题";
+    _textView.textContainerInset = UIEdgeInsetsMake(10, 10, 15, 10);
+    _textView.textColor = [UIColor blackColor];
+    _textView.font = [UIFont systemFontOfSize:14];
+    _textView.returnKeyType = UIReturnKeyDone;
+    _textView.delegate = self;
+    //    [_textView setBorder:ColorLine width:1];
+    [self.textBackView addSubview:_textView];
+    [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.mas_equalTo(UIEdgeInsetsMake(0, 0, -10, 0));
+    }];
+    
+    _strNumLabel = [[UILabel alloc] init];
+    //    _strNumLabel.backgroundColor = [UIColor redColor];
+    _strNumLabel.text = @"0/1000";
+    [self.textBackView addSubview:_strNumLabel];
+    [_strNumLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.right.mas_equalTo(-10);
+        //        make.height.mas_equalTo(10);
+    }];
+    
+    _imageBackView = [[UIView alloc]init];
+    _imageBackView.backgroundColor = [UIColor redColor];
+    [self.view addSubview:_imageBackView];
+    
+    [_imageBackView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(_textBackView).offset(100);
+        make.right.left.mas_equalTo(self.view);
+        make.height.mas_equalTo(50);
+    }];
     
     _collectionView = [[UICollectionView alloc] initWithFrame: CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50) collectionViewLayout: self.layout];
     _collectionView.delegate = self;
@@ -79,54 +115,60 @@ static NSInteger kMaxCount = 3;
     _collectionView.showsHorizontalScrollIndicator = NO;
     _collectionView.showsVerticalScrollIndicator = NO;
     
-    [cell.contentView addSubview:_collectionView];
+    [_imageBackView addSubview:_collectionView];
+    
+    
 
     
-    [cell addSubview:self.collectionView];
-
-    return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.section == 0) {
-        return 150;
+- (void)saveBtnClick:(UIButton *)sender {
+    /// 如果没有编辑就不能点击保存
+    if (!sender.selected) {
+        [SVProgressHUD showInfoWithStatus:@"请编写问题内容"];
+        [SVProgressHUD dismissWithDelay:1.0];
+        return;
     }
     
-    return 50;
-    
+    // 发布拉起
+
 }
 
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    return 10;
-}
-
-- (UITableView *)tableView {
-    //
-    
-    if (!_tableView) {
-        
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,0, self.view.frame.size.width, self.view.frame.size.height ) style:UITableViewStylePlain];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
-        _tableView.rowHeight = 180;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-            NSBundle *bundle = [NSBundle mainBundle];
-        
-        
-        [_tableView registerNib: [UINib nibWithNibName: NSStringFromClass([ZHAskTextViewTableViewCell class]) bundle: bundle]
-             forCellReuseIdentifier: NSStringFromClass([ZHAskTextViewTableViewCell class])];
-        
-        [_tableView registerNib: [UINib nibWithNibName: NSStringFromClass([ZHImageUploadTableViewCell class]) bundle: bundle]
-             forCellReuseIdentifier: NSStringFromClass([ZHImageUploadTableViewCell class])];
-    
+// -- 改变字数- textViewDidChange
+-(void)textViewDidChange:(UITextView *)textView{
+    UITextRange *selectRange = [textView markedTextRange];
+    UITextPosition *pos = [textView positionFromPosition:selectRange.start offset:0];
+    if (selectRange && pos) return;
+    if (textView.text.length >= 1000) {
+        textView.text = [textView.text substringToIndex:1000];
+    }
+    NSUInteger count = textView.text.length;
+    if (textView.text.length > 1000) {
+        textView.text = [textView.text substringToIndex:1000];
+        self.strNumLabel.text = [NSString stringWithFormat:@"1000/1000"];
+    } else {
+        self.strNumLabel.text = [NSString stringWithFormat:@"%ld/1000", (unsigned long)count];
+    }
+    if (textView.text.length>0) {
+        self.saveBtn.selected = YES;
+    } else {
+        self.saveBtn.selected = NO;
     }
     
-    return _tableView;
+    
+    
 }
+
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
+        [self.view endEditing:YES];
+        return NO;
+    }
+    return YES;
+}
+
+
 
 #pragma mark - UICollectionView DataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {

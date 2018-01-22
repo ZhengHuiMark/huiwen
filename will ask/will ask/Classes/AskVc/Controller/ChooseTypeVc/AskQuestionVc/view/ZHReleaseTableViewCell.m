@@ -24,7 +24,6 @@
     
     !self.releaseBtnClick?:self.releaseBtnClick(sender);
 
-    
 }
 
 @end

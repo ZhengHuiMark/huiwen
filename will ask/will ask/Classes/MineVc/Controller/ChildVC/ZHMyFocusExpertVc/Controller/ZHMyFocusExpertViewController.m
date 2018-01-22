@@ -16,11 +16,15 @@
 
 static NSString *myFocusCellid = @"myFocusCellid";
 
-@interface ZHMyFocusExpertViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ZHMyFocusExpertViewController ()<UITableViewDelegate,UITableViewDataSource>{
+    NSInteger _pageNumber;
+}
 
 @property(nonatomic,strong)UITableView *tableView;
 
 @property(nonatomic,strong)NSMutableArray <ZHMyFocusModel *>* listModels;
+
+
 
 @end
 
@@ -30,14 +34,34 @@ static NSString *myFocusCellid = @"myFocusCellid";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self loadData];
     
     [self.view addSubview:self.tableView];
+
+    
+    _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _pageNumber = 1;
+        
+        [self loadData];
+        
+    }];
+    _tableView.mj_header.automaticallyChangeAlpha = YES;
+    _tableView.mj_footer.automaticallyHidden = YES;
+    
+    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        _pageNumber++;
+        [self loadData];
+    }];
+    [_tableView.mj_header beginRefreshing];
+    
+    
+
+    
 }
 
 - (void)loadData{
     
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
+    [dic setObject:@(_pageNumber) forKey:@"pageNO"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/ut/follow/getFollowExpertList",kIP];
     
@@ -51,9 +75,22 @@ static NSString *myFocusCellid = @"myFocusCellid";
         NSLog(@"%@",response);
         NSArray <ZHMyFocusModel *>* models = [NSArray yy_modelArrayWithClass:[ZHMyFocusModel class] json:response[@"data"]];
         
-        self.listModels = [NSMutableArray arrayWithArray:models];
-
+        if (_pageNumber == 1) {
+            self.listModels = [NSMutableArray arrayWithArray:models];
+        }else{
+            [self.listModels addObjectsFromArray:models];
+        }
+        
         [self.tableView reloadData];
+        
+        
+        if (!models || !models.count) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        } else {
+            [self.tableView.mj_footer resetNoMoreData];
+        }
+        [self.tableView.mj_header endRefreshing];
+
     }];
     
 }
@@ -77,6 +114,29 @@ static NSString *myFocusCellid = @"myFocusCellid";
    
     cell.model = model;
     
+    cell.didClick = ^(){
+      
+        NSMutableDictionary *dic = [ZHNetworkTools parameters];
+        [dic setObject:_listModels[indexPath.row].userId forKey:@"expertId"];
+        
+        NSString *url = [NSString stringWithFormat:@"%@/api/ut/follow/unfollow",kIP];
+        
+        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+           
+            if (error) {
+                NSLog(@"%@",error);
+            }
+            
+            NSLog(@"%@",response);
+            [SVProgressHUD showInfoWithStatus:@"取消成功"];
+            [SVProgressHUD dismissWithDelay:1.0];
+            
+            [self.tableView reloadData];
+        }];
+        
+        
+        
+    };
     
     return cell;
     

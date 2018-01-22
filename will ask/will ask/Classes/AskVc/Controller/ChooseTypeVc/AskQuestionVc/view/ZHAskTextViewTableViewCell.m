@@ -43,13 +43,18 @@
         [_placeHolderLabel setHidden:YES];
         
     }
-    
-    
+
     NSInteger wordCount = textView.text.length;
-    self.numberLabel.text = [NSString stringWithFormat:@"%ld/200",  (long)wordCount];
-    
-    
-    
+    self.numberLabel.text = [NSString stringWithFormat:@"%ld/200",  (unsigned long)wordCount];
+
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
+        [self endEditing:YES];
+        return NO;
+    }
+    return YES;
 }
 
 @end

@@ -196,30 +196,6 @@ static NSString *messageCellID = @"messageCellID";
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 - (UITableView *)tableView {
     
     if (!_tableView) {

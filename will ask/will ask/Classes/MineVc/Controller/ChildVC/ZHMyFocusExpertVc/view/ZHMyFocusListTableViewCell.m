@@ -35,12 +35,14 @@
 
 - (IBAction)cancelFocusAction:(UIButton *)sender {
     
+    !self.didClick?:self.didClick();
     
 }
 
 - (IBAction)ImmediatelyConsultAction:(UIButton *)sender {
     
-    
+    !self.consultDidClick?:self.consultDidClick();
+
     
 }
 
