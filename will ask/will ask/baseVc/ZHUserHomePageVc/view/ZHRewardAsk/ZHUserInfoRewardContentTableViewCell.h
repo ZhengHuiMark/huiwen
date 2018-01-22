@@ -31,6 +31,7 @@
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *answerImgs;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *ansImgButtons;
 
+@property (weak, nonatomic) IBOutlet UILabel *questionContentLabel;
 
 @property(nonatomic,strong)ZHUserInfoRewardModel *rewardModel;
 

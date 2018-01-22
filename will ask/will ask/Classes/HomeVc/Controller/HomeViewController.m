@@ -283,9 +283,36 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
         self.bannerView.imageURLStringsGroup = _bannerImageUrlMarry;
         
         return self.bannerView;
+    }
+    UIView *headerView = [[UIView alloc] init];
+    
+    headerView.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *nameLa = [[UILabel alloc]init];
+    
+    nameLa.frame = CGRectMake(20, 17 ,[UIScreen mainScreen].bounds.size.width, 15.5);
+    
+    nameLa.text = @"最新悬赏榜";
+    
+    [headerView addSubview:nameLa];
+    
+    UIView * lineView = [[UIView alloc]init];
+    lineView.frame = CGRectMake(0, 49, [UIScreen mainScreen].bounds.size.width, 1);
+    lineView.backgroundColor = [UIColor grayColor];
+    
+    [headerView addSubview:lineView];
+    
+    if (section == 1) {
+        nameLa.text = @"最新悬赏榜";
+    }else if (section == 2) {
+        nameLa.text = @"今日专家";
+    }else if (section == 3){
+        nameLa.text = @"今日案例";
     }else {
         return [UIView new];
     }
+    
+    return headerView;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -293,6 +320,14 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
     if (section == 0) {
         return 180;
     }
+    if (section == 1) {
+        return 43;
+    }if (section == 2) {
+        return 43;
+    }if (section == 3) {
+        return 43;
+    }
+    
     return 0.1;
 }
 

@@ -386,13 +386,13 @@
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"123"];
     [imageData writeToFile:fullPath atomically:NO];
     NSString *uploadFilePath = fullPath;
-    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
+    NSInteger interval = [[NSDate date] timeIntervalSince1970] *1000;
     NSString *objectKey = [NSString stringWithFormat:@"%@",[UserManager sharedManager].userModel.resourceId];
     
     for (NSInteger i = 0 ; i < parameter.count; i ++) {
         objectKey = [NSString stringWithFormat:@"%@%@",objectKey,parameter[i]];
     }
-    objectKey = [NSString stringWithFormat:@"%@%f",objectKey,interval];
+    objectKey = [NSString stringWithFormat:@"%@%ld",objectKey,(long)interval];
     hander(objectKey,uploadFilePath);
 }
 

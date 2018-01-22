@@ -32,6 +32,9 @@
     
     self.clickNumber.text = self.expertRewardModel.praiseNumber;
     
+    self.questionContentLabel.text = [NSString stringWithFormat:@"      %@",self.expertRewardModel.questionsContent];
+
+    
     self.learnNumber.text = [NSString stringWithFormat:@"%@人已学习",self.expertRewardModel.learnNumber];
     
     self.releaseTime.text = self.expertRewardModel.time;
@@ -50,6 +53,9 @@
     self.content.text = self.rewardModel.answerContent;
     
     self.clickNumber.text = self.rewardModel.praiseNumber;
+    
+    self.questionContentLabel.text = [NSString stringWithFormat:@"      %@",self.rewardModel.questionsContent];
+
     
     self.learnNumber.text = [NSString stringWithFormat:@"%@人已学习",self.rewardModel.learnNumber];
     

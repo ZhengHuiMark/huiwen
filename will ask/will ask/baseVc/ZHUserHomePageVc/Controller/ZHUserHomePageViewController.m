@@ -8,7 +8,6 @@
 
 #import "ZHUserHomePageViewController.h"
 #import "ZHUserInfoTableViewCell.h"
-#import "ZHUserInfoRewardAskTableViewCell.h"
 #import "ZHUserInfoRewardVoiceTableViewCell.h"
 #import "ZHUserInfoRewardContentTableViewCell.h"
 #import "ZHUserInfoFreeAskTableViewCell.h"
@@ -148,9 +147,7 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
     
 }
 
-
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
     
     UIView * view = nil;
     
@@ -184,11 +181,10 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
         [headerView addSubview:moreBtn];
         
         return headerView;
-        
-        
+ 
     }
     
-    if (section == 2 ) {
+    if (section == 2) {
         
         UIView *headerView = [[UIView alloc] init];
         headerView.backgroundColor = [UIColor whiteColor];
@@ -217,13 +213,9 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
         
         [headerView addSubview:moreBtn];
 
-        
         return headerView;
-        
-        
+
     }
-    
-    
     
     return view;
     
@@ -244,9 +236,9 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
     }
     if (indexPath.section == 1) {
         
-        if (indexPath.row == 0) {
-            return 70;
-        }
+//        if (indexPath.row == 0) {
+//            return 70;
+//        }
         
         return 300;
     }
@@ -265,7 +257,7 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
     }
     
     if (section == 1) {
-        return 2;
+        return 1;
     }
     
     return 1;
@@ -287,19 +279,19 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
     
     if (indexPath.section == 1) {
         
-        if (indexPath.row == 0) {
-            ZHUserInfoRewardAskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoRewardCellid forIndexPath:indexPath];
-            
-            cell.rewardModel = _bigModel.rewardModel;
-            return cell;
-        }
+//        if (indexPath.row == 0) {
+//            ZHUserInfoRewardAskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoRewardCellid forIndexPath:indexPath];
+//            
+//            cell.rewardModel = _bigModel.rewardModel;
+//            return cell;
+//        }
         
-        if (indexPath.row == 1) {
+//        if (indexPath.row == 1) {
             ZHUserInfoRewardContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoRewardContntCellid forIndexPath:indexPath];
             cell.rewardModel = _bigModel.rewardModel;
             
             return cell;
-        }
+//        }
  
     }
     if (indexPath.section == 2) {
@@ -325,13 +317,10 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
         self.tableView.sectionHeaderHeight = 43;
-
-        //    NSBundle *bundle = [NSBundle mainBundle];
  
         
         [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoCellid];
-        
-        [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoRewardAskTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoRewardCellid];
+
         
         [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoRewardVoiceTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoRewardVoiceCellid];
         [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoRewardContentTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoRewardContntCellid];

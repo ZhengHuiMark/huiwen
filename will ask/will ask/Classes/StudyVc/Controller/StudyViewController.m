@@ -182,6 +182,9 @@ static NSString *typeCellid = @"typeCellid";
     
 }
 
+
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
 
     if (section == 0 ) {
@@ -348,12 +351,12 @@ static NSString *typeCellid = @"typeCellid";
     if (section == 1) {
         [button setTitle:@"查看全部专家 >" forState:UIControlStateNormal];
         [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(toReward) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(toExpert) forControlEvents:UIControlEventTouchUpInside];
         
     }else if (section == 2) {
         [button setTitle:@"查看全部案例 >" forState:UIControlStateNormal];
         [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(toFree) forControlEvents:UIControlEventTouchUpInside];
+        [button addTarget:self action:@selector(toCase) forControlEvents:UIControlEventTouchUpInside];
         
         
     }else {
@@ -361,6 +364,20 @@ static NSString *typeCellid = @"typeCellid";
     }
     
     return headerView;
+}
+
+- (void)toExpert{
+    
+    ZHExpertViewController *ExpertVc = [[ZHExpertViewController alloc]init];
+    
+    [self.navigationController pushViewController:ExpertVc animated:YES];
+    
+}
+
+- (void)toCase{
+    ZHFindCaseViewController *FindCaseVc = [[ZHFindCaseViewController alloc]init];
+    
+    [self.navigationController pushViewController:FindCaseVc animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

@@ -111,7 +111,7 @@
                         imageModel.image = image;
                         isReplace = YES;
                         imageModel.uploadFilePath = uploadFilePath;
-                        imageModel.objectKey = objectKey;
+                        imageModel.objectKey = [NSString stringWithFormat:@"%@%ld",objectKey,sender.tag];
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"NSNotification_AddImage" object:imageModel];
                         break;
                     }
@@ -121,7 +121,7 @@
                     imageModel.index = sender.tag;
                     imageModel.image = image;
                     imageModel.uploadFilePath = uploadFilePath;
-                    imageModel.objectKey = objectKey;
+                    imageModel.objectKey =  [NSString stringWithFormat:@"%@%ld",objectKey,sender.tag];
                     [self.imageArr addObject:imageModel];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"NSNotification_AddImage" object:imageModel];
                 }

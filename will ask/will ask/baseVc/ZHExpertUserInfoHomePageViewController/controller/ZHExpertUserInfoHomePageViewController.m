@@ -9,7 +9,6 @@
 #import "ZHExpertUserInfoHomePageViewController.h"
 
 #import "ZHExpertUserInfoTableViewCell.h"
-#import "ZHUserInfoRewardAskTableViewCell.h"
 #import "ZHUserInfoRewardContentTableViewCell.h"
 #import "ZHExpertUserInfoCaseTableViewCell.h"
 #import "businessCellViewCell.h"
@@ -22,6 +21,7 @@
 #import "ZHExpertUserInfoModel.h"
 #import "ZHExpertCaseModel.h"
 #import "ZHExpertBigUserModel.h"
+#import "ZHUserInfoNoModelTableViewCell.h"
 
 
 static NSString *expertUserInfoCellid = @"expertUserInfoCellid";
@@ -33,6 +33,8 @@ static NSString *userInfoRewardContntCellid = @"userInfoRewardContntCellid";
 static NSString *expertUserInfoCaseCellid = @"expertUserInfoCaseCellid";
 
 static NSString *businessCellid = @"businessCellid";
+
+static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
 
 
 @interface ZHExpertUserInfoHomePageViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -105,6 +107,93 @@ static NSString *businessCellid = @"businessCellid";
     }];
     
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0) {
+        return 0.1;
+    }
+    if (section == 1) {
+        return 0.1;
+    }
+    
+    return 43;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UIView * view = nil;
+    
+    if (section == 2) {
+        
+        UIView *headerView = [[UIView alloc] init];
+        headerView.backgroundColor = [UIColor whiteColor];
+        //    headerView.frame = self.view.frame;
+        //
+        UILabel *nameLa = [[UILabel alloc]init];
+        
+        nameLa.frame = CGRectMake(20, 10 ,[UIScreen mainScreen].bounds.size.width, 20);
+        
+        nameLa.text = @"悬赏问";
+        
+        [headerView addSubview:nameLa];
+        
+        UIView * lineView = [[UIView alloc]init];
+        lineView.frame = CGRectMake(0, 43, [UIScreen mainScreen].bounds.size.width, 1);
+        lineView.backgroundColor = [UIColor grayColor];
+        
+        [headerView addSubview:lineView];
+        
+        UIButton *moreBtn = [[UIButton alloc]init];
+        moreBtn.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 40 - 18, 18, 50 , 20);
+        [moreBtn setTitle:@"更多>>" forState:UIControlStateNormal];
+        moreBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        [moreBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [moreBtn addTarget:self action:@selector(moreRewardAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        [headerView addSubview:moreBtn];
+        
+        return headerView;
+        
+    }
+    
+    if (section == 3) {
+        
+        UIView *headerView = [[UIView alloc] init];
+        headerView.backgroundColor = [UIColor whiteColor];
+        //    headerView.frame = self.view.frame;
+        //
+        UILabel *nameLa = [[UILabel alloc]init];
+        
+        nameLa.frame = CGRectMake(20, 10 ,[UIScreen mainScreen].bounds.size.width, 20);
+        
+        nameLa.text = @"案例";
+        
+        [headerView addSubview:nameLa];
+        
+        UIView * lineView = [[UIView alloc]init];
+        lineView.frame = CGRectMake(0, 43, [UIScreen mainScreen].bounds.size.width, 1);
+        lineView.backgroundColor = [UIColor grayColor];
+        
+        [headerView addSubview:lineView];
+        
+        UIButton *moreBtn = [[UIButton alloc]init];
+        moreBtn.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 40 - 18, 18, 50 , 20);
+        [moreBtn setTitle:@"更多>>" forState:UIControlStateNormal];
+        moreBtn.titleLabel.font = [UIFont systemFontOfSize:12];
+        [moreBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [moreBtn addTarget:self action:@selector(moreFreeAction) forControlEvents:UIControlEventTouchUpInside];
+        
+        [headerView addSubview:moreBtn];
+        
+        return headerView;
+        
+    }
+    
+    return view;
+    
+    
+}
+
 
 
 
@@ -119,7 +208,7 @@ static NSString *businessCellid = @"businessCellid";
         return 1;
     }
     if (section == 2) {
-        return 2;
+        return 1;
     }
     return 1;
 }
@@ -148,28 +237,22 @@ static NSString *businessCellid = @"businessCellid";
 
     }
     
-    if (indexPath.section == 2) {
+    if (indexPath.section == 2 && _bigModel.expertRewardModel) {
         
-        if (indexPath.row == 0) {
-            return 50;
-        }else{
-            
-            return 250;
-        }
+            return 300;
+ 
     }
-//
-    return 118;
+    
+    if (indexPath.section == 3 && _bigModel.expertCaseModel) {
+        return 160;
+    }else{
+        return 100;
+    }
+    
+    return 0;
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    
-    if (section == 0) {
-        return 0;
-    }
-    
-    return 20;
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -192,36 +275,26 @@ static NSString *businessCellid = @"businessCellid";
     }
     
     
-    if (indexPath.section == 2) {
-        
-        if (indexPath.row == 0) {
-            
-            ZHUserInfoRewardAskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoRewardCellid forIndexPath:indexPath];
-            
-            cell.expertRewardModel = _bigModel.expertRewardModel;
-            
-            return cell;
-        }
-        
-        
-        if (indexPath.row == 1) {
-            
+    if (indexPath.section == 2 && _bigModel.expertRewardModel) {
+
             ZHUserInfoRewardContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoRewardContntCellid forIndexPath:indexPath];
             
             cell.expertRewardModel = _bigModel.expertRewardModel;
             
             return cell;
-            
-        }
-        
-    }
-    
-    if (indexPath.section == 3) {
+
+    }else if (indexPath.section == 3 && _bigModel.expertCaseModel) {
         ZHExpertUserInfoCaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:expertUserInfoCaseCellid forIndexPath:indexPath];
         
         cell.caseModel = _bigModel.expertCaseModel;
         
         return cell;
+    }else {
+
+            ZHUserInfoNoModelTableViewCell *Nocell = [tableView dequeueReusableCellWithIdentifier:userInfoNoModelCelId forIndexPath:indexPath];
+            
+            return Nocell;
+  
     }
     
     return cell?cell:[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
@@ -234,7 +307,7 @@ static NSString *businessCellid = @"businessCellid";
     
     if (!_tableView) {
         
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
@@ -247,7 +320,7 @@ static NSString *businessCellid = @"businessCellid";
         
         [_tableView registerNib:[UINib nibWithNibName:@"ZHExpertUserInfoTableViewCell" bundle:nil] forCellReuseIdentifier:expertUserInfoCellid];
         
-        [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoRewardAskTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoRewardCellid];
+//        [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoRewardAskTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoRewardCellid];
         //
 
                
@@ -255,6 +328,7 @@ static NSString *businessCellid = @"businessCellid";
         
         [_tableView registerNib:[UINib nibWithNibName:@"ZHExpertUserInfoCaseTableViewCell" bundle:nil] forCellReuseIdentifier:expertUserInfoCaseCellid];
         //
+        [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoNoModelTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoNoModelCelId];
         
         [_tableView registerClass:[businessCellViewCell class] forCellReuseIdentifier:businessCellid];
 

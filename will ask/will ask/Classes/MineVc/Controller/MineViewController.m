@@ -292,9 +292,9 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
                 break;
             }
             case 3:{
-//                // 测试
-//                NSString *className = @"ZHUserHomePageViewController";
-//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                // 测试
+                NSString *className = @"ZHUserHomePageViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
 //                
 //                NSString *className = @"ZHExpertUserInfoHomePageViewController";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
@@ -302,8 +302,8 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
 
 //  ZHOrderPaymentViewController  ZHExpertServiceViewController
-                    NSString *className = @"ZHOrderPaymentViewController";
-                [self pushToSetControllerWithIndexPath:indexPath className:className];
+//                    NSString *className = @"ZHOrderPaymentViewController";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
 //                NSString *className = @"ZHSetupViewController";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 break;
