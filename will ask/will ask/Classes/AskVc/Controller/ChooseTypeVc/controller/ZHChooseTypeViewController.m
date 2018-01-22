@@ -129,7 +129,8 @@ static NSInteger kIsSubTag = 1;
 #pragma mark - UITableViewDataSource
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *header = [UIView new];
-    header.backgroundColor = [UIColor greenColor];
+//    header.backgroundColor = [UIColor greenColor];
+    
     
     _typeTitle = [UILabel new];
     _typeTitle.frame = (CGRect){CGPointZero, {200, 44}};

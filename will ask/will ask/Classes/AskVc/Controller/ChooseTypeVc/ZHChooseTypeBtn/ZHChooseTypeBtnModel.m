@@ -89,23 +89,32 @@
 }
 
 + (CGFloat)marginLeft {
-    return 1.0f;
+//    return 1.0f;
+    return 0;
 }
 
 + (CGFloat)marginRight {
-    return 1.0f;
+//    return 1.0f;
+    return 0;
+
 }
 
 + (CGFloat)marginTop {
-    return 1.0f;
+//    return 1.0f;
+    return 0;
+
 }
 
 + (CGFloat)marginBottom {
-    return 1.0f;
+//    return 1.0f;
+    return 0;
+
 }
 
 + (CGFloat)marginMiddleH {
-    return 1.0f;
+//    return 1.0f;
+    return 0;
+
 }
 
 + (CGFloat)marginMiddleV {

@@ -11,9 +11,10 @@
 /**
  认证专家头部视图
  */
-@class expert;
+@class expert,ZHImageCategory;
 @interface ZHCertifiedExpertsHeaderView : UIView
 @property (nonatomic, copy) NSString *objectKey;
 @property (nonatomic, copy) NSString *uploadFilePath;
 @property (nonatomic, strong) expert *expert;
+@property (nonatomic, strong) ZHImageCategory *imageCategory;
 @end

@@ -13,6 +13,7 @@
 #import "certifications.h"
 #import "expert.h"
 #import "LBViewController+ImagePicker.h"
+#import "ZHImageCategory.h"
 
 #define Color(Custom) [UIColor colorWithHexString:Custom]
 #define DefaultFont(font) [UIFont systemFontOfSize:font]
@@ -49,8 +50,8 @@
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.titleLabel.font = [UIFont systemFontOfSize:15];
         btn.tag = i;
-        btn.backgroundColor = [UIColor orangeColor];
-        //        [btn setImage:[UIImage imageNamed:@"Expers_nor"] forState:UIControlStateNormal];
+//        btn.backgroundColor = [UIColor orangeColor];
+                [btn setImage:[UIImage imageNamed:@"sczs"] forState:UIControlStateNormal];
         //        [btn setImage:[UIImage imageNamed:@"Expers_sed"] forState:UIControlStateSelected];
         [btn addTarget:self action:@selector(sedImage:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btn];
@@ -101,23 +102,29 @@
         [[self viewController] selectPhotoWithSuccessBlock:^(UIImagePickerController *imagePickerViewController, NSDictionary<NSString *,id> *info) {
             UIImage *image = info[UIImagePickerControllerEditedImage];
             [sender setImage:image forState:UIControlStateNormal];
-            BOOL isReplace = NO;
-            for (NSInteger i = 0; i < self.imageArr.count; i ++) {
-                ZHImageCategory *imageModel = self.imageArr[i];
-                if (sender.tag == imageModel.index) {
-                    imageModel.image = image;
-                    isReplace = YES;
-                    break;
-                }
-            }
-            if (!isReplace) {
-                ZHImageCategory *imageModel = [[ZHImageCategory alloc] init];
-                imageModel.index = sender.tag;
-                imageModel.image = image;
-                [self.imageArr addObject:imageModel];
-            }
             NSArray *arr = @[image,@"cert",@(self.model.type)];
             [[ZHNetworkTools sharedTools] imageChangeParameter:arr.mutableCopy hander:^(NSString *objectKey, NSString *uploadFilePath) {
+                BOOL isReplace = NO;
+                for (NSInteger i = 0; i < self.imageArr.count; i ++) {
+                    ZHImageCategory *imageModel = self.imageArr[i];
+                    if (sender.tag == imageModel.index) {
+                        imageModel.image = image;
+                        isReplace = YES;
+                        imageModel.uploadFilePath = uploadFilePath;
+                        imageModel.objectKey = objectKey;
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"NSNotification_AddImage" object:imageModel];
+                        break;
+                    }
+                }
+                if (!isReplace) {
+                    ZHImageCategory *imageModel = [[ZHImageCategory alloc] init];
+                    imageModel.index = sender.tag;
+                    imageModel.image = image;
+                    imageModel.uploadFilePath = uploadFilePath;
+                    imageModel.objectKey = objectKey;
+                    [self.imageArr addObject:imageModel];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"NSNotification_AddImage" object:imageModel];
+                }
                 if (sender.tag == 0) {
                     self.certifications.certificate1 = [NSString stringWithFormat:@"%@%ld",objectKey,sender.tag];
                 } else if (sender.tag == 1) {
@@ -125,6 +132,7 @@
                 } else if (sender.tag == 2) {
                     self.certifications.certificate3 = [NSString stringWithFormat:@"%@%ld",objectKey,sender.tag];
                 }
+                self.certifications.type = self.model.type;
                 [self.expert.certifications removeObject:self.certifications];
                 [self.expert.certifications addObject:self.certifications];
                 self.uploadFilePath = uploadFilePath;
@@ -146,7 +154,3 @@
 
 @end
 
-@implementation ZHImageCategory
-
-
-@end

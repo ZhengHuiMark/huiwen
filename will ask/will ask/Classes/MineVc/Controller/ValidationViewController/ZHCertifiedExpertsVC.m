@@ -17,6 +17,9 @@
 #import "expert.h"
 #import "UIColor+Extension.h"
 #import "ZHGoodAtBusinessVC.h"
+#import "ZHPersonProfileVC.h"
+#import "OSSService.h"
+#import "ZHImageCategory.h"
 
 #define kWidth [UIScreen mainScreen].bounds.size.width
 #define kHeight [UIScreen mainScreen].bounds.size.height
@@ -27,7 +30,11 @@ static NSString *ZHCertifiedNormalCellID = @"ZHCertifiedNormalCellID";
 static NSString *ZHCertificateCellID = @"ZHCertificateCellID";
 static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
 
-@interface ZHCertifiedExpertsVC ()<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>
+@interface ZHCertifiedExpertsVC ()<UITableViewDelegate, UITableViewDataSource, UIActionSheetDelegate>{
+    OssService * service;
+    NSString * uploadFilePath;
+    
+}
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ZHCertifiedExpertsHeaderView *headerView;
@@ -37,6 +44,7 @@ static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
 @property (nonatomic, strong) expert *expertModel;
 @property (nonatomic, strong) UIButton *savePersonInfomationBtn; /// 保存个人信息
 @property (nonatomic, strong) UIView *saveBackView;
+@property (nonatomic, strong) NSMutableArray *uploadImageArr;
 
 @end
 
@@ -45,6 +53,7 @@ static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"专家信息";
+    self.uploadImageArr = [NSMutableArray new];
     self.expertModel = [[expert alloc] init];
     self.expertModel.sex = 100;
     self.thridGroupMArr = [NSMutableArray new];
@@ -52,6 +61,15 @@ static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
     [self creatSaveBackView];
     self.secondGroupArr = @[@"*真实姓名:",@"*专家昵称:",@"*性别:",@"*所在地:",@"*出生日期:",@"*企业名称:",@"*职务:",@"*擅长业务:",@"*个人简介:"];
     [self loadData];
+    
+    
+    NSString * const endPoint = @"http://oss-cn-qingdao.aliyuncs.com";
+    NSString * const callbackAddress = @"http://oss-demo.aliyuncs.com:23450";
+    
+    service = [[OssService alloc] initWithViewController:self withEndPoint:endPoint];
+    [service setCallbackAddress:callbackAddress];
+    /// 添加需要上传的图片通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addUploadImage:) name:@"NSNotification_AddImage" object:nil];
 }
 
 #pragma mark - 获取专家类型
@@ -66,6 +84,17 @@ static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
 }
 
 #pragma mark - 上传个人信息
+- (void)addUploadImage:(NSNotification *)note { // 添加需要上传的image
+    ZHImageCategory *imageModel = (ZHImageCategory *)note.object;
+    if ([self.uploadImageArr containsObject:imageModel]) {
+        [self.uploadImageArr removeObject:imageModel];
+        [self.uploadImageArr addObject:imageModel];
+    } else {
+        [self.uploadImageArr addObject:imageModel];
+    }
+    
+}
+
 - (void)putData {
     NSMutableDictionary *mdic = [ZHNetworkTools parameters];
     self.expertModel.intro = @"你好晖哥";
@@ -74,11 +103,40 @@ static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
         return;
     }
     NSString *url = [NSString stringWithFormat:@"%@/api/ut/expert/apply",kIP];
-    NSDictionary *dic = [self jsonValueDecoded:[[self.expertModel yy_modelToJSONString] dataUsingEncoding:NSUTF8StringEncoding]];
+//    NSDictionary *dic = [self jsonValueDecoded:[[self.expertModel yy_modelToJSONString] dataUsingEncoding:NSUTF8StringEncoding]];
+    NSMutableDictionary *dic = [[ZHNetworkTools sharedTools] modelToDic:self.expertModel];
+    [mdic setValuesForKeysWithDictionary:dic];
+//    NSMutableDictionary *tempDic = [NSMutableDictionary dictionary];
+//    [tempDic setValue:dic forKey:@"expert"];
+//    [mdic setValuesForKeysWithDictionary:tempDic];
     NSLog(@"%@",dic);
-    [[ZHNetworkTools sharedTools] requestWithType:POST andUrl:url andParams:mdic andCallBlock:^(id response, NSError *error) {
-        
-    }];
+    __block NSInteger imageCount = 0;
+    for (ZHImageCategory *imageModel in self.uploadImageArr) {
+        [service asyncPutImage:imageModel.objectKey localFilePath:imageModel.uploadFilePath bucketName:bucketNameUser comletion:^(BOOL isSuccess) {
+            imageCount += 1;
+            if (isSuccess) {
+                if (imageCount == self.uploadImageArr.count) {
+                    [[ZHNetworkTools sharedTools] requestWithType:POST andUrl:url andParams:mdic andCallBlock:^(id response, NSError *error) {
+                    
+                        if (error) {
+                            NSLog(@"%@",error);
+                        }
+                        NSLog(@"提交成功");
+                        NSLog(@"%@",response);
+                        if ([response[@"success"] integerValue] == 1) {
+                            [SVProgressHUD showInfoWithStatus:@"提交成功,等待审核"];
+                            [SVProgressHUD dismissWithDelay:1.0];
+                            [self.navigationController popViewControllerAnimated:YES];
+                        } else {
+                            [SVProgressHUD showInfoWithStatus:@"上传失败"];
+                            [SVProgressHUD dismissWithDelay:1.0];
+                        }
+                    }];
+                }
+            }
+            
+        }];
+    }
 }
 
 - (id)jsonValueDecoded:(NSData *)data {
@@ -185,6 +243,14 @@ static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
                 cell.editEndTitle = @"已填";
             };
             [self.navigationController pushViewController:vc animated:YES];
+        } else if (indexPath.row == 8) {
+            ZHPersonProfileVC *vc = [[ZHPersonProfileVC alloc] init];
+            WEAKSELF
+            vc.SavePersonProfileBlock = ^(NSString *string) {
+                weakSelf.expertModel.intro = string;
+                cell.editEndTitle = @"已填";
+            };
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
 }
@@ -240,6 +306,7 @@ static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
 - (ZHCertifiedExpertsHeaderView *)headerView {
     if (!_headerView) {
         _headerView = [[ZHCertifiedExpertsHeaderView alloc] initWithFrame:CGRectMake(0, 0, kWidth, 150)];
+        _headerView.expert = self.expertModel;
     }
     return _headerView;
 }
@@ -265,6 +332,10 @@ static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
         make.height.mas_equalTo(50);
         make.centerY.mas_equalTo(_saveBackView);
     }];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

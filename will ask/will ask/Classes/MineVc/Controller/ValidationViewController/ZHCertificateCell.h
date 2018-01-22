@@ -11,7 +11,7 @@
 /**
  身份证cell
  */
-@class CertifiedExpertsModel, expert;
+@class CertifiedExpertsModel, expert, ZHImageCategory;
 @interface ZHCertificateCell : UITableViewCell
 
 @property (nonatomic, assign) BOOL isCertification; // 是否认证
@@ -21,6 +21,8 @@
 @property (nonatomic, copy) NSString *objectKey;
 @property (nonatomic, copy) NSString *uploadFilePath;
 @property (nonatomic, strong) expert *expert;
+@property (nonatomic, strong) ZHImageCategory *imageFront;
+@property (nonatomic, strong) ZHImageCategory *imageBack;
 /**
  选中专家类别
  */

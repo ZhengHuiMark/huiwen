@@ -12,6 +12,6 @@
 @interface CertifiedExpertsModel : NSObject
 
 @property(nonatomic,copy)NSString *name;
-@property (nonatomic, assign) NSInteger type;
+@property (nonatomic, assign) CertificationsType type;
 
 @end

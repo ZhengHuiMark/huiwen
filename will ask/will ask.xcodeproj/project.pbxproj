@@ -132,6 +132,10 @@
 		442289381F4BD4F40084EB83 /* AskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 442289371F4BD4F40084EB83 /* AskViewController.m */; };
 		4422893B1F4BD5040084EB83 /* StudyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4422893A1F4BD5040084EB83 /* StudyViewController.m */; };
 		4422893E1F4BD50D0084EB83 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4422893D1F4BD50D0084EB83 /* MineViewController.m */; };
+		442A9C582014730F0038210F /* ZHImageCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 442A9C572014730F0038210F /* ZHImageCategory.m */; };
+		442A9C5F2014C7840038210F /* alertButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 442A9C5E2014C7840038210F /* alertButtonView.m */; };
+		442A9C652014D2850038210F /* expertBtnView.m in Sources */ = {isa = PBXBuildFile; fileRef = 442A9C622014D2850038210F /* expertBtnView.m */; };
+		442A9C662014D2850038210F /* expertTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 442A9C642014D2850038210F /* expertTypeView.m */; };
 		442C032C1F6A85DF0078CDC7 /* ZHExpertsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 442C032A1F6A85DF0078CDC7 /* ZHExpertsTableViewCell.m */; };
 		442C032D1F6A85DF0078CDC7 /* ZHExpertsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 442C032B1F6A85DF0078CDC7 /* ZHExpertsTableViewCell.xib */; };
 		442C03311F6A8A460078CDC7 /* ZHMineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 442C032F1F6A8A460078CDC7 /* ZHMineTableViewCell.m */; };
@@ -364,6 +368,22 @@
 		449A0D132013512F0003196A /* ZHGoodAtBusinessVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D0C2013512F0003196A /* ZHGoodAtBusinessVC.m */; };
 		449A0D162013518B0003196A /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D152013518B0003196A /* UIColor+Extension.m */; };
 		449A0D1920138B5F0003196A /* ZHSearchPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D1820138B5F0003196A /* ZHSearchPageViewController.m */; };
+		449A0D1C20138BE50003196A /* historyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D1B20138BE50003196A /* historyView.m */; };
+		449A0D3320138FAF0003196A /* NSArray+LPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D2020138FAF0003196A /* NSArray+LPC.m */; };
+		449A0D3420138FAF0003196A /* NSArray+test.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D2220138FAF0003196A /* NSArray+test.m */; };
+		449A0D3520138FAF0003196A /* NSAttributedString+LPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D2420138FAF0003196A /* NSAttributedString+LPC.m */; };
+		449A0D3620138FAF0003196A /* NSObject+LPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D2620138FAF0003196A /* NSObject+LPC.m */; };
+		449A0D3720138FAF0003196A /* UIAlertController+LPC_Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D2820138FAF0003196A /* UIAlertController+LPC_Extend.m */; };
+		449A0D3820138FAF0003196A /* UIBarButtonItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D2A20138FAF0003196A /* UIBarButtonItem+Extension.m */; };
+		449A0D3920138FAF0003196A /* UIButton+LPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D2C20138FAF0003196A /* UIButton+LPC.m */; };
+		449A0D3A20138FAF0003196A /* UIColor+LPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D2E20138FAF0003196A /* UIColor+LPC.m */; };
+		449A0D3B20138FAF0003196A /* UILabel+LPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D3020138FAF0003196A /* UILabel+LPC.m */; };
+		449A0D3C20138FAF0003196A /* UIScreen+LPC.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D3220138FAF0003196A /* UIScreen+LPC.m */; };
+		449A0D4320139CEA0003196A /* ZHJPushCustomMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D4220139CEA0003196A /* ZHJPushCustomMessageViewController.m */; };
+		449A0D4A20139D4B0003196A /* JPushMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D4620139D4B0003196A /* JPushMessageModel.m */; };
+		449A0D4B20139D4B0003196A /* MessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D4920139D4B0003196A /* MessageViewCell.m */; };
+		449A0D5220145FB90003196A /* UITextView+Placeholder.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D5120145FB90003196A /* UITextView+Placeholder.m */; };
+		449A0D55201460920003196A /* ZHPersonProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 449A0D54201460920003196A /* ZHPersonProfileVC.m */; };
 		44AF4AEF20049E500022B237 /* ZHFocusButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AF4AEA20049E500022B237 /* ZHFocusButton.m */; };
 		44AF4AF020049E500022B237 /* ZHFocusButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44AF4AEB20049E500022B237 /* ZHFocusButton.xib */; };
 		44AF4AF120049E500022B237 /* ZHFoucsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AF4AED20049E500022B237 /* ZHFoucsTableView.m */; };
@@ -628,6 +648,14 @@
 		4422893A1F4BD5040084EB83 /* StudyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudyViewController.m; sourceTree = "<group>"; };
 		4422893C1F4BD50D0084EB83 /* MineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineViewController.h; sourceTree = "<group>"; };
 		4422893D1F4BD50D0084EB83 /* MineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineViewController.m; sourceTree = "<group>"; };
+		442A9C562014730F0038210F /* ZHImageCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHImageCategory.h; sourceTree = "<group>"; };
+		442A9C572014730F0038210F /* ZHImageCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHImageCategory.m; sourceTree = "<group>"; };
+		442A9C5D2014C7840038210F /* alertButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = alertButtonView.h; sourceTree = "<group>"; };
+		442A9C5E2014C7840038210F /* alertButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = alertButtonView.m; sourceTree = "<group>"; };
+		442A9C612014D2850038210F /* expertBtnView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = expertBtnView.h; sourceTree = "<group>"; };
+		442A9C622014D2850038210F /* expertBtnView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = expertBtnView.m; sourceTree = "<group>"; };
+		442A9C632014D2850038210F /* expertTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = expertTypeView.h; sourceTree = "<group>"; };
+		442A9C642014D2850038210F /* expertTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = expertTypeView.m; sourceTree = "<group>"; };
 		442C03291F6A85DF0078CDC7 /* ZHExpertsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHExpertsTableViewCell.h; sourceTree = "<group>"; };
 		442C032A1F6A85DF0078CDC7 /* ZHExpertsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHExpertsTableViewCell.m; sourceTree = "<group>"; };
 		442C032B1F6A85DF0078CDC7 /* ZHExpertsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHExpertsTableViewCell.xib; sourceTree = "<group>"; };
@@ -1028,6 +1056,40 @@
 		449A0D152013518B0003196A /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
 		449A0D1720138B5F0003196A /* ZHSearchPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHSearchPageViewController.h; sourceTree = "<group>"; };
 		449A0D1820138B5F0003196A /* ZHSearchPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHSearchPageViewController.m; sourceTree = "<group>"; };
+		449A0D1A20138BE50003196A /* historyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = historyView.h; sourceTree = "<group>"; };
+		449A0D1B20138BE50003196A /* historyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = historyView.m; sourceTree = "<group>"; };
+		449A0D1E20138FAF0003196A /* Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Addition.h; sourceTree = "<group>"; };
+		449A0D1F20138FAF0003196A /* NSArray+LPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+LPC.h"; sourceTree = "<group>"; };
+		449A0D2020138FAF0003196A /* NSArray+LPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+LPC.m"; sourceTree = "<group>"; };
+		449A0D2120138FAF0003196A /* NSArray+test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+test.h"; sourceTree = "<group>"; };
+		449A0D2220138FAF0003196A /* NSArray+test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+test.m"; sourceTree = "<group>"; };
+		449A0D2320138FAF0003196A /* NSAttributedString+LPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+LPC.h"; sourceTree = "<group>"; };
+		449A0D2420138FAF0003196A /* NSAttributedString+LPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+LPC.m"; sourceTree = "<group>"; };
+		449A0D2520138FAF0003196A /* NSObject+LPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LPC.h"; sourceTree = "<group>"; };
+		449A0D2620138FAF0003196A /* NSObject+LPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LPC.m"; sourceTree = "<group>"; };
+		449A0D2720138FAF0003196A /* UIAlertController+LPC_Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+LPC_Extend.h"; sourceTree = "<group>"; };
+		449A0D2820138FAF0003196A /* UIAlertController+LPC_Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+LPC_Extend.m"; sourceTree = "<group>"; };
+		449A0D2920138FAF0003196A /* UIBarButtonItem+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Extension.h"; sourceTree = "<group>"; };
+		449A0D2A20138FAF0003196A /* UIBarButtonItem+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extension.m"; sourceTree = "<group>"; };
+		449A0D2B20138FAF0003196A /* UIButton+LPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+LPC.h"; sourceTree = "<group>"; };
+		449A0D2C20138FAF0003196A /* UIButton+LPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+LPC.m"; sourceTree = "<group>"; };
+		449A0D2D20138FAF0003196A /* UIColor+LPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+LPC.h"; sourceTree = "<group>"; };
+		449A0D2E20138FAF0003196A /* UIColor+LPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+LPC.m"; sourceTree = "<group>"; };
+		449A0D2F20138FAF0003196A /* UILabel+LPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+LPC.h"; sourceTree = "<group>"; };
+		449A0D3020138FAF0003196A /* UILabel+LPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+LPC.m"; sourceTree = "<group>"; };
+		449A0D3120138FAF0003196A /* UIScreen+LPC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScreen+LPC.h"; sourceTree = "<group>"; };
+		449A0D3220138FAF0003196A /* UIScreen+LPC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+LPC.m"; sourceTree = "<group>"; };
+		449A0D4120139CEA0003196A /* ZHJPushCustomMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHJPushCustomMessageViewController.h; sourceTree = "<group>"; };
+		449A0D4220139CEA0003196A /* ZHJPushCustomMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHJPushCustomMessageViewController.m; sourceTree = "<group>"; };
+		449A0D4520139D4B0003196A /* JPushMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPushMessageModel.h; sourceTree = "<group>"; };
+		449A0D4620139D4B0003196A /* JPushMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPushMessageModel.m; sourceTree = "<group>"; };
+		449A0D4820139D4B0003196A /* MessageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageViewCell.h; sourceTree = "<group>"; };
+		449A0D4920139D4B0003196A /* MessageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageViewCell.m; sourceTree = "<group>"; };
+		449A0D5020145FB90003196A /* UITextView+Placeholder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Placeholder.h"; sourceTree = "<group>"; };
+		449A0D5120145FB90003196A /* UITextView+Placeholder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Placeholder.m"; sourceTree = "<group>"; };
+		449A0D53201460920003196A /* ZHPersonProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHPersonProfileVC.h; sourceTree = "<group>"; };
+		449A0D54201460920003196A /* ZHPersonProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHPersonProfileVC.m; sourceTree = "<group>"; };
+		449A0D5920146D380003196A /* ZHEnumerationCateType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHEnumerationCateType.h; sourceTree = "<group>"; };
 		44AF4AE920049E500022B237 /* ZHFocusButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHFocusButton.h; sourceTree = "<group>"; };
 		44AF4AEA20049E500022B237 /* ZHFocusButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHFocusButton.m; sourceTree = "<group>"; };
 		44AF4AEB20049E500022B237 /* ZHFocusButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHFocusButton.xib; sourceTree = "<group>"; };
@@ -1424,6 +1486,7 @@
 		4407706F1FDE7A550000C20E /* view */ = {
 			isa = PBXGroup;
 			children = (
+				442A9C5C2014C7840038210F /* BuyAlertView */,
 				440770731FDE86CA0000C20E /* ZHMyCardNumberTableViewCell.h */,
 				440770741FDE86CA0000C20E /* ZHMyCardNumberTableViewCell.m */,
 				440770751FDE86CA0000C20E /* ZHMyCardNumberTableViewCell.xib */,
@@ -1929,6 +1992,7 @@
 		441ADEA81F4BCAF200ECD63E /* baseVc */ = {
 			isa = PBXGroup;
 			children = (
+				449A0D4020139CEA0003196A /* ZHJPushCustomMessageViewController */,
 				444D49CC1FF3332300D82736 /* ZHOrderPaymentVc */,
 				440771651FEB4FC80000C20E /* ZHExpertUserInfoHomePageViewController */,
 				440771171FE8AF3C0000C20E /* ZHUserHomePageVc */,
@@ -2166,6 +2230,26 @@
 				44C9520C1FBACF18002B5509 /* ZHTypeTableViewCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		442A9C5C2014C7840038210F /* BuyAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				442A9C5D2014C7840038210F /* alertButtonView.h */,
+				442A9C5E2014C7840038210F /* alertButtonView.m */,
+			);
+			path = BuyAlertView;
+			sourceTree = "<group>";
+		};
+		442A9C602014D2850038210F /* ZHExpertView */ = {
+			isa = PBXGroup;
+			children = (
+				442A9C612014D2850038210F /* expertBtnView.h */,
+				442A9C622014D2850038210F /* expertBtnView.m */,
+				442A9C632014D2850038210F /* expertTypeView.h */,
+				442A9C642014D2850038210F /* expertTypeView.m */,
+			);
+			path = ZHExpertView;
 			sourceTree = "<group>";
 		};
 		442C03981F70EBE80078CDC7 /* ChildVC */ = {
@@ -2991,10 +3075,13 @@
 				44827BDB1FA01FA80097F1E7 /* TextFiled */,
 				44827BB71F9DBB6B0097F1E7 /* BRPickerView */,
 				449956B11F6275160087503B /* DESEncryption */,
+				449A0D1D20138FAF0003196A /* LPCAdditonal */,
 				444D49C91FF23FC700D82736 /* UIView+LayerEffects.h */,
 				444D49CA1FF23FC700D82736 /* UIView+LayerEffects.m */,
 				44C7AC821FAAF22500F42616 /* XLCircle.h */,
 				44C7AC831FAAF22500F42616 /* XLCircle.m */,
+				449A0D5020145FB90003196A /* UITextView+Placeholder.h */,
+				449A0D5120145FB90003196A /* UITextView+Placeholder.m */,
 				44C7AC841FAAF22500F42616 /* XLCircleProgress.h */,
 				44C7AC851FAAF22500F42616 /* XLCircleProgress.m */,
 				449A0CE120132E9D0003196A /* UIViewController+BackButtonHandler.h */,
@@ -3003,6 +3090,7 @@
 				449956C61F6292850087503B /* RSAEncryptor.m */,
 				449957071F6777790087503B /* ZHNetworkTools.h */,
 				449957081F6777790087503B /* ZHNetworkTools.m */,
+				449A0D5920146D380003196A /* ZHEnumerationCateType.h */,
 				44827BD71F9DBD090097F1E7 /* NSDate+BRAdd.h */,
 				44827BD81F9DBD090097F1E7 /* NSDate+BRAdd.m */,
 				449957111F678F6A0087503B /* ZHMD5.h */,
@@ -3254,6 +3342,7 @@
 		449A0CE4201350E90003196A /* ValidationViewController */ = {
 			isa = PBXGroup;
 			children = (
+				449A0D4C20145E7B0003196A /* ZHPersonalProfileVc */,
 				449A0CFE2013512F0003196A /* ZHGoodAtBusiness */,
 				449A0CE5201350E90003196A /* certifications.h */,
 				449A0CE6201350E90003196A /* certifications.m */,
@@ -3262,6 +3351,8 @@
 				449A0CE9201350E90003196A /* EditPersonal.h */,
 				449A0CEA201350E90003196A /* expert.h */,
 				449A0CEB201350E90003196A /* expert.m */,
+				442A9C562014730F0038210F /* ZHImageCategory.h */,
+				442A9C572014730F0038210F /* ZHImageCategory.m */,
 				449A0CEC201350E90003196A /* ZHCertificateCell.h */,
 				449A0CED201350E90003196A /* ZHCertificateCell.m */,
 				449A0CEE201350E90003196A /* ZHCertifiedExpertsHeaderView.h */,
@@ -3298,11 +3389,103 @@
 			path = ZHGoodAtBusiness;
 			sourceTree = "<group>";
 		};
+		449A0D1D20138FAF0003196A /* LPCAdditonal */ = {
+			isa = PBXGroup;
+			children = (
+				449A0D1E20138FAF0003196A /* Addition.h */,
+				449A0D1F20138FAF0003196A /* NSArray+LPC.h */,
+				449A0D2020138FAF0003196A /* NSArray+LPC.m */,
+				449A0D2120138FAF0003196A /* NSArray+test.h */,
+				449A0D2220138FAF0003196A /* NSArray+test.m */,
+				449A0D2320138FAF0003196A /* NSAttributedString+LPC.h */,
+				449A0D2420138FAF0003196A /* NSAttributedString+LPC.m */,
+				449A0D2520138FAF0003196A /* NSObject+LPC.h */,
+				449A0D2620138FAF0003196A /* NSObject+LPC.m */,
+				449A0D2720138FAF0003196A /* UIAlertController+LPC_Extend.h */,
+				449A0D2820138FAF0003196A /* UIAlertController+LPC_Extend.m */,
+				449A0D2920138FAF0003196A /* UIBarButtonItem+Extension.h */,
+				449A0D2A20138FAF0003196A /* UIBarButtonItem+Extension.m */,
+				449A0D2B20138FAF0003196A /* UIButton+LPC.h */,
+				449A0D2C20138FAF0003196A /* UIButton+LPC.m */,
+				449A0D2D20138FAF0003196A /* UIColor+LPC.h */,
+				449A0D2E20138FAF0003196A /* UIColor+LPC.m */,
+				449A0D2F20138FAF0003196A /* UILabel+LPC.h */,
+				449A0D3020138FAF0003196A /* UILabel+LPC.m */,
+				449A0D3120138FAF0003196A /* UIScreen+LPC.h */,
+				449A0D3220138FAF0003196A /* UIScreen+LPC.m */,
+			);
+			path = LPCAdditonal;
+			sourceTree = "<group>";
+		};
+		449A0D4020139CEA0003196A /* ZHJPushCustomMessageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				449A0D4120139CEA0003196A /* ZHJPushCustomMessageViewController.h */,
+				449A0D4220139CEA0003196A /* ZHJPushCustomMessageViewController.m */,
+				449A0D4420139D4B0003196A /* model */,
+				449A0D4720139D4B0003196A /* view */,
+			);
+			path = ZHJPushCustomMessageViewController;
+			sourceTree = "<group>";
+		};
+		449A0D4420139D4B0003196A /* model */ = {
+			isa = PBXGroup;
+			children = (
+				449A0D4520139D4B0003196A /* JPushMessageModel.h */,
+				449A0D4620139D4B0003196A /* JPushMessageModel.m */,
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		449A0D4720139D4B0003196A /* view */ = {
+			isa = PBXGroup;
+			children = (
+				449A0D4820139D4B0003196A /* MessageViewCell.h */,
+				449A0D4920139D4B0003196A /* MessageViewCell.m */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		449A0D4C20145E7B0003196A /* ZHPersonalProfileVc */ = {
+			isa = PBXGroup;
+			children = (
+				449A0D4D20145E7B0003196A /* controller */,
+				449A0D4E20145E7B0003196A /* model */,
+				449A0D4F20145E7B0003196A /* view */,
+			);
+			path = ZHPersonalProfileVc;
+			sourceTree = "<group>";
+		};
+		449A0D4D20145E7B0003196A /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				449A0D53201460920003196A /* ZHPersonProfileVC.h */,
+				449A0D54201460920003196A /* ZHPersonProfileVC.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		449A0D4E20145E7B0003196A /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		449A0D4F20145E7B0003196A /* view */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		44AF4AE520049D140022B237 /* SearchVc */ = {
 			isa = PBXGroup;
 			children = (
 				449A0D1720138B5F0003196A /* ZHSearchPageViewController.h */,
 				449A0D1820138B5F0003196A /* ZHSearchPageViewController.m */,
+				449A0D1A20138BE50003196A /* historyView.h */,
+				449A0D1B20138BE50003196A /* historyView.m */,
 				44AF4AE620049D140022B237 /* controller */,
 				44AF4AE720049D140022B237 /* model */,
 				44AF4AE820049D140022B237 /* view */,
@@ -3480,6 +3663,7 @@
 				449A0CCF200EEAE20003196A /* CaseDetailViewController */,
 				44C952131FBADB76002B5509 /* ZHExpertViewController.h */,
 				44C952141FBADB76002B5509 /* ZHExpertViewController.m */,
+				442A9C602014D2850038210F /* ZHExpertView */,
 				44CB43D41FC80D8A0045F80E /* FindCaseViewController */,
 			);
 			path = Controller;
@@ -3858,6 +4042,7 @@
 				440770CB1FE37EA00000C20E /* ZHContentTextViewTableViewCell.m in Sources */,
 				4407704F1FD92D930000C20E /* ZHMyRewardAskViewController.m in Sources */,
 				440770821FDF8C4C0000C20E /* ZHCardNumberModel.m in Sources */,
+				442A9C652014D2850038210F /* expertBtnView.m in Sources */,
 				444D49A11FF22CAF00D82736 /* ZHNormalUserTableViewCell.m in Sources */,
 				44C7ACB01FB3F8A300F42616 /* ZHSubCaseModel.m in Sources */,
 				440770F11FE76D520000C20E /* ZHMyConsultingDetailTableViewCell.m in Sources */,
@@ -3869,11 +4054,14 @@
 				440771111FE7C44F0000C20E /* ZHMyFocusListTableViewCell.m in Sources */,
 				448DC9BA1FFDC49B004F4F2A /* ZHTotalIncomeTableViewCell.m in Sources */,
 				44C9520D1FBACF18002B5509 /* ZHTypeTableViewCell.m in Sources */,
+				449A0D3C20138FAF0003196A /* UIScreen+LPC.m in Sources */,
 				444D49621FF0E05400D82736 /* ZHExpertUserInfoHomePageViewController.m in Sources */,
 				449A0CDC200EFB000003196A /* ZHCaseDetailTableViewCell.m in Sources */,
+				449A0D4A20139D4B0003196A /* JPushMessageModel.m in Sources */,
 				444D4A091FF376D800D82736 /* ZHOrderDetailLearnModel.m in Sources */,
 				444D49FA1FF3515F00D82736 /* ZHOrderDetailViewController.m in Sources */,
 				448DC9C11FFDC828004F4F2A /* ZHTotalIncomeModel.m in Sources */,
+				442A9C662014D2850038210F /* expertTypeView.m in Sources */,
 				440280B51F7E2B250020BD47 /* ZHPersonalInformationVc.m in Sources */,
 				449956DD1F6627CF0087503B /* ZHMessageTableViewController.m in Sources */,
 				4407709F1FE24B2B0000C20E /* ZHInvoiceTableViewCell.m in Sources */,
@@ -3915,6 +4103,7 @@
 				4422893E1F4BD50D0084EB83 /* MineViewController.m in Sources */,
 				440770F71FE792C50000C20E /* ZHMyConsultVc.m in Sources */,
 				44C952061FB97AA9002B5509 /* ZHChooseTypeTableViewCell.m in Sources */,
+				449A0D3B20138FAF0003196A /* UILabel+LPC.m in Sources */,
 				44827BD31F9DBB6B0097F1E7 /* BRDatePickerView.m in Sources */,
 				448DC9D01FFE07F7004F4F2A /* ZHWithdrawalModel.m in Sources */,
 				449A0C4D2005C3790003196A /* ZHHaveToAnswerTableViewCell.m in Sources */,
@@ -3924,6 +4113,7 @@
 				44BB65DE1FCBFB44003C3A6E /* ZHAskQuestionModel.m in Sources */,
 				44CB43D71FC80DD60045F80E /* ZHFindCaseViewController.m in Sources */,
 				44CB43CC1FC8085A0045F80E /* BtnColorModel.m in Sources */,
+				449A0D1C20138BE50003196A /* historyView.m in Sources */,
 				44827C101FAAC5A00097F1E7 /* ZHRewardDetailTableViewCell.m in Sources */,
 				444D4A061FF351D600D82736 /* ZHOrderDetailRewardModel.m in Sources */,
 				44827B6F1F98A9B00097F1E7 /* ZHFreeAnswerModel.m in Sources */,
@@ -3938,6 +4128,7 @@
 				447674DD1F8F666F007162AC /* ZHRewardAndDateTableViewCell.m in Sources */,
 				449956B61F6275160087503B /* Base64.m in Sources */,
 				442289381F4BD4F40084EB83 /* AskViewController.m in Sources */,
+				442A9C582014730F0038210F /* ZHImageCategory.m in Sources */,
 				44C952151FBADB76002B5509 /* ZHExpertViewController.m in Sources */,
 				4407712D1FE8C3500000C20E /* ZHUserInfoRewardAskTableViewCell.m in Sources */,
 				440771371FE8E5BB0000C20E /* ZHUserInfoRewardVoiceTableViewCell.m in Sources */,
@@ -3949,6 +4140,7 @@
 				442289211F4BCE070084EB83 /* ZHNavigationVC.m in Sources */,
 				44C7ACA11FB2A1A000F42616 /* ZHCaseBreakDownTableViewCell.m in Sources */,
 				448DC9D31FFE0B1F004F4F2A /* ZHWithdrawalViewController.m in Sources */,
+				449A0D3420138FAF0003196A /* NSArray+test.m in Sources */,
 				449957091F6777790087503B /* ZHNetworkTools.m in Sources */,
 				444D49541FF0D95C00D82736 /* ZHMoerFreeListModel.m in Sources */,
 				444D496A1FF0E77F00D82736 /* ZHExpertUserInfoModel.m in Sources */,
@@ -3962,14 +4154,17 @@
 				442C038E1F6FC0220078CDC7 /* OssService.m in Sources */,
 				440770581FD936500000C20E /* ZHMyRewardRightListTableViewCell.m in Sources */,
 				448DC9AB1FFB6901004F4F2A /* ZHSpecialExpertTableViewCell.m in Sources */,
+				449A0D3320138FAF0003196A /* NSArray+LPC.m in Sources */,
 				440771541FE929880000C20E /* ZHMoreRewardListViewController.m in Sources */,
 				44BB65E41FCD3549003C3A6E /* ZHCaseListTableViewCell.m in Sources */,
+				449A0D55201460920003196A /* ZHPersonProfileVC.m in Sources */,
 				449A0C442005C2CE0003196A /* ZHToAnswerViewController.m in Sources */,
 				444D49CB1FF23FC700D82736 /* UIView+LayerEffects.m in Sources */,
 				447674D81F8F6031007162AC /* ZHAskTextViewTableViewCell.m in Sources */,
 				442C03371F6B6FC70078CDC7 /* MineModel.m in Sources */,
 				4407713C1FE8E6B40000C20E /* ZHUserInfoNoModelTableViewCell.m in Sources */,
 				4445F807200103D50027EB1B /* VoiceConverter.mm in Sources */,
+				449A0D5220145FB90003196A /* UITextView+Placeholder.m in Sources */,
 				444D4A0C1FF376F000D82736 /* ZHOrderDetailVipCardModel.m in Sources */,
 				440770441FD8E21D0000C20E /* ZHMyFreeAskTableViewCell.m in Sources */,
 				440770531FD930730000C20E /* ZHMyRewardListTableViewCell.m in Sources */,
@@ -3983,6 +4178,7 @@
 				44310E181F906DCB00A68A66 /* MLImageCell.m in Sources */,
 				440770F31FE76D520000C20E /* ZHMyConsultingVoiceTableViewCell.m in Sources */,
 				44827B3C1F971EEE0097F1E7 /* ZHBtnModel.m in Sources */,
+				449A0D4B20139D4B0003196A /* MessageViewCell.m in Sources */,
 				44C7AC861FAAF22500F42616 /* XLCircle.m in Sources */,
 				44827B611F989CF20097F1E7 /* FreeDetailViewController.m in Sources */,
 				44C952091FB97AC4002B5509 /* ZHChooseTypeViewController.m in Sources */,
@@ -3992,12 +4188,14 @@
 				440770631FDE52DE0000C20E /* ZHMyConsultingViewController.m in Sources */,
 				449A0C6020060B570003196A /* ZHMyRewardAnswerModel.m in Sources */,
 				44827C0B1FAAB9350097F1E7 /* MLTagButton.m in Sources */,
+				442A9C5F2014C7840038210F /* alertButtonView.m in Sources */,
 				4499570D1F6778440087503B /* UserModel.m in Sources */,
 				44827B4A1F97429C0097F1E7 /* ZHFreeQuestionViewController.m in Sources */,
 				44827BEF1FA868BA0097F1E7 /* ZHAnswerTableViewCell.m in Sources */,
 				44827B3F1F9738EB0097F1E7 /* ZHFreeListTableViewCell.m in Sources */,
 				444D49701FF0EEAA00D82736 /* ZHExpertCaseModel.m in Sources */,
 				44C7AC981FB1A4F000F42616 /* ZHRewardDetailViewController.m in Sources */,
+				449A0D3820138FAF0003196A /* UIBarButtonItem+Extension.m in Sources */,
 				449A0CFC201350E90003196A /* ZHCertifiedNormalCell.m in Sources */,
 				444D49EC1FF350CF00D82736 /* ZHOrderDetailLearnTableViewCell.m in Sources */,
 				444D49E71FF3505D00D82736 /* ZHOrderDetailPayTableViewCell.m in Sources */,
@@ -4037,6 +4235,7 @@
 				44BB66311FD131CE003C3A6E /* ZHWalletModel.m in Sources */,
 				44C7AC9C1FB2A00400F42616 /* ZHExpertTodayTableViewCell.m in Sources */,
 				449956A91F5E45200087503B /* ZHLoginViewController.m in Sources */,
+				449A0D4320139CEA0003196A /* ZHJPushCustomMessageViewController.m in Sources */,
 				4407710D1FE7C3820000C20E /* ZHMyFocusExpertViewController.m in Sources */,
 				444D49511FF0D94700D82736 /* ZHUserInfoFreeListViewController.m in Sources */,
 				442C03971F70B99F0078CDC7 /* ImageModel.m in Sources */,
@@ -4047,6 +4246,7 @@
 				449A0C5C200608EB0003196A /* ZHMyRewardAnswerTableViewCell.m in Sources */,
 				44C952021FB97AA9002B5509 /* ZHChooseTypeBtn.m in Sources */,
 				4410C5102002123F0085086C /* ZHStudyBannerModel.m in Sources */,
+				449A0D3520138FAF0003196A /* NSAttributedString+LPC.m in Sources */,
 				449A0C3D2004A4170003196A /* ZHAllModel.m in Sources */,
 				4407706B1FDE69FF0000C20E /* ZHMyConsultModel.m in Sources */,
 				44827BCF1F9DBB6B0097F1E7 /* BRAddressModel.m in Sources */,
@@ -4057,8 +4257,10 @@
 				449A0D102013512F0003196A /* expertBusinesses.m in Sources */,
 				440770901FDFDC820000C20E /* ZHRecordListModel.m in Sources */,
 				4407707B1FDE86DE0000C20E /* ZHVipCardDetailTableViewCell.m in Sources */,
+				449A0D3920138FAF0003196A /* UIButton+LPC.m in Sources */,
 				449A0D0E2013512F0003196A /* ButtonBusinessView.m in Sources */,
 				4445F800200103D50027EB1B /* ICChatBox.m in Sources */,
+				449A0D3720138FAF0003196A /* UIAlertController+LPC_Extend.m in Sources */,
 				4445F804200103D50027EB1B /* amrFileCodec.mm in Sources */,
 				449A0D1920138B5F0003196A /* ZHSearchPageViewController.m in Sources */,
 				449A0CE0200F51440003196A /* ZHForgetViewController.m in Sources */,
@@ -4071,9 +4273,11 @@
 				449A0CFD201350E90003196A /* ZHExpertCategoryCell.m in Sources */,
 				440770721FDE865F0000C20E /* ZHMyVipCardViewController.m in Sources */,
 				44C9521E1FC420AD002B5509 /* MLAvatarDisplayView.m in Sources */,
+				449A0D3A20138FAF0003196A /* UIColor+LPC.m in Sources */,
 				440770761FDE86CA0000C20E /* ZHMyCardNumberTableViewCell.m in Sources */,
 				449A0C6F200627BA0003196A /* ZHFocusMeUserViewController.m in Sources */,
 				442289351F4BD4E50084EB83 /* HomeViewController.m in Sources */,
+				449A0D3620138FAF0003196A /* NSObject+LPC.m in Sources */,
 				4445F7FF200103D50027EB1B /* alertString.m in Sources */,
 				442C03911F6FC0DE0078CDC7 /* LBViewController+ImagePicker.m in Sources */,
 				44C7ACA61FB2E45F00F42616 /* ZHIntroductionTableViewCell.m in Sources */,

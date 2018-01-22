@@ -17,6 +17,12 @@
 #import "ZHStudyModel.h"
 #import "BtnColorModel.h"
 #import "ZHButton.h"
+#import "expertTypeView.h"
+#import "ZHSearchPageViewController.h"
+#import "ZHExpertUserInfoHomePageViewController.h"
+
+#define kSconfirmBtnArrayName  @"kSconfirmBtnArrayName"
+
 
 typedef NS_ENUM(NSUInteger, EnumASCTypes) {
     EnumASCTypesNone = 0,
@@ -33,7 +39,10 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
 {
     ZHButton *_selectedButton;
     AModel *model1;
+    NSInteger pageNo;
 
+    NSString *orderStr;
+    BOOL aseBOOL;
 }
 
 @property (nonatomic, assign) EnumASCTypes ASCType; // 排序方式
@@ -42,6 +51,8 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
 @property(nonatomic,strong)UITableView *tableView;
 
 @property(nonatomic,strong)NSArray <ZHStudyModel *> *studyModels;
+
+@property(nonatomic,strong)NSMutableArray <ZHStudyModel *>*Marry;
 
 @property(nonatomic,strong)UIButton *answerFirstBtn;
 
@@ -53,6 +64,13 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
 
 @property(nonatomic,strong)UIButton *tempBtn;
 
+@property(nonatomic,strong)NSArray *arr;
+
+@property(nonatomic, strong) expertTypeView *expert;
+
+@property(nonatomic,strong)NSMutableArray <UIButton *> *buttonArray;
+
+@property(nonatomic,strong)UIButton *allButton;
 
 /**
  存放所有按钮标题的数组
@@ -73,12 +91,31 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self loadData];
+    [self loadExpertData];
     
     [self.view addSubview:self.tableView];
     
+    pageNo = 1;
+    orderStr = @"vieAnswerNumber";
+    aseBOOL = YES;
 }
 
 
+- (void)loadExpertData{
+    NSMutableDictionary *dic = [ZHNetworkTools parameters];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/expert/getExpertTitles",kIP];
+    
+    [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+        if (error) {
+            NSLog(@"%@",error);
+        }
+        _arr = response[@"data"];
+        
+        NSLog(@"%@",response);
+    }];
+    
+}
 
 - (void)loadData{
     
@@ -104,37 +141,43 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
     
 }
 
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     
+    UIView *view = nil;
     
-    UIView * view = nil;
-    
-    if (section == 1) {
+    if (section == 0) {
         
         UIView *headerView = [[UIView alloc] init];
-//        headerView.autoresizesSubviews = NO;
+        //        headerView.autoresizesSubviews = NO;
         headerView.clipsToBounds = YES;
         headerView.backgroundColor = [UIColor whiteColor];
         
-        
+        _buttonArray = [[NSMutableArray alloc]init]; //将button放到数组里面
         NSArray * array = [NSArray arrayWithObjects:@"抢答",@"接受咨询",@"发布案例", nil];
-
+        
         for (NSInteger i = 0; i < 3; i++) {
             
-            UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-            btn.frame = CGRectMake(self.view.frame.size.width /3 *i, 0, self.view.frame.size.width/3, 50);
-            btn.tag = i;
-            btn.backgroundColor = [UIColor colorWithWhite:100*i alpha:0];
+            _allButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            _allButton.frame = CGRectMake(self.view.frame.size.width /3 *i, 0, self.view.frame.size.width/3, 50);
+            _allButton.tag = i;
+            _allButton.backgroundColor = [UIColor colorWithWhite:100*i alpha:0];
             
-            [btn addTarget:self action:@selector(btnActions:) forControlEvents:UIControlEventTouchUpInside];
-            [headerView addSubview:btn];
-            [btn setTitle:[array objectAtIndex:i] forState:UIControlStateNormal];
-            [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-           
+            [_allButton addTarget:self action:@selector(btnActions:) forControlEvents:UIControlEventTouchUpInside];
+            [headerView addSubview:_allButton];
+            [_allButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+            [_allButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+            _ASCType = EnumASCTypesJiang;
+            
+            [_allButton setTitle:[array objectAtIndex:i] forState:UIControlStateNormal];
+            
+            [_buttonArray addObject:_allButton];
+            
+            if (!i) {
+                _allButton.selected = YES;
+            }
         }
-
-        _tempBtn = nil;
+        
+        //        _tempBtn = nil;
         
         
         // 线
@@ -143,92 +186,96 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
         lineView.backgroundColor = [UIColor yellowColor];
         
         [headerView addSubview:lineView];
-     
         
         return headerView;
-        
-        
     }
-    
-    
-    
     return view;
-    
-    
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
+    UIView * view = nil;
+    return view;
+}
 
-- (void)btnActions:(UIButton *)sender{
+- (void)btnActions:(UIButton *)sender {
     
     NSInteger tag = sender.tag;
     
 
-    if (tag == 0 && _ASCType == EnumASCTypesSheng) { //抢答
-        sender.selected = YES;
-        _ASCType = EnumASCTypesJiang;
-        
-        
-//        [self requestFromNetworkWithOrder:@"vieAnswerNumber" asc:true];
-        sender.backgroundColor = [UIColor whiteColor];
-
-    }else if (tag == 0 && _ASCType == EnumASCTypesJiang ) {
-        
-        sender.selected = YES;
-        _ASCType = EnumASCTypesSheng;
-//        [self requestFromNetworkWithOrder:@"vieAnswerNumber" asc:false];
-
-        sender.backgroundColor = [UIColor whiteColor];
-    }else if (tag == 0 && _ASCType == EnumASCTypesNone){
-        
-        sender.selected = YES;
-        _ASCType = EnumASCTypesSheng;
-        
-        sender.backgroundColor = [UIColor whiteColor];
+    for (UIButton *btn in self.buttonArray) {
+        btn.selected = NO;
     }
-    
-    if (tag == 1 && _ASCType == EnumASCTypesSheng) {
-        
-        sender.selected = YES;
-        _ASCType = EnumASCTypesJiang;
 
-        sender.backgroundColor = [UIColor whiteColor];
-        
-    }else if (tag == 1 && _ASCType == EnumASCTypesJiang && (tag != 0) | 3) {
-        
-        
-        
-        sender.selected = YES;
-        _ASCType = EnumASCTypesSheng;
-        sender.backgroundColor = [UIColor whiteColor];
-    }else if (tag == 1 && _ASCType == EnumASCTypesNone){
-        
-        sender.selected = YES;
-        _ASCType = EnumASCTypesSheng;
-        
-        sender.backgroundColor = [UIColor whiteColor];
+    pageNo = 1;
+
+    if (tag == 0) {
+        orderStr = @"vieAnswerNumber";
+        switch (_ASCType) {
+            case EnumASCTypesSheng:{
+                sender.selected = YES;
+                _ASCType = EnumASCTypesJiang;
+                aseBOOL = YES;
+                sender.backgroundColor = [UIColor whiteColor];
+            }
+                break;
+            case EnumASCTypesJiang:{
+                sender.selected = YES;
+                _ASCType = EnumASCTypesSheng;
+                aseBOOL = NO;
+                sender.backgroundColor = [UIColor whiteColor];
+                break;
+            }
+            default:
+                break;
+        }
+        [self requestFromNetworkWithOrder:orderStr asc:aseBOOL pageNo:pageNo];
+        [_tableView.mj_header beginRefreshing];
+    }else if (tag == 1) {
+        orderStr = @"acceptConsultNumber";
+        switch (_ASCType) {
+            case EnumASCTypesSheng:{
+                sender.selected = YES;
+                _ASCType = EnumASCTypesJiang;
+                aseBOOL = YES;
+                sender.backgroundColor = [UIColor whiteColor];
+            }
+                break;
+            case EnumASCTypesJiang:{
+                sender.selected = YES;
+                _ASCType = EnumASCTypesSheng;
+                aseBOOL = NO;
+                sender.backgroundColor = [UIColor whiteColor];
+                break;
+            }
+            default:
+                break;
+        }
+        [self requestFromNetworkWithOrder:orderStr asc:aseBOOL pageNo:pageNo];
+        [_tableView.mj_header beginRefreshing];
+    }else {
+        orderStr = @"caseAnalysisNumber";
+        switch (_ASCType) {
+            case EnumASCTypesSheng:{
+                sender.selected = YES;
+                _ASCType = EnumASCTypesJiang;
+                aseBOOL = YES;
+                sender.backgroundColor = [UIColor whiteColor];
+            }
+                break;
+            case EnumASCTypesJiang:{
+                sender.selected = YES;
+                _ASCType = EnumASCTypesSheng;
+                aseBOOL = NO;
+                sender.backgroundColor = [UIColor whiteColor];
+                break;
+            }
+            default:
+                break;
+        }
+        [self requestFromNetworkWithOrder:orderStr asc:aseBOOL pageNo:pageNo];
+        [_tableView.mj_header beginRefreshing];
     }
-    if (tag == 2 && _ASCType == EnumASCTypesSheng) {
-        
-        sender.selected = YES;
-        _ASCType = EnumASCTypesJiang;
-        
-        sender.backgroundColor = [UIColor whiteColor];
-        
-    }else if (tag == 2 && _ASCType == EnumASCTypesJiang && (tag != 0) | 3) {
-        
-        
-        
-        sender.selected = YES;
-        _ASCType = EnumASCTypesSheng;
-        sender.backgroundColor = [UIColor whiteColor];
-    }else if (tag == 2 && _ASCType == EnumASCTypesNone){
-        
-        sender.selected = YES;
-        _ASCType = EnumASCTypesSheng;
-        
-        sender.backgroundColor = [UIColor whiteColor];
-    }
-   
     
     if(_tempBtn == sender) {
         //上次点击过的按钮，不做处理
@@ -239,20 +286,16 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
         [_tempBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     _tempBtn = sender;
-    
 }
 
+- (void)requestFromNetworkWithOrder:(NSString *)order asc:(BOOL)asc pageNo:(NSInteger)type{
 
-- (void)requestFromNetworkWithOrder:(NSString *)order asc:(BOOL)asc {
-
-    
-    
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
     [dic setObject: order
             forKey: @"order"];
     [dic setObject: @(asc)
             forKey: @"asc"];
-
+    [dic setObject: @(type) forKey:@"pageNo"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/learning/column/getExpertList",kIP];
     
@@ -261,67 +304,63 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
         if (error) {
             NSLog(@"%@",error);
         }
-        
-        
+    
         NSLog(@"response = %@",response);
         
         _studyModels = [NSArray yy_modelArrayWithClass:[ZHStudyModel class] json:response[@"data"]];
+
+        if (pageNo == 1) { // 刷新
+            _Marry = [NSMutableArray arrayWithArray:_studyModels];
+        } else { // 加载更多
+            
+            [_Marry addObjectsFromArray: _studyModels];
+        }
         
-        [self.tableView reloadData];
+        
+        if (!_studyModels || !_studyModels.count) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        } else {
+            [self.tableView.mj_footer resetNoMoreData];
+        }
+        
+        [self.tableView.mj_header endRefreshing];
+        NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:1];
+        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
 }
 
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
-        return 44;
-    }
-
+//    if (indexPath.section == 0) {
+//        return 44;
+//    }
+//    return 160;
     
-    return 160;
+    return (indexPath.section == 0 ? 44:160);
 }
 
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    if (section == 0) {
-    
-        return 0.1;
-    }
-    
-    return 50;
+    return (section == 0 ? 50:iOS11Later);
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    switch (section) {
-        case 0:
-            return 10;
-        case 1:
-            return 20;
-//        case 2:
-//            return 20;
-    }
-    return 0;
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    return iOS11Later;
 }
-
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
     return 2;
 }
 
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (section == 0) {
-        return 1;
-    }
-    return _studyModels.count;
+//    if (section == 0) {
+//        return 1;
+//    }
+//    return _Marry.count;
+    return (section == 0 ? 1:_Marry.count);
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -332,54 +371,105 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
     if (indexPath.section == 0) {
         ZHSearchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:SearchCellid forIndexPath:indexPath];
         
-        return cell;
+        cell.didClick = ^(UIButton *sender){
+            
+            int row = 1;
+            for (int i = 0; i < _arr.count; i++) {
+                if (i % 3 == 0 && i != 0) {
+                    row += 1;
+                }
+            }
+            
+            WEAKSELF
+            if (sender.selected == YES) {
+                cell.lineImgView.hidden = NO;
+                weakSelf.expert = [[expertTypeView alloc] initWithFrame:CGRectMake(0, 50, self.view.bounds.size.width, 115+row*40)];
+                weakSelf.expert.rowNum = row;
+                weakSelf.expert.btnStrArray = _arr;
+                [self.view addSubview:weakSelf.expert];
+                [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shuju:) name:kSconfirmBtnArrayName object:nil];
+            }else{
+                [weakSelf.expert removeFromSuperview];
+                cell.lineImgView.hidden = YES;
+            }
+        };
         
+        cell.searchClick = ^(){
+          
+            
+            ZHSearchPageViewController *pageVc = [[ZHSearchPageViewController alloc]init];
+            
+            [self.navigationController pushViewController:pageVc animated:YES];
+            
+            
+        };
+        
+        return cell;
     }
     
     if (indexPath.section == 1) {
         
-        _studyModel = _studyModels[indexPath.row];
+        _studyModel = _Marry[indexPath.row];
      
         ZHExpertTodayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ExpertsCellid forIndexPath:indexPath];
-     
+
         cell.model =  _studyModel;
         
         return  cell;
+    }
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) return;
+    
+    if (indexPath.section == 1) {
+        
+        ZHExpertUserInfoHomePageViewController  *expertVc = [[ZHExpertUserInfoHomePageViewController alloc]init];
+        
+        expertVc.expertID = _Marry[indexPath.row].expertId;
+        
+        [self.navigationController pushViewController:expertVc animated:YES];
         
     }
-    
-    
-    
-    return cell;
+}
 
+- (void)shuju:(NSNotification *)action {
+    
+    NSLog(@"shuju %@",action.userInfo[@"confirm"]);
+    
+    
+    [self.expert removeFromSuperview];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kScreenNameSelected object:nil];
 }
 
 - (UITableView *)tableView {
-    //
     
     if (!_tableView) {
         
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-64) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
-        
 
-        //    NSBundle *bundle = [NSBundle mainBundle];
-        
-        
         [_tableView registerNib:[UINib nibWithNibName:@"ZHSearchTableViewCell" bundle:nil] forCellReuseIdentifier:SearchCellid];
         
         [_tableView registerNib:[UINib nibWithNibName:@"ZHExpertTodayTableViewCell" bundle:nil] forCellReuseIdentifier:ExpertsCellid];
         
-//        [_tableView registerNib:[UINib nibWithNibName:@"ZHIntroductionTableViewCell" bundle:nil] forCellReuseIdentifier:IntroductionCellid];
+        _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [self requestFromNetworkWithOrder:orderStr asc:aseBOOL pageNo:pageNo];
+        }];
         
-//        [_tableView registerNib:[UINib nibWithNibName:@"ZHTypeTableViewCell" bundle:nil] forCellReuseIdentifier:typeCellid];
+        _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            pageNo++;
+            [self requestFromNetworkWithOrder:orderStr asc:aseBOOL pageNo:pageNo];
+        }];
+        
+        [_tableView.mj_header beginRefreshing];
     }
     
     return _tableView;
 }
-
 
 - (NSMutableArray<NSString *> *)buttonTitles {
     if (!_buttonTitles) {
@@ -395,7 +485,24 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
     return _buttons;
 }
 
+- (NSArray *)arr {
+    if (!_arr) {
+        _arr = [NSMutableArray array];
+    }
+    return _arr;
+}
 
+- (NSMutableArray<ZHStudyModel *> *)Marry{
+    if (!_Marry) {
+        _Marry = [NSMutableArray array];
+    }
+    
+    return _Marry;
+}
 
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end

@@ -53,18 +53,21 @@
 - (void)statusNormal {
     switch (_btnType) {
         case MLTagButtonTypeImage: {
-            self.backgroundColor = [UIColor colorWithRed: 245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
+//            self.backgroundColor = [UIColor colorWithRed: 245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
+            self.layer.borderColor = [UIColor colorWithRed: 245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1].CGColor;
+
             self.layer.borderColor = [UIColor clearColor].CGColor;
             self.layer.borderWidth = 1.0f;
-            self.layer.cornerRadius = 5.0f;
+//            self.layer.cornerRadius = 5.0f;
         }
             break;
             
         case MLTagButtonTypeTitleOnly: {
             self.backgroundColor = [UIColor whiteColor];
-            self.layer.borderColor = [UIColor colorWithRed: 242.0/255.0 green:90.0/255.0 blue:41.0/255.0 alpha:0.5].CGColor;
+//            self.layer.borderColor = [UIColor colorWithRed: 242.0/255.0 green:90.0/255.0 blue:41.0/255.0 alpha:0.5].CGColor;
+            self.layer.borderColor = [UIColor colorWithRed: 245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1].CGColor;
             self.layer.borderWidth = 1.0f;
-            self.layer.cornerRadius = 5.0f;
+//            self.layer.cornerRadius = 5.0f;
             self.title.textColor = [UIColor darkGrayColor];
         }
             break;
@@ -83,9 +86,9 @@
             
         case MLTagButtonTypeTitleOnly: {
             self.backgroundColor = [UIColor whiteColor];
-            self.layer.borderColor = [UIColor orangeColor].CGColor;
-            self.layer.borderWidth = 1.0f;
-            self.layer.cornerRadius = 5.0f;
+//            self.layer.borderColor = [UIColor orangeColor].CGColor;
+//            self.layer.borderWidth = 1.0f;
+//            self.layer.cornerRadius = 5.0f;
             self.title.textColor = [UIColor orangeColor];
         }
             break;

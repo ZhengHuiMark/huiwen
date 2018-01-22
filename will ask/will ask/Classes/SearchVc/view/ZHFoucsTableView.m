@@ -54,7 +54,6 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(loadData) name:@"loginSuccess" object:nil];
     
     // Setup table view
     self.tableView.delegate = self;
@@ -92,10 +91,10 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
 }
 
 #define kUrls @[ \
-    @"http://192.168.0.21:7000/api/search/searchByRewardAsk", \
-    @"http://192.168.0.21:7000/api/search/searchByFreeAsk", \
-    @"http://192.168.0.21:7000/api/search/searchByExpert", \
-    @"http://192.168.0.21:7000/api/search/searchByCaseInfo", \
+    @"http://119.57.140.230:7000/api/search/searchByRewardAsk", \
+    @"http://119.57.140.230:7000/api/search/searchByFreeAsk", \
+    @"http://119.57.140.230:7000/api/search/searchByExpert", \
+    @"http://119.57.140.230:7000/api/search/searchByCaseInfo", \
 ]
 
 - (void)setRequestType:(NSInteger)requestType {
@@ -168,16 +167,17 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
 
 - (void)loadData {
     
+    _pageNo = 1;
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
-    [dic setObject:@"什么" forKey:@"content"];
-    [dic setObject:@(1) forKey:@"pageNo"];
+    [dic setObject:_content forKey:@"content"];
+    [dic setObject:@(_pageNo) forKey:@"pageNo"];
     
  
     [SVProgressHUD show];
     [[ZHNetworkTools sharedTools]requestWithType:GET andUrl: _baseUrl andParams:dic andCallBlock:^(id response, NSError *error) {
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
-        [SVProgressHUD dismiss];
+        [SVProgressHUD dismissWithDelay:1.0];
 
         // 2. 判断错误
         if (error) {

@@ -19,6 +19,9 @@
 @end
 
 @interface ZHFoucsTableView : UIView
+@property (nonatomic, copy) NSString *content;
+
+@property (nonatomic, assign) NSInteger pageNo;
 
 + (instancetype)tableViewWithDropMenu:(NSArray <NSArray <id <ZHDropMenuProtocol>>*>*)dropMenuData frame:(CGRect)frame inView:(UIView *)superView;
 

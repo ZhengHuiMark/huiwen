@@ -15,6 +15,7 @@
 #define Color(Custom) [UIColor colorWithHexString:Custom]
 #define DefaultFont(font) [UIFont systemFontOfSize:font]
 #define Margin 10
+#define MarginRight 17
 
 @implementation ZHCertifiedNormalCell {
     UILabel *_categoryTitleLabel;           /// 左侧分类标签
@@ -73,12 +74,13 @@
     
     if (!_pushImgV) {
         _pushImgV = [[UIImageView alloc] init];
-        _pushImgV.backgroundColor = Color(@"678966");
+//        _pushImgV.backgroundColor = Color(@"678966");
+        _pushImgV.image = [UIImage imageNamed:@"s-get"];
         [self.contentView addSubview:_pushImgV];
         [_pushImgV mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-Margin);
+            make.right.mas_equalTo(-MarginRight);
             make.centerY.mas_equalTo(self.contentView);
-            make.size.mas_equalTo(CGSizeMake(15, 15));
+            make.size.mas_equalTo(CGSizeMake(5, 9.5));
         }];
     }
     

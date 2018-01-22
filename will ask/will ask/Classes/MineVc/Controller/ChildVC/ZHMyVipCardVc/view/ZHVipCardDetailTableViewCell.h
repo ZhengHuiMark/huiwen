@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @class ZHVipCardModel,ZHCardNumberModel;
+typedef void(^buyCardClick)();
 
 @interface ZHVipCardDetailTableViewCell : UITableViewCell
 
@@ -20,5 +21,7 @@
 @property(nonatomic,strong)ZHVipCardModel *vipModel;
 
 @property(nonatomic,strong)ZHCardNumberModel *numberModel;
+
+@property(nonatomic,copy)buyCardClick didClick;
 
 @end

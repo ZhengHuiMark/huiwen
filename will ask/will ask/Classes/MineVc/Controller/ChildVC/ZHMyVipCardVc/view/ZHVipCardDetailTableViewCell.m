@@ -42,10 +42,15 @@
 
 - (IBAction)selectedInvoice:(UIButton *)sender {
     
+    
+    
+    
 }
 
 
 - (IBAction)buyBtnAction:(UIButton *)sender {
+ 
+    !self.didClick?:self.didClick();
     
 }
 

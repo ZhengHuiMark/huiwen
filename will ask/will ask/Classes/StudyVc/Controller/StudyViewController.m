@@ -142,7 +142,8 @@ static NSString *typeCellid = @"typeCellid";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    
+    UIView *headerView = [[UIView alloc] init];
+
     if (section == 0) {
         
         self.bannerView = [[SDCycleScrollView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 100)];
@@ -150,9 +151,33 @@ static NSString *typeCellid = @"typeCellid";
         self.bannerView.imageURLStringsGroup = _bannerImageUrlMarray;
         
         return self.bannerView;
+    }
+    
+    headerView.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *nameLa = [[UILabel alloc]init];
+    
+    nameLa.frame = CGRectMake(20, 17 ,[UIScreen mainScreen].bounds.size.width, 15.5);
+    
+    nameLa.text = @"最新悬赏榜";
+    
+    [headerView addSubview:nameLa];
+    
+    UIView * lineView = [[UIView alloc]init];
+    lineView.frame = CGRectMake(0, 49, [UIScreen mainScreen].bounds.size.width, 1);
+    lineView.backgroundColor = [UIColor grayColor];
+    
+    [headerView addSubview:lineView];
+    
+    if (section == 1) {
+        nameLa.text = @"今日专家";
+    }else if (section == 2) {
+        nameLa.text = @"今日案例";
     }else {
         return [UIView new];
     }
+    
+    return headerView;
     
     
 }
@@ -163,12 +188,16 @@ static NSString *typeCellid = @"typeCellid";
         return 100;
     }
     
-    return 30;
+    return 50;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return iOS11Later;
+    if (section == 0) {
+        return 10;
+    }
+    
+    return 50;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -290,6 +319,50 @@ static NSString *typeCellid = @"typeCellid";
 }
 
 
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *headerView = [[UIView alloc] init];
+    headerView.backgroundColor = [UIColor whiteColor];
+    
+    UIButton *button = [[UIButton alloc]init];
+    
+    button.frame = CGRectMake(0, 1, [UIScreen mainScreen].bounds.size.width, 44);
+    [button setTitle:@"dadas" forState:UIControlStateNormal];
+    //    [button setBackgroundColor:[UIColor redColor]];
+    
+    [headerView addSubview:button];
+    
+    UIView * lineView = [[UIView alloc]init];
+    lineView.frame = CGRectMake(0, 45, [UIScreen mainScreen].bounds.size.width, 5 );
+    lineView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
+    
+    [headerView addSubview:lineView];
+    
+    UIView * lineView1 = [[UIView alloc]init];
+    lineView1.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 1);
+    lineView1.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1];
+    
+    [headerView addSubview:lineView1];
+    
+    
+    if (section == 1) {
+        [button setTitle:@"查看全部专家 >" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(toReward) forControlEvents:UIControlEventTouchUpInside];
+        
+    }else if (section == 2) {
+        [button setTitle:@"查看全部案例 >" forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(toFree) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+    }else {
+        return [UIView new];
+    }
+    
+    return headerView;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     [tableView deselectRowAtIndexPath: indexPath animated: YES];
@@ -317,6 +390,9 @@ static NSString *typeCellid = @"typeCellid";
         [self.navigationController pushViewController:caseDetailVc animated:YES];
     }
 }
+
+
+
 
 - (UITableView *)tableView {
     //

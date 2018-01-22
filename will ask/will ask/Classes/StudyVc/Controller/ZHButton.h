@@ -57,5 +57,6 @@ typedef NS_ENUM(NSUInteger, EnumASCType) {
 @property (nonatomic, assign, getter=isSelected) BOOL selected; // 是否选中
 @property (nonatomic, copy) NSString *order; // 请求类型
 @property (nonatomic, assign) EnumASCType ASCType; // 排序方式
+@property (nonatomic,copy)NSString *honor;
 
 @end

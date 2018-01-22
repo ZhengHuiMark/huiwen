@@ -10,4 +10,8 @@
 
 @interface ZHSearchViewController : UIViewController
 
+@property (nonatomic, copy) NSString *content;
+
+@property (nonatomic, assign) NSInteger pageNo;
+
 @end

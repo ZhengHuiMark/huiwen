@@ -16,6 +16,7 @@
 #import "YYModel.h"
 #import "ZHRecordMoneyViewController.h"
 #import "ZHInvoiceViewController.h"
+#import "alertButtonView.h"
 
 static NSString *cardNumberCellid = @"cardNumberCellid";
 
@@ -137,6 +138,20 @@ static NSString *vipCardDetailCellid = @"vipCardDetailCellid";
     ZHVipCardDetailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:vipCardDetailCellid forIndexPath:indexPath];
     
     cell.numberModel = self.cardModel.cards[indexPath.row];
+    
+    cell.didClick = ^(){
+      
+        alertButtonView *alert = [alertButtonView new];
+        alert.leftLabel.text = @"name";
+        alert.rightLabel.text = @"$9999000";
+        [alert showsAlertView];
+        
+        alert.numBlock = ^(NSInteger num) {
+            NSLog(@"%lu",num);
+//            na.text = [NSString stringWithFormat:@"%lu",num];
+        };
+        
+    };
     
     return cell;
     

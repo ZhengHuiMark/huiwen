@@ -13,6 +13,7 @@
 #import "OssService.h"
 #import "ZHNetworkTools.h"
 #import "Macro.h"
+#import "JPushMessageModel.h"
 
 
 
@@ -166,6 +167,7 @@
     manager.enableAutoToolbar = NO;
     
     
+   
     
     _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
@@ -200,6 +202,29 @@
     NSLog(@"推%@",extras);
     
     NSLog(@"推%@",customizeField1);
+    
+    NSMutableArray *dataSoureMArray = [NSMutableArray array];
+    
+    JPushMessageModel *model = [JPushMessageModel new];
+    model.time = extras[@""];
+    model.objectId = extras[@""];
+    model.linkType = extras[@""];
+    model.msgType = extras[@""];
+    model.content = @"消息内容";
+    model.title = extras[@""];
+    model.pushType = extras[@""];
+    model.isMessageSelection = NO;
+    model.isHiddenChooseBtn = YES;
+    model.isRead = NO;
+    [dataSoureMArray addObject:model];
+
+    
+    BOOL ret =  [NSKeyedArchiver archiveRootObject:dataSoureMArray toFile:kPersonInfoPath];
+    if (ret) {
+        NSLog(@"归档成功");
+    }else{
+        NSLog(@"归档失败");
+    }
 
 //    [JPUSHService addTags:(NSSet<NSString *> *) completion:^(NSInteger iResCode, NSSet *iTags, NSInteger seq) {
 //        code

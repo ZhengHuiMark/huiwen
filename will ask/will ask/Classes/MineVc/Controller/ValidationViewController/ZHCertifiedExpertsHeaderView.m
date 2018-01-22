@@ -11,6 +11,7 @@
 #import "expert.h"
 #import "UIView+LayerEffects.h"
 #import "LBViewController+ImagePicker.h"
+#import "ZHImageCategory.h"
 
 #define Color(Custom) [UIColor colorWithHexString:Custom]
 #define DefaultFont(font) [UIFont systemFontOfSize:font];
@@ -27,6 +28,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self configUI];
+        self.imageCategory = [[ZHImageCategory alloc] init];
     }
     return self;
 }
@@ -50,7 +52,7 @@
     _descLabel = [[UILabel alloc] init];
     _descLabel.text = @"请上传真实照片";
     _descLabel.font = DefaultFont(11);
-    _descLabel.textColor = Color(@"333333");
+    _descLabel.textColor = [UIColor redColor];
     [self addSubview:_descLabel];
     [_descLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.bottom.mas_equalTo(-10);
@@ -58,7 +60,7 @@
     
     UIView *lineView = [[UIView alloc] init];
     [self addSubview:lineView];
-    lineView.backgroundColor = [UIColor redColor];
+    lineView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
     [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.bottom.left.mas_equalTo(self);
         make.height.mas_equalTo(10);
@@ -85,9 +87,10 @@
             [strongSelf->_iconBtn setImage:image forState:UIControlStateNormal];
             NSArray *arr = @[image,@"realphoto"];
             [[ZHNetworkTools sharedTools] imageChangeParameter:arr.mutableCopy hander:^(NSString *objectKey, NSString *uploadFilePath) {
-                self.objectKey = objectKey;
-                self.uploadFilePath = uploadFilePath;
-                self.expert.realname = objectKey;
+                self.expert.realPhoto = objectKey;
+                self.imageCategory.uploadFilePath = uploadFilePath;
+                self.imageCategory.objectKey = objectKey;
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"NSNotification_AddImage" object:self.imageCategory];
             }];
         } cancelBlock:^(UIImagePickerController *imagePickerViewController) {}];
     }];

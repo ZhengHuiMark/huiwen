@@ -11,8 +11,10 @@
 /**
  专家身份认证对象
  */
+
 @interface certifications : NSObject
 @property (nonatomic, copy) NSString *certificate1;  // 照片1
 @property (nonatomic, copy) NSString *certificate2;  // 照片2
 @property (nonatomic, copy) NSString *certificate3;  // 照片3
+@property (nonatomic, assign) CertificationsType type;
 @end

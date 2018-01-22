@@ -10,6 +10,7 @@
 #import "UIColor+Extension.h"
 #import "CertifiedExpertsModel.h"
 #import "expert.h"
+#import "ZHImageCategory.h"
 #import "LBViewController+ImagePicker.h"
 
 #define Color(Custom) [UIColor colorWithHexString:Custom]
@@ -35,6 +36,8 @@
         self.selectionStyle = UITableViewCellSelectionStyleNone;
         _btnArr = [NSMutableArray new];
         self.categoryArr = arr;
+        self.imageBack = [[ZHImageCategory alloc] init];
+        self.imageFront = [[ZHImageCategory alloc] init];
         [self configUI];
     }
     return self;
@@ -79,6 +82,10 @@
     }];
     
     UILabel *idcordLabel = [self creatSubLabel:@"*身份认证照片:" color:@"333333" font:15];
+    
+    NSMutableAttributedString *mastr = [[NSMutableAttributedString alloc] initWithString:idcordLabel.text];
+    [mastr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 1)];
+    idcordLabel.attributedText = mastr;
     [_idcordView addSubview:idcordLabel];
     [idcordLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.mas_equalTo(10);
@@ -95,7 +102,8 @@
     CGFloat width = (kWidth - 20 * 2 - 15)/2;
     _frontalIdImg = [[UIImageView alloc] init];
     _frontalIdImg.tag = 101;
-    _frontalIdImg.backgroundColor = [UIColor redColor];
+//    _frontalIdImg.backgroundColor = [UIColor redColor];
+    _frontalIdImg.image = [UIImage imageNamed:@"zheng"];
     [_idcordView addSubview:_frontalIdImg];
     _frontalIdImg.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapFront = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(setCertificationCard:)];
@@ -111,7 +119,9 @@
     _backIdImg.userInteractionEnabled = YES;
     UITapGestureRecognizer *tapBack = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(setCertificationCard:)];
     [_backIdImg addGestureRecognizer:tapBack];
-    _backIdImg.backgroundColor = [UIColor redColor];
+//    _backIdImg.backgroundColor = [UIColor redColor];
+    _backIdImg.image = [UIImage imageNamed:@"fan"];
+
     [_idcordView addSubview:_backIdImg];
     [_backIdImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(idcordLabel.mas_bottom).offset(15);
@@ -143,7 +153,12 @@
     }];
     
     UILabel *expertsLabel = [self creatSubLabel:@"*专家身份:" color:@"333333" font:15];
+    NSMutableAttributedString *mastr = [[NSMutableAttributedString alloc] initWithString:expertsLabel.text];
+    [mastr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 1)];
+
+    expertsLabel.attributedText = mastr;
     [_expertsIdView addSubview:expertsLabel];
+    
     [expertsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.mas_equalTo(10);
     }];
@@ -211,8 +226,15 @@
                 arr = @[image,@"ic_reverse"];
             }
             [[ZHNetworkTools sharedTools] imageChangeParameter:arr.mutableCopy hander:^(NSString *objectKey, NSString *uploadFilePath) {
-                self.objectKey = objectKey;
-                self.uploadFilePath = uploadFilePath;
+                if (tap.view.tag == 101) {
+                    self.imageFront.uploadFilePath = uploadFilePath;
+                    self.imageFront.objectKey = objectKey;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"NSNotification_AddImage" object:self.imageFront];
+                } else {
+                    self.imageBack.uploadFilePath = uploadFilePath;
+                    self.imageBack.objectKey = objectKey;
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"NSNotification_AddImage" object:self.imageBack];
+                }
                 if (tap.view.tag == 101) {
                     self.expert.identityCardFront = objectKey;
                 } else {

@@ -15,7 +15,8 @@
 
 #define randomColor random(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
 
-#define Nav_Height 64
+#define Nav_Height 0
+
 static NSString *businessViewCellID = @"businessViewCellID";
 
 @interface ZHGoodAtBusinessVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -111,12 +112,12 @@ static NSString *businessViewCellID = @"businessViewCellID";
     [self.chesoBtnView addSubview:self.chesoLabel];
     self.chesoLabel.frame = CGRectMake(15, 15, 100, 30);
     
-    self.table.frame = CGRectMake(0, _choseHeight+Nav_Height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-self.chesoBtnView.frame.size.height);
+    self.table.frame = CGRectMake(0, _choseHeight+Nav_Height, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height-self.chesoBtnView.frame.size.height-64);
     
     [self.btnView removeFromSuperview];
     self.btnView = [ButtonBusinessView new];
     self.btnView.backgroundColor = [UIColor whiteColor];
-    self.btnView.frame = CGRectMake(0, Nav_Height, [UIScreen mainScreen].bounds.size.width, _row * 30+_row*10);
+    self.btnView.frame = CGRectMake(0, self.chesoLabel.frame.size.height+self.chesoLabel.frame.origin.y + 14, [UIScreen mainScreen].bounds.size.width, _row * 30+_row*10);
     self.btnView.choseBtnMArray = _tempMArray;
     [self.chesoBtnView addSubview:self.btnView];
     
@@ -130,7 +131,7 @@ static NSString *businessViewCellID = @"businessViewCellID";
     
     if (!_chesoBtnView) {
         _chesoBtnView = [UIView new];
-        _chesoBtnView.backgroundColor = [UIColor redColor];
+//        _chesoBtnView.backgroundColor = [UIColor redColor];
     }
     return  _chesoBtnView;
 }
@@ -199,7 +200,7 @@ static NSString *businessViewCellID = @"businessViewCellID";
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     UIView *headerView = [UIView new];
-    headerView.backgroundColor = [UIColor grayColor];
+    headerView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
     
     UIView *lineView = [UIView new];
     lineView.backgroundColor = [UIColor redColor];
@@ -226,7 +227,7 @@ static NSString *businessViewCellID = @"businessViewCellID";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     
-    return 0;
+    return iOS11Later;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {

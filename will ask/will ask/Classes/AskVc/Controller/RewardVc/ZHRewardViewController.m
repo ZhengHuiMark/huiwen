@@ -75,6 +75,7 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
 - (void)setupUI {
     
     // Table view
+    self.title = @"悬赏问";
     
     if (self.tableView.style == UITableViewStyleGrouped) {
         UIEdgeInsets contentInset = self.tableView.contentInset;

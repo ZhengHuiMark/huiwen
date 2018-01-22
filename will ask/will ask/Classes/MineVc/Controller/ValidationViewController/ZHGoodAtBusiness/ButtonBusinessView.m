@@ -16,7 +16,7 @@
 
 
 #define LabelHeight 30
-#define LabelSpac 2  // label之间的间距
+#define LabelSpac 1  // label之间的间距
 #define ViewSpac 0   // label距离屏幕左右的间距
 #define LabelWidth ([UIScreen mainScreen].bounds.size.width - ViewSpac*2 - LabelSpac*3)/4
 
@@ -62,8 +62,8 @@
         btn.titleLabel.font = [UIFont systemFontOfSize:15];
         btn.backgroundColor = [UIColor whiteColor];
         [btn addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
-        [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
+        [btn setTitleColor:[UIColor colorWithRed:102.0/255.0 green:102.0/255.0 blue:102.0/255.0 alpha:1] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor colorWithRed:242.0/255.0 green:90.0/255.0 blue:41.0/255.0 alpha:1] forState:UIControlStateSelected];
         
         // 第二种方法 使用多行
         if (i % 4 == 0 && i != 0) {
@@ -101,9 +101,9 @@
         btn.titleLabel.font = [UIFont systemFontOfSize:15];
         btn.backgroundColor = [UIColor whiteColor];
         [btn addTarget:self action:@selector(choseBtnMArrayClickAction:) forControlEvents:UIControlEventTouchUpInside];
-        [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
         [btn setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
-        [btn setImage:[UIImage imageNamed:@"del"] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:@"delegate"] forState:UIControlStateNormal];
         btn.layer.borderColor = [UIColor orangeColor].CGColor;
         btn.layer.borderWidth = 1.0f;
         btn.layer.cornerRadius = LabelHeight/2;

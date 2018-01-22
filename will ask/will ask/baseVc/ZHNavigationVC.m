@@ -24,10 +24,27 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     //设置文字的颜色
-    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+//    [self.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
     
     
     [self.navigationBar setTintColor:[UIColor blackColor]];
+    
+    
+//    UINavigationBar *navigationBarAppearance = [UINavigationBar appearance];
+    //    [navigationBarAppearance setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"ffffff"]] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationBar setTintColor:[UIColor colorWithHexString:@"666666"]];//返回按钮的箭头颜色
+    NSDictionary *textAttributes = @{
+                                     NSFontAttributeName: [UIFont systemFontOfSize:18.0],
+                                     NSForegroundColorAttributeName: [UIColor colorWithHexString:@"3333333"],
+                                     };
+    //    [[UINavigationBar appearance] setShadowImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"3333333"]]];
+    
+    [self.navigationBar setTitleTextAttributes:textAttributes];
+    [self.navigationBar.backItem.backBarButtonItem setTitle:@""];
+    
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(NSIntegerMin, NSIntegerMin)
+                                                         forBarMetrics:UIBarMetricsDefault];
+    
 
 
 }

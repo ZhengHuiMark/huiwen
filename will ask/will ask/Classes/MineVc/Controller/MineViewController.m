@@ -29,6 +29,7 @@
 #import "ZHSetupViewController.h"
 #import "ZHSearchViewController.h"
 #import "UIView+LayerEffects.h"
+#import "ZHRegisteredViewController.h"
 
 //头部cell
 static NSString *HeaderCellid = @"HeaderCellid";
@@ -153,11 +154,6 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 
 
 #pragma mark - 根据模型状态显示UI
-- (void)noUserModelUI{
-    
-    
-    
-}
 
 - (UIImageView *)BackgroundImageView {
     self.tableView.hidden = YES;
@@ -174,11 +170,14 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
         }];
         
         UIButton *loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [loginBtn addTarget:self action:@selector(loginAccount) forControlEvents:UIControlEventTouchUpInside];
+
         [_BackgroundImageView addSubview:loginBtn];
         loginBtn.backgroundColor = [UIColor orangeColor];
         [loginBtn setTitle:@"登录" forState:UIControlStateNormal];
         [loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [loginBtn setCornerRadius:20];
+        
         [loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(ScreenWidth-57.5*2, 40));
             make.centerX.mas_equalTo(iconImg);
@@ -186,10 +185,13 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
         }];
         
         UIButton *regisBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [regisBtn addTarget:self action:@selector(registedAccount) forControlEvents:UIControlEventTouchUpInside];
+
         [_BackgroundImageView addSubview:regisBtn];
         [regisBtn setTitle:@"注册" forState:UIControlStateNormal];
         [regisBtn setTitleColor:[UIColor colorWithRed:59.0/255.0 green:189.0/255.0 blue:234.0/255.0 alpha:1] forState:UIControlStateNormal];
         [regisBtn setAllCornerWithRoundedCornersSize:20 pathSize:CGSizeMake(ScreenWidth-57.5*2, 40) strokeColor:[UIColor colorWithRed:59.0/255.0 green:189.0/255.0 blue:234.0/255.0 alpha:1]];
+
         [regisBtn mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(ScreenWidth-57.5*2, 40));
             make.centerX.mas_equalTo(loginBtn);
@@ -197,6 +199,22 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
         }];
     }
     return _BackgroundImageView;
+}
+
+- (void)loginAccount{
+    
+    ZHLoginViewController *loginVc = [[ZHLoginViewController alloc]init];
+    
+    [self.navigationController pushViewController:loginVc animated:YES];
+    
+}
+
+- (void)registedAccount{
+    
+    ZHRegisteredViewController *registedVc = [[ZHRegisteredViewController alloc]init];
+    
+    [self.navigationController pushViewController:registedVc animated:YES];
+    
 }
 
 
@@ -236,7 +254,7 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (indexPath.section == 0) {
         
-            NSString *className = @"ZHCertifiedExpertsVC";
+            NSString *className = @"ZHPersonalInformationVc";
             
             [self pushToSetControllerWithIndexPath:indexPath className:className];
         
@@ -245,7 +263,7 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
             case 0:{
                 
                 
-                NSString *className = @"ValidationViewController";
+                NSString *className = @"ZHCertifiedExpertsVC";
                 [self pushToSetControllerWithIndexPath:indexPath className:className];
                 
                 break;

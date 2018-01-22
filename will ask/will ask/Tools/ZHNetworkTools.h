@@ -47,4 +47,6 @@ typedef enum : NSUInteger {
 - (void)imageChangeParameter:(NSMutableArray *)parameter hander:(void (^)(NSString *, NSString *))hander;
 
 - (BOOL)chectInfomationIsCorrect:(expert *)model;
+
+- (NSMutableDictionary *)modelToDic:(expert *)model;
 @end

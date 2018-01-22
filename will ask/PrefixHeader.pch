@@ -41,5 +41,23 @@
 #import "SVProgressHUD.h"
 #import "Masonry.h"
 #import "UIView+LayerEffects.h"
+#import "UITextView+Placeholder.h"
+#import "ZHEnumerationCateType.h"
+#import "UIColor+Extension.h"
+
+
+/** 消息存储路径 */
+#define KDocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) lastObject]
+#define kPersonInfoPath [KDocumentPath stringByAppendingPathComponent:@"personInfo.archiver"]
+
+#define WEAKSELF __weak __typeof(self)weakSelf = self;
+#define STRONGSELF __strong __typeof(weakSelf)strongSelf = weakSelf;
+
+
+
+/** 通知 */
+// 学习 - 找专家 - 筛选
+#define kScreenNameSelected @"kScreenNameSelected"
+
 
 #endif /* PrefixHeader_pch */

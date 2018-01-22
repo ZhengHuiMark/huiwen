@@ -57,12 +57,12 @@
 
     if (self.expertUserInfoModel.answerNumber) {
         
-        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.numbers.text];
-        [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:242.0f / 255.0f green:90.0f / 255.0f blue:41.0f / 255.0f alpha:1.0f] range:NSMakeRange(3, 3)];
-        [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:242.0f / 255.0f green:90.0f / 255.0f blue:41.0f / 255.0f alpha:1.0f] range:NSMakeRange(11, 3)];
-        [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:242.0f / 255.0f green:90.0f / 255.0f blue:41.0f / 255.0f alpha:1.0f] range:NSMakeRange(19, 3)];
+//        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:self.numbers.text];
+//        [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:242.0f / 255.0f green:90.0f / 255.0f blue:41.0f / 255.0f alpha:1.0f] range:NSMakeRange(3, 3)];
+//        [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:242.0f / 255.0f green:90.0f / 255.0f blue:41.0f / 255.0f alpha:1.0f] range:NSMakeRange(11, 3)];
+//        [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:242.0f / 255.0f green:90.0f / 255.0f blue:41.0f / 255.0f alpha:1.0f] range:NSMakeRange(19, 3)];
         
-        [self.numbers setAttributedText:attributedString];
+//        [self.numbers setAttributedText:attributedString];
     }
     
 

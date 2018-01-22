@@ -25,9 +25,3 @@
 - (CGFloat)calculateSelfHeight;
 @end
 
-@interface ZHImageCategory : NSObject
-
-@property (nonatomic, strong) UIImage *image;
-@property (nonatomic, assign) NSInteger index;
-
-@end

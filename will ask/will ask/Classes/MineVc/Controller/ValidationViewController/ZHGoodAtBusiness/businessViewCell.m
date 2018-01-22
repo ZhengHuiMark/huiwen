@@ -34,7 +34,7 @@
 
 - (void)setupUI {
 
-    self.backgroundColor = [UIColor lightGrayColor];
+    self.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     self.btnView = [ButtonBusinessView new];

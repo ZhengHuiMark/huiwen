@@ -67,15 +67,8 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     // Do any additional setup after loading the view.
     
 
-    
-
-    
-    
-    
     [self setupUI];
-    
-
-    
+        
     _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         _pageNumber = 1;
         
@@ -105,6 +98,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 - (void)setupUI {
     
     // Table view
+    self.title = @"免费问";
     
     if (self.tableView.style == UITableViewStyleGrouped) {
         UIEdgeInsets contentInset = self.tableView.contentInset;

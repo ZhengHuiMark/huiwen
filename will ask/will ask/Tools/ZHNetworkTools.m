@@ -17,7 +17,7 @@
 #import "ZHMD5.h"
 #import "ZHRegisteredViewController.h"
 #import "expert.h"
-
+#import "certifications.h"
 
 //static NSString *json = @"application/json";
 
@@ -427,6 +427,60 @@
     }
     return YES;
 }
+
+- (NSMutableDictionary *)modelToDic:(expert *)model {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:model.birthdate forKey:@"birthdate"];
+    [dic setObject:model.business forKey:@"business"];
+    [dic setObject:model.company forKey:@"company"];
+    [dic setObject:model.duty forKey:@"duty"];
+    [dic setObject:model.identityCardFront forKey:@"identityCardFront"];
+    [dic setObject:model.identityCardReverse forKey:@"identityCardReverse"];
+    [dic setObject:model.intro forKey:@"intro"];
+    [dic setObject:model.locus forKey:@"locus"];
+    [dic setObject:model.nickname forKey:@"nickname"];
+    [dic setObject:model.realname forKey:@"realname"];
+    [dic setObject:model.realPhoto forKey:@"realPhoto"];
+    [dic setObject:@(model.sex) forKey:@"sex"];
+    for (NSInteger i = 0; i < model.certifications.count; i ++) {
+        certifications *certification = model.certifications[i];
+        [dic setObject:@(certification.type) forKey:[NSString stringWithFormat:@"certifications[%ld].type",i]];
+        if (certification.certificate1.length > 0) {
+            [dic setObject:certification.certificate1 forKey:[NSString stringWithFormat:@"certifications[%ld].certificate1",i]];
+        }
+        if (certification.certificate2.length > 0) {
+            [dic setObject:certification.certificate2 forKey:[NSString stringWithFormat:@"certifications[%ld].certificate2",i]];
+        }
+        if (certification.certificate3.length > 0) {
+            [dic setObject:certification.certificate3 forKey:[NSString stringWithFormat:@"certifications[%ld].certificate3",i]];
+        }
+    }
+    return dic;
+}
+
+/**
+ birthdate 出生日期 string
+ business 擅长业务 string
+ 
+ certifications 专家身份认证 array<object>
+ certificate1 证书1 string
+ certificate2 证书2 string
+ certificate3 证书3 string
+ type 认证类型（专家身份） number
+ 
+ company 企业名称 string
+ duty 职务 string
+ identityCardFront 身份证_正面 string
+ identityCardReverse 身份证_反面 string
+ intro 个人简介 string
+ locus 所在地 string
+ nickname 专家昵称 string
+ realPhoto 真实照片 string
+ realname 真实姓名 string
+ sex 性别
+ */
+
+
 
 
 //for (ZHImageModel *imageModel in uploadImages) {

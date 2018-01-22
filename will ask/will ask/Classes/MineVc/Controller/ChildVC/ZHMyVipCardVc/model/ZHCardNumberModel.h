@@ -20,5 +20,9 @@
 
 @property(nonatomic,copy)NSString *photo;
 
+@property(nonatomic,assign)BOOL needInvoice;
+
+@property(nonatomic,copy)NSString *number;
+
 
 @end

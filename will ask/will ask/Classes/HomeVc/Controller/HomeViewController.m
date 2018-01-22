@@ -13,6 +13,8 @@
 #import "LBViewController+ImagePicker.h"
 #import "ImageModel.h"
 #import "ZHRewardDetailViewController.h"
+#import "ZHSearchPageViewController.h"
+#import "ZHJPushCustomMessageViewController.h"
 
 #import "ZHBtn.h"
 #import "ZHBtnModel.h"
@@ -85,6 +87,7 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
 
 @property(nonatomic,strong) UISearchBar *searchBar;
 
+@property(nonatomic,strong)UIButton *searchButton;
 
 
 @property(nonatomic,weak)UIView *headerView;
@@ -136,6 +139,7 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
     [self.view addSubview:view];
     
     [view addSubview:self.searchBar];
+    [view addSubview:self.searchButton];
 
     UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [editorBtn addTarget:self action:@selector(toMessage) forControlEvents:UIControlEventTouchUpInside];
@@ -147,6 +151,14 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
  
     
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mingzizijiqi:) name:@"postVc" object:nil];
+}
+
+- (void)toMessage{
+    
+    ZHJPushCustomMessageViewController *JPushCustomVc = [[ZHJPushCustomMessageViewController alloc]init];
+    
+    [self.navigationController pushViewController:JPushCustomVc animated:YES];
+    
 }
 
 
@@ -171,9 +183,13 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
     ZHLoginViewController *loginVc = [[ZHLoginViewController alloc]init];
     
     [self.navigationController pushViewController:loginVc animated:YES];
+}
+
+- (void)toSearchPageVc{
     
+    ZHSearchPageViewController *pageVc = [[ZHSearchPageViewController alloc]init];
     
-    
+    [self.navigationController pushViewController:pageVc animated:YES];
 }
 
 
@@ -450,6 +466,19 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
         
     }
     return _searchBar;
+}
+
+- (UIButton *)searchButton{
+    
+    if (!_searchButton) {
+        _searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _searchButton.frame = CGRectMake(0, 17, [UIScreen mainScreen].bounds.size.width - 60, 44);
+        _searchButton.backgroundColor = [UIColor clearColor];
+        _searchButton.alpha = .5;
+        [_searchButton addTarget:self action:@selector(toSearchPageVc) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _searchButton;
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

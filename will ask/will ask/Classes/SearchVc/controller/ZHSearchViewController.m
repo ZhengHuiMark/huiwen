@@ -124,7 +124,9 @@
     
     // New table view
     ZHFoucsTableView *tableView = [ZHFoucsTableView tableViewWithDropMenu: dropMenuData frame: frame inView: self.tableScrollView];
+    tableView.content = self.content;
     tableView.requestType = index;
+    
 //    
 //    tableView.FocusCellSelectPush = ^(ZHModel *model){
 //       
