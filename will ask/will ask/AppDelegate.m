@@ -210,8 +210,8 @@
     model.objectId = extras[@""];
     model.linkType = extras[@""];
     model.msgType = extras[@""];
-    model.content = @"消息内容";
-    model.title = extras[@""];
+    model.content = extras[@"content"];
+    model.title = extras[@"title"];
     model.pushType = extras[@""];
     model.isMessageSelection = NO;
     model.isHiddenChooseBtn = YES;

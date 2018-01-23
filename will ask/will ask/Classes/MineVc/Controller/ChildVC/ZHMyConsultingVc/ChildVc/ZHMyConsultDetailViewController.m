@@ -19,10 +19,17 @@
 #import "UserModel.h"
 #import "ImageTools.h"
 
+#import "ZHOrderPayModel.h"
+#import "ZHOrderPaymentViewController.h"
+
 static NSInteger kMaxCount = 3;
 
 
 @interface ZHMyConsultDetailViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UITextViewDelegate>
+{
+    OssService * service;
+    NSString * uploadFilePath;
+}
 @property(nonatomic,strong)UITableView *tableView;
 
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -30,6 +37,8 @@ static NSInteger kMaxCount = 3;
 @property (nonatomic, strong) NSMutableArray<MLImageModel *> *imageModels;
 
 @property (nonatomic, strong) UICollectionViewFlowLayout *layout;
+
+@property (nonatomic, strong) NSMutableArray *mArray;
 
 @property (nonatomic, strong) UIButton *saveBtn;
 
@@ -49,6 +58,12 @@ static NSInteger kMaxCount = 3;
     
     self.view.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
     [self configUI];
+    
+    NSString * const endPoint = @"http://oss-cn-qingdao.aliyuncs.com";
+    NSString * const callbackAddress = @"http://oss-demo.aliyuncs.com:23450";
+    
+    service = [[OssService alloc] initWithViewController:self withEndPoint:endPoint];
+    [service setCallbackAddress:callbackAddress];
 }
 
 - (void)configUI{
@@ -129,8 +144,88 @@ static NSInteger kMaxCount = 3;
         [SVProgressHUD dismissWithDelay:1.0];
         return;
     }
-    
+
     // 发布拉起
+    NSMutableDictionary *dic = [ZHNetworkTools parameters];
+    [dic setObject:_expertID forKey:@"expertId"];
+    [dic setObject:_textView.text forKey:@"question"];
+    NSString *url = [NSString stringWithFormat:@"%@/api/ut/consult/question",kIP];
+    
+        NSInteger index=0;
+        __block NSInteger  imgCount = 0;
+        if (self.imageModels.count == 1) {
+            [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"%@",error);
+                }
+                
+                NSLog(@"response = %@",response);
+
+            }];
+            
+        } else {
+            for (MLImageModel *imageModel in self.imageModels) {
+                if (imageModel.modelType == MLImageModelTypePlaceholder) continue;{
+                    
+                    
+                    NSData *imageData = UIImageJPEGRepresentation(imageModel.image, 0.5);
+                    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"123"];
+                    [imageData writeToFile:fullPath atomically:NO];
+                    uploadFilePath = fullPath;
+                    //                NSLog(@"uploadFilePath : %@", uploadFilePath);
+                    
+                    
+                    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
+                    
+                    NSString * objectKey = [NSString stringWithFormat:@"%@%@%f%ld",[UserManager sharedManager].userModel.resourceId,@"AQ",interval,(long)index];
+                    index++;
+                    //            NSLog(@"2131312321323  ===%@",objectKey);
+                    
+                    NSString *bucketName = bucketNameFree;
+                    //            NSLog(@"%@",bucketName);
+                    
+                    [service asyncPutImage:objectKey localFilePath:uploadFilePath bucketName:bucketName comletion:^(BOOL isSuccess) {
+                        
+                        if (isSuccess) {
+                            [self.mArray addObject:objectKey];
+                            
+                            if (self.mArray.count >= imgCount) {
+                                [dic setObject: [_mArray componentsJoinedByString:@","] forKey: @"photos"];
+                                [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                                    
+                                    if (error) {
+                                        NSLog(@"%@",error);
+                                    }
+                                    
+                                    NSLog(@"response = %@",response);
+         
+                                    
+                                    ZHOrderPayModel *model = [ZHOrderPayModel yy_modelWithJSON:response[@"data"]];
+                                    model.descriptions = self.expertNickName;
+                                    model.goodsName = @"咨询订单";
+                                    model.amount = @"0.01";
+                                    
+                                    ZHOrderPaymentViewController *payVc = [[ZHOrderPaymentViewController alloc]init];
+                                    payVc.payModel = model;
+                                    
+                                    [self.navigationController pushViewController:payVc animated:YES];
+                                    
+                                }];
+                            }
+                            
+                            
+                            
+                        } else {
+                            imgCount--;
+                        }
+                    }];
+                    
+                    
+                    
+                }
+            }
+        }
 
 }
 
@@ -259,6 +354,16 @@ static NSInteger kMaxCount = 3;
         
     }
     return _imageModels;
+}
+
+- (NSMutableArray *)mArray {
+    
+    if (!_mArray) {
+        
+        _mArray = [[NSMutableArray alloc]init];
+    }
+    
+    return _mArray;
 }
 
 

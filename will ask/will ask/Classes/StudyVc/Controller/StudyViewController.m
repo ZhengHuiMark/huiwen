@@ -59,6 +59,17 @@ static NSString *typeCellid = @"typeCellid";
     NSMutableArray *_bannerImageUrlMarray;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+
+{
+    
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.hidden = NO;
+    
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

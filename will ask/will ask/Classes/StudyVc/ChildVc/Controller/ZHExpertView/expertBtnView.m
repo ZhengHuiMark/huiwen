@@ -56,7 +56,8 @@
     for (int i = 0; i < arrayDataSource.count; i++) {
         
         UIButton *btn = [UIButton new];
-        [btn setTitle:arrayDataSource[i] forState:UIControlStateNormal];
+        [btn setTitle:arrayDataSource[i][@"name"] forState:UIControlStateNormal];
+        btn.tag = [arrayDataSource[i][@"type"] integerValue];
         btn.titleLabel.textAlignment = NSTextAlignmentCenter;
         btn.titleLabel.font = [UIFont systemFontOfSize:15];
         btn.backgroundColor = [UIColor whiteColor];
@@ -81,9 +82,17 @@
 - (void)buttonClickAction:(UIButton *)sender {
     
     sender.selected = !sender.selected;
+    for (UIButton *button in _tempBtnMArray) {
+        button.selected = NO;
+        if (sender == button) {
+            button.selected = YES;
+        }
+    }
     
-    NSLog(@"sender %@",sender.titleLabel.text);
-    [[NSNotificationCenter defaultCenter] postNotificationName:kSBtnTitleName object:self userInfo:@{@"name":sender.titleLabel.text}];
+//    NSLog(@"sender %@",sender.titleLabel.text);
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kSBtnTitleName object:self userInfo:@{@"name":sender.titleLabel.text}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSBtnTitleName object:self userInfo:@{@"name":sender.titleLabel.text,@"type":@(sender.tag)}];
+
 }
 
 - (void)cancelNotificationClickAction:(NSNotification *)action {

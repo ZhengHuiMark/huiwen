@@ -10,6 +10,8 @@
 
 @interface ZHMyConsultDetailViewController : UIViewController
 
+@property(nonatomic,copy)NSString *expertID;
+@property(nonatomic,copy)NSString *expertNickName;
 
 
 @end

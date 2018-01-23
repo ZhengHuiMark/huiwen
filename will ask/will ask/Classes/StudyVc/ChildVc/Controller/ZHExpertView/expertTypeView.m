@@ -32,14 +32,17 @@
 @end
 
 @implementation expertTypeView {
-    NSMutableArray *_tempArray;
+//    NSMutableArray *_tempArray;
+    // 用来存储筛选选择的name和type的
+    NSMutableDictionary *_tempDict;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
     
     if (self = [super initWithFrame:frame]) {
         
-        _tempArray = [NSMutableArray array];
+//        _tempArray = [NSMutableArray array];
+        _tempDict = [NSMutableDictionary dictionary];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(btnTitle:) name:kSBtnTitleName object:nil];
         
@@ -97,36 +100,43 @@
 - (void)resetButtonClickAction {
     
     NSLog(@"resetButtonClickAction");
-    [_tempArray removeAllObjects];
+//    [_tempArray removeAllObjects];
+    [_tempDict removeAllObjects];
+
     [[NSNotificationCenter defaultCenter] postNotificationName:kScancelBtnArrayName object:self];
 }
 
 - (void)confirmButtonClickAction {
     
-    NSLog(@"confirmButtonClickAction");
-    if (_tempArray.count > 0) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kSconfirmBtnArrayName object:self userInfo:@{@"confirm":_tempArray}];
-    }else {
-//        NSLog(@"- 请选择类型 -");
-        [SVProgressHUD showInfoWithStatus:@"请选择类型"];
-        [SVProgressHUD dismissWithDelay:1.0];
-    }
+//    NSLog(@"confirmButtonClickAction");
+//    if (_tempArray.count > 0) {
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kSconfirmBtnArrayName object:self userInfo:@{@"confirm":_tempArray}];
+//    }else {
+////        NSLog(@"- 请选择类型 -");
+//        [SVProgressHUD showInfoWithStatus:@"请选择类型"];
+//        [SVProgressHUD dismissWithDelay:1.0];
+//    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSconfirmBtnArrayName object:self userInfo:@{@"confirm":_tempDict}];
+
 }
 
 - (void)btnTitle:(NSNotification *)action {
     
     NSLog(@" action %@",action.userInfo[@"name"]);
-    
-    for (int i = 0; i < _tempArray.count; i++) {
-        
-        if ([_tempArray[i] isEqualToString: action.userInfo[@"name"]]) {
-            [_tempArray removeObjectAtIndex:i];
-            return;
-        }
-    }
-    
-    [_tempArray addObject: action.userInfo[@"name"]];
-    NSLog(@" %@",_tempArray);
+//    
+//    for (int i = 0; i < _tempArray.count; i++) {
+//        
+//        if ([_tempArray[i] isEqualToString: action.userInfo[@"name"]]) {
+//            [_tempArray removeObjectAtIndex:i];
+//            return;
+//        }
+//    }
+//
+    [_tempDict setObject:action.userInfo[@"name"] forKey:@"name"];
+    [_tempDict setObject:action.userInfo[@"type"] forKey:@"type"];
+    NSLog(@"name %@ type %@, dict%@",action.userInfo[@"name"],action.userInfo[@"type"],_tempDict);
+//    [_tempArray addObject: action.userInfo[@"name"]];
+//    NSLog(@" %@",_tempArray);
 }
 
 - (void)dealloc {

@@ -80,14 +80,14 @@
                             <constraint firstAttribute="height" constant="60" id="Qgo-87-322"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9iZ-qt-dYM">
+                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9iZ-qt-dYM">
                         <rect key="frame" x="85" y="162" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="uZe-gF-pfQ"/>
                             <constraint firstAttribute="width" constant="60" id="yFN-2j-M5O"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nrd-qH-pVG">
+                    <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nrd-qH-pVG">
                         <rect key="frame" x="153" y="162" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="njb-UZ-Rhs"/>

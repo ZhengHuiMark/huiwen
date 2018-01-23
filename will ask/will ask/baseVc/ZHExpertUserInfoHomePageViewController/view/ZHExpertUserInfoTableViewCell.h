@@ -10,6 +10,7 @@
 @class ZHExpertUserInfoModel;
 
 @interface ZHExpertUserInfoTableViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UIImageView *userAvatar;
 @property (weak, nonatomic) IBOutlet UIView *shadowView;
 @property (weak, nonatomic) IBOutlet UILabel *userName;

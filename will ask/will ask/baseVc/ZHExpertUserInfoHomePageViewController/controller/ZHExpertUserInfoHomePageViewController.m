@@ -22,6 +22,7 @@
 #import "ZHExpertCaseModel.h"
 #import "ZHExpertBigUserModel.h"
 #import "ZHUserInfoNoModelTableViewCell.h"
+#import "ZHMyConsultDetailViewController.h"
 
 
 static NSString *expertUserInfoCellid = @"expertUserInfoCellid";
@@ -47,6 +48,9 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
 
 @property(nonatomic,strong)UIButton *consultingBtn;
 
+@property(nonatomic,weak)UIView *headerView;
+
+
 @end
 
 @implementation ZHExpertUserInfoHomePageViewController
@@ -57,20 +61,16 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
     
     [super viewWillAppear:animated];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-    
-    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-    
-    self.navigationController.navigationBar.backgroundColor = [UIColor orangeColor];
+    self.navigationController.navigationBar.hidden = YES;
+
     
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
-    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    
-    [self.navigationController.navigationBar setShadowImage:nil];
+    self.navigationController.navigationBar.hidden = NO;
+
     
 }
 
@@ -80,38 +80,78 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
  
+    
+   
+    
     [self loadData];
     [self.view addSubview:self.tableView];
     
+    if (self.tableView.style == UITableViewStylePlain) {
+        UIEdgeInsets contentInset = self.tableView.contentInset;
+        contentInset.top = -22;
+        [self.tableView setContentInset:contentInset];
+    }
 //    [self.view addSubview:self.focusView];
-    [self setupUI];
 
- 
+    
+    UIView *view = [[UIView alloc] init];
+    _headerView = view;
+    view.frame = CGRectMake(0, 0, ScreenWidth, 64);
+    view.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:view];
+    
+    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"return"] style:UIBarButtonItemStyleDone target:self action:@selector(backClickAction)];
+    
+    UIButton *backBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    backBtn1.frame = CGRectMake(10, 30, 30, 30);
+    [backBtn1 setImage:[UIImage imageNamed:@"return1"] forState:UIControlStateNormal];
+    [backBtn1 addTarget:self action:@selector(backClickAction) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:backBtn1];
+    //    self.navigationItem.backBarButtonItem = backBtn;
+  
 
 }
 
+
+- (void)backClickAction {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+//这里
 - (void)setupUI{
     
+    
     _focusView = [UIView new];
-    _focusView.frame = CGRectMake(0,CGRectGetMaxY(self.view.frame)-110, ScreenHeight, 49);
-    _focusView.backgroundColor = [UIColor redColor];
-
+    _focusView.frame = CGRectMake(0,CGRectGetMaxY(self.view.frame)-49, ScreenHeight, 49);
+    _focusView.backgroundColor = [UIColor darkGrayColor];
     [self.view addSubview:self.focusView];
     
     _focusBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _focusBtn.frame = CGRectMake(0, CGRectGetMinY(_focusView.frame), ScreenWidth / 2, 50);
+    _focusBtn.frame = CGRectMake(0, 1, ScreenWidth / 2, 49);
+    _focusBtn.backgroundColor = [UIColor whiteColor];
+    _focusBtn.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     [_focusBtn setTitle:@"关注" forState:UIControlStateNormal];
     [_focusBtn setTitle:@"已关注" forState:UIControlStateSelected];
     [_focusBtn setImage:[UIImage imageNamed:@"follow"] forState:UIControlStateNormal];
     [_focusBtn setImage:[UIImage imageNamed:@"follow--1"] forState:UIControlStateSelected];
     [_focusBtn setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
     [_focusBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
-
-    
+    [_focusBtn addTarget:self action:@selector(focusBtnClickAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.focusView addSubview:self.focusBtn];
-
     
+    if (_bigModel.expertUserInfoModel.followed == YES) {
+        _focusBtn.selected = YES;
+    }else{
+        _focusBtn.selected = NO;
+    }
     
+    _consultingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _consultingBtn.frame = CGRectMake(ScreenWidth / 2, 0, ScreenWidth / 2, 50);
+    _consultingBtn.backgroundColor = [UIColor orangeColor];
+    [_consultingBtn setTitle:[NSString stringWithFormat:@"￥%@咨询",_bigModel.expertUserInfoModel.consultPrice] forState:UIControlStateNormal];
+    [_consultingBtn setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
+    [_consultingBtn addTarget:self action:@selector(consultingBtnClickAction) forControlEvents:UIControlEventTouchUpInside];
+    [self.focusView addSubview:self.consultingBtn];
 }
 
 - (void)loadData{
@@ -137,7 +177,8 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
         
         
         [self.tableView reloadData];
-        
+        [self setupUI];
+
     }];
     
 }
@@ -372,17 +413,79 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
     return _tableView;
 }
 
+- (void)focusBtnClickAction:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    
+    
+    if (sender.selected == YES) {
+        NSMutableDictionary *dic = [ZHNetworkTools parameters];
+        [dic setObject:self.expertID forKey:@"expertId"];
+        
+        NSString *url = [NSString stringWithFormat:@"%@/api/ut/follow/follow",kIP];
+       
+        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+            
+            if (error) {
+                NSLog(@"%@",error);
+            }
+            
+            NSLog(@"%@",response);
+            
+        }];
+        
+    }else{
+        NSMutableDictionary *dic = [ZHNetworkTools parameters];
+        [dic setObject:self.expertID forKey:@"expertId"];
+        
+        NSString *url = [NSString stringWithFormat:@"%@/api/ut/follow/unfollow",kIP];
+        
+        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+            
+            if (error) {
+                NSLog(@"%@",error);
+            }
+            
+            NSLog(@"%@",response);
+            
+        }];
+    }
+    
+}
 
-//- (UIView *)focusView {
-//    if (!_focusView) {
-//        
-//        _focusView = [UIView new];
-//        _focusView.frame = CGRectMake(0,CGRectGetMaxY(self.view.frame) - 49, ScreenHeight, 49);
-//        _focusView.backgroundColor = [UIColor redColor];
-//
-//    }
-//    
-//    return _focusView;
-//}
+- (void)consultingBtnClickAction {
+    
+    NSLog(@"consultingBtnClickAction");
+    
+    ZHMyConsultDetailViewController *consultDetailVc = [[ZHMyConsultDetailViewController alloc]init];
+    consultDetailVc.expertID = self.expertID;
+    consultDetailVc.expertNickName = _bigModel.expertUserInfoModel.nickname;
+    [self.navigationController pushViewController:consultDetailVc animated:YES];
+    
+}
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    CGFloat offset = scrollView.contentOffset.y;
+    UIColor *color = [UIColor redColor];
+    
+    if (offset > 50) {
+        
+        if (offset >= 100) {
+            
+            offset = 100;
+        }
+        CGFloat alpha = (offset - 50)/50;
+        _headerView.backgroundColor = [color colorWithAlphaComponent:alpha];
+    }else {
+        _headerView.backgroundColor = [UIColor clearColor];
+    }
+    
+    if (offset < -80) {
+        _headerView.hidden = YES;
+    }else {
+        _headerView.hidden = NO;
+    }
+}
 
 @end

@@ -45,28 +45,28 @@ static NSString *messageCellID = @"messageCellID";
     
     _dataSoure = [NSMutableArray array];
     
-        for (int i = 0; i < 15; i++) {
-            JPushMessageModel *model = [JPushMessageModel new];
-            model.time = @"2019-10-11 12:23:33";
-            model.objectId = [NSString stringWithFormat:@"%d",i];
-            model.linkType = @"43";
-            model.msgType = @"系统消息";
-            model.content = @"消息内容";
-            model.title = @"标题";
-            model.pushType = @"推送类型 固定值：1";
-            model.isMessageSelection = NO;
-            model.isHiddenChooseBtn = YES;
-            model.isRead = NO;
-            [_dataSoure addObject:model];
-        }
-    
-    
-    BOOL ret =  [NSKeyedArchiver archiveRootObject:_dataSoure toFile:kPersonInfoPath];
-    if (ret) {
-        NSLog(@"归档成功");
-    }else{
-        NSLog(@"归档失败");
-    }
+//        for (int i = 0; i < 15; i++) {
+//            JPushMessageModel *model = [JPushMessageModel new];
+//            model.time = @"2019-10-11 12:23:33";
+//            model.objectId = [NSString stringWithFormat:@"%d",i];
+//            model.linkType = @"43";
+//            model.msgType = @"系统消息";
+//            model.content = @"消息内容";
+//            model.title = @"标题";
+//            model.pushType = @"推送类型 固定值：1";
+//            model.isMessageSelection = NO;
+//            model.isHiddenChooseBtn = YES;
+//            model.isRead = NO;
+//            [_dataSoure addObject:model];
+//        }
+//    
+//    
+//    BOOL ret =  [NSKeyedArchiver archiveRootObject:_dataSoure toFile:kPersonInfoPath];
+//    if (ret) {
+//        NSLog(@"归档成功");
+//    }else{
+//        NSLog(@"归档失败");
+//    }
     
     NSArray *arr =[NSKeyedUnarchiver unarchiveObjectWithFile:kPersonInfoPath];
     _dataSoure = [NSMutableArray arrayWithArray:arr];

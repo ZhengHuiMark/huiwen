@@ -63,14 +63,14 @@
                             <constraint firstAttribute="height" constant="60" id="hJL-Qh-BbY"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="abZ-Dk-vqF">
+                    <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="abZ-Dk-vqF">
                         <rect key="frame" x="89.5" y="120.5" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="MoX-Uu-YE6"/>
                             <constraint firstAttribute="width" constant="60" id="p67-Cu-55G"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8qH-KP-Yly">
+                    <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8qH-KP-Yly">
                         <rect key="frame" x="156.5" y="120.5" width="60" height="60"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="60" id="u9L-tZ-a6j"/>

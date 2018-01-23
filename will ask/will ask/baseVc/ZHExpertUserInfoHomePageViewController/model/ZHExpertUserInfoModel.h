@@ -27,7 +27,7 @@
 /** 职位 */
 @property(nonatomic,copy)NSString *duty;
 /** 是否已关注 */
-@property(nonatomic,copy)NSString *followed;
+@property(nonatomic,assign)BOOL followed;
 /** 头衔 */
 @property(nonatomic,copy)NSString *honor;
 /** 个人简介 */
@@ -36,6 +36,8 @@
 @property(nonatomic,copy)NSString *nickname;
 /** 真实姓名 */
 @property(nonatomic,copy)NSString *realname;
+
+@property(nonatomic,copy)NSString *consultPrice;
 
 
 @end

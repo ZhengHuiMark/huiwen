@@ -104,8 +104,9 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
 - (void)loadExpertData{
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
     
-    NSString *url = [NSString stringWithFormat:@"%@/api/expert/getExpertTitles",kIP];
-    
+//    NSString *url = [NSString stringWithFormat:@"%@/api/expert/getExpertTitles",kIP];
+    NSString *url = [NSString stringWithFormat:@"%@/api/expert/getCertificationTypes",kIP];
+
     [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
         if (error) {
             NSLog(@"%@",error);
@@ -124,7 +125,7 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/learning/column/getExpertList",kIP];
-    
+
     [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
         
         if (error) {
@@ -288,6 +289,9 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
     _tempBtn = sender;
 }
 
+
+
+
 - (void)requestFromNetworkWithOrder:(NSString *)order asc:(BOOL)asc pageNo:(NSInteger)type{
 
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
@@ -295,7 +299,8 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
             forKey: @"order"];
     [dic setObject: @(asc)
             forKey: @"asc"];
-    [dic setObject: @(type) forKey:@"pageNo"];
+    [dic setObject: @(type)
+            forKey:@"pageNo"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/learning/column/getExpertList",kIP];
     
@@ -437,6 +442,44 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
 - (void)shuju:(NSNotification *)action {
     
     NSLog(@"shuju %@",action.userInfo[@"confirm"]);
+    aseBOOL = NO;
+    NSMutableDictionary *dic = [ZHNetworkTools parameters];
+    [dic setObject:@"vieAnswerNumber" forKey:@"order"];
+    [dic setObject:@(aseBOOL) forKey:@"asc"];
+    [dic setObject:@(pageNo) forKey:@"pageNo"];
+    [dic setObject:action.userInfo[@"confirm"][@"type"] forKey:@"certificationType"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/learning/column/getExpertList",kIP];
+    
+    [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+        
+        if (error) {
+            NSLog(@"%@",error);
+        }
+        
+        NSLog(@"response = %@",response);
+        
+        _studyModels = [NSArray yy_modelArrayWithClass:[ZHStudyModel class] json:response[@"data"]];
+        
+        if (pageNo == 1) { // 刷新
+            _Marry = [NSMutableArray arrayWithArray:_studyModels];
+        } else { // 加载更多
+            
+            [_Marry addObjectsFromArray: _studyModels];
+        }
+        
+        
+        if (!_studyModels || !_studyModels.count) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        } else {
+            [self.tableView.mj_footer resetNoMoreData];
+        }
+        
+        [self.tableView.mj_header endRefreshing];
+        NSIndexSet *indexSet=[[NSIndexSet alloc] initWithIndex:1];
+        [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
+    }];
+    
     
     
     [self.expert removeFromSuperview];

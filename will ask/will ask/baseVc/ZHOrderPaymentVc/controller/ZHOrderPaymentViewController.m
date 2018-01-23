@@ -146,19 +146,47 @@ static NSString *paymentOptionsCellid = @"paymentOptionsCellid";
                         
                     }];
 
-                  
                 }];
 
-                
             }
                 break;
                 
             case 2:{
+                self.payModel.payMode = @"3";
+                NSMutableDictionary *dic = [ZHNetworkTools parameters];
+                [dic setObject:self.payModel.payMode forKey:@"payMode"];
+                [dic setObject:self.payModel.orderNum forKey:@"orderNum"];
+                NSString *url = [NSString stringWithFormat:@"%@/api/ut/orderPay/payment",kIP];
+                
+                [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                    if (error) {
+                        NSLog(@"%@",error);
+                    }
+                    NSLog(@"%@",response);
+                    NSString *data = response[@"data"];
+
+                }];
                 
             }
                 break;
                 
             case 3:{
+                
+                self.payModel.payMode = @"4";
+                NSMutableDictionary *dic = [ZHNetworkTools parameters];
+                [dic setObject:self.payModel.payMode forKey:@"payMode"];
+                [dic setObject:self.payModel.orderNum forKey:@"orderNum"];
+                NSString *url = [NSString stringWithFormat:@"%@/api/ut/orderPay/payment",kIP];
+                
+                [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                    if (error) {
+                        NSLog(@"%@",error);
+                    }
+                    NSLog(@"%@",response);
+                    NSString *data = response[@"data"];
+
+                
+                }];
                 
             }
                 break;
