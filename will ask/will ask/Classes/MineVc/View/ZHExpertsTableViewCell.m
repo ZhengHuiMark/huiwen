@@ -17,6 +17,11 @@
     self.expertsBtn.layer.cornerRadius = 15;
 }
 
+- (IBAction)btnDidClick:(UIButton *)sender {
+    
+    !self.BtnClick?:self.BtnClick();
+    
+}
 
 
 @end

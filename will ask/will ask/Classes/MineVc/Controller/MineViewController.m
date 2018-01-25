@@ -262,10 +262,10 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
         switch (indexPath.row) {
             case 0:{
                 
-                
-                NSString *className = @"ZHCertifiedExpertsVC";
-                [self pushToSetControllerWithIndexPath:indexPath className:className];
-                
+                return;
+//                NSString *className = @"ZHCertifiedExpertsVC";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+//                
                 break;
             }
             default:
@@ -292,27 +292,10 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
                 break;
             }
             case 3:{
-                // 测试
-//                NSString *className = @"ZHMyConsultDetailViewController";
-//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+  
                 NSString *className = @"ZHConsultingMeViewController";
                 [self pushToSetControllerWithIndexPath:indexPath className:className];
-                
-//                NSString *className = @"ZHUserHomePageViewController";
-//                [self pushToSetControllerWithIndexPath:indexPath className:className];
-                
-//                ZHMyConsultDetailViewController
-//                NSString *className = @"ZHExpertUserInfoHomePageViewController";
-//                [self pushToSetControllerWithIndexPath:indexPath className:className];
-                
-//                NSString *className = @"ZHSearchViewController";
-//                [self pushToSetControllerWithIndexPath:indexPath className:className];
 
-//  ZHOrderPaymentViewController  ZHExpertServiceViewController
-//                    NSString *className = @"ZHOrderPaymentViewController";
-//                [self pushToSetControllerWithIndexPath:indexPath className:className];
-//                NSString *className = @"ZHSetupViewController";
-//                [self pushToSetControllerWithIndexPath:indexPath className:className];
                 break;
             }
             case 4:{
@@ -436,6 +419,13 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
             }
             
             [eCell.expertsBtn setTitle:@"专家服务" forState:UIControlStateNormal];
+            
+            eCell.BtnClick = ^{
+                
+                NSString *className = @"ZHExpertServiceViewController";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                
+            };
             return eCell;
 
         }
@@ -447,7 +437,15 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
                 eCell = [[ZHExpertsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ExpertsCellid];
             }
             
+            
             [eCell.expertsBtn setTitle:@"认证专家" forState:UIControlStateNormal];
+            
+            eCell.BtnClick = ^{
+                
+                NSString *className = @"ZHCertifiedExpertsVC";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                
+            };
             return eCell;
             
         }

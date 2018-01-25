@@ -133,45 +133,44 @@ static NSString *transCellid = @"transCellid";
     if (sender.selectedSegmentIndex == 0) {
         NSLog(@"正在销售");
       
-        _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            _pageNo = 1;
-            
-           
-            [self requestFormNetWorkIncomeFlag:@"" pageNo:_pageNo];
-            
-        }];
-        _tableView.mj_header.automaticallyChangeAlpha = YES;
-        _tableView.mj_footer.automaticallyHidden = YES;
+//        _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//            _pageNo = 1;
+//            
+//           
+//            [self requestFormNetWorkIncomeFlag:@"" pageNo:_pageNo];
+//            
+//        }];
+   
         
         [_tableView.mj_header beginRefreshing];
 
         
     } else if (sender.selectedSegmentIndex == 1){
         
-        _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            _pageNo = 1;
-            
-            
-            [self requestFormNetWorkIncomeFlag:@"1" pageNo:_pageNo];
-            
-        }];
-        _tableView.mj_header.automaticallyChangeAlpha = YES;
-        _tableView.mj_footer.automaticallyHidden = YES;
-        
+//        _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//            _pageNo = 1;
+//            
+//            
+//            [self requestFormNetWorkIncomeFlag:@"1" pageNo:_pageNo];
+//            
+//        }];
+//        _tableView.mj_header.automaticallyChangeAlpha = YES;
+//        _tableView.mj_footer.automaticallyHidden = YES;
+//        
         [_tableView.mj_header beginRefreshing];
 
         NSLog(@"已下架");
     } else {
         
-        _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            _pageNo = 1;
-            
-            
-            [self requestFormNetWorkIncomeFlag:@"2" pageNo:_pageNo];
-            
-        }];
-        _tableView.mj_header.automaticallyChangeAlpha = YES;
-        _tableView.mj_footer.automaticallyHidden = YES;
+//        _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//            _pageNo = 1;
+//            
+//            
+//            [self requestFormNetWorkIncomeFlag:@"2" pageNo:_pageNo];
+//            
+//        }];
+//        _tableView.mj_header.automaticallyChangeAlpha = YES;
+//        _tableView.mj_footer.automaticallyHidden = YES;
         
         [_tableView.mj_header beginRefreshing];
 

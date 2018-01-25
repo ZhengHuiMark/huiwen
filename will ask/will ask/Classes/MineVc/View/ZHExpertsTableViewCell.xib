@@ -24,6 +24,9 @@
                         <state key="normal" title="认证专家">
                             <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
+                        <connections>
+                            <action selector="btnDidClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="KfH-wH-33I"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

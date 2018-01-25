@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^didClick)();
+
 @interface ZHExpertsTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *expertsBtn;
+
+@property (nonatomic, copy) didClick BtnClick;
 
 @end
