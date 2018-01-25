@@ -40,7 +40,9 @@
             self.askTime.text = self.detailModel.questionTime;
       
             NSArray *PhotoArray = [self.detailModel.questionPhotos componentsSeparatedByString:@","];
-            
+    if (detailModel.questionPhotos) {
+        [PhotoArray arrayByAddingObject:detailModel.questionPhotos];
+    }
             NSInteger index = -1;
             NSLog(@"%zd",index);
             for (UIImageView *imageView in self.images) {

@@ -16,7 +16,7 @@
 /** 追问时间 */
 @property(nonatomic,copy)NSString *addQuestionTime;
 /** 是否允许追问 */
-@property(nonatomic,copy)NSString *allowAddAnswer;
+@property(nonatomic,assign)BOOL allowAddAnswer;
 /** 咨询金额 */
 @property(nonatomic,copy)NSString *amount;
 /** 回答时间 */
@@ -42,7 +42,7 @@
 /** 提问人昵称 */
 @property(nonatomic,copy)NSString *userNickname;
 /** 是否允许回答 */
-@property(nonatomic,copy)NSString *allowAnswer;
+@property(nonatomic,assign)BOOL allowAnswer;
 
 
 @end

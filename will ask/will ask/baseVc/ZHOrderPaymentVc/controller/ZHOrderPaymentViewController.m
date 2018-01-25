@@ -164,7 +164,15 @@ static NSString *paymentOptionsCellid = @"paymentOptionsCellid";
                     }
                     NSLog(@"%@",response);
                     NSString *data = response[@"data"];
-
+                    
+                    NSInteger code = [response[@"errcode"] integerValue];
+                    
+                    if (code == 60000) {
+                        [SVProgressHUD showInfoWithStatus: response[@"message"]];
+                    }else{
+                        [SVProgressHUD showInfoWithStatus: @"支付成功"];
+                    }
+                    
                 }];
                 
             }

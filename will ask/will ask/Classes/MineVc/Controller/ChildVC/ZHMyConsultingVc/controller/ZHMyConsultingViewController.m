@@ -38,6 +38,8 @@ static NSString *conultListCellid = @"conultListCellid";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    
+    self.title = @"我的咨询";
     [self setupUI];
     [self.view addSubview:self.tableView];
 
@@ -213,13 +215,11 @@ static NSString *conultListCellid = @"conultListCellid";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-//    
-//    ZHMyConsultDetailViewController *detailvc = [[ZHMyConsultDetailViewController alloc]init];
-//
+    
     ZHMyConsultVc *myvc = [[ZHMyConsultVc alloc]init];
     
     myvc.consultId = _listModels[indexPath.row].consultId;
+    
     [self.navigationController pushViewController:myvc animated:YES];
     
 }

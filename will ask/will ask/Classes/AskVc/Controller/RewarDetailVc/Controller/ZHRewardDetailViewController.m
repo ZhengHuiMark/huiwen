@@ -1131,7 +1131,7 @@ static NSInteger kMaxCount = 3;
         _layout.minimumInteritemSpacing = 10;
         _layout.minimumLineSpacing = 10;
         _layout.sectionInset = UIEdgeInsetsZero;
-        _layout.itemSize = CGSizeMake(35, 35);
+        _layout.itemSize = CGSizeMake(25, 25);
     }
     return _layout;
 }

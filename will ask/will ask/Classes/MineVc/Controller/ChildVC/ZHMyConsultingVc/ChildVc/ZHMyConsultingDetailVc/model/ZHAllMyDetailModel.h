@@ -31,7 +31,7 @@
 
 
 /** 允许追问 */
-@property(nonatomic,copy)NSString *allowAppend;
+@property(nonatomic,assign)BOOL allowAppend;
 /** 资讯金额 */
 @property(nonatomic,copy)NSString *amount;
 /** 回答内容 */
@@ -43,7 +43,7 @@
 /** 回答语音 */
 @property(nonatomic,copy)NSString *answerVoice;
 /** 是否有追问 */
-@property(nonatomic,copy)NSString *appended;
+@property(nonatomic,assign)BOOL appended;
 /** 咨询ID */
 @property(nonatomic,copy)NSString *consultId;
 /** 专家头像 */

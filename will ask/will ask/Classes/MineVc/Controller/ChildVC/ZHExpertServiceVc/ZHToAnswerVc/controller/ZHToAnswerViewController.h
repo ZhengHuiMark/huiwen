@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class ZHToAnsModel;
 @interface ZHToAnswerViewController : UIViewController
+
+@property (nonatomic, strong) ZHToAnsModel *model;
 
 @end

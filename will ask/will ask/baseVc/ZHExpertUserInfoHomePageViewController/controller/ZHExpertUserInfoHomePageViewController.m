@@ -133,9 +133,9 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
     [_focusBtn setTitle:@"关注" forState:UIControlStateNormal];
     [_focusBtn setTitle:@"已关注" forState:UIControlStateSelected];
     [_focusBtn setImage:[UIImage imageNamed:@"follow"] forState:UIControlStateNormal];
-    [_focusBtn setImage:[UIImage imageNamed:@"follow--1"] forState:UIControlStateSelected];
-    [_focusBtn setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
-    [_focusBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
+    [_focusBtn setImage:[UIImage imageNamed:@"follower"] forState:UIControlStateSelected];
+    [_focusBtn setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    [_focusBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateSelected];
     [_focusBtn addTarget:self action:@selector(focusBtnClickAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.focusView addSubview:self.focusBtn];
     

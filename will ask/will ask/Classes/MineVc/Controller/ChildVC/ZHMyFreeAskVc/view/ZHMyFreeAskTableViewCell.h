@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+
+typedef void(^editorDidClick)();
+typedef void(^deleteDidClick)();
 @class ZHMyFreeAskModel;
 
 @interface ZHMyFreeAskTableViewCell : UITableViewCell
@@ -20,5 +23,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *answerNumber;
 
 @property(nonatomic,weak)ZHMyFreeAskModel *model;
+
+@property (nonatomic, copy) editorDidClick editDidClick;
+@property (nonatomic, copy) deleteDidClick didClick;
+
+
 
 @end

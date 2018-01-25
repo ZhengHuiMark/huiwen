@@ -120,10 +120,16 @@
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yNi-OH-bCm">
                         <rect key="frame" x="85.5" y="162" width="60" height="60"/>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="buttonActions:" destination="zYe-hV-9Yv" eventType="touchUpInside" id="FLy-X2-414"/>
+                        </connections>
                     </button>
                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4QN-ey-PkO">
                         <rect key="frame" x="153" y="162" width="60" height="60"/>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="buttonActions:" destination="zYe-hV-9Yv" eventType="touchUpInside" id="YcP-LR-myr"/>
+                        </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xqP-9y-7RJ">
                         <rect key="frame" x="0.0" y="274.5" width="375" height="10"/>
@@ -194,12 +200,12 @@
                 <outlet property="expertName" destination="Ost-zo-fxT" id="h1u-QY-A4P"/>
                 <outlet property="time" destination="ZXR-Yi-o2u" id="VJ3-R5-uCD"/>
                 <outlet property="voiceTime" destination="deP-GC-GTi" id="s4R-q3-8IE"/>
-                <outletCollection property="images" destination="jFM-iF-Ez3" id="bWE-u1-4c5"/>
                 <outletCollection property="images" destination="Snm-B4-TQa" id="kBB-Fs-pGy"/>
-                <outletCollection property="images" destination="Yi6-ix-yZ2" id="dua-Qf-PIj"/>
                 <outletCollection property="imageButtons" destination="0P8-58-q63" id="v8z-1a-ffB"/>
                 <outletCollection property="imageButtons" destination="yNi-OH-bCm" id="lnw-fx-oYX"/>
                 <outletCollection property="imageButtons" destination="4QN-ey-PkO" id="QiP-dO-yA7"/>
+                <outletCollection property="images" destination="jFM-iF-Ez3" id="gRD-2E-1GA"/>
+                <outletCollection property="images" destination="Yi6-ix-yZ2" id="JAe-5J-1Wk"/>
             </connections>
             <point key="canvasLocation" x="24.5" y="50.5"/>
         </tableViewCell>

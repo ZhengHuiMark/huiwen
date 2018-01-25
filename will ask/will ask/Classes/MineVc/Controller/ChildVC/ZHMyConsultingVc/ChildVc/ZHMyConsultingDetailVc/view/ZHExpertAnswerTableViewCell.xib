@@ -79,6 +79,9 @@
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Kr-84-fWI">
                         <rect key="frame" x="21.5" y="122" width="60" height="60"/>
+                        <connections>
+                            <action selector="buttonActions:" destination="XVe-5V-lhr" eventType="touchUpInside" id="C99-38-vlj"/>
+                        </connections>
                     </button>
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBE-kQ-Uwd">
                         <rect key="frame" x="89.5" y="120.5" width="60" height="60"/>
@@ -88,6 +91,9 @@
                     </button>
                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUc-Wt-30U">
                         <rect key="frame" x="156.5" y="120.5" width="60" height="60"/>
+                        <connections>
+                            <action selector="buttonActions:" destination="XVe-5V-lhr" eventType="touchUpInside" id="qH9-7W-Vov"/>
+                        </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MT9-TN-63F">
                         <rect key="frame" x="0.0" y="197" width="375" height="1"/>
@@ -96,15 +102,6 @@
                             <constraint firstAttribute="height" constant="1" id="CvB-R2-fT8"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ng-bV-yfb">
-                        <rect key="frame" x="18" y="216.5" width="31" height="12"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="12" id="24T-Dg-ZWi"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6k-pZ-JGK">
                         <rect key="frame" x="324.5" y="217" width="31" height="11"/>
                         <constraints>
@@ -131,7 +128,6 @@
                     <constraint firstItem="fUc-Wt-30U" firstAttribute="leading" secondItem="tMW-Y0-CA5" secondAttribute="leading" id="7Yg-ZY-lLs"/>
                     <constraint firstItem="dg2-Aa-eA1" firstAttribute="leading" secondItem="gkQ-hs-yvY" secondAttribute="leading" constant="17" id="7fn-dh-eOu"/>
                     <constraint firstItem="0fA-TF-yHP" firstAttribute="top" secondItem="gkQ-hs-yvY" secondAttribute="top" constant="25.5" id="Ah7-Iz-Wto"/>
-                    <constraint firstItem="1Ng-bV-yfb" firstAttribute="top" secondItem="MT9-TN-63F" secondAttribute="bottom" constant="18.5" id="GcA-NJ-ydc"/>
                     <constraint firstItem="eDJ-hi-Zqa" firstAttribute="top" secondItem="0fA-TF-yHP" secondAttribute="bottom" constant="7" id="Jya-hs-Ebt"/>
                     <constraint firstItem="pBE-kQ-Uwd" firstAttribute="trailing" secondItem="sT6-zE-xkk" secondAttribute="trailing" id="LH6-6i-vNG"/>
                     <constraint firstItem="pBE-kQ-Uwd" firstAttribute="top" secondItem="sT6-zE-xkk" secondAttribute="top" id="Lqg-hQ-Y9h"/>
@@ -159,7 +155,6 @@
                     <constraint firstItem="MT9-TN-63F" firstAttribute="top" secondItem="6Kr-84-fWI" secondAttribute="bottom" constant="15" id="o2E-Vw-0rn"/>
                     <constraint firstItem="sT6-zE-xkk" firstAttribute="leading" secondItem="R0h-dd-nG1" secondAttribute="trailing" constant="7.5" id="o6O-5P-uVZ"/>
                     <constraint firstItem="6Kr-84-fWI" firstAttribute="leading" secondItem="R0h-dd-nG1" secondAttribute="leading" id="oVh-QF-7y7"/>
-                    <constraint firstItem="1Ng-bV-yfb" firstAttribute="leading" secondItem="gkQ-hs-yvY" secondAttribute="leading" constant="18" id="rqS-uD-X8x"/>
                     <constraint firstItem="b5f-Ln-BkT" firstAttribute="leading" secondItem="gkQ-hs-yvY" secondAttribute="leading" id="wmM-an-83j"/>
                     <constraint firstItem="pH0-bH-TuZ" firstAttribute="leading" secondItem="gkQ-hs-yvY" secondAttribute="leading" constant="21" id="woL-TV-I3l"/>
                     <constraint firstItem="YQC-h8-uHE" firstAttribute="leading" secondItem="gkQ-hs-yvY" secondAttribute="leading" constant="20" id="wvb-w6-yyh"/>
@@ -170,7 +165,6 @@
                 <outlet property="askTime" destination="s6k-pZ-JGK" id="zOz-xQ-mKq"/>
                 <outlet property="content" destination="YQC-h8-uHE" id="Wj0-Rn-Zm1"/>
                 <outlet property="questionPrompt" destination="pH0-bH-TuZ" id="vvk-cJ-475"/>
-                <outlet property="remainingTime" destination="1Ng-bV-yfb" id="4cg-lL-i6m"/>
                 <outlet property="userAvatar" destination="dg2-Aa-eA1" id="scj-1W-aTU"/>
                 <outlet property="userName" destination="0fA-TF-yHP" id="OgS-oU-hz1"/>
                 <outletCollection property="images" destination="R0h-dd-nG1" id="H6C-ey-7sO"/>

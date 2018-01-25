@@ -18,6 +18,8 @@
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *imageButtons;
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *images;
+@property (weak, nonatomic) IBOutlet UILabel *time;
+
 @property (nonatomic,strong)ZHAllMyDetailModel *model;
 
 @end

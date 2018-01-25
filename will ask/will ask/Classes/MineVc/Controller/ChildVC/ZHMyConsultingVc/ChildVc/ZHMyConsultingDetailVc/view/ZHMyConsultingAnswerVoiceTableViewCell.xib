@@ -113,14 +113,23 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bKH-h9-uoc">
                         <rect key="frame" x="18" y="162" width="60" height="60"/>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="btnAction:" destination="5vs-OO-Ytt" eventType="touchUpInside" id="yOL-xK-tmH"/>
+                        </connections>
                     </button>
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eF9-5T-2qp">
                         <rect key="frame" x="85.5" y="162" width="60" height="60"/>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="btnAction:" destination="5vs-OO-Ytt" eventType="touchUpInside" id="xtz-GW-2vX"/>
+                        </connections>
                     </button>
                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nIR-XM-h1h">
                         <rect key="frame" x="153" y="162" width="60" height="60"/>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="btnAction:" destination="5vs-OO-Ytt" eventType="touchUpInside" id="hGk-fS-jzn"/>
+                        </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cod-Zs-XtV">
                         <rect key="frame" x="0.0" y="274.5" width="375" height="10"/>
@@ -186,9 +195,10 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="askStateImg" destination="TdV-hh-BE6" id="9ZE-Zf-yAf"/>
-                <outlet property="cerTitle" destination="jNi-cn-pFu" id="gyS-8L-MvP"/>
+                <outlet property="cerTitle" destination="mrl-nE-1dW" id="5wA-rp-a4v"/>
                 <outlet property="expertAvatar" destination="CJi-I5-QmM" id="Gsz-lQ-6dc"/>
                 <outlet property="expertName" destination="9L9-QV-sgo" id="0Yp-tQ-pJM"/>
+                <outlet property="time" destination="bAk-x5-gwO" id="xzU-uB-f0t"/>
                 <outlet property="voiceTime" destination="sEa-3T-yi8" id="S4F-GY-UWp"/>
                 <outletCollection property="imageButtons" destination="bKH-h9-uoc" id="bK8-6g-FXO"/>
                 <outletCollection property="images" destination="BdB-Dx-ad5" id="2gJ-CL-wx7"/>

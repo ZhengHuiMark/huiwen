@@ -157,26 +157,18 @@ static NSString *MyFreeAskCellid = @"MyFreeAskCellid";
                         
                         
                         [self.tableView reloadData];
-                        
-                        
-                        
+     
                         
                     }];
-                    
-                    
-                    
+
                 } else {
-//                    _title = @"未选中标签";
-                    
+   
                 }
             } else if ([tagModel isKindOfClass: [MLTagModel class]]) {
                 if (tagModel.isSelected) {
-//                    _title = @"未选中标签";
                     
                     _pageNumber = 1;
-                    
-                    
-                    
+     
                     NSString *url = [NSString stringWithFormat:@"%@/api/freeask/ut/getMyFreeAskList",kIP];
                     
                     NSMutableDictionary *dic = [ZHNetworkTools parameters];
@@ -209,13 +201,48 @@ static NSString *MyFreeAskCellid = @"MyFreeAskCellid";
     return cell;
 }
 
-    
-    ZHMyFreeAskModel *model = _Freemodels[indexPath.row];
+    ZHMyFreeAskModel *model = self.Freemodels[indexPath.row];
     
     ZHMyFreeAskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyFreeAskCellid forIndexPath:indexPath];
     if (cell == nil) {
         cell = [[ZHMyFreeAskTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyFreeAskCellid];
     }
+    
+    // 编辑免费问
+    cell.editDidClick = ^{
+        
+//         /api/freeask/ut/edit
+        NSMutableDictionary *dic = [ZHNetworkTools parameters];
+        [dic setObject:model.freeAskId forKey:@"freeAskId"];
+        NSString *url = [NSString stringWithFormat:@"%@/api/freeask/ut/edit",kIP];
+        
+        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+            
+        
+            
+        }];
+        
+        
+    };
+    
+    // 删除免费问
+    cell.didClick = ^{
+//        /api/freeask/ut/delete
+        NSMutableDictionary *dic = [ZHNetworkTools parameters];
+        [dic setObject:model.freeAskId forKey:@"freeAskId"];
+        NSString *url = [NSString stringWithFormat:@"%@/api/freeask/ut/delete",kIP];
+        
+        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+            
+            if (error) {
+                NSLog(@"%@",error);
+            }
+            
+            NSLog(@"%@",response);
+            
+            [self.tableView reloadData];
+        }];
+    };
     
     
     cell.model = model;

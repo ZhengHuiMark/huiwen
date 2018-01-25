@@ -41,15 +41,16 @@
     
 }
 
-- (IBAction)editorFreeAskAction:(id)sender {
-
+- (IBAction)editorFreeAskAction:(UIButton *)sender {
+    
+    !self.editDidClick?:self.editDidClick();
 
 }
 
 
-- (IBAction)deleteFreeAskAction:(id)sender {
+- (IBAction)deleteFreeAskAction:(UIButton *)sender {
     
-    
+    !self.didClick?:self.didClick();
     
 }
 

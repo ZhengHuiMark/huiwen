@@ -89,15 +89,21 @@
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ToJ-m6-iG0">
                         <rect key="frame" x="21.5" y="122" width="60" height="60"/>
+                        <connections>
+                            <action selector="buttonActions:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="XFV-Mz-vqI"/>
+                        </connections>
                     </button>
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JiI-If-uDE">
                         <rect key="frame" x="89.5" y="120.5" width="60" height="60"/>
                         <connections>
-                            <action selector="buttonActions:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="cul-pi-Jcw"/>
+                            <action selector="buttonActions:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hPk-g0-GWf"/>
                         </connections>
                     </button>
                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sqz-sO-Fvf">
                         <rect key="frame" x="156.5" y="120.5" width="60" height="60"/>
+                        <connections>
+                            <action selector="buttonActions:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="NOV-9O-Br0"/>
+                        </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8pq-rt-s0p">
                         <rect key="frame" x="0.0" y="197" width="375" height="1"/>
@@ -106,15 +112,6 @@
                             <constraint firstAttribute="height" constant="1" id="lvT-ZW-6Vy"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3N-Bn-Gvf">
-                        <rect key="frame" x="18" y="216.5" width="31" height="12"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="12" id="w38-uZ-xOD"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dbk-Cc-4Kj">
                         <rect key="frame" x="324.5" y="217" width="31" height="11"/>
                         <constraints>
@@ -146,7 +143,6 @@
                     <constraint firstItem="ToJ-m6-iG0" firstAttribute="top" secondItem="VUW-gN-wTq" secondAttribute="top" id="Dnu-e6-iSL"/>
                     <constraint firstItem="JiI-If-uDE" firstAttribute="leading" secondItem="bjf-1l-vZ9" secondAttribute="leading" id="Izh-NQ-guj"/>
                     <constraint firstItem="YhQ-Fy-cbe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="KO4-G7-NlA"/>
-                    <constraint firstItem="A3N-Bn-Gvf" firstAttribute="top" secondItem="8pq-rt-s0p" secondAttribute="bottom" constant="18.5" id="LTI-6e-aLZ"/>
                     <constraint firstItem="ToJ-m6-iG0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="21.5" id="MOA-IT-cGw"/>
                     <constraint firstAttribute="trailing" secondItem="2rD-1v-o79" secondAttribute="trailing" constant="18" id="Peb-kC-oYr"/>
                     <constraint firstItem="PLV-bo-Van" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25.5" id="QrQ-p5-ZZt"/>
@@ -169,7 +165,6 @@
                     <constraint firstItem="ToJ-m6-iG0" firstAttribute="trailing" secondItem="VUW-gN-wTq" secondAttribute="trailing" id="pL9-lm-b0O"/>
                     <constraint firstItem="ToJ-m6-iG0" firstAttribute="bottom" secondItem="VUW-gN-wTq" secondAttribute="bottom" id="q1V-3n-h0f"/>
                     <constraint firstItem="Sqz-sO-Fvf" firstAttribute="leading" secondItem="F3b-hr-wZ4" secondAttribute="leading" id="rXo-2p-voh"/>
-                    <constraint firstItem="A3N-Bn-Gvf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="t9B-9E-Dcc"/>
                     <constraint firstItem="Sqz-sO-Fvf" firstAttribute="baseline" secondItem="ToJ-m6-iG0" secondAttribute="baseline" id="uPE-9v-Pzj"/>
                     <constraint firstItem="lEx-Fi-V7u" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17" id="w60-9c-ohz"/>
                     <constraint firstItem="ToJ-m6-iG0" firstAttribute="leading" secondItem="VUW-gN-wTq" secondAttribute="leading" id="xZm-9A-VdK"/>
@@ -183,7 +178,6 @@
                 <outlet property="askTime" destination="Dbk-Cc-4Kj" id="y9a-sT-dTu"/>
                 <outlet property="content" destination="YhQ-Fy-cbe" id="2TG-Aw-XZ9"/>
                 <outlet property="questionPrompt" destination="XSY-Wd-wnl" id="Iy4-9m-ei3"/>
-                <outlet property="remainingTime" destination="A3N-Bn-Gvf" id="zTe-Iw-wX0"/>
                 <outlet property="userAvatar" destination="lEx-Fi-V7u" id="fBj-Wx-8DD"/>
                 <outlet property="userName" destination="PLV-bo-Van" id="3Ud-xt-9SF"/>
                 <outletCollection property="images" destination="VUW-gN-wTq" id="FUB-iv-4CW"/>

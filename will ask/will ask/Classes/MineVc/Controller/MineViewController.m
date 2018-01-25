@@ -293,13 +293,18 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
             }
             case 3:{
                 // 测试
-                NSString *className = @"ZHMyConsultDetailViewController";
+//                NSString *className = @"ZHMyConsultDetailViewController";
+//                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                NSString *className = @"ZHConsultingMeViewController";
                 [self pushToSetControllerWithIndexPath:indexPath className:className];
+                
 //                NSString *className = @"ZHUserHomePageViewController";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                
 //                ZHMyConsultDetailViewController
 //                NSString *className = @"ZHExpertUserInfoHomePageViewController";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                
 //                NSString *className = @"ZHSearchViewController";
 //                [self pushToSetControllerWithIndexPath:indexPath className:className];
 
@@ -414,10 +419,7 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
                 NSString *className = @"ZHMyWalletViewController";
                 [self pushToSetControllerWithIndexPath:indexPath className:className];
             };
-            
-           
-            
-            
+      
             return mCell;
             
         }

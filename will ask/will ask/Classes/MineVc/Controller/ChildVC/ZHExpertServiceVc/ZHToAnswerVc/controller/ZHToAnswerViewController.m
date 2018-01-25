@@ -9,11 +9,8 @@
 #import "ZHToAnswerViewController.h"
 #import "ZHToAnswerTableViewCell.h"
 #import "ZHHaveToAnswerTableViewCell.h"
-#import "ZHNetworkTools.h"
-#import "MJRefresh.h"
-#import "Macro.h"
-#import "YYModel.h"
 #import "ZHToAnsModel.h"
+#import "ZHConsultingMeViewController.h"
 
 static NSString *toAnswerCellid = @"toAnswerCellid";
 static NSString *haveToAnswerCellid = @"haveToAnswerCellid";
@@ -29,8 +26,8 @@ static NSString *haveToAnswerCellid = @"haveToAnswerCellid";
 
 @property(nonatomic,strong)UISegmentedControl *segmentedControl;
 
-@property (nonatomic,strong)NSMutableArray *leftArray;
-@property (nonatomic,strong)NSMutableArray *rigthArray;
+@property (nonatomic,strong)NSMutableArray <ZHToAnsModel*> *leftArray;
+@property (nonatomic,strong)NSMutableArray <ZHToAnsModel*> *rigthArray;
 
 @property(nonatomic,assign)NSInteger tag;
 
@@ -45,6 +42,9 @@ static NSString *haveToAnswerCellid = @"haveToAnswerCellid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    
+    self.title = @"咨询我的问题";
     
     self.tag = 0;
     [self initTableView];
@@ -278,19 +278,25 @@ static NSString *haveToAnswerCellid = @"haveToAnswerCellid";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (tableView == self.leftTableView) {
-        ZHToAnsModel *model = _leftArray[indexPath.row];
+        _model = _leftArray[indexPath.row];
         ZHToAnswerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:toAnswerCellid forIndexPath:indexPath];
+    
+        cell.model = _model;
         
-        cell.model = model;
+        cell.didClick = ^(){
+            ZHConsultingMeViewController *ConsultVc = [[ZHConsultingMeViewController alloc]init];
+            ConsultVc.conslutId = _leftArray[indexPath.row].consultId;
+            [self.navigationController pushViewController:ConsultVc animated:YES];
         
+        };
         return cell;
         
     }else if (tableView == self.rightTableView){
         
-        ZHToAnsModel *model = _rigthArray[indexPath.row];
+        _model = self.rigthArray[indexPath.row];
         ZHHaveToAnswerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:haveToAnswerCellid forIndexPath:indexPath];
         
-        cell.model = model;
+        cell.model = _model;
 
         
         return cell;
@@ -298,6 +304,22 @@ static NSString *haveToAnswerCellid = @"haveToAnswerCellid";
     
     
     return nil;
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath: indexPath animated: YES];
+
+    if (tableView == self.leftTableView) {
+        return;
+    }
+    
+    if (tableView == self.rightTableView) {
+        ZHConsultingMeViewController *ConsultMeVc = [[ZHConsultingMeViewController alloc]init];
+        ConsultMeVc.conslutId = self.rigthArray[indexPath.row].consultId;
+        
+        [self.navigationController pushViewController:ConsultMeVc animated:YES];
+    }
     
 }
 

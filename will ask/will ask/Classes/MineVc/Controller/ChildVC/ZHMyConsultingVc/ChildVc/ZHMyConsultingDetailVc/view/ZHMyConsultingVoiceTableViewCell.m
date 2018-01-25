@@ -26,9 +26,34 @@
 
 - (void)setVoiceModel:(ZHAllMyDetailModel *)voiceModel{
     _voiceModel = voiceModel;
+    
+    [self.expertAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,voiceModel.expertAvatar]]];
+    self.expertName.text = voiceModel.expertNickname;
+    
+    self.cerTitle.text = voiceModel.expertCertifiedNames;
+    
+    [self.askStateImg setImage:[UIImage imageNamed:@"chase"]];
+    
+    self.time.text = voiceModel.addAnswerTime;
+    
+    NSArray *PhotoArray = [self.voiceModel.addAnswerPhotos componentsSeparatedByString:@","];
+    if (voiceModel.addAnswerPhotos) {
+        [PhotoArray arrayByAddingObject:voiceModel.addAnswerPhotos];
+    }
+    NSInteger index = -1;
+    NSLog(@"%zd",index);
+    for (UIImageView *imageView in self.images) {
+        index++;
+        if (PhotoArray.count <= index) {
+            imageView.hidden = YES;
+            [self.imageButtons[index] setHidden: YES];
+            continue;
+        }
+        imageView.hidden = NO;
+        [self.imageButtons[index] setHidden: NO];
+        [imageView sd_setImageWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@",bucketNameConsultLoad,OSS,PhotoArray[index]]]];
+    }
 
-    
-    
     
     
 }

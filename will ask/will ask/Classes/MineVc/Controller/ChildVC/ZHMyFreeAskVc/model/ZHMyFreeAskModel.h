@@ -27,7 +27,7 @@
 /** 提问分类 */
 @property(nonatomic,copy)NSString *type;
 /** 免费问ID */
-@property(nonatomic,copy)NSString *uid;
+@property(nonatomic,copy)NSString *freeAskId;
 /** 用户ID */
 @property(nonatomic,copy)NSString *userId;
 

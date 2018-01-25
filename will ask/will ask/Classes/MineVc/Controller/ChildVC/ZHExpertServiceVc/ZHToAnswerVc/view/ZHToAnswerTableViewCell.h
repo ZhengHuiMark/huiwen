@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+
+typedef void(^answerDidClick)();
 @class ZHToAnsModel;
 @interface ZHToAnswerTableViewCell : UITableViewCell
 
@@ -31,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *buttonTitle;
 
 @property (nonatomic,strong)ZHToAnsModel *model;
+
+@property (nonatomic, copy) answerDidClick didClick;
 
 
 @end

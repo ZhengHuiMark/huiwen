@@ -147,10 +147,13 @@ static NSInteger kMaxCount = 3;
 
     // 发布拉起
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
-    [dic setObject:_expertID forKey:@"expertId"];
-    [dic setObject:_textView.text forKey:@"question"];
-    NSString *url = [NSString stringWithFormat:@"%@/api/ut/consult/question",kIP];
     
+    if (_expertID) {
+        [dic setObject:_expertID forKey:@"expertId"];
+        
+        [dic setObject:_textView.text forKey:@"question"];
+        NSString *url = [NSString stringWithFormat:@"%@/api/ut/consult/question",kIP];
+        
         NSInteger index=0;
         __block NSInteger  imgCount = 0;
         if (self.imageModels.count == 1) {
@@ -161,7 +164,17 @@ static NSInteger kMaxCount = 3;
                 }
                 
                 NSLog(@"response = %@",response);
-
+                
+                ZHOrderPayModel *model = [ZHOrderPayModel yy_modelWithJSON:response[@"data"]];
+                model.descriptions = @"咨询订单";
+                model.goodsName = self.expertNickName;
+                model.amount = @"0.01";
+                
+                ZHOrderPaymentViewController *payVc = [[ZHOrderPaymentViewController alloc]init];
+                payVc.payModel = model;
+                
+                [self.navigationController pushViewController:payVc animated:YES];
+                
             }];
             
         } else {
@@ -199,11 +212,10 @@ static NSInteger kMaxCount = 3;
                                     }
                                     
                                     NSLog(@"response = %@",response);
-         
                                     
                                     ZHOrderPayModel *model = [ZHOrderPayModel yy_modelWithJSON:response[@"data"]];
-                                    model.descriptions = self.expertNickName;
-                                    model.goodsName = @"咨询订单";
+                                    model.descriptions = @"咨询订单";
+                                    model.goodsName = self.expertNickName;
                                     model.amount = @"0.01";
                                     
                                     ZHOrderPaymentViewController *payVc = [[ZHOrderPaymentViewController alloc]init];
@@ -213,8 +225,6 @@ static NSInteger kMaxCount = 3;
                                     
                                 }];
                             }
-                            
-                            
                             
                         } else {
                             imgCount--;
@@ -226,6 +236,84 @@ static NSInteger kMaxCount = 3;
                 }
             }
         }
+
+    }
+    if (_consultId) {
+        [dic setObject:_consultId forKey:@"consultId"];
+        [dic setObject:_textView.text forKey:@"question"];
+        NSString *url = [NSString stringWithFormat:@"%@/api/ut/consult/addQuestion",kIP];
+        
+        NSInteger index=0;
+        __block NSInteger  imgCount = 0;
+        if (self.imageModels.count == 1) {
+            [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"%@",error);
+                }
+                
+                NSLog(@"response = %@",response);
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+            }];
+            
+        } else {
+            for (MLImageModel *imageModel in self.imageModels) {
+                if (imageModel.modelType == MLImageModelTypePlaceholder) continue;{
+                    
+                    
+                    NSData *imageData = UIImageJPEGRepresentation(imageModel.image, 0.5);
+                    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"123"];
+                    [imageData writeToFile:fullPath atomically:NO];
+                    uploadFilePath = fullPath;
+                    //                NSLog(@"uploadFilePath : %@", uploadFilePath);
+                    
+                    
+                    NSTimeInterval interval = [[NSDate date] timeIntervalSince1970] *1000;
+                    
+                    NSString * objectKey = [NSString stringWithFormat:@"%@%@%f%ld",[UserManager sharedManager].userModel.resourceId,@"AQ",interval,(long)index];
+                    index++;
+                    //            NSLog(@"2131312321323  ===%@",objectKey);
+                    
+                    NSString *bucketName = bucketNameFree;
+                    //            NSLog(@"%@",bucketName);
+                    
+                    [service asyncPutImage:objectKey localFilePath:uploadFilePath bucketName:bucketName comletion:^(BOOL isSuccess) {
+                        
+                        if (isSuccess) {
+                            [self.mArray addObject:objectKey];
+                            
+                            if (self.mArray.count >= imgCount) {
+                                [dic setObject: [_mArray componentsJoinedByString:@","] forKey: @"photos"];
+                                [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                                    
+                                    if (error) {
+                                        NSLog(@"%@",error);
+                                    }
+                                    
+                                    NSLog(@"response = %@",response);
+                                    
+                                    [self.navigationController popViewControllerAnimated:YES];
+                                    
+                                }];
+                            }
+                            
+                        } else {
+                            imgCount--;
+                        }
+                    }];
+                    
+                    
+                    
+                }
+            }
+        }
+        
+    }
+
+//    }
+    
 
 }
 
@@ -249,9 +337,7 @@ static NSInteger kMaxCount = 3;
     } else {
         self.saveBtn.selected = NO;
     }
-    
-    
-    
+
 }
 
 
@@ -342,7 +428,7 @@ static NSInteger kMaxCount = 3;
         _layout.minimumInteritemSpacing = 10;
         _layout.minimumLineSpacing = 10;
         _layout.sectionInset = UIEdgeInsetsZero;
-        _layout.itemSize = CGSizeMake(35, 35);
+        _layout.itemSize = CGSizeMake(25, 25);
     }
     return _layout;
 }

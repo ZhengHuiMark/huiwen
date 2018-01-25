@@ -14,9 +14,8 @@
 #import "ZHMyChaseAskTableViewCell.h"
 #import "ZHExpertChaseTableViewCell.h"
 #import "ZHAllMyDetailModel.h"
-#import "ZHNetworkTools.h"
-#import "Macro.h"
-#import "YYModel.h"
+#import "ZHMyConsultDetailViewController.h"
+
 
 static NSString *contentCellid = @"contentCellid";
 static NSString *expertAnswerCellid = @"expertAnswerCellid";
@@ -31,6 +30,10 @@ static NSString *voiceCellid = @"voiceCellid";
 
 @property(nonatomic,strong)NSMutableArray <ZHAllMyDetailModel *>*detailModels;
 
+@property(nonatomic,strong)UIView *backView;
+
+@property(nonatomic,strong)UIButton *addAskBtn;
+
 @end
 
 @implementation ZHMyConsultVc
@@ -38,12 +41,43 @@ static NSString *voiceCellid = @"voiceCellid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
     
     [self loadData];
 
     [self.view addSubview:self.tableView];
 
     
+}
+
+- (void)setupUI{
+    
+    _backView = [UIView new];
+    _backView.frame = CGRectMake(0,CGRectGetMaxY(self.view.frame)-49, ScreenHeight, 49);
+    _backView.backgroundColor = [UIColor darkGrayColor];
+    [self.view addSubview:self.backView];
+    
+    _addAskBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _addAskBtn.frame = CGRectMake(0, 1, ScreenWidth, 49);
+    _addAskBtn.backgroundColor = [UIColor whiteColor];
+    [_addAskBtn setTitle:@"追问" forState:UIControlStateNormal];
+    [_addAskBtn addTarget:self action:@selector(addAsk) forControlEvents:UIControlEventTouchUpInside];
+    [self.backView addSubview:self.addAskBtn];
+
+}
+
+- (void)removeUI{
+    [self.backView removeFromSuperview];
+    [self.addAskBtn removeFromSuperview];
+}
+#pragma mark - 追问
+- (void)addAsk{
+    
+    ZHMyConsultDetailViewController *myConsultVc = [[ZHMyConsultDetailViewController alloc]init];
+    myConsultVc.consultId = self.consultId;
+    
+    [self.navigationController pushViewController:myConsultVc animated:YES];
+
 }
 
 
@@ -67,12 +101,66 @@ static NSString *voiceCellid = @"voiceCellid";
         _model = [ZHAllMyDetailModel yy_modelWithJSON:response[@"data"]];
         
         
-        
-//        _detailModels = [NSMutableArray arrayWithArray:models];
-//        _detailModels = [NSMutableArray arrayWithObject:model];
+        if (_model.allowAppend == YES) {
+            [self setupUI];
+        }else{
+            [self removeUI];
+        }
         
         [self.tableView reloadData];
     }];
+    
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == 0) {
+        NSString *wenzi = self.model.question;
+        CGFloat marin = 17.5;
+        CGFloat labelWidth = [UIScreen mainScreen].bounds.size.width - marin * 2;
+        CGFloat labelHeight = [wenzi boundingRectWithSize: CGSizeMake(labelWidth, 300)
+                                                  options: NSStringDrawingUsesLineFragmentOrigin
+                                               attributes: @{NSFontAttributeName : [UIFont systemFontOfSize: 14]}
+                                                  context: nil].size.height;
+        
+        return 230 + labelHeight;
+    }
+    if (indexPath.section == 1) {
+        NSString *wenzi = self.model.answerContent;
+        CGFloat marin = 17.5;
+        CGFloat labelWidth = [UIScreen mainScreen].bounds.size.width - marin * 2;
+        CGFloat labelHeight = [wenzi boundingRectWithSize: CGSizeMake(labelWidth, 300)
+                                                  options: NSStringDrawingUsesLineFragmentOrigin
+                                               attributes: @{NSFontAttributeName : [UIFont systemFontOfSize: 14]}
+                                                  context: nil].size.height;
+        
+        return 230 + labelHeight;
+    }
+    if (indexPath.section == 2) {
+        NSString *wenzi = self.model.addQuestion;
+        CGFloat marin = 17.5;
+        CGFloat labelWidth = [UIScreen mainScreen].bounds.size.width - marin * 2;
+        CGFloat labelHeight = [wenzi boundingRectWithSize: CGSizeMake(labelWidth, 300)
+                                                  options: NSStringDrawingUsesLineFragmentOrigin
+                                               attributes: @{NSFontAttributeName : [UIFont systemFontOfSize: 14]}
+                                                  context: nil].size.height;
+        
+        return 230 + labelHeight;
+    }
+    if (indexPath.section == 3) {
+        NSString *wenzi = self.model.addAnswerContent;
+        CGFloat marin = 17.5;
+        CGFloat labelWidth = [UIScreen mainScreen].bounds.size.width - marin * 2;
+        CGFloat labelHeight = [wenzi boundingRectWithSize: CGSizeMake(labelWidth, 300)
+                                                  options: NSStringDrawingUsesLineFragmentOrigin
+                                               attributes: @{NSFontAttributeName : [UIFont systemFontOfSize: 14]}
+                                                  context: nil].size.height;
+        
+        return 230 + labelHeight;
+    }
+    
+    return 250;
     
     
 }
@@ -119,6 +207,7 @@ static NSString *voiceCellid = @"voiceCellid";
         if (self.model.answerVoice) {
             ZHMyConsultingAnswerVoiceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:answerVoiceCellid forIndexPath:indexPath];
             
+            cell.model = _model;
             return cell;
             
         }
@@ -140,6 +229,7 @@ static NSString *voiceCellid = @"voiceCellid";
         if (self.model.addAnswerVoice) {
             ZHMyConsultingVoiceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:voiceCellid forIndexPath:indexPath];
             
+            cell.voiceModel = _model;
             return cell;
         }
         ZHExpertChaseTableViewCell *contentCell = [tableView dequeueReusableCellWithIdentifier:expertChaseCellid forIndexPath:indexPath];
@@ -159,7 +249,7 @@ static NSString *voiceCellid = @"voiceCellid";
     
     if (!_tableView) {
         
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 64) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];

@@ -40,14 +40,19 @@
     
     [self.userAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.model.userAvatar]]];
     
-    if ([self.model.allowAnswer isEqual:@(0)]) {
+    if (self.model.allowAnswer == YES) {
         self.buttonTitle.text = @"我来回答";
     }
-    
-    if ([model.allowAddAnswer isEqual:@(0)]) {
+    if (model.allowAddAnswer == YES) {
         self.buttonTitle.text = @"回答追问";
     }
-    
 }
+
+- (IBAction)answerBtnAction:(UIButton *)sender {
+    
+    !self.didClick?:self.didClick();
+
+}
+
 
 @end
