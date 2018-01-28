@@ -19,18 +19,23 @@ static NSString *invoceMailCellid = @"invoceMailCellid";
 
 @property(nonatomic,strong)UITableView *tableView;
 
-
-
 @end
 
-@implementation ZHInvoiceViewController
+@implementation ZHInvoiceViewController {
+    
+    NSArray *_tempArray;
+    NSArray *_tempMailArray;
+    NSMutableDictionary *_tempDict;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     [self.view addSubview: self.tableView];
     
+    _tempDict = [NSMutableDictionary dictionary];
+    _tempArray = @[@"invoiceTitle",@"dutyParagraph",@"companyAddress",@"phone",@"depositBank",@"bankAccount"];
+    _tempMailArray = @[@"recipient",@"recipientMobile",@"recipientAddress",@"postcode"];
 
     UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 62, 20)] ;
     
@@ -94,38 +99,28 @@ static NSString *invoceMailCellid = @"invoceMailCellid";
         
         UIView *headerView = [[UIView alloc] init];
         headerView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
-        //    headerView.frame = self.view.frame;
-        //
+
         UILabel *nameLa = [[UILabel alloc]init];
-        
         nameLa.frame = CGRectMake(20, 10 ,[UIScreen mainScreen].bounds.size.width, 20);
-        
         nameLa.text = @"发票邮寄信息:";
         nameLa.font = [UIFont systemFontOfSize:15];
-        
         [headerView addSubview:nameLa];
-        
-        
+    
         return headerView;
-        
-        
     }
-    
-    
-    
     return view;
-    
-    
 }
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.section == 0) {
         ZHInvoiceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:invoceCellid forIndexPath:indexPath];
         cell.indexPath = indexPath;
-//        cell.model =
+
+        cell.textFieldClickBlock = ^(NSString *tempStr) {
+          
+            [_tempDict setValue:tempStr forKey: _tempArray[indexPath.row]];
+        };
         
         return cell;
     }
@@ -133,39 +128,65 @@ static NSString *invoceMailCellid = @"invoceMailCellid";
     ZHInvoiceMailTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:invoceMailCellid forIndexPath:indexPath];
     cell.indexPath = indexPath;
     
+    cell.textFieldClickBlock = ^(NSString *tempStr) {
+    
+        [_tempDict setValue:tempStr forKey: _tempMailArray[indexPath.row]];
+    };
+    
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)toAskQuestion {
     
-    
-    return;
+    if ([_tempDict allKeys].count >= 10) {
+        
+        NSMutableDictionary *dic = [ZHNetworkTools parameters];
+        [dic addEntriesFromDictionary:_tempDict];
+        
+        NSString *url = [NSString stringWithFormat:@"%@/api/invoiceInfo/ut/save",kIP];
+        
+        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+           
+            if (error) {
+                NSLog(@"%@",error);
+            }
+            
+            if ([response[@"errcode"] integerValue] == 60000) {
+                [SVProgressHUD showInfoWithStatus:response[@"message"]];
+            }
+            
+            if ([response[@"success"] integerValue] == 1) {
+                
+                [SVProgressHUD showSuccessWithStatus:@"保存成功"];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+          
+        }];
+        
+    }else {
+        [SVProgressHUD showInfoWithStatus:@"请确认信息"];
+    }
 }
 
+
+
+
+
+
 - (UITableView *)tableView {
-    //
-    
     if (!_tableView) {
         
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];
-        
-        
         _tableView.sectionHeaderHeight = 43;
 
-        
-        
         [_tableView registerNib:[UINib nibWithNibName:@"ZHInvoiceTableViewCell" bundle:nil] forCellReuseIdentifier:invoceCellid];
         
         [_tableView registerNib:[UINib nibWithNibName:@"ZHInvoiceMailTableViewCell" bundle:nil] forCellReuseIdentifier:invoceMailCellid];
-        
     }
-    
     return _tableView;
 }
-
-
 
 @end

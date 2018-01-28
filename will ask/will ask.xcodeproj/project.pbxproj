@@ -87,6 +87,13 @@
 		440771541FE929880000C20E /* ZHMoreRewardListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440771531FE929880000C20E /* ZHMoreRewardListViewController.m */; };
 		440771581FE929A00000C20E /* ZHMoreRewardListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 440771561FE929A00000C20E /* ZHMoreRewardListTableViewCell.m */; };
 		440771591FE929A00000C20E /* ZHMoreRewardListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440771571FE929A00000C20E /* ZHMoreRewardListTableViewCell.xib */; };
+		440B4CCB201DD1100049B01A /* KSGuaidViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B4CC6201DD1100049B01A /* KSGuaidViewCell.m */; };
+		440B4CCC201DD1100049B01A /* KSGuaidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B4CC8201DD1100049B01A /* KSGuaidViewController.m */; };
+		440B4CCD201DD1100049B01A /* KSGuaidViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B4CCA201DD1100049B01A /* KSGuaidViewManager.m */; };
+		440CC2BA2019A6250076D907 /* ZHMyCollectionOfCasesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440CC2B92019A6250076D907 /* ZHMyCollectionOfCasesViewController.m */; };
+		440CC2C12019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 440CC2BF2019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.m */; };
+		440CC2C22019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440CC2C02019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.xib */; };
+		440CC2C6201C44CB0076D907 /* messageBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 440CC2C5201C44CB0076D907 /* messageBtn.m */; };
 		441018761F4EADC700EBA751 /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4410184D1F4EADC700EBA751 /* ShareSDK.framework */; };
 		441018771F4EADC700EBA751 /* ShareSDKConfigFile.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 441018501F4EADC700EBA751 /* ShareSDKConfigFile.bundle */; };
 		441018781F4EADC700EBA751 /* ShareSDKConfigFile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 441018511F4EADC700EBA751 /* ShareSDKConfigFile.framework */; };
@@ -585,6 +592,19 @@
 		440771551FE929A00000C20E /* ZHMoreRewardListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHMoreRewardListTableViewCell.h; sourceTree = "<group>"; };
 		440771561FE929A00000C20E /* ZHMoreRewardListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHMoreRewardListTableViewCell.m; sourceTree = "<group>"; };
 		440771571FE929A00000C20E /* ZHMoreRewardListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHMoreRewardListTableViewCell.xib; sourceTree = "<group>"; };
+		440B4CC5201DD1100049B01A /* KSGuaidViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSGuaidViewCell.h; sourceTree = "<group>"; };
+		440B4CC6201DD1100049B01A /* KSGuaidViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSGuaidViewCell.m; sourceTree = "<group>"; };
+		440B4CC7201DD1100049B01A /* KSGuaidViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSGuaidViewController.h; sourceTree = "<group>"; };
+		440B4CC8201DD1100049B01A /* KSGuaidViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSGuaidViewController.m; sourceTree = "<group>"; };
+		440B4CC9201DD1100049B01A /* KSGuaidViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSGuaidViewManager.h; sourceTree = "<group>"; };
+		440B4CCA201DD1100049B01A /* KSGuaidViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSGuaidViewManager.m; sourceTree = "<group>"; };
+		440CC2B82019A6250076D907 /* ZHMyCollectionOfCasesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHMyCollectionOfCasesViewController.h; sourceTree = "<group>"; };
+		440CC2B92019A6250076D907 /* ZHMyCollectionOfCasesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHMyCollectionOfCasesViewController.m; sourceTree = "<group>"; };
+		440CC2BE2019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHMyCollectionCaseListTableViewCell.h; sourceTree = "<group>"; };
+		440CC2BF2019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHMyCollectionCaseListTableViewCell.m; sourceTree = "<group>"; };
+		440CC2C02019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZHMyCollectionCaseListTableViewCell.xib; sourceTree = "<group>"; };
+		440CC2C4201C44CB0076D907 /* messageBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = messageBtn.h; sourceTree = "<group>"; };
+		440CC2C5201C44CB0076D907 /* messageBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = messageBtn.m; sourceTree = "<group>"; };
 		4410184D1F4EADC700EBA751 /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
 		441018501F4EADC700EBA751 /* ShareSDKConfigFile.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKConfigFile.bundle; sourceTree = "<group>"; };
 		441018511F4EADC700EBA751 /* ShareSDKConfigFile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKConfigFile.framework; sourceTree = "<group>"; };
@@ -1860,6 +1880,64 @@
 			path = ZHExpertUserInfoHomePageViewController;
 			sourceTree = "<group>";
 		};
+		440B4CC4201DD1100049B01A /* KSGuaidView */ = {
+			isa = PBXGroup;
+			children = (
+				440B4CC5201DD1100049B01A /* KSGuaidViewCell.h */,
+				440B4CC6201DD1100049B01A /* KSGuaidViewCell.m */,
+				440B4CC7201DD1100049B01A /* KSGuaidViewController.h */,
+				440B4CC8201DD1100049B01A /* KSGuaidViewController.m */,
+				440B4CC9201DD1100049B01A /* KSGuaidViewManager.h */,
+				440B4CCA201DD1100049B01A /* KSGuaidViewManager.m */,
+			);
+			path = KSGuaidView;
+			sourceTree = "<group>";
+		};
+		440CC2B42019A6130076D907 /* ZHMyCollectionOfCases */ = {
+			isa = PBXGroup;
+			children = (
+				440CC2B52019A6130076D907 /* controller */,
+				440CC2B62019A6130076D907 /* model */,
+				440CC2B72019A6130076D907 /* view */,
+			);
+			path = ZHMyCollectionOfCases;
+			sourceTree = "<group>";
+		};
+		440CC2B52019A6130076D907 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				440CC2B82019A6250076D907 /* ZHMyCollectionOfCasesViewController.h */,
+				440CC2B92019A6250076D907 /* ZHMyCollectionOfCasesViewController.m */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		440CC2B62019A6130076D907 /* model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = model;
+			sourceTree = "<group>";
+		};
+		440CC2B72019A6130076D907 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				440CC2BE2019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.h */,
+				440CC2BF2019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.m */,
+				440CC2C02019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.xib */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		440CC2C3201C44B10076D907 /* MessageButtton */ = {
+			isa = PBXGroup;
+			children = (
+				440CC2C4201C44CB0076D907 /* messageBtn.h */,
+				440CC2C5201C44CB0076D907 /* messageBtn.m */,
+			);
+			path = MessageButtton;
+			sourceTree = "<group>";
+		};
 		4410184C1F4EADC700EBA751 /* ShareSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -2021,6 +2099,7 @@
 		441ADEA81F4BCAF200ECD63E /* baseVc */ = {
 			isa = PBXGroup;
 			children = (
+				440B4CC4201DD1100049B01A /* KSGuaidView */,
 				449A0D4020139CEA0003196A /* ZHJPushCustomMessageViewController */,
 				444D49CC1FF3332300D82736 /* ZHOrderPaymentVc */,
 				440771651FEB4FC80000C20E /* ZHExpertUserInfoHomePageViewController */,
@@ -2284,6 +2363,7 @@
 		442C03981F70EBE80078CDC7 /* ChildVC */ = {
 			isa = PBXGroup;
 			children = (
+				440CC2B42019A6130076D907 /* ZHMyCollectionOfCases */,
 				449A0CE4201350E90003196A /* ValidationViewController */,
 				448DC98B1FFB2BB9004F4F2A /* ZHSetUpVc */,
 				444D49791FF112B900D82736 /* ZHExpertServiceVc */,
@@ -3159,6 +3239,7 @@
 				44827BB71F9DBB6B0097F1E7 /* BRPickerView */,
 				449956B11F6275160087503B /* DESEncryption */,
 				449A0D1D20138FAF0003196A /* LPCAdditonal */,
+				440CC2C3201C44B10076D907 /* MessageButtton */,
 				444D49C91FF23FC700D82736 /* UIView+LayerEffects.h */,
 				444D49CA1FF23FC700D82736 /* UIView+LayerEffects.m */,
 				44C7AC821FAAF22500F42616 /* XLCircle.h */,
@@ -3935,6 +4016,7 @@
 				44310E191F906DCB00A68A66 /* MLImageCell.xib in Resources */,
 				441018801F4EADC700EBA751 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				441018851F4EADC700EBA751 /* README.txt in Resources */,
+				440CC2C22019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.xib in Resources */,
 				44827BF51FA869C30097F1E7 /* ZHAnswerVoiceTableViewCell.xib in Resources */,
 				440771591FE929A00000C20E /* ZHMoreRewardListTableViewCell.xib in Resources */,
 				449956D01F6299A40087503B /* public_key.der in Resources */,
@@ -4172,6 +4254,7 @@
 				44827BEA1FA851330097F1E7 /* ZHFreeDetailTableViewCell.m in Sources */,
 				440770861FDFDB8F0000C20E /* ZHRecordMoneyViewController.m in Sources */,
 				44827B3D1F971EEE0097F1E7 /* ZHRewardCellTableViewCell.m in Sources */,
+				440B4CCB201DD1100049B01A /* KSGuaidViewCell.m in Sources */,
 				444D49661FF0E19C00D82736 /* ZHExpertUserInfoTableViewCell.m in Sources */,
 				449A0CF8201350E90003196A /* expert.m in Sources */,
 				440770391FD785360000C20E /* ZHMyOrderModel.m in Sources */,
@@ -4188,6 +4271,7 @@
 				44827B3A1F971EEE0097F1E7 /* ZHBtn.m in Sources */,
 				444D49831FF1193F00D82736 /* ZHExpertServiceListTableViewCell.m in Sources */,
 				449A0C7B20062C400003196A /* ZHLearnToMeModel.m in Sources */,
+				440B4CCD201DD1100049B01A /* KSGuaidViewManager.m in Sources */,
 				440770401FD8DDD10000C20E /* ZHMyFreeAskViewController.m in Sources */,
 				44C7AC871FAAF22500F42616 /* XLCircleProgress.m in Sources */,
 				440770481FD8E9820000C20E /* ZHMyFreeAskModel.m in Sources */,
@@ -4257,6 +4341,7 @@
 				4445F807200103D50027EB1B /* VoiceConverter.mm in Sources */,
 				449A0D5220145FB90003196A /* UITextView+Placeholder.m in Sources */,
 				444D4A0C1FF376F000D82736 /* ZHOrderDetailVipCardModel.m in Sources */,
+				440B4CCC201DD1100049B01A /* KSGuaidViewController.m in Sources */,
 				440770441FD8E21D0000C20E /* ZHMyFreeAskTableViewCell.m in Sources */,
 				440770531FD930730000C20E /* ZHMyRewardListTableViewCell.m in Sources */,
 				447674D31F8F5F50007162AC /* ZHTitleTypeTableViewCell.m in Sources */,
@@ -4283,6 +4368,7 @@
 				4499570D1F6778440087503B /* UserModel.m in Sources */,
 				44827B4A1F97429C0097F1E7 /* ZHFreeQuestionViewController.m in Sources */,
 				44827BEF1FA868BA0097F1E7 /* ZHAnswerTableViewCell.m in Sources */,
+				440CC2C12019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.m in Sources */,
 				44827B3F1F9738EB0097F1E7 /* ZHFreeListTableViewCell.m in Sources */,
 				444D49701FF0EEAA00D82736 /* ZHExpertCaseModel.m in Sources */,
 				44C7AC981FB1A4F000F42616 /* ZHRewardDetailViewController.m in Sources */,
@@ -4300,6 +4386,7 @@
 				444D49FD1FF3517B00D82736 /* ZHOrderDetailModel.m in Sources */,
 				449A0C482005C35F0003196A /* ZHToAnswerTableViewCell.m in Sources */,
 				44827BD21F9DBB6B0097F1E7 /* BaseView.m in Sources */,
+				440CC2BA2019A6250076D907 /* ZHMyCollectionOfCasesViewController.m in Sources */,
 				448DC9D92000E7C0004F4F2A /* ZHBannerListModel.m in Sources */,
 				44827B511F974D2C0097F1E7 /* MLSubTagModel.m in Sources */,
 				448DC9911FFB2E9C004F4F2A /* ZHSetupViewController.m in Sources */,
@@ -4335,6 +4422,7 @@
 				442C03C71F739A670078CDC7 /* UserInfoModel.m in Sources */,
 				448DC9B51FFDBF6F004F4F2A /* ZHLearnTableViewCell.m in Sources */,
 				444D4A031FF351C600D82736 /* ZHOrderDetailConsultModel.m in Sources */,
+				440CC2C6201C44CB0076D907 /* messageBtn.m in Sources */,
 				440770A41FE24C830000C20E /* ZHInvoiceMailTableViewCell.m in Sources */,
 				449A0C5C200608EB0003196A /* ZHMyRewardAnswerTableViewCell.m in Sources */,
 				44C952021FB97AA9002B5509 /* ZHChooseTypeBtn.m in Sources */,

@@ -22,6 +22,8 @@
 #import "ZHUserInfoRewardModel.h"
 #import "ZHUserInfoBigModel.h"
 
+#import "ZHRewardDetailViewController.h"
+
 static NSString *userInfoCellid = @"userInfoCellid";
 
 static NSString *userInfoRewardCellid = @"userInfoRewardCellid";
@@ -32,7 +34,8 @@ static NSString *userInfoRewardVoiceCellid = @"userInfoRewardVoiceCellid";
 
 static NSString *userInfoFreeContentCellid = @"userInfoFreeContentCellid";
 
-static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
+static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
+
 
 
 @interface ZHUserHomePageViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -105,9 +108,9 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
 
 - (void)loadData{
     
-    NSString *userId = @"110341478336696320";
+//    NSString *userId = @"110341478336696320";
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
-    [dic setObject:userId forKey:@"userId"];
+    [dic setObject:_userId forKey:@"userId"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/user/uto/getUserHomePage",kIP];
     
@@ -234,13 +237,26 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
     if (indexPath.section == 0) {
         return 171;
     }
-    if (indexPath.section == 1) {
+    if (indexPath.section == 1 && _bigModel.rewardModel) {
         
-//        if (indexPath.row == 0) {
-//            return 70;
-//        }
+        if (_bigModel.rewardModel.answerContent) {
+            if (_bigModel.rewardModel.answerPhotos) {
+                return 298;
+            }else{
+                return 228;
+            }
+        }
         
-        return 300;
+        
+        if (_bigModel.rewardModel.answerVoice) {
+            return 300;
+        }
+        
+        if (!_bigModel.rewardModel.answerVoice) {
+            return 100;
+        }
+    }else{
+        return 100;
     }
     
     return 100;
@@ -279,26 +295,104 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
     
     if (indexPath.section == 1) {
         
-//        if (indexPath.row == 0) {
-//            ZHUserInfoRewardAskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoRewardCellid forIndexPath:indexPath];
-//            
-//            cell.rewardModel = _bigModel.rewardModel;
-//            return cell;
-//        }
-        
-//        if (indexPath.row == 1) {
-            ZHUserInfoRewardContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoRewardContntCellid forIndexPath:indexPath];
-            cell.rewardModel = _bigModel.rewardModel;
+        if (_bigModel.owner == NO) {
+            if (_bigModel.rewardModel.answerContent) {
+                ZHUserInfoRewardContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoRewardContntCellid forIndexPath:indexPath];
+                cell.rewardModel = _bigModel.rewardModel;
+                
+                cell.didClick = ^{
+                    
+                    ZHRewardDetailViewController *rewardVc = [[ZHRewardDetailViewController alloc]init];
+                    
+                    rewardVc.uidStringz = _bigModel.rewardModel.rewardAskId;
+                    [self.navigationController pushViewController:rewardVc animated:YES];
+                    
+                };
+                
+                return cell;
+            }else if(_bigModel.rewardModel.answerVoice){
+                ZHUserInfoRewardVoiceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoRewardVoiceCellid forIndexPath:indexPath];
+                
+                cell.rewardModel = _bigModel.rewardModel;
+                
+                cell.didClick = ^{
+                    ZHRewardDetailViewController *rewardVc = [[ZHRewardDetailViewController alloc]init];
+                    
+                    rewardVc.uidStringz = _bigModel.rewardModel.rewardAskId;
+                    [self.navigationController pushViewController:rewardVc animated:YES];
+                };
+                
+                return cell;
+            }
             
-            return cell;
-//        }
- 
+            if(!_bigModel.rewardModel.answerContent ||!_bigModel.rewardModel.answerVoice){
+                
+                ZHUserInfoNoModelTableViewCell *Nocell = [tableView dequeueReusableCellWithIdentifier:userInfoNoModelCelId forIndexPath:indexPath];
+                Nocell.titleLabel.text = @"您还没有悬赏问";
+                
+                return Nocell;
+            }
+        }else{
+            if (_bigModel.rewardModel.answerContent) {
+                ZHUserInfoRewardContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoRewardContntCellid forIndexPath:indexPath];
+                cell.rewardModel = _bigModel.rewardModel;
+                
+                cell.didClick = ^{
+                    
+                    ZHRewardDetailViewController *rewardVc = [[ZHRewardDetailViewController alloc]init];
+                    
+                    rewardVc.uidStringz = _bigModel.rewardModel.rewardAskId;
+                    [self.navigationController pushViewController:rewardVc animated:YES];
+                    
+                };
+                
+                return cell;
+            }else if(_bigModel.rewardModel.answerVoice){
+                ZHUserInfoRewardVoiceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoRewardVoiceCellid forIndexPath:indexPath];
+                
+                cell.rewardModel = _bigModel.rewardModel;
+                
+                cell.didClick = ^{
+                    ZHRewardDetailViewController *rewardVc = [[ZHRewardDetailViewController alloc]init];
+                    
+                    rewardVc.uidStringz = _bigModel.rewardModel.rewardAskId;
+                    [self.navigationController pushViewController:rewardVc animated:YES];
+                };
+                
+                return cell;
+            }
+            
+            if(!_bigModel.rewardModel.answerContent ||!_bigModel.rewardModel.answerVoice){
+                
+                ZHUserInfoNoModelTableViewCell *Nocell = [tableView dequeueReusableCellWithIdentifier:userInfoNoModelCelId forIndexPath:indexPath];
+                Nocell.titleLabel.text = @"您还没有悬赏问";
+                
+                return Nocell;
+            }
+        }
+      
+
     }
+    
     if (indexPath.section == 2) {
         ZHUserInfoFreeAskTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoFreeContentCellid forIndexPath:indexPath];
         
         cell.freeModel = _bigModel.freeModel;
         return cell;
+    }else if(!_bigModel.freeModel.freeAskId){
+        
+        if (_bigModel.owner == NO) {
+            ZHUserInfoNoModelTableViewCell *Nocell = [tableView dequeueReusableCellWithIdentifier:userInfoNoModelCelId forIndexPath:indexPath];
+            Nocell.titleLabel.text = @"他还没有免费问";
+            return Nocell;
+
+        }else{
+            ZHUserInfoNoModelTableViewCell *Nocell = [tableView dequeueReusableCellWithIdentifier:userInfoNoModelCelId forIndexPath:indexPath];
+            Nocell.titleLabel.text = @"您还没有免费问";
+            return Nocell;
+        }
+        
+        
     }
     
     
@@ -327,7 +421,7 @@ static NSString *userInfoNoModelCellid = @"userInfoNoModelCellid";
         
         [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoFreeAskTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoFreeContentCellid];
         
-        [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoNoModelTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoNoModelCellid];
+        [_tableView registerNib:[UINib nibWithNibName:@"ZHUserInfoNoModelTableViewCell" bundle:nil] forCellReuseIdentifier:userInfoNoModelCelId];
         
 //        _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 

@@ -147,7 +147,7 @@ static NSInteger kMaxCount = 3;
 
     // 发布拉起
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
-    
+    WEAKSELF
     if (_expertID) {
         [dic setObject:_expertID forKey:@"expertId"];
         
@@ -173,6 +173,10 @@ static NSInteger kMaxCount = 3;
                 ZHOrderPaymentViewController *payVc = [[ZHOrderPaymentViewController alloc]init];
                 payVc.payModel = model;
                 
+                payVc.popToView = ^{
+                    [weakSelf.navigationController popViewControllerAnimated:true];
+                };
+                
                 [self.navigationController pushViewController:payVc animated:YES];
                 
             }];
@@ -195,7 +199,7 @@ static NSInteger kMaxCount = 3;
                     index++;
                     //            NSLog(@"2131312321323  ===%@",objectKey);
                     
-                    NSString *bucketName = bucketNameFree;
+                    NSString *bucketName = bucketNameConsult;
                     //            NSLog(@"%@",bucketName);
                     
                     [service asyncPutImage:objectKey localFilePath:uploadFilePath bucketName:bucketName comletion:^(BOOL isSuccess) {
@@ -204,7 +208,7 @@ static NSInteger kMaxCount = 3;
                             [self.mArray addObject:objectKey];
                             
                             if (self.mArray.count >= imgCount) {
-                                [dic setObject: [_mArray componentsJoinedByString:@","] forKey: @"photos"];
+                                [dic setObject: [_mArray componentsJoinedByString:@","] forKey: @"questionPhotos"];
                                 [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
                                     
                                     if (error) {
@@ -220,6 +224,9 @@ static NSInteger kMaxCount = 3;
                                     
                                     ZHOrderPaymentViewController *payVc = [[ZHOrderPaymentViewController alloc]init];
                                     payVc.payModel = model;
+                                    payVc.popToView = ^{
+                                        [weakSelf.navigationController popViewControllerAnimated:true];
+                                    };
                                     
                                     [self.navigationController pushViewController:payVc animated:YES];
                                     
@@ -230,14 +237,11 @@ static NSInteger kMaxCount = 3;
                             imgCount--;
                         }
                     }];
-                    
-                    
-                    
                 }
             }
         }
-
     }
+    
     if (_consultId) {
         [dic setObject:_consultId forKey:@"consultId"];
         [dic setObject:_textView.text forKey:@"question"];
@@ -276,7 +280,7 @@ static NSInteger kMaxCount = 3;
                     index++;
                     //            NSLog(@"2131312321323  ===%@",objectKey);
                     
-                    NSString *bucketName = bucketNameFree;
+                    NSString *bucketName = bucketNameConsult;
                     //            NSLog(@"%@",bucketName);
                     
                     [service asyncPutImage:objectKey localFilePath:uploadFilePath bucketName:bucketName comletion:^(BOOL isSuccess) {
@@ -285,7 +289,7 @@ static NSInteger kMaxCount = 3;
                             [self.mArray addObject:objectKey];
                             
                             if (self.mArray.count >= imgCount) {
-                                [dic setObject: [_mArray componentsJoinedByString:@","] forKey: @"photos"];
+                                [dic setObject: [_mArray componentsJoinedByString:@","] forKey: @"questionPhotos"];
                                 [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
                                     
                                     if (error) {
@@ -303,9 +307,6 @@ static NSInteger kMaxCount = 3;
                             imgCount--;
                         }
                     }];
-                    
-                    
-                    
                 }
             }
         }

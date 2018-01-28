@@ -11,12 +11,8 @@
 #import "MLSubTagModel.h"
 #import "MLTagModel.h"
 #import "MLTagModelContainer.h"
-#import "ZHNetworkTools.h"
-#import "Macro.h"
 #import "MLTagButton.h"
-#import "YYModel.h"
 #import "ZHCaseListsModel.h"
-#import "MJRefresh.h"
 #import "ZHCaseListTableViewCell.h"
 #import "ZHCaseDetaiPageleViewController.h"
 
@@ -152,7 +148,7 @@ static NSString *CaseListCellid = @"CaseListCellid";
 //    
 //    return 155 + rectSize.size.height;
 //    //    }
-        return 200;
+        return 150;
 }
 
 
@@ -163,15 +159,13 @@ static NSString *CaseListCellid = @"CaseListCellid";
         return;
     }
     
-//    if (self.CaseListModels[indexPath.row].caseId) {
-////        
-//        ZHCaseDetaiPageleViewController *detailCaseVc = [[ZHCaseDetaiPageleViewController alloc]init];
-//        
-//        detailCaseVc.model = self.CaseListModels[indexPath.row];
-//        
-//        [self.navigationController pushViewController:detailCaseVc animated:YES];
-//        
-//    }
+    ZHCaseDetaiPageleViewController *caseDetailVc = [[ZHCaseDetaiPageleViewController alloc]init];
+    caseDetailVc.urlId = _CaseListModels[indexPath.row].caseId;
+    caseDetailVc.time = _CaseListModels[indexPath.row].readingTime;
+    caseDetailVc.title = _CaseListModels[indexPath.row].title;
+    caseDetailVc.words = _CaseListModels[indexPath.row].words;
+    
+    [self.navigationController pushViewController:caseDetailVc animated:YES];
     
 }
 

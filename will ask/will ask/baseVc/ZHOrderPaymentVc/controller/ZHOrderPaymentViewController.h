@@ -7,10 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @class ZHOrderPayModel,ZHTheThirdPartyModel;
+
+
+
 @interface ZHOrderPaymentViewController : UIViewController
 
 @property(nonatomic,strong)ZHOrderPayModel *payModel;
 
 @property(nonatomic,strong)ZHTheThirdPartyModel *model;
+
+@property (nonatomic, copy) void(^popToView)();
+
 @end

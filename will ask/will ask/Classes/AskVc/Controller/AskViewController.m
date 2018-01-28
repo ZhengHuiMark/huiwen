@@ -24,6 +24,7 @@
 #import "MJRefresh.h"
 #import "FreeDetailViewController.h"
 #import "ZHRewardDetailViewController.h"
+#import "ZHExpertViewController.h"
 
 static NSString *JumpCellid = @"JumpCellid";
 
@@ -49,10 +50,23 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 @implementation AskViewController
 
++ (instancetype)sharedInstance
+{
+    static AskViewController *instance;
+    static dispatch_once_t onceToken;
+    
+    dispatch_once(&onceToken, ^{
+        instance = [[AskViewController alloc] init];
+    });
+    return instance;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
    
     // Do any additional setup after loading the view.
+    
+    
     
     [self LoadFreeAskData];
     
@@ -99,7 +113,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
  
     UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [editorBtn addTarget:self action:@selector(toMessage) forControlEvents:UIControlEventTouchUpInside];
-    [editorBtn setImage:[UIImage imageNamed:@"news"] forState:UIControlStateNormal];
+    [editorBtn setImage:[UIImage imageNamed:@"news3"] forState:UIControlStateNormal];
     [editorBtn sizeToFit];
 
     UIBarButtonItem *editBtnItem = [[UIBarButtonItem alloc] initWithCustomView:editorBtn];
@@ -252,6 +266,15 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
             
             [self.navigationController pushViewController:freeVc animated:YES];
         };
+        
+        cell.AskExpertBtnClick = ^{
+            ZHExpertViewController *expertListVc = [[ZHExpertViewController alloc]init];
+            
+            [self.navigationController pushViewController:expertListVc animated:YES];
+            
+        };
+        
+        
         return cell;
     
     }else if (indexPath.section == 1){

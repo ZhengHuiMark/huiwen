@@ -39,7 +39,8 @@ static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) ZHCertifiedExpertsHeaderView *headerView;
 @property (nonatomic, strong) NSArray *secondGroupArr;
-@property (nonatomic, strong) NSArray *cateArr;
+@property (nonatomic, strong) NSMutableArray *cateArr;
+@property (nonatomic, strong) NSArray *isCertificationCateArr;
 @property (nonatomic, strong) NSMutableArray *thridGroupMArr;
 @property (nonatomic, strong) expert *expertModel;
 @property (nonatomic, strong) UIButton *savePersonInfomationBtn; /// 保存个人信息
@@ -50,16 +51,30 @@ static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
 
 @implementation ZHCertifiedExpertsVC
 
+- (instancetype)initWithCertification:(BOOL)isCertification {
+    self = [super init];
+    if (self) {
+        self.isCertification = isCertification;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"专家信息";
     self.uploadImageArr = [NSMutableArray new];
-    self.expertModel = [[expert alloc] init];
+    if (!self.isCertification) {
+        self.expertModel = [[expert alloc] init];
+    }
     self.expertModel.sex = 100;
     self.thridGroupMArr = [NSMutableArray new];
     self.view.backgroundColor = [UIColor whiteColor];
     [self creatSaveBackView];
-    self.secondGroupArr = @[@"*真实姓名:",@"*专家昵称:",@"*性别:",@"*所在地:",@"*出生日期:",@"*企业名称:",@"*职务:",@"*擅长业务:",@"*个人简介:"];
+    if (self.isCertification) {
+        self.secondGroupArr = @[@"真实姓名:",@"专家昵称:",@"性别:",@"所在地:",@"出生日期:",@"企业名称:",@"职务:",@"擅长业务:",@"个人简介:"];
+    } else {
+        self.secondGroupArr = @[@"*真实姓名:",@"*专家昵称:",@"*性别:",@"*所在地:",@"*出生日期:",@"*企业名称:",@"*职务:",@"*擅长业务:",@"*个人简介:"];
+    }
     [self loadData];
     
     
@@ -74,13 +89,39 @@ static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
 
 #pragma mark - 获取专家类型
 - (void)loadData {
-    NSMutableDictionary *dic = [ZHNetworkTools parameters];
-    NSString *url = [NSString stringWithFormat:@"%@/api/expert/getCertificationTypes",kIP];
-    [[ZHNetworkTools sharedTools] requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
-        NSLog(@"%@",response);
-        self.cateArr = [NSArray yy_modelArrayWithClass:[CertifiedExpertsModel class] json:response[@"data"]];
-        [self.view addSubview:self.tableView];
-    }];
+    if (self.isCertification) {
+        NSMutableDictionary *dicAll = [ZHNetworkTools parameters];
+        NSString *url = [NSString stringWithFormat:@"%@/api/expert/getCertificationTypes",kIP];
+        [[ZHNetworkTools sharedTools] requestWithType:GET andUrl:url andParams:dicAll andCallBlock:^(id response, NSError *error) {
+            NSLog(@"%@",response);
+            self.cateArr = [NSMutableArray arrayWithArray:[NSArray yy_modelArrayWithClass:[CertifiedExpertsModel class] json:response[@"data"]]];
+            NSMutableDictionary *dic = [ZHNetworkTools parameters];
+            NSString *url = [NSString stringWithFormat:@"%@/api/ut/expert/getExpertInfo",kIP];
+            [[ZHNetworkTools sharedTools] requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                NSLog(@"%@",response);
+                self.isCertificationCateArr = [NSArray yy_modelArrayWithClass:[CertifiedExpertsModel class] json:response[@"data"][@"certified"]];
+                NSMutableArray *tempArr = [NSMutableArray new];
+                for (CertifiedExpertsModel *modelAll in self.cateArr) {
+                    for (CertifiedExpertsModel *model in self.isCertificationCateArr) {
+                        if ([modelAll.name isEqualToString:model.name]) {
+                            [tempArr addObject:modelAll];
+                        }
+                    }
+                }
+                [self.cateArr removeObjectsInArray:tempArr];
+                self.expertModel = [expert yy_modelWithDictionary:response[@"data"]];
+                [self.view addSubview:self.tableView];
+            }];
+        }];
+    } else {
+        NSMutableDictionary *dic = [ZHNetworkTools parameters];
+        NSString *url = [NSString stringWithFormat:@"%@/api/expert/getCertificationTypes",kIP];
+        [[ZHNetworkTools sharedTools] requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+            NSLog(@"%@",response);
+            self.cateArr = [NSMutableArray arrayWithArray:[NSArray yy_modelArrayWithClass:[CertifiedExpertsModel class] json:response[@"data"]]];
+            [self.view addSubview:self.tableView];
+        }];
+    }
 }
 
 #pragma mark - 上传个人信息
@@ -170,14 +211,20 @@ static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
             cell = [[ZHCertifiedNormalCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ZHCertifiedNormalCellID];
         }
         cell.expertModel = self.expertModel;
+        cell.isCertification = self.isCertification;
         cell.titleStr = self.secondGroupArr[indexPath.row];
         cell.index = indexPath;
+        if (self.isCertification) {
+            
+        }
         return cell;
     } else if (indexPath.section == 1) {
         ZHCertificateCell *cell = [tableView dequeueReusableCellWithIdentifier:ZHCertificateCellID];
         if (!cell) {
             cell = [[ZHCertificateCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ZHCertificateCellID categoryArr:self.cateArr];
         }
+        cell.isCertificationCateArr = self.isCertificationCateArr;
+        cell.isCertification = self.isCertification;
         cell.expert = self.expertModel;
         WEAKSELF
         cell.SelectedExpertCategoryBlcok = ^(CertifiedExpertsModel *model,BOOL isSed) {
@@ -259,6 +306,9 @@ static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
     if (indexPath.section == 0) {
         return 50;
     } else if (indexPath.section == 1) {
+        if (self.isCertification) {
+            return 180;
+        }
         return 280;
     } else {
         return 200;
@@ -306,6 +356,7 @@ static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
 - (ZHCertifiedExpertsHeaderView *)headerView {
     if (!_headerView) {
         _headerView = [[ZHCertifiedExpertsHeaderView alloc] initWithFrame:CGRectMake(0, 0, kWidth, 150)];
+        _headerView.isCertification = self.isCertification;
         _headerView.expert = self.expertModel;
     }
     return _headerView;
@@ -321,7 +372,12 @@ static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
     _savePersonInfomationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _savePersonInfomationBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     _savePersonInfomationBtn.backgroundColor = [UIColor orangeColor];
-    [_savePersonInfomationBtn setTitle:@"提交认证" forState:UIControlStateNormal];
+    if (self.isCertification) {
+        [_savePersonInfomationBtn setTitle:@"保存" forState:UIControlStateNormal];
+    } else {
+        [_savePersonInfomationBtn setTitle:@"提交认证" forState:UIControlStateNormal];
+    }
+    
     [_savePersonInfomationBtn setCornerRadius:5];
     [_savePersonInfomationBtn addTarget:self action:@selector(putData) forControlEvents:UIControlEventTouchUpInside];
     [_savePersonInfomationBtn setTitleColor:[UIColor colorWithHexString:@"ffffff"] forState:UIControlStateNormal];

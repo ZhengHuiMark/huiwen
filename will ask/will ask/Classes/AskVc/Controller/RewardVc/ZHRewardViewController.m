@@ -22,13 +22,15 @@
 #import "ZHRewardDetailViewController.h"
 
 #import "ZHChooseTypeViewController.h"
+#import "ZHExpertUserInfoHomePageViewController.h"
+#import "ZHUserHomePageViewController.h"
 
 
 static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
 
 @interface ZHRewardViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>{
     NSString *_title;
-    NSNumber *_pageNumber;
+    NSInteger _pageNumber;
     
     
 }
@@ -63,11 +65,26 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self LoadFreeAskData];
     
     [self setupUI];
     
-    [self LoadData];
+    _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _pageNumber = 1;
+        
+        [self LoadData];
+        
+    }];
+    _tableView.mj_header.automaticallyChangeAlpha = YES;
+    _tableView.mj_footer.automaticallyHidden = YES;
+    
+    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        _pageNumber++;
+        [self LoadData];
+    }];
+    [_tableView.mj_header beginRefreshing];
+    [self LoadFreeAskData];
+
+    
 }
 
 
@@ -241,7 +258,7 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
                     if (tagModel.isSelected) {
                         _title = tagModel.title;
                         
-                        _pageNumber = @(1);
+                        _pageNumber = 1;
                         
                         
                         
@@ -249,7 +266,7 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
                         
                         NSMutableDictionary *dic = [ZHNetworkTools parameters];
                         [dic setObject:tagModel.code forKey:@"typeCode"];
-                        [dic setObject:_pageNumber forKey:@"pageNo"];
+                        [dic setObject:@(_pageNumber) forKey:@"pageNo"];
                         
                         [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
                             if (error) {
@@ -265,7 +282,8 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
                             
                             
                             [self.tableView reloadData];
-                            
+                            [_tableView.mj_header beginRefreshing];
+
                         }];
                         
                         
@@ -286,7 +304,7 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
                         
                         NSMutableDictionary *dic = [ZHNetworkTools parameters];
                         [dic setObject:tagModel.code forKey:@"typeCode"];
-                        [dic setObject:_pageNumber forKey:@"pageNo"];
+                        [dic setObject:@(_pageNumber) forKey:@"pageNo"];
                         
                         [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
                             if (error) {
@@ -302,7 +320,8 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
                             
                             
                             [self.tableView reloadData];
-                            
+                            [_tableView.mj_header beginRefreshing];
+
                         }];
                         
                         
@@ -326,6 +345,20 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
     }
     
     [cell setModel:model];
+    
+    
+    cell.didClick = ^{
+        if (model.certifiedNames) {
+            ZHExpertUserInfoHomePageViewController *expertVc = [[ZHExpertUserInfoHomePageViewController alloc]init];
+            expertVc.expertID = model.userId;
+            [self.navigationController pushViewController:expertVc animated:YES];
+        }else{
+            ZHUserHomePageViewController *userVc = [[ZHUserHomePageViewController alloc]init];
+            userVc.userId = model.userId;
+            [self.navigationController pushViewController:userVc animated:YES];
+            
+        }
+    };
     
     return cell;
 }
@@ -378,9 +411,16 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
         NSMutableArray<MLTagModel *> *tagModels = [NSMutableArray array];
         
         NSInteger index=0;
+        NSArray *imgs = @[@"accounting", @"tax", @"audit", @"assessment", @"software"];
+
         for (NSDictionary *dict in JSONArray) {
-            [tagModels addObject: [MLTagModel tagModelWithDictionary: dict
-                                                             atIndex: index]];
+//            [tagModels addObject: [MLTagModel tagModelWithDictionary: dict
+//                                                             atIndex: index]];
+            MLTagModel *aModel = [MLTagModel tagModelWithDictionary: dict
+                                                            atIndex: index];
+            aModel.imgName = imgs[index];
+            [tagModels addObject: aModel];
+            
             index++;
         }
         self.tagContainer.tagModels = [NSArray arrayWithArray: tagModels];
@@ -400,8 +440,9 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
     NSString *url = [NSString stringWithFormat:@"%@/api/rewardask/getRewardAskList",kIP];
     
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
-    [dic setObject: @"2"
-            forKey: @"type"];
+    [dic setObject:@(_pageNumber) forKey:@"pageNo"];
+//    [dic setObject: @"2"
+//            forKey: @"type"];
     
     
     
@@ -414,9 +455,23 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
         
         NSArray<ZHAskModel *> *models = [NSArray yy_modelArrayWithClass:[ZHAskModel class] json:response[@"data"]];
         
-        self.RewardModels = [NSMutableArray arrayWithArray:models];
-        
+//        self.RewardModels = [NSMutableArray arrayWithArray:models];
+        if (_pageNumber == 1) { // 刷新
+            self.RewardModels = [NSMutableArray arrayWithArray:models];
+        } else { // 加载更多
+            
+            self.RewardModels = [NSMutableArray arrayWithArray:models];
+        }
+    
         [self.tableView reloadData];
+        
+        if (!models || !models.count) {
+            [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        } else {
+            [self.tableView.mj_footer resetNoMoreData];
+        }
+        [self.tableView.mj_header endRefreshing];
+
         
     }];
     

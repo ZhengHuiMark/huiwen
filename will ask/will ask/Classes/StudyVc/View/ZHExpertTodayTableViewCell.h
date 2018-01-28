@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ZHStudyModel;
+@class ZHStudyModel,ZHAllModel;
 
 @interface ZHExpertTodayTableViewCell : UITableViewCell
 /** 专家头像  */
@@ -35,5 +35,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *caseNumber;
 
 @property(nonatomic,strong)ZHStudyModel *model;
+
+@property (nonatomic,strong)ZHAllModel *allModel;
 
 @end

@@ -48,8 +48,9 @@
         [_talkButton addTarget:self action:@selector(talkButtonUpInside:) forControlEvents:UIControlEventTouchUpInside];
         [_talkButton addTarget:self action:@selector(talkButtonUpOutside:) forControlEvents:UIControlEventTouchUpOutside];
         [_talkButton addTarget:self action:@selector(talkButtonTouchCancel:) forControlEvents:UIControlEventTouchCancel];
-        [_talkButton addTarget:self action:@selector(talkButtonDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
+//        [_talkButton addTarget:self action:@selector(talkButtonDragOutside:) forControlEvents:UIControlEventTouchDragOutside];
         [_talkButton addTarget:self action:@selector(talkButtonDragInside:) forControlEvents:UIControlEventTouchDragInside];
+        [_talkButton addTarget:self action:@selector(talkButtonDragInside:withEvent:) forControlEvents:UIControlEventTouchDragOutside];
     }
     return _talkButton;
 }
@@ -78,19 +79,41 @@
     }
 }
 
-- (void)talkButtonDragOutside:(UIButton *)sender
-{
-    if ([_delegate respondsToSelector:@selector(chatBoxDidDrag:)]) {
-        [_delegate chatBoxDidDrag:NO];
-    }
-}
+//- (void)talkButtonDragOutside:(UIButton *)sender
+//{
+//    if ([_delegate respondsToSelector:@selector(chatBoxDidDrag:)]) {
+//        NSLog(@"talkButtonDragOutside  NO ");
+//        [_delegate chatBoxDidDrag:NO];
+//    }
+//}
 
 - (void)talkButtonDragInside:(UIButton *)sender
 {
     if ([_delegate respondsToSelector:@selector(chatBoxDidDrag:)]) {
+        
+        NSLog(@"talkButtonDragInside YEs");
         [_delegate chatBoxDidDrag:YES];
     }
 }
+
+- (void)talkButtonDragInside:(UIButton *)sender withEvent:(UIEvent *)myEvent {
+    
+    UITouch *touch = [[myEvent allTouches] anyObject];
+    
+    CGPoint point = [touch locationInView:self];
+    
+    BOOL isIn = CGRectContainsPoint(self.bounds, point);
+    
+    if (isIn) {
+    }else {
+        if ([_delegate respondsToSelector:@selector(chatBoxDidDrag:)]) {
+            
+            NSLog(@"talkButtonDragInside NO");
+            [_delegate chatBoxDidDrag:NO];
+        }
+    }
+}
+
 
 - (void)talkButtonTouchCancel:(UIButton *)sender {
     

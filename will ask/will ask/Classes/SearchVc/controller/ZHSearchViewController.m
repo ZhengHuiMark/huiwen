@@ -10,6 +10,11 @@
 
 #import "ZHFoucsTableView.h"
 #import "ZHFocusButton.h"
+#import "ZHAllModel.h"
+#import "FreeDetailViewController.h"
+#import "ZHRewardDetailViewController.h"
+#import "ZHExpertUserInfoHomePageViewController.h"
+#import "ZHCaseDetaiPageleViewController.h"
 #define kTableViewWidth [UIScreen mainScreen].bounds.size.width
 
 @interface ZHSearchViewController ()<UIScrollViewDelegate>
@@ -128,10 +133,48 @@
     tableView.requestType = index;
     
 //    
-//    tableView.FocusCellSelectPush = ^(ZHModel *model){
-//       
-//    };
-//    
+    tableView.FocusCellSelectPush = ^(ZHAllModel *model){
+        
+        if (model.rewardAskId && model.rewardAskId.length) {
+            ZHRewardDetailViewController *FDeetailVc = [[ZHRewardDetailViewController alloc]init];
+            
+            FDeetailVc.uidStringz = model.rewardAskId ;
+            
+            [self.navigationController pushViewController:FDeetailVc animated:YES];
+            
+        }else if (model.freeAskId && model.freeAskId.length){
+            
+            FreeDetailViewController *FDeetailVc = [[FreeDetailViewController alloc]init];
+            
+            FDeetailVc.uidString = model.freeAskId ;
+            
+            [self.navigationController pushViewController:FDeetailVc animated:YES];
+            
+        }else if (model.expertId && model.expertId.length){
+            
+            ZHExpertUserInfoHomePageViewController  *expertVc = [[ZHExpertUserInfoHomePageViewController alloc]init];
+            
+            expertVc.expertID = model.expertId;
+            
+            [self.navigationController pushViewController:expertVc animated:YES];
+            
+        }
+        else if (model.caseId && model.caseId.length){
+            
+            ZHCaseDetaiPageleViewController *caseDetailVc = [[ZHCaseDetaiPageleViewController alloc]init];
+            caseDetailVc.urlId =    model.caseId;
+            caseDetailVc.time = model.readingTime;
+            caseDetailVc.title = model.title;
+            caseDetailVc.words = model.words;
+            
+            [self.navigationController pushViewController:caseDetailVc animated:YES];
+
+        }
+
+        
+//
+    };
+//
     // Add table view to dictionary
     [self.tableViewDict setObject: tableView forKey: _selectedButton.title];
     

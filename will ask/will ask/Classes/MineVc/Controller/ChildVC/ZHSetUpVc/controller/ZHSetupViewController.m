@@ -11,6 +11,7 @@
 #import "ZHSetupPushTableViewCell.h"
 #import "ZHExitAccountTableViewCell.h"
 #import "ZHLoginViewController.h"
+#import "JPUSHService.h"
 
 static NSString *setUpPushCellid = @"setUpPushCellid";
 
@@ -79,6 +80,15 @@ static NSString *exitCellid = @"exitCellid";
             [[UserManager sharedManager]removeUserModel];
             NSString *className = @"ZHLoginViewController";
             [self pushToSetControllerWithIndexPath:indexPath className:className];
+           
+            NSInteger code = 1;
+
+            [JPUSHService deleteAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+                
+                
+            } seq:code];
+            
+            
         };
         
         return cell;

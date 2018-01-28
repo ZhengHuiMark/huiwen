@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ZHUserInfoRewardModel,ZHExpertRewardModel;
+
+typedef void(^payAction)();
+typedef void(^goRewardAction)();
+
+@class ZHUserInfoRewardModel,ZHExpertRewardModel,ZHExpertBigUserModel;
 @interface ZHUserInfoRewardContentTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *userAvatar;
@@ -27,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *learnNumber;
 
 @property (weak, nonatomic) IBOutlet UILabel *releaseTime;
+@property (weak, nonatomic) IBOutlet UIButton *clickImage;
 
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *answerImgs;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *ansImgButtons;
@@ -36,4 +41,17 @@
 @property(nonatomic,strong)ZHUserInfoRewardModel *rewardModel;
 
 @property(nonatomic,strong)ZHExpertRewardModel *expertRewardModel;
+
+@property (nonatomic, strong) ZHExpertBigUserModel *bigModel;
+
+
+@property (nonatomic, copy) goRewardAction didClick;
+@property (nonatomic, copy) payAction payDidClick;
+
+@property (weak, nonatomic) IBOutlet UIImageView *bestImg;
+
+@property (weak, nonatomic) IBOutlet UIView *segmentationView;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
+
+
 @end

@@ -16,7 +16,7 @@ typedef void(^learnDidClick)();
 
 @property (weak, nonatomic) IBOutlet UILabel *userName;
 
-@property (weak, nonatomic) IBOutlet UIImageView *expertTypeImg;
+@property (weak, nonatomic) IBOutlet UILabel *expertHoor;
 
 @property (weak, nonatomic) IBOutlet UILabel *expertName;
 

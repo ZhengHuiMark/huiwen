@@ -12,7 +12,7 @@
 @interface ZHExpertBigUserModel : NSObject
 
 // 是否是自己的页面
-@property(nonatomic,copy)NSString *owner;
+@property(nonatomic,assign)BOOL owner;
 
 
 @property(nonatomic,strong)ZHExpertUserInfoModel *expertUserInfoModel;

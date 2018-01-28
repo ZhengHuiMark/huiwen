@@ -20,6 +20,8 @@
 #import "FreeDetailViewController.h"
 #import "MJRefresh.h"
 #import "ZHChooseTypeViewController.h"
+#import "ZHUserHomePageViewController.h"
+#import "ZHExpertUserInfoHomePageViewController.h"
 
 
 
@@ -298,7 +300,8 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
                             
                             [self.tableView reloadData];
                             
-                            
+                            [_tableView.mj_header beginRefreshing];
+
                             
                             
                         }];
@@ -337,7 +340,8 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
                             
                             
                             [self.tableView reloadData];
-                            
+                            [_tableView.mj_header beginRefreshing];
+
                         }];
                         
                         
@@ -357,8 +361,24 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     if (cell == nil) {
         cell = [[ZHFreeListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FreeListTableViewCellid];
     }
-    
+
     [cell setModel:model];
+    
+    cell.didClick = ^{
+        
+        if (model.certifiedNames) {
+            ZHExpertUserInfoHomePageViewController *expertVc = [[ZHExpertUserInfoHomePageViewController alloc]init];
+            expertVc.expertID = model.userId;
+            [self.navigationController pushViewController:expertVc animated:YES];
+        }else{
+            ZHUserHomePageViewController *userVc = [[ZHUserHomePageViewController alloc]init];
+            userVc.userId = model.userId;
+            [self.navigationController pushViewController:userVc animated:YES];
+
+        }
+        
+        
+    };
     
     return cell;
 }
@@ -412,9 +432,15 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
         NSMutableArray<MLTagModel *> *tagModels = [NSMutableArray array];
         
         NSInteger index=0;
+        NSArray *imgs = @[@"accounting", @"tax", @"audit", @"assessment", @"software"];
+
         for (NSDictionary *dict in JSONArray) {
-            [tagModels addObject: [MLTagModel tagModelWithDictionary: dict
-                                                             atIndex: index]];
+//            [tagModels addObject: [MLTagModel tagModelWithDictionary: dict
+//                                                             atIndex: index]];
+            MLTagModel *aModel = [MLTagModel tagModelWithDictionary: dict
+                                                            atIndex: index];
+            aModel.imgName = imgs[index];
+            [tagModels addObject: aModel];
             index++;
         }
         self.tagContainer.tagModels = [NSArray arrayWithArray: tagModels];
@@ -433,7 +459,6 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     NSString *url = [NSString stringWithFormat:@"%@/api/freeask/getFreeAskList",kIP];
     
     NSMutableDictionary *dic = [ZHNetworkTools parameters];
-
     [dic setObject:@(_pageNumber) forKey:@"pageNo"];
     
     

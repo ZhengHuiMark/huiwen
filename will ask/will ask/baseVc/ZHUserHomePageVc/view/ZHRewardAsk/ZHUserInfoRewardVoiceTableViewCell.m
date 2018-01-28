@@ -24,9 +24,27 @@
     _rewardModel = rewardModel;
     
     self.userName.text = self.rewardModel.expertNickname;
-//    self.
+
+    self.questionContenLabel.text = [NSString stringWithFormat:@"      %@",self.rewardModel.questionsContent];
+    
+    [self.userAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameRewardLoad,OSS,rewardModel.expertAvatar]]];
+    
+    self.ClickUpNumber.text = self.rewardModel.praiseNumber;
+
+    self.learnNumber.text = [NSString stringWithFormat:@"%@人已学习",self.rewardModel.learnNumber];
+    
+    self.releaseTime.text = self.rewardModel.time;
+}
+
+//  跳转支付页
+- (IBAction)btn:(UIButton *)sender {
+    
     
 }
 
+- (IBAction)btnAction:(UIButton *)sender {
+    
+    !self.didClick?:self.didClick();
+}
 
 @end

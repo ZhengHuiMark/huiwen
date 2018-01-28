@@ -106,17 +106,37 @@ static NSInteger kMaxCount = 3;
 
 @end
 
-@implementation ZHRewardDetailViewController
+@implementation ZHRewardDetailViewController {
+    
+    BOOL _isCancelBool;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+
+    [self.timer invalidate];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[AVAudioSession sharedInstance] requestRecordPermission:^(BOOL granted) {
+        
+        if (granted) {
+            NSLog(@"enabled");
+        } else {
+            NSLog(@"disabled");
+        }
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    _isCancelBool = NO;
     
 //    [self setupUI];
     
     [self loadData];
-    
-    
     
     [self.view addSubview:self.tableView];
     [self setupUI];
@@ -126,8 +146,6 @@ static NSInteger kMaxCount = 3;
     
     service = [[OssService alloc] initWithViewController:self withEndPoint:endPoint];
     [service setCallbackAddress:callbackAddress];
-
-    
 }
 
 
@@ -302,15 +320,10 @@ static NSInteger kMaxCount = 3;
                     
                 }];
             }
-            
-            
-            
         }];
     }
     
 }
-
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
@@ -325,19 +338,35 @@ static NSInteger kMaxCount = 3;
     
     if (indexPath.section == 0) {
         
+        if (self.detailModel.photos) {
+            
+            NSString *wenzi = self.detailModel.content;
+            CGFloat marin = 17.5;
+            CGFloat labelWidth = [UIScreen mainScreen].bounds.size.width - marin * 2;
+            CGFloat labelHeight = [wenzi boundingRectWithSize: CGSizeMake(labelWidth, 300)
+                                                      options: NSStringDrawingUsesLineFragmentOrigin
+                                                   attributes: @{NSFontAttributeName : [UIFont systemFontOfSize: 14]}
+                                                      context: nil].size.height;
+            
+            
+            
+            return 141 + labelHeight + 68;
+        }else{
+            
+            NSString *wenzi = self.detailModel.content;
+            CGFloat marin = 17.5;
+            CGFloat labelWidth = [UIScreen mainScreen].bounds.size.width - marin * 2;
+            CGFloat labelHeight = [wenzi boundingRectWithSize: CGSizeMake(labelWidth, 300)
+                                                      options: NSStringDrawingUsesLineFragmentOrigin
+                                                   attributes: @{NSFontAttributeName : [UIFont systemFontOfSize: 14]}
+                                                      context: nil].size.height;
+            
+            
+            
+            return 141 + labelHeight;
+        }
         
-        
-        NSString *wenzi = self.detailModel.content;
-        CGFloat marin = 17.5;
-        CGFloat labelWidth = [UIScreen mainScreen].bounds.size.width - marin * 2;
-        CGFloat labelHeight = [wenzi boundingRectWithSize: CGSizeMake(labelWidth, 300)
-                                                  options: NSStringDrawingUsesLineFragmentOrigin
-                                               attributes: @{NSFontAttributeName : [UIFont systemFontOfSize: 14]}
-                                                  context: nil].size.height;
-        
-        
-        
-        return 219 + labelHeight;
+       
     }
     
     if (self.detailModel.anserModels[indexPath.row].content) {
@@ -354,24 +383,19 @@ static NSInteger kMaxCount = 3;
         
         return 219 + labelHeight;
     }
-    
-    
     return 285;
 }
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
     return 2;
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (section == 0) {
         return 1;
     }
-    
     return self.detailModel.anserModels.count;
 }
 
@@ -404,12 +428,9 @@ static NSInteger kMaxCount = 3;
             noteLabel.font = [UIFont systemFontOfSize:13];
             
             [footerView addSubview:noteLabel];
-            
-            //
+        
             return footerView;
         }
-        
-        
         return [UIView new];
 }
 
@@ -440,9 +461,7 @@ static NSInteger kMaxCount = 3;
             NSString *url = [NSString stringWithFormat:@"%@/api/rewardask/ut/learn",kIP];
             
             [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
-                
-                
-                
+
                 ZHOrderPayModel *model = [ZHOrderPayModel yy_modelWithJSON:response[@"data"]];
                 model.descriptions = @"悬赏问-学习一下";
                 model.goodsName = @"学习一下订单";
@@ -456,7 +475,6 @@ static NSInteger kMaxCount = 3;
                 [self.navigationController pushViewController:payVc animated:YES];
                 NSLog(@"创建订单");
             }];
-   
         };
         return cell;
         
@@ -469,13 +487,30 @@ static NSInteger kMaxCount = 3;
 
         cell.answerModel = self.detailModel.anserModels[indexPath.row];
         
+        cell.didClick = ^{
+            
+            NSMutableDictionary *dic = [ZHNetworkTools parameters];
+            [dic setObject:self.detailModel.anserModels[indexPath.row].answerId forKey:@"rewardAskAnswerId"];
+            
+            NSString *url = [NSString stringWithFormat:@"%@/api/rewardask/ut/learn",kIP];
+            
+            [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                
+                ZHOrderPayModel *model = [ZHOrderPayModel yy_modelWithJSON:response[@"data"]];
+                model.descriptions = @"悬赏问-学习一下";
+                model.goodsName = @"学习一下订单";
+                model.amount = @"1";
+                
+                ZHOrderPaymentViewController *payVc = [[ZHOrderPaymentViewController alloc]init];
+                payVc.payModel = model;
+                
+                [self.navigationController pushViewController:payVc animated:YES];
+                NSLog(@"创建订单");
+            }];
+        };
         return cell;
-        
     }
-    
     return cell;
-    
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -484,9 +519,6 @@ static NSInteger kMaxCount = 3;
     
     return;
 }
-
-
-
 
 - (UITableView *)tableView {
     //
@@ -511,16 +543,12 @@ static NSInteger kMaxCount = 3;
     return _tableView;
 }
 
-
 - (void)setupUI{
-    
     
     [self.view addSubview:self.AllView];
     [_AllView addSubview:self.ControlsView];
     [_AllView addSubview:self.ContentView];
-    //    [_AllView addSubview:self.speakView];
     [_AllView addSubview:self.ImageView];
-    
     
     [self.ContentView addSubview:self.ContentTextView];
     [self.ControlsView addSubview:self.downBtn];
@@ -528,11 +556,8 @@ static NSInteger kMaxCount = 3;
     [self.ControlsView addSubview:self.speakBtn];
     [self.ControlsView addSubview:self.ReleaseBtn];
     
-    
-    
     [self.ContentTextView addSubview:self.PlaceholderLabel];
     [self.ContentTextView addSubview:self.LinkageLabel];
-    //    [self.speakView addSubview:self.VoiceBtn];
     
     self.ContentTextView.delegate = self;
     
@@ -555,17 +580,14 @@ static NSInteger kMaxCount = 3;
     _collectionView.showsVerticalScrollIndicator = NO;
     
     [self.ImageView addSubview:self.collectionView];
-    
 }
-
 
 - (UIButton *)VoiceBtn{
     if (!_VoiceBtn) {
         
         CGFloat VoiceBtnWidth = 75;
         CGFloat VoiceBtnHeight = VoiceBtnWidth;
-        
-        
+    
         _VoiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
         [_VoiceBtn setImage:[UIImage imageNamed:@"record"] forState:UIControlStateNormal];
@@ -573,7 +595,6 @@ static NSInteger kMaxCount = 3;
         
         _VoiceBtn.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - VoiceBtnWidth ) / 2, 42.5, VoiceBtnWidth, VoiceBtnHeight);
     }
-    
     return _VoiceBtn;
 }
 
@@ -582,25 +603,21 @@ static NSInteger kMaxCount = 3;
     if (!_deleteButton) {
         
         _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-        //        _deleteButton.titleLabel.text = @"删除";
         [_deleteButton setTitle:@"删除" forState:UIControlStateNormal];
         _deleteButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_deleteButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        
-        //        _deleteButton.center = self.VoiceView.center;
         _deleteButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width / 2 - 14 , 150, 50, 13);
         [_deleteButton addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
-        
     }
     
     return _deleteButton;
 }
+
 #pragma mark - 删除语音消息
 - (void)deleteAction{
     
     [self.VoiceView removeFromSuperview];
-    
+    _isCancelBool = YES;
 }
 
 - (UIView *)ControlsView{
@@ -614,12 +631,8 @@ static NSInteger kMaxCount = 3;
         _ControlsView.backgroundColor = [UIColor lightGrayColor];
         
         _ControlsView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, ControlsViewHeight);
-        
     }
-    
-    
     return _ControlsView;
-    
 }
 
 - (UIView *)ContentView{
@@ -633,10 +646,7 @@ static NSInteger kMaxCount = 3;
         _ContentView.backgroundColor = [UIColor redColor];
         
         _ContentView.frame = CGRectMake(0, CGRectGetMaxY(self.ControlsView.frame), [UIScreen mainScreen].bounds.size.width, ContentViewHeight);
-        
     }
-    
-    
     return _ContentView;
 }
 
@@ -650,15 +660,9 @@ static NSInteger kMaxCount = 3;
         _AllView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         _AllView.frame = (CGRect){CGPointMake(0, [UIScreen mainScreen].bounds.size.height - 64
                                               ), CGSizeMake([UIScreen mainScreen].bounds.size.width, AllViewHeight )};
-     
-      
     }
-    
-    
     return _AllView;
-    
 }
-
 
 - (UIView *)VoiceView{
     
@@ -670,10 +674,8 @@ static NSInteger kMaxCount = 3;
         
         _VoiceView.frame =  CGRectMake(0, CGRectGetMaxY(self.ControlsView.frame), [UIScreen mainScreen].bounds.size.width, VoiceViewHeight);
     }
-    
     return _VoiceView;
 }
-
 
 - (UIView *)speakView{
     
@@ -686,9 +688,7 @@ static NSInteger kMaxCount = 3;
         _speakView.backgroundColor = [UIColor greenColor];
         
         _speakView.frame = CGRectMake(0, CGRectGetMaxY(self.ControlsView.frame), [UIScreen mainScreen].bounds.size.width, SpeakViewHeight);
-        
     }
-    
     return _speakView;
 }
 
@@ -703,12 +703,9 @@ static NSInteger kMaxCount = 3;
         _ImageView.backgroundColor = [UIColor blueColor];
         
         _ImageView.frame = CGRectMake(0, CGRectGetMaxY(self.ContentView.frame), [UIScreen mainScreen].bounds.size.width, SpeakViewHeight);
-        
     }
     return _ImageView;
 }
-
-
 
 - (UITextView *)ContentTextView{
     
@@ -717,17 +714,12 @@ static NSInteger kMaxCount = 3;
         CGFloat ContentTextViewHeight = 190;
         
         _ContentTextView = [UITextView new];
-        
-        
         _ContentTextView.backgroundColor = [UIColor yellowColor];
         _ContentTextView.alpha = .8;
-        
-        
         _ContentTextView.frame = CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, ContentTextViewHeight);
     }
     return _ContentTextView;
 }
-
 
 - (UILabel *)PlaceholderLabel {
     
@@ -736,9 +728,7 @@ static NSInteger kMaxCount = 3;
         
         _PlaceholderLabel.text = @"请输入您的回答";
         _PlaceholderLabel.font = [UIFont systemFontOfSize:14];
-        
         _PlaceholderLabel.frame = CGRectMake(5, 7, 100, 15);
-        
     }
     return _PlaceholderLabel;
 }
@@ -792,10 +782,6 @@ static NSInteger kMaxCount = 3;
         
         [_downBtn addTarget:self action:@selector(downDownControl) forControlEvents:UIControlEventTouchUpInside];
     }
-    
-    
-    
-    
     return _downBtn;
 }
 
@@ -827,7 +813,6 @@ static NSInteger kMaxCount = 3;
     //        [self.ContentTextView removeFromSuperview];
     _speakBtn.selected = YES;
     self.textBtn.selected = NO;
-    
 }
 
 - (UIButton *)textBtn {
@@ -860,9 +845,6 @@ static NSInteger kMaxCount = 3;
     
     _speakBtn.selected = NO;
     self.textBtn.selected = YES;
-    
-    
-    
 }
 
 - (void)downDownControl {
@@ -875,8 +857,6 @@ static NSInteger kMaxCount = 3;
     } completion:^(BOOL finished) {
         
     }];
-    
-    
 }
 
 - (void)UPUPUP {
@@ -894,7 +874,6 @@ static NSInteger kMaxCount = 3;
     } completion:^(BOOL finished) {
         
     }];
-    
 }
 
 - (void)textViewDidChange:(UITextView *)textView{
@@ -921,13 +900,16 @@ static NSInteger kMaxCount = 3;
     [[ICRecordManager shareManager] startRecordingWithFileName:self.recordName completion:^(NSError *error) {
         if (error) {   // 加了录音权限的判断
         } else {
-            //            if ([_delegate respondsToSelector:@selector(voiceDidStartRecording)]) {
-            //                [_delegate voiceDidStartRecording];
-            //            }
             NSLog(@"应该是拿到录音文件 %@ ",self.recordName);
             
             self.voiceHud.hidden = NO;
-            [self timer];
+            
+            if (_isCancelBool) {
+                self.voiceHud.image  = [UIImage imageNamed:@"voice_1"];
+                [self.timer setFireDate:[NSDate date]];
+            }else {
+                [self timer];
+            }
         }
     }];
 }
@@ -942,19 +924,14 @@ static NSInteger kMaxCount = 3;
             [self.voiceHud removeFromSuperview];
             [alertString showString:@"语音太短" Delay:1];
             [[ICRecordManager shareManager] removeCurrentRecordFile:weakSelf.recordName];
-            
-            
+        
         } else {
-            //            if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController:sendVoiceMessage:)]) {
-            //                [_delegate chatBoxViewController:weakSelf sendVoiceMessage:recordPath];
-            //            }
+            
             self.voiceHud.hidden = YES;
             NSLog(@"path-%@-",recordPath);
             
             CGFloat VoiceBtnWidth = 75;
             CGFloat VoiceBtnHeight = VoiceBtnWidth;
-            
-            
             
             [_VoiceBtn setImage:[UIImage imageNamed:@"record"] forState:UIControlStateNormal];
             [_VoiceBtn setImage:[UIImage imageNamed:@"record1"] forState:UIControlStateSelected];
@@ -982,29 +959,24 @@ static NSInteger kMaxCount = 3;
             _voicePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"456"];;
             [_VoiceData writeToFile:_voicePath atomically:YES];
             
-            
-            
-            
             [self.VoiceView addSubview:yuyin];
-            
         }
     }];
+    
+    [_timer setFireDate:[NSDate distantFuture]];
 }
 
 - (void)chatBoxDidCancelRecordingVoice:(ICChatBox *)chatBox {
     
     NSLog(@"Cancel");
-    
-    //    if ([_delegate respondsToSelector:@selector(voiceDidCancelRecording)]) {
-    //        [_delegate voiceDidCancelRecording];
-    //    }
     [[ICRecordManager shareManager] removeCurrentRecordFile:self.recordName];
     self.voiceHud.hidden = YES;
-    [_timer invalidate];
+    [_timer setFireDate:[NSDate distantFuture]];
+    _isCancelBool = YES;
 }
 
-- (void)chatBoxDidDrag:(BOOL)inside
-{
+- (void)chatBoxDidDrag:(BOOL)inside {
+    
     NSLog(@"DidDrag");
     
     if (inside) {
@@ -1015,7 +987,6 @@ static NSInteger kMaxCount = 3;
         self.voiceHud.animationImages  = nil;
         self.voiceHud.image = [UIImage imageNamed:@"cancelVoice"];
     }
-    [_timer invalidate];
 }
 
 - (NSString *)currentRecordFileName
@@ -1048,11 +1019,38 @@ static NSInteger kMaxCount = 3;
 {
     AVAudioRecorder *recorder = [[ICRecordManager shareManager] recorder] ;
     [recorder updateMeters];
-    float power= [recorder averagePowerForChannel:0];//取得第一个通道的音频，注意音频强度范围时-160到0,声音越大power绝对值越小
-    //   float lowPassResults = pow(10, (0.05 * [recorder peakPowerForChannel:0]));
     
-    CGFloat progress = (1.0/160)*(power + 160);
-    self.voiceHud.progress = progress;
+    float   level;                // The linear 0.0 .. 1.0 value we need.
+    
+    float   minDecibels = -80.0f; // Or use -60dB, which I measured in a silent room.
+    
+    float   decibels = [recorder averagePowerForChannel:0];
+    
+    if (decibels < minDecibels) {
+        
+        level = 0.0f;
+        
+    } else if (decibels >= 0.0f) {
+        
+        level = 1.0f;
+        
+    } else {
+        
+        float   root            = 2.0f;
+        
+        float   minAmp          = powf(10.0f, 0.05f * minDecibels);
+        
+        float   inverseAmpRange = 1.0f / (1.0f - minAmp);
+        
+        float   amp             = powf(10.0f, 0.05f * decibels);
+        
+        float   adjAmp          = (amp - minAmp) * inverseAmpRange;
+        
+        level = powf(adjAmp, 1.0f / root);
+    }
+    
+    self.voiceHud.progress = level* 100;
+    NSLog(@"平均值 %f level %f %f ", level * 100,level,self.voiceHud.progress);
 }
 
 #pragma mark - UICollectionView DataSource
@@ -1122,7 +1120,6 @@ static NSInteger kMaxCount = 3;
     [self.collectionView reloadData];
 }
 
-
 #pragma mark - Lazy load
 - (UICollectionViewFlowLayout *)layout {
     if (!_layout) {
@@ -1136,7 +1133,6 @@ static NSInteger kMaxCount = 3;
     return _layout;
 }
 
-
 - (NSMutableArray<MLImageModel *> *)imageModels {
     if (!_imageModels) {
         _imageModels = [NSMutableArray arrayWithObject: [MLImageModel new]];
@@ -1144,7 +1140,6 @@ static NSInteger kMaxCount = 3;
     }
     return _imageModels;
 }
-
 
 - (NSMutableArray *)mArray {
     
@@ -1155,6 +1150,7 @@ static NSInteger kMaxCount = 3;
     
     return _mArray;
 }
+
 
 
 

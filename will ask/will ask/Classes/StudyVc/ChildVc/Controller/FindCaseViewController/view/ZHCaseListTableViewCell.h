@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ZHCaseListsModel;
+@class ZHCaseListsModel,ZHAllModel;
 
 @interface ZHCaseListTableViewCell : UITableViewCell
 
 @property(nonatomic,strong)ZHCaseListsModel *model;
+@property (nonatomic, strong) ZHAllModel *allModel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *typeImg;
 

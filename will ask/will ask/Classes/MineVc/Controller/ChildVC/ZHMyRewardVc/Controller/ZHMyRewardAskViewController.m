@@ -534,9 +534,16 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
         NSMutableArray<MLTagModel *> *tagModels = [NSMutableArray array];
         
         NSInteger index=0;
+        NSArray *imgs = @[@"accounting", @"tax", @"audit", @"assessment", @"software"];
+
         for (NSDictionary *dict in JSONArray) {
-            [tagModels addObject: [MLTagModel tagModelWithDictionary: dict
-                                                             atIndex: index]];
+//            [tagModels addObject: [MLTagModel tagModelWithDictionary: dict
+//                                                             atIndex: index]];
+            MLTagModel *aModel = [MLTagModel tagModelWithDictionary: dict
+                                                            atIndex: index];
+            aModel.imgName = imgs[index];
+            [tagModels addObject: aModel];
+            
             index++;
         }
         self.tagContainer.tagModels = [NSArray arrayWithArray: tagModels];
@@ -571,9 +578,16 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
         NSMutableArray<MLTagModel *> *tagModels = [NSMutableArray array];
         
         NSInteger index=0;
+        NSArray *imgs = @[@"accounting", @"tax", @"audit", @"assessment", @"software"];
+
         for (NSDictionary *dict in JSONArray) {
-            [tagModels addObject: [MLTagModel tagModelWithDictionary: dict
-                                                             atIndex: index]];
+//            [tagModels addObject: [MLTagModel tagModelWithDictionary: dict
+//                                                             atIndex: index]];
+            MLTagModel *aModel = [MLTagModel tagModelWithDictionary: dict
+                                                            atIndex: index];
+            aModel.imgName = imgs[index];
+            [tagModels addObject: aModel];
+            
             index++;
         }
         self.tagContainer.tagModels = [NSArray arrayWithArray: tagModels];

@@ -67,11 +67,24 @@
     }];
 }
 
+-  (void)setExpert:(expert *)expert {
+    _expert = expert;
+    if (self.isCertification) {
+        [_iconBtn.imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,expert.realPhoto]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            if (image) {
+                [_iconBtn setImage:image forState:UIControlStateNormal];
+            } else {
+                [_iconBtn setImage:[UIImage imageNamed:@"bj"] forState:UIControlStateNormal];
+            }
+            
+        }];
+    }
+}
+
 #pragma mark - Private Method
 - (void)customMethod {
     
 }
-
 
 - (void)setCertificationCard:(UIButton *)sender {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];

@@ -30,7 +30,7 @@
 		<key>nextButton</key>
 		<string>s-get</string>
 		<key>name</key>
-		<string>我查阅的案例</string>
+		<string>我收藏的案例</string>
 		<key>icon</key>
 		<string>book.png</string>
 	</dict>

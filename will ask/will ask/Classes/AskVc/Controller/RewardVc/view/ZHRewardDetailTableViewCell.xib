@@ -51,7 +51,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="        Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLD-HK-Lvt">
-                        <rect key="frame" x="18" y="76" width="340" height="17"/>
+                        <rect key="frame" x="18" y="75" width="340" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -125,6 +125,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="o2A-KW-pFm" firstAttribute="leading" secondItem="6nh-rP-m8v" secondAttribute="leading" id="75w-A3-L3b"/>
+                    <constraint firstItem="W3F-SR-YGZ" firstAttribute="leading" secondItem="KYf-oy-daU" secondAttribute="leading" id="7NF-yV-CO4"/>
                     <constraint firstItem="umd-lx-o70" firstAttribute="top" secondItem="DfO-FU-nGI" secondAttribute="top" id="A2o-ek-ivR"/>
                     <constraint firstItem="o2A-KW-pFm" firstAttribute="bottom" secondItem="6nh-rP-m8v" secondAttribute="bottom" id="Awa-pw-aej"/>
                     <constraint firstItem="NlC-nK-4s8" firstAttribute="top" secondItem="GpT-Ey-8Tf" secondAttribute="top" id="BEO-I7-OzI"/>
@@ -141,6 +142,7 @@
                     <constraint firstItem="KYf-oy-daU" firstAttribute="top" secondItem="zt4-R5-reo" secondAttribute="topMargin" constant="18" id="OQA-pI-53d"/>
                     <constraint firstItem="NlC-nK-4s8" firstAttribute="top" secondItem="vLD-HK-Lvt" secondAttribute="bottom" constant="18" id="Ou7-YT-y0l"/>
                     <constraint firstItem="umd-lx-o70" firstAttribute="leading" secondItem="DfO-FU-nGI" secondAttribute="leading" id="P2W-5w-pFA"/>
+                    <constraint firstItem="vLD-HK-Lvt" firstAttribute="top" secondItem="lWe-9T-MLy" secondAttribute="top" id="PTB-Hr-uiO"/>
                     <constraint firstItem="umd-lx-o70" firstAttribute="trailing" secondItem="DfO-FU-nGI" secondAttribute="trailing" id="PVY-QK-yrA"/>
                     <constraint firstItem="NlC-nK-4s8" firstAttribute="leading" secondItem="GpT-Ey-8Tf" secondAttribute="leading" id="Q4K-uJ-IJX"/>
                     <constraint firstItem="8Ds-ed-AzX" firstAttribute="top" secondItem="o2A-KW-pFm" secondAttribute="bottom" constant="29.5" id="RIA-ul-cIZ"/>
@@ -158,7 +160,6 @@
                     <constraint firstItem="cHv-Lz-fHL" firstAttribute="top" secondItem="zt4-R5-reo" secondAttribute="top" constant="20" id="sQX-C4-SPe"/>
                     <constraint firstItem="o2A-KW-pFm" firstAttribute="top" secondItem="6nh-rP-m8v" secondAttribute="top" id="uJg-wz-yFf"/>
                     <constraint firstItem="bvi-1v-uee" firstAttribute="top" secondItem="zt4-R5-reo" secondAttribute="top" id="xlX-xM-aSs"/>
-                    <constraint firstItem="W3F-SR-YGZ" firstAttribute="leading" secondItem="zt4-R5-reo" secondAttribute="leading" constant="51.5" id="yfF-1v-71u"/>
                     <constraint firstItem="DfO-FU-nGI" firstAttribute="leading" secondItem="6nh-rP-m8v" secondAttribute="trailing" constant="7.5" id="yrX-mN-S5c"/>
                     <constraint firstItem="NlC-nK-4s8" firstAttribute="trailing" secondItem="GpT-Ey-8Tf" secondAttribute="trailing" id="zIc-RI-hdN"/>
                 </constraints>

@@ -92,13 +92,25 @@
                             <constraint firstAttribute="height" constant="5" id="ECt-jb-dhD"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YJF-7E-dNd">
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="qv4-YE-zVp"/>
+                            <constraint firstAttribute="width" constant="80" id="umL-aO-7xz"/>
+                        </constraints>
+                        <connections>
+                            <action selector="btnUserInfo:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="iKh-V8-ncj"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="GgG-am-2ad" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="4zv-SF-Ddp"/>
+                    <constraint firstItem="YJF-7E-dNd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6Ai-ON-iBc"/>
                     <constraint firstAttribute="trailing" secondItem="L3p-V1-KTP" secondAttribute="trailing" constant="18" id="C5d-ZL-9Nb"/>
                     <constraint firstAttribute="trailing" secondItem="0N0-Tb-yEF" secondAttribute="trailing" constant="16" id="GwL-sN-3Yj"/>
                     <constraint firstItem="uja-bh-8Zp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="JKZ-pI-A7F"/>
                     <constraint firstItem="L3p-V1-KTP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="28" id="JWO-YA-YzB"/>
+                    <constraint firstItem="YJF-7E-dNd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="KgC-H0-7fn"/>
                     <constraint firstItem="FNy-mJ-QND" firstAttribute="leading" secondItem="Arz-zN-bof" secondAttribute="leading" id="NHh-aR-2Bg"/>
                     <constraint firstItem="3fu-Xl-1t6" firstAttribute="top" secondItem="GgG-am-2ad" secondAttribute="bottom" constant="27" id="Otf-Qc-xuE"/>
                     <constraint firstItem="uja-bh-8Zp" firstAttribute="top" secondItem="0N0-Tb-yEF" secondAttribute="bottom" constant="10" id="QN1-cQ-s7j"/>

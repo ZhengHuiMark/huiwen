@@ -17,6 +17,8 @@
 #import "ZHRecordMoneyViewController.h"
 #import "ZHInvoiceViewController.h"
 #import "alertButtonView.h"
+#import "ZHOrderPayModel.h"
+#import "ZHOrderPaymentViewController.h"
 
 static NSString *cardNumberCellid = @"cardNumberCellid";
 
@@ -142,13 +144,40 @@ static NSString *vipCardDetailCellid = @"vipCardDetailCellid";
     cell.didClick = ^(){
       
         alertButtonView *alert = [alertButtonView new];
-        alert.leftLabel.text = @"name";
-        alert.rightLabel.text = @"$9999000";
+        alert.leftLabel.text = self.cardModel.cards[indexPath.row].name;
+        alert.rightLabel.text = self.cardModel.cards[indexPath.row].amount;
         [alert showsAlertView];
         
-        alert.numBlock = ^(NSInteger num) {
-            NSLog(@"%lu",num);
-//            na.text = [NSString stringWithFormat:@"%lu",num];
+        alert.numBlock = ^(NSInteger num, NSString *priceStr) {
+            NSLog(@"%lu = %d = %@",num,self.cardModel.isInvoice,priceStr);
+
+            NSMutableDictionary *dic = [ZHNetworkTools parameters];
+            [dic setObject:@(num) forKey:@"number"];
+            [dic setObject:@(NO) forKey:@"needInvoice"];
+            [dic setObject:self.cardModel.cards[indexPath.row].cardId forKey:@"cardId"];
+            NSString *url = [NSString stringWithFormat:@"%@/api/ut/memberCard/buy",kIP];
+            
+            [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                
+                if (error) {
+                    NSLog(@"%@",error);
+                }
+                
+                ZHOrderPayModel *model = [ZHOrderPayModel yy_modelWithJSON:response[@"data"]];
+                model.descriptions = self.cardModel.cards[indexPath.row].name;
+                model.goodsName = @"购买会员卡";
+                model.amount = priceStr;
+                
+                ZHOrderPaymentViewController *payVc = [[ZHOrderPaymentViewController alloc]init];
+                payVc.payModel = model;
+                
+                [self.navigationController pushViewController:payVc animated:YES];
+
+            }];
+            
+            
+            
+            
         };
         
     };

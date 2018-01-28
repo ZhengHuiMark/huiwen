@@ -14,7 +14,9 @@
 #import "ZHNetworkTools.h"
 #import "Macro.h"
 #import "JPushMessageModel.h"
-
+#import "ZHCertifiedExpertsVC.h"
+#import "ZHTabBarViewController.h"
+#import "AskViewController.h"
 
 
 #import <ShareSDK/ShareSDK.h>
@@ -45,17 +47,24 @@
 #import "WXApiManager.h"
 
 #import <AlipaySDK/AlipaySDK.h>
+#import "KSGuaidViewManager.h"
 
 
 
 @interface AppDelegate ()<JPUSHRegisterDelegate,WXApiDelegate>
 
+
+
 @end
 
-@implementation AppDelegate
+@implementation AppDelegate{
+    NSMutableArray *_dataSoureMArray;
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    _dataSoureMArray = [NSMutableArray array];
     // Override point for customization after application launch.
     /**
      *  设置ShareSDK的appKey，如果尚未在ShareSDK官网注册过App，请移步到http://mob.com/login 登录后台进行应用注册，
@@ -124,6 +133,11 @@
     //注册微信支付
     [WXApi registerApp:@"wxc264c5d4f565c692"];
     
+    NSInteger code = 1;
+    [JPUSHService getAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+        
+        NSLog(@"!@#@!#!#1234567889");
+    } seq:code];
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
     JPUSHRegisterEntity * entity = [[JPUSHRegisterEntity alloc] init];
@@ -179,7 +193,17 @@
     
     [_window makeKeyAndVisible];
     
-       [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
+    
+    KSGuaidManager.images = @[[UIImage imageNamed:@"bj"],
+                              [UIImage imageNamed:@"bj"],
+                              [UIImage imageNamed:@"bj"],
+                              [UIImage imageNamed:@"bj"]];
+    
+    KSGuaidManager.dismissButtonImage = [UIImage imageNamed:@"会问"];
+    KSGuaidManager.dismissButtonCenter = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, [UIScreen mainScreen].bounds.size.height - 80);
+    [KSGuaidManager begin];
 
     return YES;
 }
@@ -203,23 +227,26 @@
     
     NSLog(@"推%@",customizeField1);
     
-    NSMutableArray *dataSoureMArray = [NSMutableArray array];
+    
+    NSArray *arr =[NSKeyedUnarchiver unarchiveObjectWithFile:kPersonInfoPath];
+    _dataSoureMArray = [NSMutableArray arrayWithArray:arr];
+    
     
     JPushMessageModel *model = [JPushMessageModel new];
-    model.time = extras[@""];
-    model.objectId = extras[@""];
-    model.linkType = extras[@""];
-    model.msgType = extras[@""];
-    model.content = extras[@"content"];
-    model.title = extras[@"title"];
-    model.pushType = extras[@""];
+    model.time = extras[@"time"];
+    model.objectId = extras[@"objectId"];
+    model.linkType = extras[@"linkType"];
+    model.msgType = extras[@"msgType"];
+    model.content = userInfo[@"content"];
+    model.title = userInfo[@"title"];
+    model.pushType = extras[@"pushType"];
     model.isMessageSelection = NO;
     model.isHiddenChooseBtn = YES;
     model.isRead = NO;
-    [dataSoureMArray addObject:model];
+    [_dataSoureMArray insertObject:model atIndex:0];
 
     
-    BOOL ret =  [NSKeyedArchiver archiveRootObject:dataSoureMArray toFile:kPersonInfoPath];
+    BOOL ret =  [NSKeyedArchiver archiveRootObject:_dataSoureMArray toFile:kPersonInfoPath];
     if (ret) {
         NSLog(@"归档成功");
     }else{
@@ -230,6 +257,7 @@
 //        code
 //    } seq:(NSInteger)];
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:kJPushMessage object:nil];
 }
 
 
@@ -256,6 +284,8 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
         [JPUSHService handleRemoteNotification:userInfo];
     }
+    
+    
     completionHandler(UNNotificationPresentationOptionAlert); // 需要执行这个方法，选择是否提醒用户，有Badge、Sound、Alert三种类型可以选择设置
 }
 
@@ -277,16 +307,39 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         
         //取得Extras字段内容(额外的附加信息)
         
+        
+  
         NSString *customizeField1 = [userInfo valueForKey:@"Extras"];//服务端中Extras字段，key是自己定义的
         
         NSLog(@"自定义message:%@",userInfo);
+        
         
         NSLog(@"推%@",content);
         
 //        NSLog(@"推%@",extras);
         
-        NSLog(@"推%@",customizeField1);
+        NSLog(@"推%@ = %@",customizeField1,userInfo[@"linkType"]);
        
+        
+        switch ([userInfo[@"linkType"] integerValue]) {
+            case 11:
+                
+                break;
+            case 12:
+            {
+                ZHCertifiedExpertsVC *expertVc = [[ZHCertifiedExpertsVC alloc]init];
+//                [self.inputViewController.navigationController pushViewController:expertVc animated:YES];
+                ZHTabBarViewController *tabVC = (ZHTabBarViewController *)self.window.rootViewController;
+                ZHNavigationVC *nav = tabVC.viewControllers[tabVC.selectedIndex];
+                [nav pushViewController:expertVc animated:YES];
+            }
+                
+                break;
+    
+            default:
+                break;
+        }
+        
     }
     completionHandler();  // 系统要求执行这个方法
 }
@@ -297,8 +350,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [JPUSHService handleRemoteNotification:userInfo];
     NSLog(@" 推送消息 = %@",userInfo);
     completionHandler(UIBackgroundFetchResultNewData);
-   
-    
 }
 
 

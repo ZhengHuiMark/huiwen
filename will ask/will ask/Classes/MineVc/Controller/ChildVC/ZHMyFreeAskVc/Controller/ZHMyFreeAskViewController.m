@@ -271,12 +271,20 @@ static NSString *MyFreeAskCellid = @"MyFreeAskCellid";
         
 //        _title = @"未选中标签";
         NSArray<NSDictionary *> *JSONArray = response[@"data"];
+        
+        NSArray *imgs = @[@"accounting", @"tax", @"audit", @"assessment", @"software"];
+
         NSMutableArray<MLTagModel *> *tagModels = [NSMutableArray array];
         
         NSInteger index=0;
         for (NSDictionary *dict in JSONArray) {
-            [tagModels addObject: [MLTagModel tagModelWithDictionary: dict
-                                                             atIndex: index]];
+//            [tagModels addObject: [MLTagModel tagModelWithDictionary: dict
+//                                                             atIndex: index]];
+            MLTagModel *aModel = [MLTagModel tagModelWithDictionary: dict
+                                                            atIndex: index];
+            aModel.imgName = imgs[index];
+            [tagModels addObject: aModel];
+            
             index++;
         }
         self.tagContainer.tagModels = [NSArray arrayWithArray: tagModels];

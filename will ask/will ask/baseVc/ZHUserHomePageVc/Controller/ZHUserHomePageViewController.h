@@ -11,6 +11,8 @@
 
 @interface ZHUserHomePageViewController : UIViewController
 
+@property (nonatomic, strong) NSString *userId;
+
 @property(nonatomic,strong)ZHUserInfoModel *userInfoModel;
 
 @property(nonatomic,strong)ZHUserInfoFreeModel *freeModel;

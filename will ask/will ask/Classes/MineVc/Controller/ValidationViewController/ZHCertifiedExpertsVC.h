@@ -12,5 +12,7 @@
  认证专家
  */
 @interface ZHCertifiedExpertsVC : UIViewController
+@property (nonatomic, assign) BOOL isCertification;
 
+- (instancetype)initWithCertification:(BOOL)isCertification; // 是否认证
 @end

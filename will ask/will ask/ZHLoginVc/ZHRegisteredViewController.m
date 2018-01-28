@@ -16,29 +16,23 @@
 #import "ZHNavigationVC.h"
 #import "MLTextField.h"
 #import "Macro.h"
+#import "JPUSHService.h"
 
 
 @interface ZHRegisteredViewController ()
 @property(nonatomic,copy)MLTextField *PhoneNumberL;
 
-//@property(nonatomic,copy)UIView *LineView;
-
 @property(nonatomic,copy)MLTextField *validationTf;
 
 @property(nonatomic,copy)UIButton *validationBtn;
 
-//@property(nonatomic,copy)UIView *LineView1;
-
 @property(nonatomic,copy)MLTextField *PasswordT;
-
-//@property(nonatomic,copy)UIView *LineView2;
 
 @property(nonatomic,copy)UIButton *RegisteredBtn;
 
 @property(nonatomic,copy)NSMutableAttributedString *MString;
 
 @property(nonatomic,copy)UILabel *AgreementL;
-
 
 @end
 
@@ -132,13 +126,20 @@
             return;
         }
         
-        
-        
         NSLog(@"%@",response);
         [SVProgressHUD showInfoWithStatus:@"注册成功"];
         [UserManager sharedManager].userModel = [UserModel yy_modelWithJSON:response[@"data"]];
         [[UserManager sharedManager]saveUserModel];
         [SVProgressHUD dismissWithDelay:2.0f];
+
+        /** 极光推送set绑定设备号 */
+        NSInteger code = 1;
+        [JPUSHService setAlias:[UserManager sharedManager].userModel.deviceAlias completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            
+            NSLog(@"123 = %ld 456 = %@ 798 = %ld",(long)iResCode,iAlias,(long)seq);
+            
+            
+        } seq:code ];
         
     }];
     
@@ -219,17 +220,19 @@
             return;
         }
         NSLog(@"%@",response);
-        [SVProgressHUD showInfoWithStatus:@"验证码已发送"];
-        [SVProgressHUD dismissWithDelay:2.0f];
+        if ([response[@"success"] integerValue] == 1) {
+            [SVProgressHUD showInfoWithStatus:@"验证码已发送"];
+            [SVProgressHUD dismissWithDelay:2.0f];
 
+        }else if ([response[@"errcode"] integerValue] == 60000){
+            [SVProgressHUD showInfoWithStatus:response[@"message"]];
+            [SVProgressHUD dismissWithDelay:2.0f];
+
+        }
+     
  
     }];
 
-    }else{
-        [SVProgressHUD showInfoWithStatus:@"您输入的手机号码格式不正确"];
-        [SVProgressHUD dismissWithDelay:2.0f];
-
-        return;
     }
 }
 

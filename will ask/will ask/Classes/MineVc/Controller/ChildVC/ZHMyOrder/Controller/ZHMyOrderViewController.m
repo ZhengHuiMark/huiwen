@@ -36,16 +36,22 @@ static NSString *myOrderCellid = @"myOrderCellid";
 
 @property(nonatomic,strong)UITableView *tableView;
 
+@property (nonatomic, strong) UIView *lineView;
+
 
 
 
 @end
 
-@implementation ZHMyOrderViewController
+@implementation ZHMyOrderViewController {
+    
+    NSString *_loadDataStr;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    _loadDataStr = @"";
     
     self.view.backgroundColor = [UIColor colorWithRed:245 green:245 blue:245 alpha:1];
     
@@ -199,34 +205,26 @@ static NSString *myOrderCellid = @"myOrderCellid";
       
         
         [_allBtn addTarget:self action:@selector(btnActions:) forControlEvents:UIControlEventTouchUpInside];
-        [HeaderView addSubview:_allBtn];
         [_allBtn setTitle:[array objectAtIndex:i] forState:UIControlStateNormal];
         
         [_btnMutableArray addObject:_allBtn];
  
-        UIView *view = [UIView new];
-        view.frame = (CGRect){CGRectGetMinX(_allBtn.frame) + 35 , CGRectGetMaxY(_allBtn.frame)-1, CGRectGetWidth(_allBtn.frame) / 2, 1};
-        view.hidden = YES;
-        [view setBackgroundColor: [UIColor redColor]];
-        [HeaderView addSubview: view];
-        [_arrSepViews addObject: view];
-        
-        if (!i) {
+        _lineView = [UIView new];
+        _lineView.frame = (CGRect){CGRectGetMinX(_allBtn.frame) + 35 , CGRectGetMaxY(_allBtn.frame)-1, CGRectGetWidth(_allBtn.frame) / 2, 1};
+        _lineView.hidden = YES;
+        _lineView.tag = i;
+        [_lineView setBackgroundColor: [UIColor redColor]];
+        [HeaderView addSubview: _lineView];
+        [_arrSepViews addObject: _lineView];
+        [HeaderView addSubview:_allBtn];
+
+        if (i == 0) {
             _allBtn.selected = YES;
-            view.hidden = NO;
+            _lineView.hidden = NO;
         }
     }
-    
-//    ((UIButton *)[_btnMutableArray objectAtIndex:0]).selected = YES;  // 关键是这里，设置 数组的第一个button为选中状态
 
-    
-//    _tempBtn = nil;
-
-    
-    
 }
-
-
 
 - (void)btnActions:(UIButton *)sender{
     
@@ -240,9 +238,22 @@ static NSString *myOrderCellid = @"myOrderCellid";
         btn.selected = NO;
     }
 
-    [self.arrSepViews makeObjectsPerformSelector: @selector(setHidden:) withObject: @(YES)];
+    
+    for (_lineView in _arrSepViews) {
+        
+        if (_lineView.tag == sender.tag) {
+            _lineView.hidden = NO;
+        }else {
+            _lineView.hidden = YES;
+        }
+    }
+    
+//    [[self.arrSepViews objectAtIndex: sender.tag] setHidden:@(NO)];
+
     sender.selected = YES;
-    [[self.arrSepViews objectAtIndex: sender.tag] setHidden: NO];
+    
+//    [self.arrSepViews makeObjectsPerformSelector: @selector(setHidden:) withObject: @(YES)];
+    [_tableView.mj_header removeFromSuperview];
     
     if (tag == 0) {
         
@@ -262,7 +273,7 @@ static NSString *myOrderCellid = @"myOrderCellid";
     }
     
     if (tag == 1) {
-        
+//        [_tableView.mj_header removeFromSuperview];
         _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             _pageNo = 1;
             
@@ -273,7 +284,7 @@ static NSString *myOrderCellid = @"myOrderCellid";
         _tableView.mj_header.automaticallyChangeAlpha = YES;
         _tableView.mj_footer.automaticallyHidden = YES;
         
-        [_tableView.mj_header beginRefreshing];
+//        [_tableView.mj_header beginRefreshing];
         
         
         _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -281,13 +292,16 @@ static NSString *myOrderCellid = @"myOrderCellid";
             
             [self requestFormNetWorkstatus:@"0" pageNo:_pageNo];
             
+            
         }];
         [_tableView.mj_header beginRefreshing];
+
 
     }
     
     if (tag == 2) {
         
+//        [_tableView.mj_header removeFromSuperview];
         _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
             _pageNo = 1;
             
@@ -297,21 +311,36 @@ static NSString *myOrderCellid = @"myOrderCellid";
         }];
         _tableView.mj_header.automaticallyChangeAlpha = YES;
         _tableView.mj_footer.automaticallyHidden = YES;
-        
-        [_tableView.mj_header beginRefreshing];
+    
+//        [_tableView.mj_header beginRefreshing];
 
         _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
             _pageNo++;
             
-            [self requestFormNetWorkstatus:@"2" pageNo:_pageNo];
+            [self requestFormNetWorkstatus:@"1" pageNo:_pageNo];
             
         }];
-        [_tableView.mj_header beginRefreshing];
-        
+                    [_tableView.mj_header beginRefreshing];
+
 
     }
-    
-
+//    */
+//    
+//    switch (sender.tag) {
+//        case 0:
+//            [self requestFormNetWorkstatus:@"" pageNo:_pageNo];
+//            [_tableView.mj_header beginRefreshing];
+////            _loadDataStr = @"";
+//            break;
+//        case 1:
+//            [self requestFormNetWorkstatus:@"0" pageNo:_pageNo];
+//            [_tableView.mj_header beginRefreshing];
+//            break;
+//        case 2:
+//            [self requestFormNetWorkstatus:@"1" pageNo:_pageNo];
+//            [_tableView.mj_header beginRefreshing];
+//            break;
+//    }
     
 }
 
@@ -330,7 +359,21 @@ static NSString *myOrderCellid = @"myOrderCellid";
         self.tableView.rowHeight = 222;
     
         
+        
+//        _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//            _pageNo = 1;
+//        
+//            [self requestFormNetWorkstatus:_loadDataStr pageNo:_pageNo];
+//        }];
+//        
+//        _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+//            _pageNo++;
+//            
+//            [self requestFormNetWorkstatus:_loadDataStr pageNo:_pageNo];
+//        }];
+        
         [_tableView registerNib:[UINib nibWithNibName:@"ZHMyorderTableViewCell" bundle:nil] forCellReuseIdentifier:myOrderCellid];
+        
     }
     return _tableView;
 }

@@ -7,13 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+
+typedef void(^goRewardVc)();
 @class ZHUserInfoRewardModel;
 @interface ZHUserInfoRewardVoiceTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *userAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
-@property (weak, nonatomic) IBOutlet UIImageView *expertTypeImg;
-@property (weak, nonatomic) IBOutlet UILabel *expertName;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *VoiceTime;
 @property (weak, nonatomic) IBOutlet UIButton *VoiceBtn;
@@ -28,7 +29,11 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *releaseTime;
 
+@property (weak, nonatomic) IBOutlet UILabel *questionContenLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *payBackImgView;
+
 @property (strong,nonatomic)ZHUserInfoRewardModel *rewardModel;
 
+@property (nonatomic, copy) goRewardVc didClick;
 
 @end

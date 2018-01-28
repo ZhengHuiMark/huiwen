@@ -25,6 +25,7 @@
 @implementation alertButtonView {
     
     NSInteger _num;
+    CGFloat _price;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -148,7 +149,7 @@
 - (void)payBtnClickAction {
     
     if (self.numBlock) {
-        self.numBlock(_num);
+        self.numBlock(_num,self.rightLabel.text);
     }
     [self removeAlertButtonView];
 }
@@ -164,7 +165,9 @@
     if (_num == 1) {
         self.redBtn.enabled = NO;
     }
+    
     self.numLabel.text = [NSString stringWithFormat:@"%lu",_num];
+    self.rightLabel.text = [NSString stringWithFormat:@"%0.2f", _num*_price];
 }
 
 - (void)addBtnClickAction {
@@ -172,6 +175,7 @@
     self.redBtn.enabled = YES;
     _num++;
     self.numLabel.text = [NSString stringWithFormat:@"%lu",_num];
+    self.rightLabel.text = [NSString stringWithFormat:@"%0.2f",_num*_price];
 }
 
 - (void)showsAlertView {
@@ -185,7 +189,8 @@
         self.payView.frame = CGRectMake(20, ScreenHeight-150, ScreenWidth-40, 100);
         self.numView.frame = CGRectMake(20, ScreenHeight-320, ScreenWidth-40, 150);
     }];
-   
+    
+    _price = [self.rightLabel.text floatValue];
 }
 
 - (void)removeAlertButtonView {

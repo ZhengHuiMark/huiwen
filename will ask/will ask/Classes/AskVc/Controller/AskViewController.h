@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AskViewController : UITableViewController
-
++ (instancetype)sharedInstance;
 @end

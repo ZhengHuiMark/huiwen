@@ -115,6 +115,10 @@
 
 - (void)ceshi{
     
+    if (!_PhoneNumberL.ml_textfiled.text.length || !_PasswordNumberL.ml_textfiled.text.length  ) {
+        [SVProgressHUD showErrorWithStatus:@"请输入正确的账号密码"];
+    }else{
+    
     
     NSMutableDictionary *dict = [ZHNetworkTools parameters];
     [dict setObject: _PhoneNumberL.ml_textfiled.text
@@ -123,7 +127,7 @@
              forKey: @"password"];
     
     NSString *url = [NSString stringWithFormat:@"%@/api/user/login",kIP];
-
+    [SVProgressHUD show];
     [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dict andCallBlock:^(id response, NSError *error) {
         if (error) {
             NSLog(@"网络请求异常 %@",error);
@@ -131,50 +135,54 @@
         }
         
         NSLog(@"%@",response);
-//        [UserManager sharedManager].userModel;
-        
-        // 创建用户数据模型
-        // 登录成功
-        [UserManager sharedManager].userModel = [UserModel yy_modelWithJSON:response[@"data"]];
-        [[UserManager sharedManager]saveUserModel];
-        
-        /** 极光推送set绑定设备号 */
-        NSInteger code = 1;
+        [SVProgressHUD dismiss];
+        if ([response[@"success"] integerValue] == 1) {
+            // 创建用户数据模型
+            // 登录成功
+            
+            [UserManager sharedManager].userModel = [UserModel yy_modelWithJSON:response[@"data"]];
+            [[UserManager sharedManager]saveUserModel];
+            
+            /** 极光推送set绑定设备号 */
+            NSInteger code = 1;
             [JPUSHService setAlias:[UserManager sharedManager].userModel.deviceAlias completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
                 
                 NSLog(@"123 = %ld 456 = %@ 798 = %ld",(long)iResCode,iAlias,(long)seq);
                 
                 
             } seq:code ];
+            
+            
+            
+            
+            !self.loginCompletion?:self.loginCompletion(NO);
+            
+            //
+            //        if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass: [ZHNavigationVC class]]) {
+            //            ZHTabBarViewController *ZHTabController = [[ZHTabBarViewController alloc]init];
+            //            [UIApplication sharedApplication].keyWindow.rootViewController = ZHTabController;
+            //        } else {
+            //            ZHLoginViewController *tabBarVC = [[ZHLoginViewController alloc]initWithNibName:[NSString stringWithFormat:@"ZHLoginInViewController"] bundle:[NSBundle mainBundle]];
+            //
+            //            ZHNavigationVC *nav = [[ZHNavigationVC alloc] initWithRootViewController:tabBarVC];
+            //            [nav.navigationBar setTintColor:[UIColor whiteColor]];
+            //            [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
+            //                                                                 forBarMetrics:UIBarMetricsDefault];
+            //        }
+            
+            // loginSuccess
+            [[NSNotificationCenter defaultCenter] postNotificationName: @"NSNotification_LoginSuccess"
+                                                                object: nil];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            [SVProgressHUD showSuccessWithStatus:@"登录成功"];
+            [SVProgressHUD dismissWithDelay:1.5];
+        }
         
-
-        
-        
-        !self.loginCompletion?:self.loginCompletion(NO);
-        
-//        
-//        if ([[UIApplication sharedApplication].keyWindow.rootViewController isKindOfClass: [ZHNavigationVC class]]) {
-//            ZHTabBarViewController *ZHTabController = [[ZHTabBarViewController alloc]init];
-//            [UIApplication sharedApplication].keyWindow.rootViewController = ZHTabController;
-//        } else {
-//            ZHLoginViewController *tabBarVC = [[ZHLoginViewController alloc]initWithNibName:[NSString stringWithFormat:@"ZHLoginInViewController"] bundle:[NSBundle mainBundle]];
-//            
-//            ZHNavigationVC *nav = [[ZHNavigationVC alloc] initWithRootViewController:tabBarVC];
-//            [nav.navigationBar setTintColor:[UIColor whiteColor]];
-//            [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60)
-//                                                                 forBarMetrics:UIBarMetricsDefault];
-//        }
-
-        // loginSuccess
-        [[NSNotificationCenter defaultCenter] postNotificationName: @"NSNotification_LoginSuccess"
-                                                            object: nil];
-        
-        [self.navigationController popViewControllerAnimated:YES];
-        
-//        self.tabBarController.selectedIndex = 1;
 
         
     }];
+}
 ////原始数据
 //    NSString *str = @"ibuaiVcKdpRxkhJA_1491819233692";
 //    

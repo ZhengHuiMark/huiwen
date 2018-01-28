@@ -160,6 +160,16 @@
                         <state key="normal" title="学习一下:￥1元">
                             <color key="titleColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
+                        <connections>
+                            <action selector="btnPayAction:" destination="lzb-Eg-PFb" eventType="touchUpInside" id="85X-Ea-ImS"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nFs-6C-6Ft">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
+                        <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="btnAction:" destination="lzb-Eg-PFb" eventType="touchUpInside" id="iPI-Gx-DG9"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -190,6 +200,7 @@
                     <constraint firstItem="LaW-qT-C56" firstAttribute="top" secondItem="Cg4-3C-g9l" secondAttribute="bottom" constant="12" id="Pkl-NQ-mY0"/>
                     <constraint firstItem="pxe-XM-UcS" firstAttribute="top" secondItem="yYA-nI-s0e" secondAttribute="top" id="Q5H-cP-qCh"/>
                     <constraint firstAttribute="trailing" secondItem="Na9-Se-iYl" secondAttribute="trailing" constant="20" id="QJH-8a-q2c"/>
+                    <constraint firstAttribute="trailing" secondItem="nFs-6C-6Ft" secondAttribute="trailing" id="SlP-ey-noS"/>
                     <constraint firstItem="RS3-iM-8Zj" firstAttribute="top" secondItem="ain-IR-Zjl" secondAttribute="bottom" constant="19" id="SnY-Wg-YQB"/>
                     <constraint firstItem="OPm-Cm-pnV" firstAttribute="top" secondItem="QYh-ju-jiu" secondAttribute="bottom" constant="21" id="TS8-7R-h8P"/>
                     <constraint firstItem="7vc-we-lf8" firstAttribute="top" secondItem="ryO-sQ-EBb" secondAttribute="bottom" id="Wu9-rS-KKg"/>
@@ -199,6 +210,7 @@
                     <constraint firstItem="ryO-sQ-EBb" firstAttribute="top" secondItem="Cg4-3C-g9l" secondAttribute="bottom" id="ZKY-fE-a59"/>
                     <constraint firstItem="Pgt-hT-O5P" firstAttribute="top" secondItem="QYh-ju-jiu" secondAttribute="bottom" constant="15.5" id="ZM1-Oq-QFQ"/>
                     <constraint firstItem="pxe-XM-UcS" firstAttribute="leading" secondItem="yYA-nI-s0e" secondAttribute="leading" id="aSm-8l-lX8"/>
+                    <constraint firstItem="nFs-6C-6Ft" firstAttribute="leading" secondItem="Njq-e6-wJo" secondAttribute="leading" id="b2B-Yy-Zfe"/>
                     <constraint firstItem="CMg-hU-IZV" firstAttribute="trailing" secondItem="eKW-6l-khm" secondAttribute="trailing" id="bN2-CK-xVe"/>
                     <constraint firstItem="FGV-mH-Pi6" firstAttribute="centerX" secondItem="7vc-we-lf8" secondAttribute="centerX" id="btc-gt-ENA"/>
                     <constraint firstItem="RS3-iM-8Zj" firstAttribute="baseline" secondItem="CMg-hU-IZV" secondAttribute="baseline" id="cKK-3Y-Azh"/>
@@ -209,12 +221,14 @@
                     <constraint firstAttribute="trailing" secondItem="3AD-iN-wAs" secondAttribute="trailing" id="j6p-cV-DSG"/>
                     <constraint firstItem="pxe-XM-UcS" firstAttribute="trailing" secondItem="yYA-nI-s0e" secondAttribute="trailing" id="ks5-OE-eRJ"/>
                     <constraint firstAttribute="trailing" secondItem="Cg4-3C-g9l" secondAttribute="trailing" id="ktl-v6-m7J"/>
+                    <constraint firstItem="Cg4-3C-g9l" firstAttribute="top" secondItem="nFs-6C-6Ft" secondAttribute="bottom" id="kuv-Xc-Asv"/>
                     <constraint firstItem="QYh-ju-jiu" firstAttribute="top" secondItem="pxe-XM-UcS" secondAttribute="bottom" constant="14" id="lkl-my-uZA"/>
                     <constraint firstItem="Cg4-3C-g9l" firstAttribute="leading" secondItem="Njq-e6-wJo" secondAttribute="leading" id="oMS-9g-qmg"/>
                     <constraint firstItem="mIr-FJ-NFK" firstAttribute="leading" secondItem="Njq-e6-wJo" secondAttribute="leading" constant="19" id="oUe-1y-QGc"/>
                     <constraint firstItem="Pgt-hT-O5P" firstAttribute="leading" secondItem="Njq-e6-wJo" secondAttribute="leading" constant="20.5" id="p61-EY-tVm"/>
                     <constraint firstItem="Stz-Oa-4xs" firstAttribute="leading" secondItem="Pgt-hT-O5P" secondAttribute="trailing" constant="7.5" id="slm-pn-ivO"/>
                     <constraint firstItem="RS3-iM-8Zj" firstAttribute="top" secondItem="mIr-FJ-NFK" secondAttribute="top" id="usL-Kc-ObU"/>
+                    <constraint firstItem="nFs-6C-6Ft" firstAttribute="top" secondItem="Njq-e6-wJo" secondAttribute="top" id="wbH-gN-LDA"/>
                     <constraint firstItem="Stz-Oa-4xs" firstAttribute="top" secondItem="QYh-ju-jiu" secondAttribute="bottom" constant="21.5" id="xYH-Dg-Bos"/>
                     <constraint firstItem="RS3-iM-8Zj" firstAttribute="leading" secondItem="mIr-FJ-NFK" secondAttribute="leading" id="za0-Ih-Xde"/>
                     <constraint firstItem="QYh-ju-jiu" firstAttribute="leading" secondItem="Njq-e6-wJo" secondAttribute="leading" constant="15" id="zbK-Us-DAJ"/>
@@ -224,12 +238,16 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="backgroundImg" destination="7vc-we-lf8" id="eRo-K0-rOm"/>
+                <outlet property="bestImg" destination="ryO-sQ-EBb" id="wZa-MV-sCC"/>
+                <outlet property="clickImage" destination="Pgt-hT-O5P" id="Za4-0i-AWT"/>
                 <outlet property="clickNumber" destination="Stz-Oa-4xs" id="PSq-y6-8aD"/>
                 <outlet property="content" destination="ain-IR-Zjl" id="BYY-Cz-jSf"/>
                 <outlet property="learnBtn" destination="FGV-mH-Pi6" id="L5v-Av-QMl"/>
                 <outlet property="learnNumber" destination="a9u-DV-xQ0" id="sMc-PZ-Xof"/>
+                <outlet property="lineView" destination="QYh-ju-jiu" id="c3I-TZ-FaG"/>
                 <outlet property="questionContentLabel" destination="Na9-Se-iYl" id="vhG-23-0aJ"/>
                 <outlet property="releaseTime" destination="OPm-Cm-pnV" id="MAM-pa-pLh"/>
+                <outlet property="segmentationView" destination="3AD-iN-wAs" id="0XZ-JH-pNn"/>
                 <outlet property="userAvatar" destination="LaW-qT-C56" id="MtD-Tf-EDz"/>
                 <outlet property="userName" destination="8Nc-EM-OiC" id="Qz7-qG-tvr"/>
                 <outletCollection property="answerImgs" destination="yYA-nI-s0e" id="hhK-Qe-fuP"/>

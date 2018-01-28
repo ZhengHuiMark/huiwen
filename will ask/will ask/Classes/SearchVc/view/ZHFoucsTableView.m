@@ -132,11 +132,13 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
     if (model.rewardAskId) {
         ZHRewardListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ZHRewardListTableViewCellid forIndexPath:indexPath];
         
+        cell.allModel = model;
         return cell;
     }
     
     if (model.freeAskId) {
         ZHFreeListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:FreeListTableViewCellid forIndexPath:indexPath];
+        cell.allModel = model;
         
         return cell;
     }
@@ -144,11 +146,15 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
     if (model.expertId) {
         ZHExpertTodayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ExpertsCellid forIndexPath:indexPath];
         
+        cell.allModel = model;
+        
         return cell;
     }
     
     if (model.caseId) {
-        ZHExpertTodayTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CaseListCellid forIndexPath:indexPath];
+        ZHCaseListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CaseListCellid forIndexPath:indexPath];
+        
+        
         
         return cell;
     }

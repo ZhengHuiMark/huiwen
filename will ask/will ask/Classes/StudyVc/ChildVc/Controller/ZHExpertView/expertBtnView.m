@@ -60,10 +60,11 @@
         btn.tag = [arrayDataSource[i][@"type"] integerValue];
         btn.titleLabel.textAlignment = NSTextAlignmentCenter;
         btn.titleLabel.font = [UIFont systemFontOfSize:15];
-        btn.backgroundColor = [UIColor whiteColor];
+        [btn setCornerRadius:5.0f];
+        btn.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
         [btn addTarget:self action:@selector(buttonClickAction:) forControlEvents:UIControlEventTouchUpInside];
-        [btn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
+        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor orangeColor] forState:UIControlStateSelected];
         
         // 第二种方法 使用多行
         if (i % self.rowNum == 0 && i != 0) {

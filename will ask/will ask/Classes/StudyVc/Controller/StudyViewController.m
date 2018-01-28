@@ -74,9 +74,7 @@ static NSString *typeCellid = @"typeCellid";
     [super viewDidLoad];
     
     _bannerImageUrlMarray = [NSMutableArray array];
-    
-//    [self.view addSubview:self.tableView];
-    
+        
     [self loadData];
     
     [self loadCaseData];

@@ -44,7 +44,7 @@
 #import "UITextView+Placeholder.h"
 #import "ZHEnumerationCateType.h"
 #import "UIColor+Extension.h"
-
+#import "UIImageView+WebCache.h"
 
 /** 消息存储路径 */
 #define KDocumentPath [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask, YES) lastObject]
@@ -58,6 +58,7 @@
 /** 通知 */
 // 学习 - 找专家 - 筛选
 #define kScreenNameSelected @"kScreenNameSelected"
-
+/** 接受通知 */
+#define kJPushMessage @"kJPushMessage"
 
 #endif /* PrefixHeader_pch */

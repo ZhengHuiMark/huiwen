@@ -30,6 +30,7 @@
 #import "ZHSearchViewController.h"
 #import "UIView+LayerEffects.h"
 #import "ZHRegisteredViewController.h"
+#import "ZHCertifiedExpertsVC.h"
 
 //头部cell
 static NSString *HeaderCellid = @"HeaderCellid";
@@ -70,7 +71,7 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
     }else{
         [self.view addSubview:self.BackgroundImageView];
         _BackgroundImageView.hidden =NO;
-
+        _BackgroundImageView.userInteractionEnabled = YES;
         [_BackgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.edges.mas_equalTo(self.view);
         }];
@@ -163,11 +164,13 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
         UIImageView *iconImg = [[UIImageView alloc] init];
         [_BackgroundImageView addSubview:iconImg];
         iconImg.backgroundColor = [UIColor redColor];
+        iconImg.userInteractionEnabled = YES;
         [iconImg mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(198);
             make.centerX.mas_equalTo(_BackgroundImageView);
             make.width.height.mas_equalTo(80);
         }];
+        
         
         UIButton *loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [loginBtn addTarget:self action:@selector(loginAccount) forControlEvents:UIControlEventTouchUpInside];
@@ -175,6 +178,7 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
         [_BackgroundImageView addSubview:loginBtn];
         loginBtn.backgroundColor = [UIColor orangeColor];
         [loginBtn setTitle:@"登录" forState:UIControlStateNormal];
+        loginBtn.userInteractionEnabled = YES;
         [loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [loginBtn setCornerRadius:20];
         
@@ -189,7 +193,10 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 
         [_BackgroundImageView addSubview:regisBtn];
         [regisBtn setTitle:@"注册" forState:UIControlStateNormal];
+        regisBtn.userInteractionEnabled = YES;
+
         [regisBtn setTitleColor:[UIColor colorWithRed:59.0/255.0 green:189.0/255.0 blue:234.0/255.0 alpha:1] forState:UIControlStateNormal];
+        
         [regisBtn setAllCornerWithRoundedCornersSize:20 pathSize:CGSizeMake(ScreenWidth-57.5*2, 40) strokeColor:[UIColor colorWithRed:59.0/255.0 green:189.0/255.0 blue:234.0/255.0 alpha:1]];
 
         [regisBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -248,24 +255,29 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 }
 
 
+
 // 点击跳转控制器
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (indexPath.section == 0) {
-        
-            NSString *className = @"ZHPersonalInformationVc";
-            
-            [self pushToSetControllerWithIndexPath:indexPath className:className];
+        NSString *className;
+        if ([[UserManager sharedManager].userModel.expertCheckStatus isEqual:@(1)]) {
+            ZHCertifiedExpertsVC *vc = [[ZHCertifiedExpertsVC alloc] initWithCertification:YES];
+            [self.navigationController pushViewController:vc animated:YES];
+        } else {
+           className = @"ZHPersonalInformationVc";
+        }
+        [self pushToSetControllerWithIndexPath:indexPath className:className];
         
     }else if (indexPath.section == 2){
         switch (indexPath.row) {
             case 0:{
                 
-                return;
-//                NSString *className = @"ZHCertifiedExpertsVC";
-//                [self pushToSetControllerWithIndexPath:indexPath className:className];
-//                
+//                return;
+                NSString *className = @"ZHCertifiedExpertsVC";
+                [self pushToSetControllerWithIndexPath:indexPath className:className];
+//
                 break;
             }
             default:
@@ -293,7 +305,7 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
             }
             case 3:{
   
-                NSString *className = @"ZHConsultingMeViewController";
+                NSString *className = @"ZHMyCollectionOfCasesViewController";
                 [self pushToSetControllerWithIndexPath:indexPath className:className];
 
                 break;
@@ -357,12 +369,14 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
     
     if (indexPath.section == 1){
         
+        
         if ([[UserManager sharedManager].userModel.expertCertified isEqual:@(1)]) {
         
             ZHExpertsListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ExpertBtnCellid forIndexPath:indexPath];
             if (cell == nil) {
                 cell = [[ZHExpertsListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ExpertBtnCellid];
             }
+
             cell.userModel = [UserManager sharedManager].userModel;
             
             cell.didClick = ^(){
@@ -387,6 +401,8 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
             if (mCell == nil) {
                 mCell = [[ZHMoneyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MoneyCellid];
             }
+            mCell.selectionStyle = UITableViewCellSelectionStyleNone;
+
             
             mCell.usermodel = [UserManager sharedManager].userModel;
   
@@ -417,7 +433,8 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
             if (eCell == nil) {
                 eCell = [[ZHExpertsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ExpertsCellid];
             }
-            
+            eCell.selectionStyle = UITableViewCellSelectionStyleNone;
+
             [eCell.expertsBtn setTitle:@"专家服务" forState:UIControlStateNormal];
             
             eCell.BtnClick = ^{
@@ -436,14 +453,14 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
             if (eCell == nil) {
                 eCell = [[ZHExpertsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ExpertsCellid];
             }
-            
+            eCell.selectionStyle = UITableViewCellSelectionStyleNone;
+
             
             [eCell.expertsBtn setTitle:@"认证专家" forState:UIControlStateNormal];
             
             eCell.BtnClick = ^{
-                
-                NSString *className = @"ZHCertifiedExpertsVC";
-                [self pushToSetControllerWithIndexPath:indexPath className:className];
+                ZHCertifiedExpertsVC *vc = [[ZHCertifiedExpertsVC alloc] initWithCertification:NO];
+                [self.navigationController pushViewController:vc animated:YES];
                 
             };
             return eCell;

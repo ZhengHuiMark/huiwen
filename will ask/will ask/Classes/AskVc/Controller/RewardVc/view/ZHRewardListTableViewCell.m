@@ -8,6 +8,7 @@
 
 #import "ZHRewardListTableViewCell.h"
 #import "ZHAskModel.h"
+#import "ZHAllModel.h"
 #import "ImageTools.h"
 #import "UIImageView+WebCache.h"
 
@@ -124,9 +125,123 @@
         [self.typeImg setImage:[UIImage imageNamed:@"qtrj"]];
         
     }
-    
-    
-    
+
 }
+
+- (void)setAllModel:(ZHAllModel *)allModel{
+    _allModel = allModel;
+    
+    [self.avatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.allModel.avatar]]];
+    
+    self.nickName.text = self.allModel.nickname;
+    
+    self.typeExpert.text = self.allModel.certifiedNames;
+    
+    self.releaseTime.text = self.allModel.time;
+    
+    self.content.text = self.allModel.content;
+    
+    self.amount.text = [NSString stringWithFormat:@"悬赏金额 %@",self.allModel.amount];
+    self.amount.layer.cornerRadius = 10;
+    
+    self.amount.clipsToBounds = YES;
+    
+    self.remainingTime.text = [NSString stringWithFormat:@"剩余时间:%@",self.allModel.remainingTime];
+    
+    self.answerNumber.text = [NSString stringWithFormat:@"%@人已抢答",self.allModel.answerNumber];
+    
+    self.learnNumber.text = [NSString stringWithFormat:@"%@人学习",self.allModel.learnNumber];
+    
+    if ([allModel.type  isEqual: @"涉税实务"]) {
+        [self.typeImg setImage:[UIImage imageNamed:@"sssw"]];
+    }else if ([allModel.type isEqual:@"税收优惠"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"ssyh"]];
+        
+    }else if  ([allModel.type isEqual:@"发票管理"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"fpgl"]];
+        
+    }else if  ([allModel.type isEqual:@"税收筹划"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"ssch"]];
+        
+    }else if  ([allModel.type isEqual:@"纳税申报"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"nssb"]];
+        
+    }else if  ([allModel.type isEqual:@"跨境税收"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"kjss"]];
+        
+    }else if  ([allModel.type isEqual:@"税务其他"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"qtsw"]];
+        
+    }else if  ([allModel.type isEqual:@"年报审计"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"nbsj"]];
+        
+    }else if  ([allModel.type isEqual:@"上市审计"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"sssj"]];
+        
+    }else if  ([allModel.type isEqual:@"债券审计"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"zqsj"]];
+        
+    }else if  ([allModel.type isEqual:@"验资审计"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"yzsj"]];
+        
+    }else if  ([allModel.type isEqual:@"内容审计"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"nksj"]];
+        
+    }else if  ([allModel.type isEqual:@"其他审计"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"qtsj"]];
+        
+    }else if  ([allModel.type isEqual:@"会计核算"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"kjhs"]];
+        
+    }else if  ([allModel.type isEqual:@"政策咨询"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"zczx"]];
+        
+    }else if  ([allModel.type isEqual:@"财务管理"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"cwgl"]];
+        
+    }else if  ([allModel.type isEqual:@"报表编制"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"bbbz"]];
+        
+    }else if  ([allModel.type isEqual:@"会计其他"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"qtkj"]];
+        
+    }else if  ([allModel.type isEqual:@"资产评估"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"kuaiji"]];
+        
+    }else if  ([allModel.type isEqual:@"单项评估"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"kuaiji"]];
+        
+    }else if  ([allModel.type isEqual:@"整体评估"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"kuaiji"]];
+        
+    }else if  ([allModel.type isEqual:@"价值评估"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"kuaiji"]];
+        
+    }else if  ([allModel.type isEqual:@"其他评估"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"kuaiji"]];
+        
+    }else if  ([allModel.type isEqual:@"财务软件"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"cwrj"]];
+        
+    }else if  ([allModel.type isEqual:@"审计软件"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"sjrj"]];
+        
+    }else if  ([allModel.type isEqual:@"office软件"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"office"]];
+        
+    }else if  ([allModel.type isEqual:@"其他软件"]){
+        [self.typeImg setImage:[UIImage imageNamed:@"qtrj"]];
+        
+    }
+
+}
+
+
+- (IBAction)btnAction:(UIButton *)sender {
+    
+    !self.didClick?:self.didClick();
+}
+
+
 
 @end

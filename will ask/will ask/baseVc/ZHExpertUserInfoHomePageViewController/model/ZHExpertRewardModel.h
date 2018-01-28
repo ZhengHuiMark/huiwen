@@ -19,13 +19,13 @@
 /** 回答语音 */
 @property(nonatomic,copy)NSString *answerVoice;
 /** 是否最佳 */
-@property(nonatomic,copy)NSString *best;
+@property(nonatomic,assign)BOOL best;
 /** 几人学习 */
 @property(nonatomic,copy)NSString *learnNumber;
 /** 是否已学习 */
-@property(nonatomic,copy)NSString *learned;
+@property(nonatomic,assign)BOOL learned;
 /** 是否已点赞 */
-@property(nonatomic,copy)NSString *praise;
+@property(nonatomic,assign)BOOL praise;
 /** 点赞数量 */
 @property(nonatomic,copy)NSString *praiseNumber;
 /** 提问人头像 */

@@ -33,11 +33,23 @@
 - (void)setDetailModel:(ZHFreeDetailModel *)detailModel {
     _detailModel = detailModel;
     
+   
     self.userNickName.text = self.detailModel.nickname;
     
     [self.userAvatarImg sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.detailModel.avatar]]];
     
     self.content.text = [NSString stringWithFormat:@"      %@",self.detailModel.content];
+    
+    NSString *wenzi = self.detailModel.content;
+    CGFloat marin = 17.5;
+    CGFloat labelWidth = [UIScreen mainScreen].bounds.size.width - marin * 2;
+    CGFloat labelHeight = [wenzi boundingRectWithSize: CGSizeMake(labelWidth, 300)
+                                              options: NSStringDrawingUsesLineFragmentOrigin
+                                           attributes: @{NSFontAttributeName : [UIFont systemFontOfSize: 14]}
+                                              context: nil].size.height;
+    [self.content mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(labelHeight);
+    }];
     
     
     if (!self.detailModel.certifiedNames) {

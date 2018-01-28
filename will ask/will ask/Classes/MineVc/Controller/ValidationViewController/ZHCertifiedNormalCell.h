@@ -19,4 +19,5 @@
 @property (nonatomic, copy) NSString *editEndTitle;
 @property (nonatomic, copy) void((^ChangeTitleSucessBlock)(NSString *title));
 @property (nonatomic, strong) expert *expertModel;
+@property (nonatomic, assign) BOOL isCertification; // 是否认证
 @end

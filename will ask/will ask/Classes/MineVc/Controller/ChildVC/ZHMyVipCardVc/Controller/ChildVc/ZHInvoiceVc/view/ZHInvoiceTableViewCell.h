@@ -19,4 +19,6 @@
 
 @property( nonatomic,strong)ZHInvoiceModel *model;
 
+@property (nonatomic, copy) void(^textFieldClickBlock)(NSString *tempStr);
+
 @end

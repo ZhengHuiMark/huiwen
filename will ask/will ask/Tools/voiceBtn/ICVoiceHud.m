@@ -38,7 +38,8 @@
 
 - (void)setProgress:(CGFloat)progress
 {
-    _progress   = MIN(MAX(progress, 0.f),1.f);
+//    _progress   = MIN(MAX(progress, 0.f),1.f);
+    _progress = progress;
     [self updateImages];
 }
 
@@ -50,11 +51,18 @@
         [self stopAnimating];
         return;
     }
-    if (_progress <= 0.55 ) {
-        self.animationImages = @[_images[3],_images[4],_images[5],_images[4],_images[3]];
+    
+    if (_progress < 15) {
+        self.animationImages = @[_images[0]];
+        NSLog(@"123= %f %@",_progress,self.animationImages);
+    }else if(_progress >= 15 && _progress < 60) {
+        self.animationImages = @[_images[0],_images[1],_images[2],_images[3],_images[2],_images[1],_images[0]];
+        NSLog(@"456= %f %@",_progress,self.animationImages);
     } else {
-        self.animationImages = @[_images[0],_images[1],_images[2],_images[1]];
+        self.animationImages = @[_images[3],_images[4],_images[5],_images[4],_images[3]];
+        NSLog(@"789= %f %@ ",_progress,self.animationImages);
     }
+
     [self startAnimating];
 }
 

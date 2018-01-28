@@ -41,6 +41,8 @@
 @property(nonatomic,copy)NSString *certifiedNames;
 
 
+@property (nonatomic,assign)BOOL owner;
+
 //  ----- 以下为悬赏问属性   ----
 
 @property(nonatomic,copy)NSString *remainingTime;

@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+
+typedef void(^learnBtnAction)();
 @class ZHFreeDetailModel,ZHFreeAnswerModel;
-
-
 @interface ZHRewardAnswerVoiceTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *userAvatar;
 @property (weak, nonatomic) IBOutlet UILabel *userName;
-@property (weak, nonatomic) IBOutlet UIImageView *expertTypeImg;
+@property (weak, nonatomic) IBOutlet UILabel *expertHoor;
 @property (weak, nonatomic) IBOutlet UILabel *expertName;
 
 @property (weak, nonatomic) IBOutlet UILabel *VoiceTime;
@@ -28,7 +28,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *learnNumber;
 
 @property (weak, nonatomic) IBOutlet UILabel *releaseTime;
+@property (weak, nonatomic) IBOutlet UIImageView *bestImage;
+@property (weak, nonatomic) IBOutlet UIImageView *backGroundImg;
+@property (weak, nonatomic) IBOutlet UIButton *learnBtn;
 
+@property (nonatomic, copy)learnBtnAction didClick;
 
 @property(nonatomic,strong)ZHFreeDetailModel *detailModel;
 

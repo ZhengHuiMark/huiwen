@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ZHAskModel;
 
+typedef void(^goUserInfo)();
+@class ZHAskModel,ZHAllModel;
 @interface ZHRewardListTableViewCell : UITableViewCell
 
 @property (nonatomic,strong)ZHAskModel *model;
+
+@property (nonatomic, strong) ZHAllModel *allModel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *avatar;
 
@@ -32,5 +35,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *answerNumber;
 
 @property (weak, nonatomic) IBOutlet UILabel *learnNumber;
+
+@property (nonatomic, copy) goUserInfo didClick;
 
 @end

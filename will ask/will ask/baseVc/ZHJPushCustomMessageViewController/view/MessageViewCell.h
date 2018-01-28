@@ -14,7 +14,7 @@
 @property(nonatomic,strong) JPushMessageModel *models;
 
 /** 选中的btn */
-@property(nonatomic,copy) void(^hookButtonClickBlock)(UIButton *sender);
+@property(nonatomic,copy) void(^hookButtonClickBlock)();
 
 
 @end

@@ -169,8 +169,14 @@ static NSString *paymentOptionsCellid = @"paymentOptionsCellid";
                     
                     if (code == 60000) {
                         [SVProgressHUD showInfoWithStatus: response[@"message"]];
+                        [SVProgressHUD dismissWithDelay:1];
                     }else{
                         [SVProgressHUD showInfoWithStatus: @"支付成功"];
+                        [SVProgressHUD dismissWithDelay:1];
+                        [self.navigationController popViewControllerAnimated:YES];
+                        if (self.popToView) {
+                            self.popToView();
+                        }
                     }
                     
                 }];
@@ -192,8 +198,20 @@ static NSString *paymentOptionsCellid = @"paymentOptionsCellid";
                     }
                     NSLog(@"%@",response);
                     NSString *data = response[@"data"];
-
-                
+                    
+                    NSInteger code = [response[@"errcode"] integerValue];
+                    
+                    if (code == 60000) {
+                        [SVProgressHUD showInfoWithStatus: response[@"message"]];
+                        [SVProgressHUD dismissWithDelay:1];
+                    }else{
+                        [SVProgressHUD showInfoWithStatus: @"支付成功"];
+                        [SVProgressHUD dismissWithDelay:1];
+                        [self.navigationController popViewControllerAnimated:YES];
+                        if (self.popToView) {
+                            self.popToView();
+                        }
+                    }
                 }];
                 
             }

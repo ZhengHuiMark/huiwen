@@ -37,11 +37,33 @@
 - (void)setAnswerModel:(ZHFreeAnswerModel *)answerModel {
     _answerModel = answerModel;
     
+    if (self.answerModel.owner == YES) {
+        self.learnBtn.hidden = YES;
+        self.backGroundImg.hidden = YES;
+    }else{
+        self.learnBtn.hidden = NO;
+        self.backGroundImg.hidden = NO;
+    }
+    
+    if (self.answerModel.learned == YES || self.answerModel.owner == YES) {
+        self.learnBtn.hidden = YES;
+        self.backGroundImg.hidden = YES;
+    }else{
+        self.learnBtn.hidden = NO;
+        self.backGroundImg.hidden = NO;
+    }
+    
+    if (self.answerModel.best == YES) {
+        self.bestImage.hidden = NO;
+    }else{
+        self.bestImage.hidden = YES;
+    }
     
     self.userName.text = self.answerModel.nickname;
     
-//    self.expertName.text = self.answerModel.
-    
+    [self.userAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.answerModel.avatar]]];
+    self.expertName.text = self.answerModel.certifiedNames;
+    self.expertHoor.text = self.answerModel.honor;
     self.ClickUpNumber.text = self.answerModel.praiseNumber;
     
     
@@ -85,5 +107,12 @@
     }
     return _avatarDisplayView;
 }
+
+- (IBAction)learnPayAction:(UIButton *)sender {
+    
+    !self.didClick?:self.didClick();
+    
+}
+
 
 @end

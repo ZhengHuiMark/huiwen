@@ -82,86 +82,69 @@
     self.ContentLaebl.text = tagModel.content;
     self.jjjLabel.text = [NSString stringWithFormat:@"悬赏人:%@",tagModel.nickname];
     if ([tagModel.type  isEqual: @"涉税实务"]) {
-        [self.typeImgV setImage:[UIImage imageNamed:@"sssw"]];
-    }else if ([tagModel.type isEqual:@"税收优惠"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"ssyh"]];
-        
-    }else if  ([tagModel.type isEqual:@"发票管理"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"fpgl"]];
-        
-    }else if  ([tagModel.type isEqual:@"税收筹划"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"ssch"]];
-        
-    }else if  ([tagModel.type isEqual:@"纳税申报"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"nssb"]];
-        
-    }else if  ([tagModel.type isEqual:@"跨境税收"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"kjss"]];
-        
-    }else if  ([tagModel.type isEqual:@"税务其他"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"qtsw"]];
-        
-    }else if  ([tagModel.type isEqual:@"年报审计"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"nbsj"]];
-        
-    }else if  ([tagModel.type isEqual:@"上市审计"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"sssj"]];
-        
-    }else if  ([tagModel.type isEqual:@"债券审计"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"zqsj"]];
-        
-    }else if  ([tagModel.type isEqual:@"验资审计"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"yzsj"]];
-        
-    }else if  ([tagModel.type isEqual:@"内容审计"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"nksj"]];
-        
-    }else if  ([tagModel.type isEqual:@"其他审计"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"qtsj"]];
-        
-    }else if  ([tagModel.type isEqual:@"会计核算"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"kjhs"]];
-        
-    }else if  ([tagModel.type isEqual:@"政策咨询"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"zczx"]];
-        
-    }else if  ([tagModel.type isEqual:@"财务管理"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"cwgl"]];
-        
-    }else if  ([tagModel.type isEqual:@"报表编制"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"bbbz"]];
-        
-    }else if  ([tagModel.type isEqual:@"会计其他"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"qtkj"]];
-        
-    }else if  ([tagModel.type isEqual:@"资产评估"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"kuaiji"]];
-        
-    }else if  ([tagModel.type isEqual:@"单项评估"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"kuaiji"]];
-        
-    }else if  ([tagModel.type isEqual:@"整体评估"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"kuaiji"]];
-        
-    }else if  ([tagModel.type isEqual:@"价值评估"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"kuaiji"]];
-        
-    }else if  ([tagModel.type isEqual:@"其他评估"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"kuaiji"]];
-        
-    }else if  ([tagModel.type isEqual:@"财务软件"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"cwrj"]];
-        
-    }else if  ([tagModel.type isEqual:@"审计软件"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"sjrj"]];
-        
-    }else if  ([tagModel.type isEqual:@"office软件"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"office"]];
-        
-    }else if  ([tagModel.type isEqual:@"其他软件"]){
-        [self.typeImgV setImage:[UIImage imageNamed:@"qtrj"]];
-        
+        [self.typeImgV setImage:[UIImage imageNamed:@"shuiwu1"]];
+    }else if ([tagModel.type  isEqual: @"发票管理"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"shuiwu1"]];
+    }else if ([tagModel.type  isEqual: @"税收优惠"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"shuiwu1"]];
+    }else if ([tagModel.type  isEqual: @"税收筹划"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"shuiwu1"]];
+    }else if ([tagModel.type  isEqual: @"纳税申报"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"shuiwu1"]];
+    }else if ([tagModel.type  isEqual: @"跨境税收"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"shuiwu1"]];
+    }else if ([tagModel.type  isEqual: @"税务其他"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"shuiwu1"]];
     }
+    
+    if ([tagModel.type  isEqual: @"会计核算"]) {
+        [self.typeImgV setImage:[UIImage imageNamed:@"kuaiji-1"]];
+    }else if ([tagModel.type  isEqual: @"报表编制"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"kuaiji-1"]];
+    }else if ([tagModel.type  isEqual: @"财务管理"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"kuaiji-1"]];
+    }else if ([tagModel.type  isEqual: @"政策咨询"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"kuaiji-1"]];
+    }else if ([tagModel.type  isEqual: @"会计其他"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"kuaiji-1"]];
+    }
+    
+    if ([tagModel.type  isEqual: @"年报审计"]) {
+        [self.typeImgV setImage:[UIImage imageNamed:@"shenji-1"]];
+    }else if ([tagModel.type  isEqual: @"上市审计"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"shenji-1"]];
+    }else if ([tagModel.type  isEqual: @"债券审计"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"shenji-1"]];
+    }else if ([tagModel.type  isEqual: @"验资审计"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"shenji-1"]];
+    }else if ([tagModel.type  isEqual: @"内控审计"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"shenji-1"]];
+    }else if ([tagModel.type  isEqual: @"其他审计"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"shenji-1"]];
+    }
+    
+    if ([tagModel.type  isEqual: @"资产评估"]) {
+        [self.typeImgV setImage:[UIImage imageNamed:@"pinggu-1"]];
+    }else if ([tagModel.type  isEqual: @"单项评估"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"pinggu-1"]];
+    }else if ([tagModel.type  isEqual: @"整体评估"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"pinggu-1"]];
+    }else if ([tagModel.type  isEqual: @"价值评估"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"pinggu-1"]];
+    }else if ([tagModel.type  isEqual: @"评估其他"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"pinggu-1"]];
+    }
+    
+    if ([tagModel.type  isEqual: @"财务软件"]) {
+        [self.typeImgV setImage:[UIImage imageNamed:@"ruanjian-1"]];
+    }else if ([tagModel.type  isEqual: @"审计软件"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"ruanjian-1"]];
+    }else if ([tagModel.type  isEqual: @"office软件"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"ruanjian-1"]];
+    }else if ([tagModel.type  isEqual: @"软件其他"]){
+        [self.typeImgV setImage:[UIImage imageNamed:@"ruanjian-1"]];
+    }
+
 
     
     self.RewardMoneyImgV.text = [NSString stringWithFormat:@" 赏金%@",tagModel.amount];
@@ -177,7 +160,7 @@
     
     self.placeholderView.frame = CGRectMake(0, 0, ([UIScreen mainScreen].bounds.size.width - 50) / 3, 150.5);
     
-    self.typeImgV.frame = CGRectMake(0, 14.5, 40, 30);
+    self.typeImgV.frame = CGRectMake(0, 14.5, 40, 20);
 
     self.imgView.frame = (CGRect){CGRectGetWidth(self.placeholderView.frame) -39.5, 8,39.5 , 34.5};
     

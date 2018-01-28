@@ -58,7 +58,7 @@
 /** 是否隐藏按钮 */
 @property(nonatomic,assign) BOOL isHiddenChooseBtn;
 
-/** 是否阅读 */
+/** 是否阅读:  NO -> 未读 , YES -> 已读  */
 @property(nonatomic,assign) BOOL isRead;
 
 @end

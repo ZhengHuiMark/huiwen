@@ -40,8 +40,12 @@
 /** 我的会员卡余额	 */
 @property(nonatomic,copy)NSString *balance;
 /** 	发票信息是否存在	 */
-@property(nonatomic,copy)NSString *invoiceInfoExists;
+@property(nonatomic,assign)BOOL invoiceInfoExists;
 
 @property(nonatomic,strong)NSArray<ZHCardNumberModel *>* cards;
+
+
+/** 是否需要发票 */
+@property (nonatomic, assign) BOOL isInvoice;
 
 @end

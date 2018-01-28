@@ -28,6 +28,7 @@
     UIImageView *_frontalIdImg;
     UIImageView *_backIdImg;
     NSMutableArray *_btnArr;
+    UILabel *_certifiedLabel;
 }
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier categoryArr:(NSArray *)arr {
@@ -47,7 +48,7 @@
     _lineView = [[UIView alloc] init];
     _lineView.backgroundColor = Color(@"eeeeee");
     [self addSubview:_lineView];
-    if (self.isCertification) {
+    if (!self.isCertification) {
         [self creatZHIdentityCardViewYes];
         [_lineView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.left.mas_equalTo(_idcordView);
@@ -81,7 +82,7 @@
         make.height.mas_equalTo(180);
     }];
     
-    UILabel *idcordLabel = [self creatSubLabel:@"*身份认证照片:" color:@"333333" font:15];
+    UILabel *idcordLabel = [self creatSubLabel:@"*身份认证照片:" color:[UIColor colorWithHexString:@"333333"] font:15];
     
     NSMutableAttributedString *mastr = [[NSMutableAttributedString alloc] initWithString:idcordLabel.text];
     [mastr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 1)];
@@ -91,7 +92,7 @@
         make.top.left.mas_equalTo(10);
     }];
     
-    UILabel *idDescLabel = [self creatSubLabel:@"仅认证时使用" color:@"666666" font:13];
+    UILabel *idDescLabel = [self creatSubLabel:@"仅认证时使用" color:[UIColor colorWithHexString:@"666666"] font:13];
     [_idcordView addSubview:idDescLabel];
     [idDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-10);
@@ -132,11 +133,26 @@
 
 - (void)creatZHIdentityCardViewYes {
     _idcordView = [[UIView alloc] init];
-    _idcordView.backgroundColor = Color(@"666666");
     [self addSubview:_idcordView];
     [_idcordView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.right.left.mas_equalTo(self);
-        make.height.mas_equalTo(80);
+        make.height.mas_equalTo(74.5);
+    }];
+    UILabel *idcordLabel = [self creatSubLabel:@"身份认证照片:" color:[UIColor colorWithHexString:@"333333"] font:15];
+//    NSMutableAttributedString *mastr = [[NSMutableAttributedString alloc] initWithString:idcordLabel.text];
+//    [mastr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 1)];
+//    idcordLabel.attributedText = mastr;
+    [_idcordView addSubview:idcordLabel];
+    [idcordLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(10);
+        make.top.mas_equalTo(19.5);
+    }];
+    
+    _certifiedLabel = [self creatSubLabel:@"" color:[UIColor colorWithRed:242.0/255.0 green:90.0/255.0 blue:41.0/255.0 alpha:1] font:15];
+    [_idcordView addSubview:_certifiedLabel];
+    [_certifiedLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.leading.mas_equalTo(idcordLabel);
+        make.top.mas_equalTo(idcordLabel.mas_bottom).offset(5);
     }];
 }
 
@@ -152,7 +168,7 @@
         make.height.mas_equalTo(100);
     }];
     
-    UILabel *expertsLabel = [self creatSubLabel:@"*专家身份:" color:@"333333" font:15];
+    UILabel *expertsLabel = [self creatSubLabel:@"*专家身份:" color:[UIColor colorWithHexString:@"333333"] font:15];
     NSMutableAttributedString *mastr = [[NSMutableAttributedString alloc] initWithString:expertsLabel.text];
     [mastr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 1)];
 
@@ -163,7 +179,7 @@
         make.left.top.mas_equalTo(10);
     }];
     
-    UILabel *experDescL = [self creatSubLabel:@"仅验证身份时使用" color:@"666666" font:13];
+    UILabel *experDescL = [self creatSubLabel:@"仅验证身份时使用" color:[UIColor colorWithHexString:@"6666666"] font:13];
     [_expertsIdView addSubview:experDescL];
     [experDescL mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(expertsLabel);
@@ -174,7 +190,7 @@
     UIButton *lastView;
     for (NSInteger i = 0; i < self.categoryArr.count; i ++) {
         UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.titleLabel.font = [UIFont systemFontOfSize:15];
+        btn.titleLabel.font = [UIFont systemFontOfSize:13];
         btn.tag = i;
         CertifiedExpertsModel *model = self.categoryArr[i];
         [btn setTitle:model.name forState:UIControlStateNormal];
@@ -194,6 +210,20 @@
         }];
         lastView = btn;
         [_btnArr addObject:btn];
+    }
+}
+
+#pragma mark - Setter
+- (void)setIsCertification:(BOOL)isCertification {
+    _isCertification = isCertification;
+    if (isCertification) {
+        for (CertifiedExpertsModel *model in self.isCertificationCateArr) {
+            if (_certifiedLabel.text.length>0) {
+                _certifiedLabel.text = [NSString stringWithFormat:@"%@%@",_certifiedLabel.text,model.name];
+            } else {
+                _certifiedLabel.text = [NSString stringWithFormat:@"%@     %@",_certifiedLabel.text,model.name];
+            }
+        }
     }
 }
 
@@ -249,11 +279,11 @@
     [[self viewController] presentViewController:alert animated:YES completion:nil];
 }
 
-- (UILabel *)creatSubLabel:(NSString *)title color:(NSString *)color font:(CGFloat)font {
+- (UILabel *)creatSubLabel:(NSString *)title color:(UIColor *)color font:(CGFloat)font {
     UILabel *label = [[UILabel alloc] init];
     label.font = [UIFont systemFontOfSize:font];
     label.text = title;
-    label.textColor = Color(color);
+    label.textColor = color;
     return label;
 }
 

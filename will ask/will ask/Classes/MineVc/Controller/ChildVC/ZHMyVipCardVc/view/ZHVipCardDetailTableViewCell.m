@@ -43,8 +43,12 @@
 - (IBAction)selectedInvoice:(UIButton *)sender {
     
     
-    
-    
+    if (self.vipModel.invoiceInfoExists == YES) {
+        sender.selected = !sender.selected;
+        self.vipModel.isInvoice = sender.selected;
+    }else{
+        [SVProgressHUD showInfoWithStatus:@"您还未添加发票信息，请先添加发票信息"];
+    }
 }
 
 

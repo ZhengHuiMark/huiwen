@@ -9,6 +9,7 @@
 #import "ZHJPushCustomMessageViewController.h"
 #import "MessageViewCell.h"
 #import "JPushMessageModel.h"
+#import "ZHCertifiedExpertsVC.h"
 
 
 static NSString *messageCellID = @"messageCellID";
@@ -33,6 +34,7 @@ static NSString *messageCellID = @"messageCellID";
 @implementation ZHJPushCustomMessageViewController{
     
     NSMutableArray *_dataSoure;
+    BOOL _isEditBoooL;
 }
 
 
@@ -40,10 +42,12 @@ static NSString *messageCellID = @"messageCellID";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor redColor];
-    
+    _isEditBoooL = NO;
     [self setupMessageViewControllerUI];
     
     _dataSoure = [NSMutableArray array];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadData) name:kJPushMessage object:nil];
     
 //        for (int i = 0; i < 15; i++) {
 //            JPushMessageModel *model = [JPushMessageModel new];
@@ -67,10 +71,18 @@ static NSString *messageCellID = @"messageCellID";
 //    }else{
 //        NSLog(@"归档失败");
 //    }
+//    
+//    NSArray *arr =[NSKeyedUnarchiver unarchiveObjectWithFile:kPersonInfoPath];
+//    _dataSoure = [NSMutableArray arrayWithArray:arr];
+    [self loadData];
+}
+
+- (void)loadData {
     
     NSArray *arr =[NSKeyedUnarchiver unarchiveObjectWithFile:kPersonInfoPath];
     _dataSoure = [NSMutableArray arrayWithArray:arr];
-
+    
+    [self.tableView reloadData];
 }
 
 - (void)setupMessageViewControllerUI {
@@ -111,6 +123,34 @@ static NSString *messageCellID = @"messageCellID";
     cell.backgroundColor = [UIColor yellowColor];
     cell.models = _dataSoure[indexPath.row];
     
+    
+    __weak __typeof(self) weakself= self;
+    __block int idx = 0;
+    cell.hookButtonClickBlock = ^{
+        dispatch_async(dispatch_queue_create(0, 0), ^{
+            // 子线程执行任务（比如获取较大数据）
+            for (JPushMessageModel *model in _dataSoure) {
+                
+                if (model.isMessageSelection == YES) {
+                    idx ++;
+                    
+                    if (idx == _dataSoure.count) {
+
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            weakself.choseButton.selected = YES;
+                        });
+                        
+                    }else{
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            weakself.choseButton.selected = NO;
+                        });
+                    }
+                }
+            }
+        });
+    };
+    
+    
     return cell;
 }
 
@@ -133,6 +173,23 @@ static NSString *messageCellID = @"messageCellID";
     return @"删除";
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (_isEditBoooL == NO) {
+        
+        if ([[_dataSoure[indexPath.row] linkType] isEqualToString:@"12"]) {
+            ZHCertifiedExpertsVC *expertVc = [[ZHCertifiedExpertsVC alloc]init];
+            
+            [self.navigationController pushViewController:expertVc animated:YES];
+            
+        }
+    }
+
+    NSLog(@" linktype %@",[_dataSoure[indexPath.row] linkType]);
+//    [_dataSoure[indexPath.row] objectId];
+    
+}
+
 
 - (void)choseButtonClickAction:(UIButton *)sender {
     
@@ -148,6 +205,7 @@ static NSString *messageCellID = @"messageCellID";
     
     sender.selected = !sender.selected;
     self.choseButton.selected = !sender.selected;
+    _isEditBoooL = sender.selected;
     
     if (sender.selected) {
         self.bottomChooseView.hidden = NO;
@@ -175,6 +233,15 @@ static NSString *messageCellID = @"messageCellID";
     }
     [self editorClickAction:_itemBut];
     [self.tableView reloadData];
+    
+    BOOL ret =  [NSKeyedArchiver archiveRootObject:_dataSoure toFile:kPersonInfoPath];
+    if (ret) {
+        NSLog(@"delete-归档成功");
+    }else{
+        NSLog(@"delete-归档失败");
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kJPushMessage object:nil];
 }
 
 - (void)deleteButtonClickAction {

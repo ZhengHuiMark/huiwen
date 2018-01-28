@@ -8,6 +8,7 @@
 
 #import "ZHExpertTodayTableViewCell.h"
 #import "ZHStudyModel.h"
+#import "ZHAllModel.h"
 #import "ImageTools.h"
 #import "UIImageView+WebCache.h"
 
@@ -44,10 +45,27 @@
     
 //    [self.expertAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.model.avatar]]];
     [self.expertAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.model.avatar]] placeholderImage:[UIImage imageNamed:@"bj"]];
-    
 
+}
 
+- (void)setAllModel:(ZHAllModel *)allModel{
+    _allModel = allModel;
     
+    self.expertName.text = self.allModel.nickname;
+    
+    self.expertTitle.text = self.allModel.certifiedNames;
+    
+    self.expertResume.text = self.allModel.intro;
+    
+    self.expertAnswerNumber.text = self.allModel.vieAnswerNumber;
+    
+    self.expertInformationNumber.text = self.allModel.acceptConsultNumber;
+    
+    self.caseNumber.text = self.allModel.caseAnalysisNumber;
+    
+    //    [self.expertAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.model.avatar]]];
+    [self.expertAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.allModel.avatar]] placeholderImage:[UIImage imageNamed:@"bj"]];
+
 }
 
 @end

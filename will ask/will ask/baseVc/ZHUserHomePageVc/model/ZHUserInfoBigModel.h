@@ -11,7 +11,7 @@
 
 @interface ZHUserInfoBigModel : NSObject
 
-@property(nonatomic,copy)NSString *owner;
+@property(nonatomic,assign)BOOL owner;
 
 
 @property(nonatomic,strong)ZHUserInfoRewardModel *rewardModel;

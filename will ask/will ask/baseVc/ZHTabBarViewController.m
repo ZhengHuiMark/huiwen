@@ -55,7 +55,12 @@
 -(UIViewController *)setControllerWith:(NSString *)className  Title:(NSString *)title image:(NSString *)imageName
 {
     Class clz = NSClassFromString(className);
-    UIViewController *controller = [[clz alloc]init];
+    UIViewController *controller;
+    if ([clz isSubclassOfClass:[AskViewController class]]) {
+        controller = [AskViewController sharedInstance];
+    } else {
+        controller = [[clz alloc]init];
+    }
     controller.tabBarItem.title = title;
     controller.tabBarItem.image = [[UIImage imageNamed:imageName] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     controller.tabBarItem.selectedImage = [[UIImage imageNamed:[ NSString stringWithFormat:@"%@_Sel",imageName]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];

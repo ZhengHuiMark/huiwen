@@ -36,18 +36,13 @@
     _PhoneNumberTf.ml_textfiled.textColor = [UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1];
     _PhoneNumberTf.ml_textfiled.font = [UIFont systemFontOfSize:15];
     
-    
     CGFloat validationTfWidth = [UIScreen mainScreen].bounds.size.width - 80;
     CGFloat validationTfHeight = 40;
     CGFloat validationTfX = CGRectGetMinX(self.view.frame) + 40;
     CGFloat validationTfY = CGRectGetMinY(_PhoneNumberTf.frame) + 30;
     
     _validationTf = [MLTextField textFieldWithFrame:CGRectMake(validationTfWidth, validationTfHeight, validationTfX, validationTfY) inView:self.view];
-    
-    
-    
-    
-    
+
 }
 
 @end

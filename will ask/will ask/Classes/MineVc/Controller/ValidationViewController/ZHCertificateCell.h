@@ -23,6 +23,7 @@
 @property (nonatomic, strong) expert *expert;
 @property (nonatomic, strong) ZHImageCategory *imageFront;
 @property (nonatomic, strong) ZHImageCategory *imageBack;
+@property (nonatomic, strong) NSArray *isCertificationCateArr;
 /**
  选中专家类别
  */

@@ -51,9 +51,7 @@ static UserManager *_instance = nil;
 }
 
 #pragma mark - Public methods
-+ (BOOL)isLogin:(ZHLoginCompletion)completion {
-    
-    
++ (BOOL)isLogin:(ZHLoginCompletion)completion {    
     [[NSNotificationCenter defaultCenter] postNotificationName: @"loginSuccess"
                                                         object: nil];
     if ([UserManager sharedManager].userModel) return YES;

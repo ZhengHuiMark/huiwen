@@ -44,6 +44,7 @@
     self.content.text = self.answerModel.content;
     
     self.expertName.text = self.answerModel.certifiedNames;
+    self.expertHoor.text = self.answerModel.honor;
     
     [self.userAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.answerModel.avatar]]];
     
@@ -66,7 +67,7 @@
         self.backGroundImg.hidden = NO;
     }
     
-    if (self.answerModel.learned || self.answerModel.owner == YES) {
+    if (self.answerModel.learned == YES || self.answerModel.owner == YES) {
         self.learnButton.hidden = YES;
         self.backGroundImg.hidden = YES;
     }else{

@@ -23,6 +23,9 @@
 #import "ZHExpertBigUserModel.h"
 #import "ZHUserInfoNoModelTableViewCell.h"
 #import "ZHMyConsultDetailViewController.h"
+#import "ZHRewardDetailViewController.h"
+#import "ZHOrderPaymentViewController.h"
+#import "ZHOrderPayModel.h"
 
 
 static NSString *expertUserInfoCellid = @"expertUserInfoCellid";
@@ -315,7 +318,6 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
     if (indexPath.section == 2 && _bigModel.expertRewardModel) {
         
             return 300;
- 
     }
     
     if (indexPath.section == 3 && _bigModel.expertCaseModel) {
@@ -353,24 +355,70 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
     if (indexPath.section == 2 && _bigModel.expertRewardModel) {
 
             ZHUserInfoRewardContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoRewardContntCellid forIndexPath:indexPath];
-            
+            cell.bigModel = _bigModel;
             cell.expertRewardModel = _bigModel.expertRewardModel;
-            
+        
+            cell.didClick = ^{
+                
+                ZHRewardDetailViewController *rewardVc = [[ZHRewardDetailViewController alloc]init];
+                
+                rewardVc.uidStringz = _bigModel.expertRewardModel.rewardAskId;
+                [self.navigationController pushViewController:rewardVc animated:YES];
+                
+            };
+        
+            cell.payDidClick = ^{
+                
+                NSMutableDictionary *dic = [ZHNetworkTools parameters];
+                [dic setObject:_bigModel.expertRewardModel.answerId forKey:@"rewardAskAnswerId"];
+                NSString *url = [NSString stringWithFormat:@"%@/api/rewardask/ut/learn",kIP];
+                
+                [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+                    
+                    if (error) {
+                        NSLog(@"%@",error);
+                    }
+                    
+                    ZHOrderPayModel *model = [ZHOrderPayModel yy_modelWithJSON:response[@"data"]];
+                    model.descriptions = @"悬赏问-学习一下";
+                    model.goodsName = @"悬赏订单";
+                    model.amount = @"0.01";
+                    
+                    ZHOrderPaymentViewController *payVc = [[ZHOrderPaymentViewController alloc]init];
+                    payVc.payModel = model;
+                    
+                    [self.navigationController pushViewController:payVc animated:YES];
+                    
+                }];
+            };
+        
             return cell;
-
-    }else if (indexPath.section == 3 && _bigModel.expertCaseModel) {
-        ZHExpertUserInfoCaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:expertUserInfoCaseCellid forIndexPath:indexPath];
-        
-        cell.caseModel = _bigModel.expertCaseModel;
-        
-        return cell;
-    }else {
+  
+    }else if(indexPath.section == 2 && !_bigModel.expertRewardModel){
 
             ZHUserInfoNoModelTableViewCell *Nocell = [tableView dequeueReusableCellWithIdentifier:userInfoNoModelCelId forIndexPath:indexPath];
-            
+        
+            Nocell.titleLabel.text = @"12312313";
             return Nocell;
   
     }
+
+    if (indexPath.section == 3 && _bigModel.expertCaseModel) {
+            ZHExpertUserInfoCaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:expertUserInfoCaseCellid forIndexPath:indexPath];
+    
+            cell.caseModel = _bigModel.expertCaseModel;
+    
+        return cell;
+    }else if(indexPath.section == 3 && !_bigModel.expertCaseModel){
+        
+        ZHUserInfoNoModelTableViewCell *Nocell = [tableView dequeueReusableCellWithIdentifier:userInfoNoModelCelId forIndexPath:indexPath];
+        Nocell.titleLabel.text = @"455654665464646";
+
+        
+        return Nocell;
+        
+    }
+    
     
     return cell?cell:[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
                                             reuseIdentifier: @"Cell"];

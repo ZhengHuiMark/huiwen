@@ -57,6 +57,11 @@
     
     self.models.isMessageSelection = sender.selected;
     
+    
+    if (self.hookButtonClickBlock) {
+        self.hookButtonClickBlock();
+    }
+    
 }
 
 - (void)setModels:(JPushMessageModel *)models {
@@ -94,6 +99,23 @@
     }else {
         self.hookButton.selected = NO;
     }
+    
+    
+    switch ([models.msgType integerValue]) {
+        case 1:
+            self.pictureImageView.image = [UIImage imageNamed:@"会问"];
+            break;
+        case 2:
+            self.pictureImageView.image = [UIImage imageNamed:@"case"];
+            break;
+        case 3:
+            self.pictureImageView.image = [UIImage imageNamed:@"reward"];
+            break;
+        case 4:
+            self.pictureImageView.image = [UIImage imageNamed:@"expert"];
+            break;
+    }
+    
 }
 
 

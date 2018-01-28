@@ -48,6 +48,8 @@
 // 如果需要使用idfa功能所需要引入的头文件（可选）
 #import <AdSupport/AdSupport.h>
 
+#import "messageBtn.h"
+
 static NSString *jumpCellid = @"jumpCellid";
 
 static NSString *specialCellid = @"specialCellid";
@@ -141,25 +143,27 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
     [view addSubview:self.searchBar];
     [view addSubview:self.searchButton];
 
-    UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [editorBtn addTarget:self action:@selector(toMessage) forControlEvents:UIControlEventTouchUpInside];
-    [editorBtn setImage:[UIImage imageNamed:@"news"] forState:UIControlStateNormal];
-    [editorBtn sizeToFit];
-
+    messageBtn *editorBtn = [messageBtn buttonWithType:UIButtonTypeCustom];
     editorBtn.frame = CGRectMake(CGRectGetMaxX(self.searchBar.frame) + 16, 30.5, 20, 17);
-    [view addSubview:editorBtn];
- 
     
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mingzizijiqi:) name:@"postVc" object:nil];
+    WEAKSELF
+    editorBtn.MessBtnClickBlock = ^{
+        ZHJPushCustomMessageViewController *JPushCustomVc = [[ZHJPushCustomMessageViewController alloc]init];
+        [weakSelf.navigationController pushViewController:JPushCustomVc animated:YES];
+    };
+    
+    [view addSubview:editorBtn];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mingzizijiqi:) name:@"postVc" object:nil];
 }
 
-- (void)toMessage{
-    
-    ZHJPushCustomMessageViewController *JPushCustomVc = [[ZHJPushCustomMessageViewController alloc]init];
-    
-    [self.navigationController pushViewController:JPushCustomVc animated:YES];
-    
-}
+//- (void)toMessage{
+//    
+//    ZHJPushCustomMessageViewController *JPushCustomVc = [[ZHJPushCustomMessageViewController alloc]init];
+//    
+//    [self.navigationController pushViewController:JPushCustomVc animated:YES];
+//
+//}
 
 
 - (void)mingzizijiqi:(NSNotification *)notification{
@@ -519,7 +523,7 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     
     CGFloat offset = scrollView.contentOffset.y;
-    UIColor *color = [UIColor whiteColor];
+    UIColor *color = [UIColor clearColor];
     
     if (offset > 50) {
         
@@ -527,7 +531,7 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
             
             offset = 100;
         }
-        CGFloat alpha = (offset - 50)/50;
+        CGFloat alpha = .1;
         
         _headerView.backgroundColor = [color colorWithAlphaComponent:alpha];
         

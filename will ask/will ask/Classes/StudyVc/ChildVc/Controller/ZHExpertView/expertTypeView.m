@@ -53,33 +53,39 @@
 
 - (void)setupUI {
     
-    self.backgroundColor = [UIColor redColor];
+    self.backgroundColor = [UIColor whiteColor];
     
-    self.resetButton = [[UIButton alloc] initWithFrame:CGRectMake(0, self.bounds.size.height-Btn_Height, [UIScreen mainScreen].bounds.size.width/2-1, Btn_Height)];
+    self.resetButton = [[UIButton alloc] initWithFrame:CGRectMake(0, self.bounds.size.height-Btn_Height, [UIScreen mainScreen].bounds.size.width/2, Btn_Height)];
     [self.resetButton addTarget:self action:@selector(resetButtonClickAction) forControlEvents:UIControlEventTouchUpInside];
     [self.resetButton setTitle:@"重置" forState:UIControlStateNormal];
-    self.resetButton.backgroundColor = [UIColor brownColor];
+    [self.resetButton setBorder:[UIColor lightGrayColor] width:.5];
+    [self.resetButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    self.resetButton.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.resetButton];
     
-    self.confirmButton = [[UIButton alloc] initWithFrame:CGRectMake(self.resetButton.bounds.size.width+1, self.bounds.size.height-Btn_Height, [UIScreen mainScreen].bounds.size.width/2, Btn_Height)];
+    self.confirmButton = [[UIButton alloc] initWithFrame:CGRectMake(self.resetButton.bounds.size.width, self.bounds.size.height-Btn_Height, [UIScreen mainScreen].bounds.size.width/2, Btn_Height)];
     [self.confirmButton addTarget:self action:@selector(confirmButtonClickAction) forControlEvents:UIControlEventTouchUpInside];
     [self.confirmButton setTitle:@"确认" forState:UIControlStateNormal];
-    self.confirmButton.backgroundColor = [UIColor purpleColor];
+    [self.confirmButton setBorder:[UIColor lightGrayColor] width:.5];
+
+    [self.confirmButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+
+    self.confirmButton.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.confirmButton];
     
     self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 15, 100, 30)];
     self.nameLabel.font = [UIFont systemFontOfSize:15];
-    self.nameLabel.textColor = [UIColor yellowColor];
+    self.nameLabel.textColor = [UIColor blackColor];
     self.nameLabel.text = @"专家类型";
-    self.nameLabel.backgroundColor = [UIColor blueColor];
+    self.nameLabel.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.nameLabel];
     
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(self.resetButton.bounds.size.width, self.bounds.size.height-Btn_Height+5, 1, Btn_Height-10)];
-    lineView.backgroundColor = [UIColor redColor];
-    [self addSubview:lineView];
+//    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(self.resetButton.bounds.size.width, self.bounds.size.height-Btn_Height+5, 1, Btn_Height-10)];
+//    lineView.backgroundColor = [UIColor lightGrayColor];
+//    [self addSubview:lineView];
     
     self.expBtnView = [[expertBtnView alloc] initWithFrame:CGRectMake(0, self.nameLabel.bounds.size.height+self.nameLabel.frame.origin.y, [UIScreen mainScreen].bounds.size.width, 100)];
-    self.expBtnView.backgroundColor = [UIColor purpleColor];
+    self.expBtnView.backgroundColor = [UIColor whiteColor];
     self.expBtnView.rowNum = 3;
     [self addSubview:self.expBtnView];
 }

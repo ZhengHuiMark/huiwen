@@ -15,7 +15,7 @@
 
 @property(nonatomic,strong) UILabel *rightLabel;
 
-@property(nonatomic,copy) void(^numBlock)(NSInteger num);
+@property(nonatomic,copy) void(^numBlock)(NSInteger num,NSString *priceStr);
 
 - (void)showsAlertView;
 

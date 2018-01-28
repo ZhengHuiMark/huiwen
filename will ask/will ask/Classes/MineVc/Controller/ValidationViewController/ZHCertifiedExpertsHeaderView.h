@@ -17,4 +17,5 @@
 @property (nonatomic, copy) NSString *uploadFilePath;
 @property (nonatomic, strong) expert *expert;
 @property (nonatomic, strong) ZHImageCategory *imageCategory;
+@property (nonatomic, assign) BOOL isCertification; // 是否认证
 @end

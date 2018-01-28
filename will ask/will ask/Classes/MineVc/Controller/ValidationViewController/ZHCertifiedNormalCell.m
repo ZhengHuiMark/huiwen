@@ -127,13 +127,18 @@
 }
 
 #pragma mark - Setter
+- (void)setIsCertification:(BOOL)isCertification {
+    _isCertification = isCertification;
+}
 /// 左侧默认
 - (void)setTitleStr:(NSString *)titleStr {
     _titleStr = titleStr;
     _categoryTitleLabel.text = titleStr;
-    NSMutableAttributedString *mastr = [[NSMutableAttributedString alloc] initWithString:_categoryTitleLabel.text];
-    [mastr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 1)];
-    _categoryTitleLabel.attributedText = mastr;
+    if (!self.isCertification) {
+        NSMutableAttributedString *mastr = [[NSMutableAttributedString alloc] initWithString:_categoryTitleLabel.text];
+        [mastr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 1)];
+        _categoryTitleLabel.attributedText = mastr;
+    }
 }
 
 /// 编辑完成,右侧赋值
@@ -172,6 +177,31 @@
             make.right.left.bottom.mas_equalTo(self.contentView);
             make.height.mas_equalTo(1);
         }];
+    }
+    if (_isCertification) {
+        if (index.row == 0) {
+            _informationTextField.text = self.expertModel.realname;
+        } else if (index.row == 1) {
+            _informationTextField.text = self.expertModel.nickname;
+        } else if (index.row == 2) {
+            if (self.expertModel.sex == 0) {
+                _showLabel.text = @"女";
+            } else if (self.expertModel.sex == 1) {
+                _showLabel.text = @"男";
+            }
+        } else if (index.row == 3) {
+            _showLabel.text = self.expertModel.locus;
+        } else if (index.row == 4) {
+            _showLabel.text = self.expertModel.birthdate;
+        } else if (index.row == 5) {
+            _informationTextField.text = self.expertModel.company;
+        } else if (index.row == 6) {
+            _informationTextField.text = self.expertModel.duty;
+        } else if (index.row == 7) {
+            _showLabel.text = @"已填";
+        } else if (index.row == 8) {
+            _showLabel.text = @"已填";
+        }
     }
 }
 

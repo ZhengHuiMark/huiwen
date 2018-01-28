@@ -24,4 +24,5 @@ typedef void(^buyCardClick)();
 
 @property(nonatomic,copy)buyCardClick didClick;
 
+
 @end

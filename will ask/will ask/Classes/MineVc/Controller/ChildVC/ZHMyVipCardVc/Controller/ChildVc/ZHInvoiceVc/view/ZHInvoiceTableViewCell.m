@@ -27,8 +27,9 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     [_contentTextFiled setBorderStyle:UITextBorderStyleNone];
+    
+    [self.contentTextFiled addTarget:self action:@selector(textChangClickAction:) forControlEvents:UIControlEventEditingChanged];
 }
-
 
 - (void)setModel:(ZHInvoiceModel *)model{
     _model = model;
@@ -154,8 +155,15 @@
             break;
     }
  
-    
     return YES;
 }
+
+- (void)textChangClickAction:(UITextView *)textView {
+    
+    if (self.textFieldClickBlock) {
+        self.textFieldClickBlock(textView.text);
+    }
+}
+
 
 @end
