@@ -34,9 +34,10 @@ static NSString *WalletListCellid = @"WalletListCellid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.title = @"我的钱包";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor orangeColor];
+
     
     [self loadData];
     [self.view addSubview: self.tableView];
@@ -101,14 +102,16 @@ static NSString *WalletListCellid = @"WalletListCellid";
         
         cell.model = self.model;
         
-      
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         
         return cell;
     }
 
     
     ZHWalletListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:WalletListCellid forIndexPath:indexPath];
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     cell.indexPath = indexPath;
     
     return cell;

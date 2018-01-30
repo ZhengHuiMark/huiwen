@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^pushRewardVc)();
+typedef void(^pushFreeVc)();
+typedef void(^pushFindExeprtVc)();
+typedef void(^pushCheakCaseVc)();
+
 @interface ZHJumpFourTableViewCell : UITableViewCell
+
+@property (nonatomic, copy) pushRewardVc rewardDidClick;
+
+@property (nonatomic, copy) pushRewardVc freeDidClick;
+@property (nonatomic, copy) pushRewardVc expertDidClick;
+@property (nonatomic, copy) pushRewardVc CaseDidClick;
 
 @end

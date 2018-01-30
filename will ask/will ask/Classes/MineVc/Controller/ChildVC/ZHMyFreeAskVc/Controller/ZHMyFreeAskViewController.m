@@ -18,6 +18,7 @@
 #import "MJRefresh.h"
 #import "ZHMyFreeAskModel.h"
 #import "ZHMyFreeAskTableViewCell.h"
+#import "ZHAskQuestionTableViewController.h"
 
 static NSString *MyFreeAskCellid = @"MyFreeAskCellid";
 
@@ -210,19 +211,11 @@ static NSString *MyFreeAskCellid = @"MyFreeAskCellid";
     
     // 编辑免费问
     cell.editDidClick = ^{
+        ZHAskQuestionTableViewController *editVc = [[ZHAskQuestionTableViewController alloc]init];
+        editVc.AskType = @"3";
+        editVc.editId = self.Freemodels[indexPath.row].freeAskId;
         
-//         /api/freeask/ut/edit
-        NSMutableDictionary *dic = [ZHNetworkTools parameters];
-        [dic setObject:model.freeAskId forKey:@"freeAskId"];
-        NSString *url = [NSString stringWithFormat:@"%@/api/freeask/ut/edit",kIP];
-        
-        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
-            
-        
-            
-        }];
-        
-        
+        [self.navigationController pushViewController:editVc animated:YES];
     };
     
     // 删除免费问
@@ -239,8 +232,12 @@ static NSString *MyFreeAskCellid = @"MyFreeAskCellid";
             }
             
             NSLog(@"%@",response);
-            
-            [self.tableView reloadData];
+            if ([response[@"success"] integerValue] == 1) {
+                [SVProgressHUD showSuccessWithStatus:@"删除成功"];
+                [SVProgressHUD dismissWithDelay:1.0];
+            }
+
+            [self loadData];
         }];
     };
     

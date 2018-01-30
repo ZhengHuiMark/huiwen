@@ -11,13 +11,17 @@
 #import "ZHTabBarViewController.h"
 #import "IQKeyboardManager.h"
 #import "OssService.h"
-#import "ZHNetworkTools.h"
-#import "Macro.h"
 #import "JPushMessageModel.h"
 #import "ZHCertifiedExpertsVC.h"
 #import "ZHTabBarViewController.h"
 #import "AskViewController.h"
-
+#import "ZHExpertServiceViewController.h"
+#import "ZHRewardDetailViewController.h"
+#import "ZHMyConsultVc.h"
+#import "ZHConsultingMeViewController.h"
+#import "ZHToAnswerViewController.h"
+#import "ZHChooseTypeViewController.h"
+#import "JPushModel.h"
 
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
@@ -52,8 +56,6 @@
 
 
 @interface AppDelegate ()<JPUSHRegisterDelegate,WXApiDelegate>
-
-
 
 @end
 
@@ -90,7 +92,7 @@
          switch (platformType)
          {
              case SSDKPlatformTypeWechat:
-                 [ShareSDKConnector connectWeChat:[WXApi class]];
+                 [ShareSDKConnector connectWeChat:[WXApi class] delegate:self];
                  break;
              case SSDKPlatformTypeQQ:
                  [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
@@ -117,7 +119,7 @@
                  break;
              case SSDKPlatformTypeWechat:
                  [appInfo SSDKSetupWeChatByAppId:@"wxc264c5d4f565c692"
-                                       appSecret:@"db5c2c9660c35df6859bbd86d81e9b83"];
+                                       appSecret:@"78c4934e3743466e9645726276803460"];
                  break;
              case SSDKPlatformTypeQQ:
                  [appInfo SSDKSetupQQByAppId:@"101390845"
@@ -136,7 +138,7 @@
     NSInteger code = 1;
     [JPUSHService getAlias:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
         
-        NSLog(@"!@#@!#!#1234567889");
+//        NSLog(@"!@#@!#!#1234567889");
     } seq:code];
     //Required
     //notice: 3.0.0及以后版本注册可以这样写，也可以继续用之前的注册方式
@@ -162,13 +164,17 @@
                           channel:@"AppStore"
                  apsForProduction:NO
             advertisingIdentifier:nil];
+  
     
     /** 极光自定义消息通知 */
-    
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
-    
-    
+    /** 获取极光ID */
+    NSNotificationCenter *defaultCenter1 = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self
+                      selector:@selector(networkDidLogin:)
+                          name:kJPFNetworkDidLoginNotification
+                        object:nil];
     
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     
@@ -180,9 +186,7 @@
     
     manager.enableAutoToolbar = NO;
     
-    
-   
-    
+
     _window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
 
@@ -206,6 +210,19 @@
     [KSGuaidManager begin];
 
     return YES;
+}
+
+
+- (void)networkDidLogin:(NSNotification *)notification {
+    
+    
+    if ([JPUSHService registrationID]) {
+        JPushModel *jPushModel = [[JPushModel alloc]init];
+        jPushModel.deviceId = [JPUSHService registrationID];
+        NSLog(@"get RegistrationID:%@",[JPUSHService registrationID]);//获取registrationID
+        
+        
+    }
 }
 
 #pragma mark - 极光自定义消息回调
@@ -245,7 +262,6 @@
     model.isRead = NO;
     [_dataSoureMArray insertObject:model atIndex:0];
 
-    
     BOOL ret =  [NSKeyedArchiver archiveRootObject:_dataSoureMArray toFile:kPersonInfoPath];
     if (ret) {
         NSLog(@"归档成功");
@@ -262,13 +278,17 @@
 
 
 
+
 #pragma mark - 极光推送回调
 - (void)application:(UIApplication *)application
 didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     
     /// Required - 注册 DeviceToken
     [JPUSHService registerDeviceToken:deviceToken];
+    
 }
+
+
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     //Optional
@@ -307,8 +327,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         
         //取得Extras字段内容(额外的附加信息)
         
-        
-  
         NSString *customizeField1 = [userInfo valueForKey:@"Extras"];//服务端中Extras字段，key是自己定义的
         
         NSLog(@"自定义message:%@",userInfo);
@@ -316,24 +334,118 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
         
         NSLog(@"推%@",content);
         
-//        NSLog(@"推%@",extras);
         
         NSLog(@"推%@ = %@",customizeField1,userInfo[@"linkType"]);
        
+      /*
+        链接类型
+        编码
+        无链接
+        0
+        专家服务页
+        11
+        专家认证申请页
+        12
+        悬赏问详情页
+        21
+        悬赏问提问-选择分类页
+        22
+        专家服务-我的案例详解
+        31
+        我的咨询详情页
+        41
+        专家服务-咨询我的详情页
+        42
+        专家服务-咨询我的问题列表页
+        43
+*/
         
         switch ([userInfo[@"linkType"] integerValue]) {
+            case 0:
+            {
+                [SVProgressHUD showInfoWithStatus:@"系统消息无跳转页面"];
+                [SVProgressHUD dismissWithDelay:1.0];
+            }
+                break;
             case 11:
-                
+            {
+                //跳转专家服务页
+                ZHExpertServiceViewController *expertServiceVc = [[ZHExpertServiceViewController alloc]init];
+//                expertServiceVc.uidStringz = userInfo[@"objectId"];
+                ZHTabBarViewController *tabVC = (ZHTabBarViewController *)self.window.rootViewController;
+                ZHNavigationVC *nav = tabVC.viewControllers[tabVC.selectedIndex];
+                [nav pushViewController:expertServiceVc animated:YES];
+            }
                 break;
             case 12:
             {
+                //专家认证页
                 ZHCertifiedExpertsVC *expertVc = [[ZHCertifiedExpertsVC alloc]init];
 //                [self.inputViewController.navigationController pushViewController:expertVc animated:YES];
                 ZHTabBarViewController *tabVC = (ZHTabBarViewController *)self.window.rootViewController;
                 ZHNavigationVC *nav = tabVC.viewControllers[tabVC.selectedIndex];
                 [nav pushViewController:expertVc animated:YES];
             }
+                break;
+            case 21:
+            {
+                //悬赏问详情
+                ZHRewardDetailViewController *rewardDetail = [[ZHRewardDetailViewController alloc]init];
+                rewardDetail.uidStringz = userInfo[@"objectId"];
+                ZHTabBarViewController *tabVC = (ZHTabBarViewController *)self.window.rootViewController;
+                ZHNavigationVC *nav = tabVC.viewControllers[tabVC.selectedIndex];
+                [nav pushViewController:rewardDetail animated:YES];
+            }
+                break;
+            case 22:
+            {
+                // 悬赏问 - 选择分类页面
+                ZHChooseTypeViewController *chooseTypeVc = [[ZHChooseTypeViewController alloc]init];
+                chooseTypeVc.typeString = @"2";
+                ZHTabBarViewController *tabVC = (ZHTabBarViewController *)self.window.rootViewController;
+                ZHNavigationVC *nav = tabVC.viewControllers[tabVC.selectedIndex];
+                [nav pushViewController:chooseTypeVc animated:YES];
+            }
+                break;
+            case 31:
+            {
                 
+//                ZHRewardDetailViewController *rewardDetail = [[ZHRewardDetailViewController alloc]init];
+//                rewardDetail.uidStringz = userInfo[@"objectId"];
+//                ZHTabBarViewController *tabVC = (ZHTabBarViewController *)self.window.rootViewController;
+//                ZHNavigationVC *nav = tabVC.viewControllers[tabVC.selectedIndex];
+//                [nav pushViewController:rewardDetail animated:YES];
+            }
+                break;
+            case 41:
+            {
+                //我的咨询详情页
+                ZHMyConsultVc *myConsultVc = [[ZHMyConsultVc alloc]init];
+                myConsultVc.consultId = userInfo[@"objectId"];
+                ZHTabBarViewController *tabVC = (ZHTabBarViewController *)self.window.rootViewController;
+                ZHNavigationVC *nav = tabVC.viewControllers[tabVC.selectedIndex];
+                [nav pushViewController:myConsultVc animated:YES];
+            }
+                break;
+            case 42:
+            {
+                //咨询我的详情页
+                ZHConsultingMeViewController *consultMeVc = [[ZHConsultingMeViewController alloc]init];
+                consultMeVc.conslutId = userInfo[@"objectId"];
+                ZHTabBarViewController *tabVC = (ZHTabBarViewController *)self.window.rootViewController;
+                ZHNavigationVC *nav = tabVC.viewControllers[tabVC.selectedIndex];
+                [nav pushViewController:consultMeVc animated:YES];
+            }
+                break;
+            case 43:
+            {
+                //专家服务 - 咨询我的 - 列表页
+                ZHToAnswerViewController *toAnswerVc = [[ZHToAnswerViewController alloc]init];
+//                toAnswerVc.uidStringz = userInfo[@"objectId"];
+                ZHTabBarViewController *tabVC = (ZHTabBarViewController *)self.window.rootViewController;
+                ZHNavigationVC *nav = tabVC.viewControllers[tabVC.selectedIndex];
+                [nav pushViewController:toAnswerVc animated:YES];
+            }
                 break;
     
             default:
@@ -351,17 +463,6 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     NSLog(@" 推送消息 = %@",userInfo);
     completionHandler(UIBackgroundFetchResultNewData);
 }
-
-
-// iOS9.0及9.0以后调用此方法
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
-    // 在此方法中做如下判断，因为还有可能有其他的支付，如支付宝就是@"safepay"
-    if ([url.host isEqualToString:@"pay"]) {
-        return [WXApi handleOpenURL:url delegate:self];
-    }
-    return YES;
-}
-
 
 //微信SDK自带的方法，处理从微信客户端完成操作后返回程序之后的回调方法,显示支付结果的
 -(void)onResp:(BaseResp*)resp
@@ -389,7 +490,15 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
 
 
-
+// iOS9.0及9.0以后调用此方法
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    // 在此方法中做如下判断，因为还有可能有其他的支付，如支付宝就是@"safepay"
+    //    if ([url.host isEqualToString:@"pay"]) {
+    return [WXApi handleOpenURL:url delegate:self];
+    //    }
+    
+        return YES;
+}
 // NOTE: 9.0以后使用新API接口
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options
 {
@@ -399,9 +508,20 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
             NSLog(@"result = %@",resultDic);
         }];
     }
+        if ([url.host isEqualToString:@"pay"]) {
+
+    return  [WXApi handleOpenURL:url delegate:self];
+        }
     return YES;
 }
 
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    
+    [WXApi handleOpenURL:url delegate:self];
+    
+    return YES;
+}
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     

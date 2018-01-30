@@ -26,6 +26,7 @@
 #import "ZHRewardDetailViewController.h"
 #import "ZHExpertViewController.h"
 
+
 static NSString *JumpCellid = @"JumpCellid";
 
 static NSString *LatesPriceCellid = @"LatesPriceCellid";
@@ -34,17 +35,17 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 
 
-@interface AskViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
+@interface AskViewController ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong)ZHBtnModel *model;
+@property (nonatomic, strong) ZHBtnModel *model;
+
 @property (nonatomic, strong) NSMutableArray<ZHBtn *> *tagButtons;
 
-@property (nonatomic, strong)NSMutableArray<ZHAskModel *>* Freemodels;
-
+@property (nonatomic, strong) NSMutableArray<ZHAskModel *>* Freemodels;
 
 @property (nonatomic, strong) ZHBtnContainer *tagContainer;
 
-@property(nonatomic,strong) UISearchBar *searchBar;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -61,38 +62,37 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     return instance;
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    self.navigationController.navigationBar.hidden = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.hidden = YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
    
-    // Do any additional setup after loading the view.
-    
-    
-    
     [self LoadFreeAskData];
-    
-    
     
     [self loadData];
 
-    
     [self configUI];
 
     _tagContainer =  [ZHBtnContainer new];
     
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mingzizijiqi:) name:@"postVc" object:nil];
-
-//    [self.navigationController.navigationBar addSubview:self.searchBar];
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
     
-
+    NavBaseView *view = [[NavBaseView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, SafeAreaTopHeight)];
+    view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:view];
 }
 
 - (void)mingzizijiqi:(NSNotification *)notification{
-    
     
     if([notification.object isKindOfClass:[self class]]) {
         
@@ -109,38 +109,22 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 }
 
 - (void)configUI{
-    
- 
-    UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [editorBtn addTarget:self action:@selector(toMessage) forControlEvents:UIControlEventTouchUpInside];
-    [editorBtn setImage:[UIImage imageNamed:@"news3"] forState:UIControlStateNormal];
-    [editorBtn sizeToFit];
 
-    UIBarButtonItem *editBtnItem = [[UIBarButtonItem alloc] initWithCustomView:editorBtn];
-    self.navigationItem.rightBarButtonItem = editBtnItem;
-
-    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
-
+    self.tableView.dataSource = self;
     [self.tableView registerNib:[UINib nibWithNibName:@"ZHJumpTableViewCell" bundle:nil] forCellReuseIdentifier:JumpCellid];
     [self.tableView registerNib:[UINib nibWithNibName:@"ZHLatestPriceTableViewCell" bundle:nil] forCellReuseIdentifier:LatesPriceCellid];
     [self.tableView registerNib:[UINib nibWithNibName:@"ZHFreeListTableViewCell" bundle:nil] forCellReuseIdentifier:FreeListTableViewCellid];
-    
     self.tableView.rowHeight = 110;
     self.tableView.sectionHeaderHeight = 43;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-//    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    
-
-
+    [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top).offset(SafeAreaTopHeight);
+        make.left.bottom.right.equalTo(self.view);
+    }];
 }
-
-- (instancetype)initWithStyle:(UITableViewStyle)style {
-    
-    return [super initWithStyle:UITableViewStyleGrouped];
-}
-
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
@@ -160,7 +144,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
         
         UIView * lineView = [[UIView alloc]init];
         lineView.frame = CGRectMake(0, 43, [UIScreen mainScreen].bounds.size.width, 1);
-        lineView.backgroundColor = [UIColor grayColor];
+        lineView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
         
         [headerView addSubview:lineView];
     
@@ -244,14 +228,11 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
         ZHJumpTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JumpCellid forIndexPath:indexPath];
         
         if (cell == nil) {
-            
             cell = [[ZHJumpTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:JumpCellid];
-
-           
             cell.indexPath = indexPath;
-
-
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         cell.RewardBtnClick = ^(){
 //            ZHAskQuestion TableViewController *AskVc = [[ZHAskQuestionTableViewController alloc]init];
             ZHRewardViewController *rewardVc = [[ZHRewardViewController alloc]init];
@@ -300,7 +281,8 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     if (cell == nil) {
         cell = [[ZHFreeListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FreeListTableViewCellid];
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     [cell setModel:model];
     
     return cell;
@@ -450,24 +432,5 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     return _tagButtons;
 }
 
-
-- (UISearchBar *)searchBar {
-    if (!_searchBar) {
-        _searchBar = [[UISearchBar alloc] initWithFrame: CGRectMake(13, 0, [UIScreen mainScreen].bounds.size.width-60, 44)];
-        
-        _searchBar.delegate = self;
-        
-        _searchBar.placeholder = @"搜索案例,资讯,问答";
-        
-        _searchBar.searchBarStyle = UISearchBarStyleMinimal;
-        
-        _searchBar.layer.cornerRadius = 3;
-        _searchBar.layer.masksToBounds = YES;
-        _searchBar.layer.borderColor = [UIColor whiteColor].CGColor;
-        
-        
-    }
-    return _searchBar;
-}
 
 @end

@@ -17,17 +17,30 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
     
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.touXiangBtn.layer.masksToBounds = YES;
     self.touXiangBtn.layer.cornerRadius = 35;
+    
+    messageBtn *editorBtn = [messageBtn buttonWithType:UIButtonTypeCustom];
+    [editorBtn setImage:[UIImage imageNamed:@"news1"] forState:UIControlStateNormal];
+    [editorBtn setImage:[UIImage imageNamed:@"news-index"] forState:UIControlStateSelected];
+    [self addSubview:editorBtn];
+    [editorBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.setBtn.mas_centerY);
+        make.right.equalTo(self.setBtn.mas_left).offset(-20);
+        make.size.mas_equalTo(CGSizeMake(20, 17));
+    }];
+    
+    WEAKSELF
+    editorBtn.MessBtnClickBlock = ^{
+        ZHJPushCustomMessageViewController *JPushCustomVc = [[ZHJPushCustomMessageViewController alloc]init];
+        [weakSelf.GetViewController.navigationController pushViewController:JPushCustomVc animated:YES];
+    };
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 - (void)setUsermodel:(UserModel *)usermodel {
@@ -47,6 +60,8 @@
     !self.didClick?:self.didClick();
     
 }
+
+
 
 
 @end

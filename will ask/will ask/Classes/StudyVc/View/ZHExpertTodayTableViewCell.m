@@ -18,13 +18,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 
 -(void)setModel:(ZHStudyModel *)model {
@@ -41,7 +37,7 @@
     
     self.expertInformationNumber.text = self.model.acceptConsultNumber;
     
-    self.caseNumber.text = self.model.caseAnalysisNumber;
+//    self.caseNumber.text = self.model.caseAnalysisNumber;
     
 //    [self.expertAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.model.avatar]]];
     [self.expertAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.model.avatar]] placeholderImage:[UIImage imageNamed:@"bj"]];
@@ -61,7 +57,7 @@
     
     self.expertInformationNumber.text = self.allModel.acceptConsultNumber;
     
-    self.caseNumber.text = self.allModel.caseAnalysisNumber;
+//    self.caseNumber.text = self.allModel.caseAnalysisNumber;
     
     //    [self.expertAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.model.avatar]]];
     [self.expertAvatar sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",bucketNameUserLoad,OSS,self.allModel.avatar]] placeholderImage:[UIImage imageNamed:@"bj"]];

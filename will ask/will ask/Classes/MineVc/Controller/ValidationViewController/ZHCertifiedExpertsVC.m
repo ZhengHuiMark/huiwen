@@ -61,7 +61,11 @@ static NSString *ZHExpertCategoryCellID = @"ZHExpertCategoryCellID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"专家信息";
+    if (self.isCertification) {
+        self.title = @"专家信息";
+    }else{
+        self.title = @"认证专家";
+    }
     self.uploadImageArr = [NSMutableArray new];
     if (!self.isCertification) {
         self.expertModel = [[expert alloc] init];

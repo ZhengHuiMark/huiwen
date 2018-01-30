@@ -67,7 +67,6 @@ static NSString *nameCellid = @"nameCellid";
     
     UILabel * titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 62, 20)] ;
     titleLabel.text  = @"个人信息";
-    //    titleLabel.backgroundColor  = [UIColor blueColor]   ;
     
     titleLabel.textColor = [UIColor blackColor] ;
     

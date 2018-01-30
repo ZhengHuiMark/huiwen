@@ -24,34 +24,17 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fbg-pE-fVZ">
-                        <rect key="frame" x="54" y="16" width="11" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="财务审计" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oba-mt-mmt">
-                        <rect key="frame" x="70" y="18" width="61.5" height="18"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstItem="Oba-mt-mmt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="IvG-bV-edy"/>
-                    <constraint firstItem="Oba-mt-mmt" firstAttribute="leading" secondItem="Fbg-pE-fVZ" secondAttribute="trailing" constant="5" id="hxN-jG-hYV"/>
-                    <constraint firstItem="Fbg-pE-fVZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="iL2-4A-Tks"/>
                     <constraint firstItem="dpM-na-DTb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="nV5-lO-Ajq"/>
-                    <constraint firstItem="Fbg-pE-fVZ" firstAttribute="leading" secondItem="dpM-na-DTb" secondAttribute="trailing" constant="5" id="oax-N6-19e"/>
                     <constraint firstItem="dpM-na-DTb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="wXk-BA-rX9"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="titleSubType" destination="Oba-mt-mmt" id="MMf-t5-sxv"/>
                 <outlet property="titleType" destination="dpM-na-DTb" id="wUT-ro-fxv"/>
             </connections>
-            <point key="canvasLocation" x="-34" y="21"/>
+            <point key="canvasLocation" x="-34.5" y="21"/>
         </tableViewCell>
     </objects>
 </document>

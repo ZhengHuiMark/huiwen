@@ -40,6 +40,8 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
     OssService * service;
     NSString * uploadFilePath;
     NSString * _voicePath;
+    BOOL _isCancelBool;
+
 }
 
 @property(nonatomic,strong)UITableView *tableView;
@@ -578,13 +580,10 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
 
 - (void)setupUI{
     
-    
     [self.view addSubview:self.AllView];
     [_AllView addSubview:self.ControlsView];
     [_AllView addSubview:self.ContentView];
-    //    [_AllView addSubview:self.speakView];
     [_AllView addSubview:self.ImageView];
-    
     
     [self.ContentView addSubview:self.ContentTextView];
     [self.ControlsView addSubview:self.downBtn];
@@ -592,11 +591,8 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
     [self.ControlsView addSubview:self.speakBtn];
     [self.ControlsView addSubview:self.ReleaseBtn];
     
-    
-    
     [self.ContentTextView addSubview:self.PlaceholderLabel];
     [self.ContentTextView addSubview:self.LinkageLabel];
-    //    [self.speakView addSubview:self.VoiceBtn];
     
     self.ContentTextView.delegate = self;
     
@@ -619,16 +615,13 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
     _collectionView.showsVerticalScrollIndicator = NO;
     
     [self.ImageView addSubview:self.collectionView];
-    
 }
-
 
 - (UIButton *)VoiceBtn{
     if (!_VoiceBtn) {
         
         CGFloat VoiceBtnWidth = 75;
         CGFloat VoiceBtnHeight = VoiceBtnWidth;
-        
         
         _VoiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
@@ -637,7 +630,6 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
         
         _VoiceBtn.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - VoiceBtnWidth ) / 2, 42.5, VoiceBtnWidth, VoiceBtnHeight);
     }
-    
     return _VoiceBtn;
 }
 
@@ -646,25 +638,21 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
     if (!_deleteButton) {
         
         _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-        //        _deleteButton.titleLabel.text = @"删除";
         [_deleteButton setTitle:@"删除" forState:UIControlStateNormal];
         _deleteButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_deleteButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        
-        //        _deleteButton.center = self.VoiceView.center;
         _deleteButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width / 2 - 14 , 150, 50, 13);
         [_deleteButton addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
-        
     }
     
     return _deleteButton;
 }
+
 #pragma mark - 删除语音消息
 - (void)deleteAction{
     
     [self.VoiceView removeFromSuperview];
-    
+    _isCancelBool = YES;
 }
 
 - (UIView *)ControlsView{
@@ -675,15 +663,11 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
         
         _ControlsView = [UIView new];
         
-        _ControlsView.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:245/255.0 alpha:1];
+        _ControlsView.backgroundColor = [UIColor lightGrayColor];
         
         _ControlsView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, ControlsViewHeight);
-        
     }
-    
-    
     return _ControlsView;
-    
 }
 
 - (UIView *)ContentView{
@@ -697,10 +681,7 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
         _ContentView.backgroundColor = [UIColor redColor];
         
         _ContentView.frame = CGRectMake(0, CGRectGetMaxY(self.ControlsView.frame), [UIScreen mainScreen].bounds.size.width, ContentViewHeight);
-        
     }
-    
-    
     return _ContentView;
 }
 
@@ -714,14 +695,9 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
         _AllView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         _AllView.frame = (CGRect){CGPointMake(0, [UIScreen mainScreen].bounds.size.height - 64
                                               ), CGSizeMake([UIScreen mainScreen].bounds.size.width, AllViewHeight )};
-        
     }
-    
-    
     return _AllView;
-    
 }
-
 
 - (UIView *)VoiceView{
     
@@ -733,10 +709,8 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
         
         _VoiceView.frame =  CGRectMake(0, CGRectGetMaxY(self.ControlsView.frame), [UIScreen mainScreen].bounds.size.width, VoiceViewHeight);
     }
-    
     return _VoiceView;
 }
-
 
 - (UIView *)speakView{
     
@@ -749,9 +723,7 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
         _speakView.backgroundColor = [UIColor greenColor];
         
         _speakView.frame = CGRectMake(0, CGRectGetMaxY(self.ControlsView.frame), [UIScreen mainScreen].bounds.size.width, SpeakViewHeight);
-        
     }
-    
     return _speakView;
 }
 
@@ -766,12 +738,9 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
         _ImageView.backgroundColor = [UIColor blueColor];
         
         _ImageView.frame = CGRectMake(0, CGRectGetMaxY(self.ContentView.frame), [UIScreen mainScreen].bounds.size.width, SpeakViewHeight);
-        
     }
     return _ImageView;
 }
-
-
 
 - (UITextView *)ContentTextView{
     
@@ -780,17 +749,12 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
         CGFloat ContentTextViewHeight = 190;
         
         _ContentTextView = [UITextView new];
-        
-        
         _ContentTextView.backgroundColor = [UIColor yellowColor];
         _ContentTextView.alpha = .8;
-        
-        
         _ContentTextView.frame = CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, ContentTextViewHeight);
     }
     return _ContentTextView;
 }
-
 
 - (UILabel *)PlaceholderLabel {
     
@@ -799,9 +763,7 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
         
         _PlaceholderLabel.text = @"请输入您的回答";
         _PlaceholderLabel.font = [UIFont systemFontOfSize:14];
-        
         _PlaceholderLabel.frame = CGRectMake(5, 7, 100, 15);
-        
     }
     return _PlaceholderLabel;
 }
@@ -832,7 +794,6 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
     _ReleaseBtn.titleLabel.font = [UIFont systemFontOfSize:15];
     
     _ReleaseBtn.frame = CGRectMake(CGRectGetMaxX(self.ControlsView.frame) - 18 - ReleaseBtnWidth, 18, ReleaseBtnWidth, ReleaseBtnHeight);
-    
     [_ReleaseBtn addTarget:self action:@selector(releaseAnswer) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -849,17 +810,13 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
     if (!_downBtn) {
         _downBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        [_downBtn setImage:[UIImage imageNamed:@"drop"] forState:UIControlStateNormal];
+        [_downBtn setImage:[UIImage imageNamed:@"home"] forState:UIControlStateNormal];
         
         _downBtn.frame = CGRectMake(18, 11, DownBtnWidth, DownBtnHeight);
         
         
         [_downBtn addTarget:self action:@selector(downControl) forControlEvents:UIControlEventTouchUpInside];
     }
-    
-    
-    
-    
     return _downBtn;
 }
 
@@ -868,15 +825,15 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
     
     if (!_speakBtn) {
         
-        CGFloat DownBtnHeight = 25.5;
-        CGFloat DownBtnWidth = 17.5;
+        CGFloat DownBtnHeight = 22.5;
+        CGFloat DownBtnWidth = DownBtnHeight;
         
         _speakBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        [_speakBtn setImage:[UIImage imageNamed:@"voice_normal"] forState:UIControlStateNormal];
-        [_speakBtn setImage:[UIImage imageNamed:@"voice_selected"] forState:UIControlStateSelected];
+        [_speakBtn setImage:[UIImage imageNamed:@"book-1"] forState:UIControlStateNormal];
+        [_speakBtn setImage:[UIImage imageNamed:@"free"] forState:UIControlStateSelected];
         
-        _speakBtn.frame = CGRectMake(CGRectGetMaxX(self.textBtn.frame) + 20, 11, DownBtnWidth, DownBtnHeight);
+        _speakBtn.frame = CGRectMake(CGRectGetMaxX(self.textBtn.frame) + 10, 11, DownBtnWidth, DownBtnHeight);
         [_speakBtn addTarget:self action:@selector(gogo) forControlEvents:UIControlEventTouchUpInside];
         
     }
@@ -891,22 +848,21 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
     //        [self.ContentTextView removeFromSuperview];
     _speakBtn.selected = YES;
     self.textBtn.selected = NO;
-    
 }
 
 - (UIButton *)textBtn {
     if (!_textBtn) {
         
-        CGFloat DownBtnHeight = 20.5;
+        CGFloat DownBtnHeight = 22.5;
         CGFloat DownBtnWidth = DownBtnHeight;
         
         _textBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        [_textBtn setImage:[UIImage imageNamed:@"write_normal"] forState:UIControlStateNormal];
-        [_textBtn setImage:[UIImage imageNamed:@"write_selected"] forState:UIControlStateSelected];
+        [_textBtn setImage:[UIImage imageNamed:@"book-1"] forState:UIControlStateNormal];
+        [_textBtn setImage:[UIImage imageNamed:@"bonus"] forState:UIControlStateSelected];
         
         _textBtn.selected = YES;
-        _textBtn.frame = CGRectMake(CGRectGetMaxX(self.downBtn.frame) + 30, 13.5, DownBtnWidth, DownBtnHeight);
+        _textBtn.frame = CGRectMake(CGRectGetMaxX(self.downBtn.frame) + 10, 11, DownBtnWidth, DownBtnHeight);
         [_textBtn addTarget:self action:@selector(nono) forControlEvents:UIControlEventTouchUpInside];
         
     }
@@ -924,16 +880,12 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
     
     _speakBtn.selected = NO;
     self.textBtn.selected = YES;
-    
-    
-    
 }
 
 - (void)downControl {
-//    self.footerView.hidden = NO;
-//    self.answerButton.hidden = NO;
-    [self.shadowView removeFromSuperview];
-
+    
+    _answerButton.hidden = NO;
+    _footerView.hidden = NO;
     [UIView animateWithDuration: .5 animations:^{
         CGRect currentFrame = self.AllView.frame;
         currentFrame.origin.y = self.AllView.frame.origin.y + CGRectGetHeight(currentFrame)    ;
@@ -941,19 +893,18 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
     } completion:^(BOOL finished) {
         
     }];
-    
-    
 }
 
-- (void)UPControl {
+- (void)UPUP {
+    //
+    //    _shadowView = [UIView new];
+    //    _shadowView.backgroundColor = [UIColor blackColor];
+    //    _shadowView.alpha = .3;
+    //    _shadowView.frame = self.tableView.frame;
+    //    [self.tableView addSubview:self.shadowView];
     
-    _shadowView = [UIView new];
-    _shadowView.backgroundColor = [UIColor blackColor];
-    _shadowView.alpha = .3;
-    _shadowView.frame = self.tableView.frame;
-    [self.tableView addSubview:self.shadowView];
-//    self.answerButton.hidden = YES;
-//    self.footerView.hidden = YES;
+    _answerButton.hidden = YES;
+    _footerView.hidden = YES;
     [UIView animateWithDuration: .5 animations:^{
         CGRect currentFrame = self.AllView.frame;
         currentFrame.origin.y = self.AllView.frame.origin.y - CGRectGetHeight(currentFrame);
@@ -961,7 +912,6 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
     } completion:^(BOOL finished) {
         
     }];
-    
 }
 
 - (void)textViewDidChange:(UITextView *)textView{
@@ -988,13 +938,16 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
     [[ICRecordManager shareManager] startRecordingWithFileName:self.recordName completion:^(NSError *error) {
         if (error) {   // 加了录音权限的判断
         } else {
-            //            if ([_delegate respondsToSelector:@selector(voiceDidStartRecording)]) {
-            //                [_delegate voiceDidStartRecording];
-            //            }
             NSLog(@"应该是拿到录音文件 %@ ",self.recordName);
             
             self.voiceHud.hidden = NO;
-            [self timer];
+            
+            if (_isCancelBool) {
+                self.voiceHud.image  = [UIImage imageNamed:@"voice_1"];
+                [self.timer setFireDate:[NSDate date]];
+            }else {
+                [self timer];
+            }
         }
     }];
 }
@@ -1010,18 +963,13 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
             [alertString showString:@"语音太短" Delay:1];
             [[ICRecordManager shareManager] removeCurrentRecordFile:weakSelf.recordName];
             
-            
         } else {
-            //            if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController:sendVoiceMessage:)]) {
-            //                [_delegate chatBoxViewController:weakSelf sendVoiceMessage:recordPath];
-            //            }
+            
             self.voiceHud.hidden = YES;
             NSLog(@"path-%@-",recordPath);
             
             CGFloat VoiceBtnWidth = 75;
             CGFloat VoiceBtnHeight = VoiceBtnWidth;
-            
-            
             
             [_VoiceBtn setImage:[UIImage imageNamed:@"record"] forState:UIControlStateNormal];
             [_VoiceBtn setImage:[UIImage imageNamed:@"record1"] forState:UIControlStateSelected];
@@ -1033,11 +981,8 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
             
             yuyinView *yuyin = [[yuyinView alloc] initWithFrame:CGRectMake(55,(self.VoiceView.frame.size.height / 2) - 25,[UIScreen mainScreen].bounds.size.width - 55 - 88, 50)];
             yuyin.pathStr = recordPath;
-            _voiceSecondTime = yuyin.durationLabel.text;
-            //
-            NSLog(@"yuyin path = %@", yuyin.pathStr);
             
-            //
+            _voiceSecondTime = yuyin.durationLabel.text;
             
             // 文件路径
             NSString *voicePath =  recordPath;
@@ -1051,27 +996,25 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
             
             _voicePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"456"];;
             [_VoiceData writeToFile:_voicePath atomically:YES];
-
-            [self.VoiceView addSubview:yuyin];
             
+            [self.VoiceView addSubview:yuyin];
         }
     }];
+    
+    [_timer setFireDate:[NSDate distantFuture]];
 }
 
 - (void)chatBoxDidCancelRecordingVoice:(ICChatBox *)chatBox {
     
     NSLog(@"Cancel");
-    
-    //    if ([_delegate respondsToSelector:@selector(voiceDidCancelRecording)]) {
-    //        [_delegate voiceDidCancelRecording];
-    //    }
     [[ICRecordManager shareManager] removeCurrentRecordFile:self.recordName];
     self.voiceHud.hidden = YES;
-    [_timer invalidate];
+    [_timer setFireDate:[NSDate distantFuture]];
+    _isCancelBool = YES;
 }
 
-- (void)chatBoxDidDrag:(BOOL)inside
-{
+- (void)chatBoxDidDrag:(BOOL)inside {
+    
     NSLog(@"DidDrag");
     
     if (inside) {
@@ -1082,7 +1025,6 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
         self.voiceHud.animationImages  = nil;
         self.voiceHud.image = [UIImage imageNamed:@"cancelVoice"];
     }
-    [_timer invalidate];
 }
 
 - (NSString *)currentRecordFileName
@@ -1115,11 +1057,38 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
 {
     AVAudioRecorder *recorder = [[ICRecordManager shareManager] recorder] ;
     [recorder updateMeters];
-    float power= [recorder averagePowerForChannel:0];//取得第一个通道的音频，注意音频强度范围时-160到0,声音越大power绝对值越小
-    //   float lowPassResults = pow(10, (0.05 * [recorder peakPowerForChannel:0]));
     
-    CGFloat progress = (1.0/160)*(power + 160);
-    self.voiceHud.progress = progress;
+    float   level;                // The linear 0.0 .. 1.0 value we need.
+    
+    float   minDecibels = -80.0f; // Or use -60dB, which I measured in a silent room.
+    
+    float   decibels = [recorder averagePowerForChannel:0];
+    
+    if (decibels < minDecibels) {
+        
+        level = 0.0f;
+        
+    } else if (decibels >= 0.0f) {
+        
+        level = 1.0f;
+        
+    } else {
+        
+        float   root            = 2.0f;
+        
+        float   minAmp          = powf(10.0f, 0.05f * minDecibels);
+        
+        float   inverseAmpRange = 1.0f / (1.0f - minAmp);
+        
+        float   amp             = powf(10.0f, 0.05f * decibels);
+        
+        float   adjAmp          = (amp - minAmp) * inverseAmpRange;
+        
+        level = powf(adjAmp, 1.0f / root);
+    }
+    
+    self.voiceHud.progress = level* 100;
+    NSLog(@"平均值 %f level %f %f ", level * 100,level,self.voiceHud.progress);
 }
 
 #pragma mark - UICollectionView DataSource
@@ -1136,8 +1105,6 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
 
 #pragma mark - UICollectionView Delegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
     
     // 获取 Model
     MLImageModel *imageModel = self.imageModels[indexPath.item];
@@ -1161,6 +1128,7 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
                 if (self.imageModels.count > kMaxCount) {
                     [self.imageModels removeObjectAtIndex: self.imageModels.count-1];
                 }
+                
                 
                 [self.collectionView reloadData];
                 
@@ -1190,7 +1158,6 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
     [self.collectionView reloadData];
 }
 
-
 #pragma mark - Lazy load
 - (UICollectionViewFlowLayout *)layout {
     if (!_layout) {
@@ -1199,11 +1166,10 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
         _layout.minimumInteritemSpacing = 10;
         _layout.minimumLineSpacing = 10;
         _layout.sectionInset = UIEdgeInsetsZero;
-        _layout.itemSize = CGSizeMake(25,25);
+        _layout.itemSize = CGSizeMake(25, 25);
     }
     return _layout;
 }
-
 
 - (NSMutableArray<MLImageModel *> *)imageModels {
     if (!_imageModels) {
@@ -1212,7 +1178,6 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
     }
     return _imageModels;
 }
-
 
 - (NSMutableArray *)mArray {
     
@@ -1223,7 +1188,6 @@ static NSString *expertAnswerChaseCellid = @"expertAnswerChaseCellid";
     
     return _mArray;
 }
-
 
 
 

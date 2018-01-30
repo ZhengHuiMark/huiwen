@@ -10,4 +10,7 @@
 
 @interface ZHMoreRewardListViewController : UIViewController
 
+@property(nonatomic,copy) NSString *userId;
+
+
 @end

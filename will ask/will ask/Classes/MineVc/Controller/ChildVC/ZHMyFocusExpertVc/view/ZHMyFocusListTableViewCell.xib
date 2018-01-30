@@ -73,7 +73,7 @@
                             <constraint firstAttribute="height" constant="51" id="cge-ce-dM8"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <state key="normal" title="  取消关注" image="cancel">
+                        <state key="normal" title="  取消关注" image="mYfollower">
                             <color key="titleColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
@@ -86,7 +86,7 @@
                             <constraint firstAttribute="height" constant="51" id="rac-gY-5YY"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <state key="normal" title="  立即咨询" image="zixun">
+                        <state key="normal" title="  立即咨询" image="comments">
                             <color key="titleColor" red="0.61176470589999998" green="0.61176470589999998" blue="0.61176470589999998" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
@@ -139,7 +139,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="cancel" width="13" height="13"/>
-        <image name="zixun" width="15" height="13"/>
+        <image name="comments" width="16" height="15"/>
+        <image name="mYfollower" width="17" height="18"/>
     </resources>
 </document>

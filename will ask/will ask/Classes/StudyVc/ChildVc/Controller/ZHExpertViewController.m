@@ -89,6 +89,8 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = @"专家";
     // Do any additional setup after loading the view.
     [self loadData];
     [self loadExpertData];
@@ -154,12 +156,36 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
         headerView.backgroundColor = [UIColor whiteColor];
         
         _buttonArray = [[NSMutableArray alloc]init]; //将button放到数组里面
-        NSArray * array = [NSArray arrayWithObjects:@"抢答",@"接受咨询",@"发布案例", nil];
+//        NSArray * array = [NSArray arrayWithObjects:@"抢答",@"接受咨询",@"发布案例", nil];
+//        
+//        for (NSInteger i = 0; i < 3; i++) {
+//            
+//            _allButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//            _allButton.frame = CGRectMake(self.view.frame.size.width /3 *i, 0, self.view.frame.size.width/3, 50);
+//            _allButton.tag = i;
+//            _allButton.backgroundColor = [UIColor colorWithWhite:100*i alpha:0];
+//            
+//            [_allButton addTarget:self action:@selector(btnActions:) forControlEvents:UIControlEventTouchUpInside];
+//            [headerView addSubview:_allButton];
+//            [_allButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//            [_allButton setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+//            _ASCType = EnumASCTypesJiang;
+//            
+//            [_allButton setTitle:[array objectAtIndex:i] forState:UIControlStateNormal];
+//            
+//            [_buttonArray addObject:_allButton];
+//            
+//            if (!i) {
+//                _allButton.selected = YES;
+//            }
+//        }
         
-        for (NSInteger i = 0; i < 3; i++) {
+        NSArray * array = [NSArray arrayWithObjects:@"抢答",@"接受咨询", nil];
+        
+        for (NSInteger i = 0; i < 2; i++) {
             
             _allButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            _allButton.frame = CGRectMake(self.view.frame.size.width /3 *i, 0, self.view.frame.size.width/3, 50);
+            _allButton.frame = CGRectMake(self.view.frame.size.width /2 *i, 0, self.view.frame.size.width/2, 50);
             _allButton.tag = i;
             _allButton.backgroundColor = [UIColor colorWithWhite:100*i alpha:0];
             
@@ -177,10 +203,7 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
                 _allButton.selected = YES;
             }
         }
-        
-        //        _tempBtn = nil;
-        
-        
+
         // 线
         UIView * lineView = [[UIView alloc]init];
         lineView.frame = CGRectMake(0, 50, [UIScreen mainScreen].bounds.size.width, 1);
@@ -254,29 +277,30 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
         }
         [self requestFromNetworkWithOrder:orderStr asc:aseBOOL pageNo:pageNo];
         [_tableView.mj_header beginRefreshing];
-    }else {
-        orderStr = @"caseAnalysisNumber";
-        switch (_ASCType) {
-            case EnumASCTypesSheng:{
-                sender.selected = YES;
-                _ASCType = EnumASCTypesJiang;
-                aseBOOL = YES;
-                sender.backgroundColor = [UIColor whiteColor];
-            }
-                break;
-            case EnumASCTypesJiang:{
-                sender.selected = YES;
-                _ASCType = EnumASCTypesSheng;
-                aseBOOL = NO;
-                sender.backgroundColor = [UIColor whiteColor];
-                break;
-            }
-            default:
-                break;
-        }
-        [self requestFromNetworkWithOrder:orderStr asc:aseBOOL pageNo:pageNo];
-        [_tableView.mj_header beginRefreshing];
     }
+//    else {
+//        orderStr = @"caseAnalysisNumber";
+//        switch (_ASCType) {
+//            case EnumASCTypesSheng:{
+//                sender.selected = YES;
+//                _ASCType = EnumASCTypesJiang;
+//                aseBOOL = YES;
+//                sender.backgroundColor = [UIColor whiteColor];
+//            }
+//                break;
+//            case EnumASCTypesJiang:{
+//                sender.selected = YES;
+//                _ASCType = EnumASCTypesSheng;
+//                aseBOOL = NO;
+//                sender.backgroundColor = [UIColor whiteColor];
+//                break;
+//            }
+//            default:
+//                break;
+//        }
+//        [self requestFromNetworkWithOrder:orderStr asc:aseBOOL pageNo:pageNo];
+//        [_tableView.mj_header beginRefreshing];
+//    }
     
     if(_tempBtn == sender) {
         //上次点击过的按钮，不做处理
@@ -516,7 +540,7 @@ static NSString *ExpertsCellid = @"ExpertsCellid";
 
 - (NSMutableArray<NSString *> *)buttonTitles {
     if (!_buttonTitles) {
-        _buttonTitles = [NSMutableArray arrayWithArray: @[@"抢答", @"接受咨询", @"发布案例"]];
+        _buttonTitles = [NSMutableArray arrayWithArray: @[@"抢答", @"接受咨询"]];
     }
     return _buttonTitles;
 }

@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -66,33 +67,93 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQP-Vn-wam">
+                        <rect key="frame" x="30" y="15" width="60" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="70" id="YTR-3d-h7M"/>
+                            <constraint firstAttribute="width" constant="60" id="gtj-bD-g6G"/>
+                            <constraint firstAttribute="width" secondItem="oQP-Vn-wam" secondAttribute="height" multiplier="6:7" id="r3Z-lg-mS0"/>
+                        </constraints>
+                        <connections>
+                            <action selector="rewardAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Ss7-Vd-xAo"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dtq-lg-Tse">
+                        <rect key="frame" x="210" y="20" width="60" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="Dtq-lg-Tse" secondAttribute="height" multiplier="6:7" id="FXU-md-UcV"/>
+                            <constraint firstAttribute="height" constant="70" id="s6J-FU-M3t"/>
+                            <constraint firstAttribute="width" constant="60" id="w2E-HS-Jcb"/>
+                        </constraints>
+                        <connections>
+                            <action selector="findExpertAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="uql-eQ-EX7"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZHf-Nu-ln4">
+                        <rect key="frame" x="300" y="20" width="60" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="70" id="LP8-nW-qgi"/>
+                            <constraint firstAttribute="width" secondItem="ZHf-Nu-ln4" secondAttribute="height" multiplier="6:7" id="mZD-VK-UTb"/>
+                            <constraint firstAttribute="width" constant="60" id="naS-Ap-FIs"/>
+                        </constraints>
+                        <connections>
+                            <action selector="cheakCase:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ZCG-bK-Wdg"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DL3-gx-42D">
+                        <rect key="frame" x="120" y="20" width="60" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="70" id="84N-Se-sUO"/>
+                            <constraint firstAttribute="width" secondItem="DL3-gx-42D" secondAttribute="height" multiplier="6:7" id="COb-D0-l3a"/>
+                            <constraint firstAttribute="width" constant="60" id="ZjG-Dx-Fe2"/>
+                        </constraints>
+                        <connections>
+                            <action selector="freeAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jiZ-7E-jzl"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="GAq-OI-CCM" firstAttribute="top" secondItem="YBU-Ls-3aD" secondAttribute="bottom" constant="4.5" id="2Jr-Lm-DNw"/>
+                    <constraint firstItem="Dtq-lg-Tse" firstAttribute="leading" secondItem="DL3-gx-42D" secondAttribute="trailing" constant="30" id="2iy-mv-wMM"/>
                     <constraint firstItem="aPq-7R-LPn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="26" id="3bD-6r-0Ae"/>
+                    <constraint firstItem="DL3-gx-42D" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="4uv-65-rnr"/>
                     <constraint firstItem="aPq-7R-LPn" firstAttribute="leading" secondItem="6za-qn-YYH" secondAttribute="trailing" constant="48" id="5Dv-yQ-aVf"/>
                     <constraint firstItem="6za-qn-YYH" firstAttribute="height" secondItem="YBU-Ls-3aD" secondAttribute="height" id="5UF-FD-kpx"/>
                     <constraint firstItem="YdN-Xi-VOL" firstAttribute="centerX" secondItem="aPq-7R-LPn" secondAttribute="centerX" id="6UP-1n-YG8"/>
+                    <constraint firstItem="oQP-Vn-wam" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="EVZ-ye-WLY"/>
+                    <constraint firstItem="oQP-Vn-wam" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="EkR-K6-H58"/>
                     <constraint firstItem="6za-qn-YYH" firstAttribute="leading" secondItem="bRw-ii-oM5" secondAttribute="trailing" constant="48" id="HbQ-n1-FVe"/>
+                    <constraint firstItem="DL3-gx-42D" firstAttribute="height" secondItem="oQP-Vn-wam" secondAttribute="height" id="Kfm-rv-pJM"/>
                     <constraint firstItem="YBU-Ls-3aD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="36" id="KjP-pe-w81"/>
+                    <constraint firstItem="ZHf-Nu-ln4" firstAttribute="width" secondItem="oQP-Vn-wam" secondAttribute="width" id="MAJ-ot-lef"/>
                     <constraint firstItem="6za-qn-YYH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="26" id="MI6-i6-zIX"/>
                     <constraint firstItem="YBU-Ls-3aD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="26" id="Pnf-2a-U3n"/>
+                    <constraint firstItem="DL3-gx-42D" firstAttribute="width" secondItem="oQP-Vn-wam" secondAttribute="width" id="PxJ-HO-aVO"/>
                     <constraint firstAttribute="trailing" secondItem="aPq-7R-LPn" secondAttribute="trailing" constant="35" id="RAo-Tf-wkA"/>
                     <constraint firstItem="aPq-7R-LPn" firstAttribute="width" secondItem="YBU-Ls-3aD" secondAttribute="width" id="Ri2-GK-EJB"/>
+                    <constraint firstItem="ZHf-Nu-ln4" firstAttribute="height" secondItem="oQP-Vn-wam" secondAttribute="height" id="UKn-q2-gfM"/>
                     <constraint firstItem="bRw-ii-oM5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="26" id="UVh-cz-RJb"/>
                     <constraint firstItem="bRw-ii-oM5" firstAttribute="leading" secondItem="YBU-Ls-3aD" secondAttribute="trailing" constant="48" id="UfM-OZ-4i4"/>
+                    <constraint firstItem="Dtq-lg-Tse" firstAttribute="height" secondItem="oQP-Vn-wam" secondAttribute="height" id="Vrc-cC-tF1"/>
+                    <constraint firstItem="Dtq-lg-Tse" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="Vx7-9Y-5MU"/>
+                    <constraint firstAttribute="trailing" secondItem="ZHf-Nu-ln4" secondAttribute="trailing" constant="30" id="W0W-Nk-WRI"/>
                     <constraint firstItem="Gl2-qc-w3T" firstAttribute="top" secondItem="6za-qn-YYH" secondAttribute="bottom" constant="4.5" id="baZ-wa-YIr"/>
+                    <constraint firstItem="ZHf-Nu-ln4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="erD-lw-f2q"/>
                     <constraint firstItem="bRw-ii-oM5" firstAttribute="height" secondItem="YBU-Ls-3aD" secondAttribute="height" id="hDO-Pz-6ma"/>
                     <constraint firstItem="6za-qn-YYH" firstAttribute="width" secondItem="YBU-Ls-3aD" secondAttribute="width" id="hp2-2e-DRh"/>
                     <constraint firstItem="aPq-7R-LPn" firstAttribute="height" secondItem="YBU-Ls-3aD" secondAttribute="height" id="i60-rt-w8G"/>
+                    <constraint firstItem="Dtq-lg-Tse" firstAttribute="width" secondItem="oQP-Vn-wam" secondAttribute="width" id="n9k-f0-rXV"/>
                     <constraint firstItem="NIp-WW-owI" firstAttribute="centerX" secondItem="bRw-ii-oM5" secondAttribute="centerX" id="pzs-8F-MI0"/>
+                    <constraint firstItem="DL3-gx-42D" firstAttribute="leading" secondItem="oQP-Vn-wam" secondAttribute="trailing" constant="30" id="sFQ-5H-bLE"/>
                     <constraint firstItem="NIp-WW-owI" firstAttribute="top" secondItem="bRw-ii-oM5" secondAttribute="bottom" constant="4.5" id="t7r-rP-jTS"/>
                     <constraint firstItem="Gl2-qc-w3T" firstAttribute="centerX" secondItem="6za-qn-YYH" secondAttribute="centerX" id="th4-CP-1Ya"/>
                     <constraint firstItem="YdN-Xi-VOL" firstAttribute="top" secondItem="aPq-7R-LPn" secondAttribute="bottom" constant="4.5" id="xVU-tq-n1g"/>
                     <constraint firstItem="GAq-OI-CCM" firstAttribute="centerX" secondItem="YBU-Ls-3aD" secondAttribute="centerX" id="yT4-p5-DwD"/>
+                    <constraint firstItem="ZHf-Nu-ln4" firstAttribute="leading" secondItem="Dtq-lg-Tse" secondAttribute="trailing" constant="30" id="ymc-iM-gvA"/>
                     <constraint firstItem="bRw-ii-oM5" firstAttribute="width" secondItem="YBU-Ls-3aD" secondAttribute="width" id="zdS-Lm-fXR"/>
                 </constraints>
             </tableViewCellContentView>
+            <point key="canvasLocation" x="34.5" y="143"/>
         </tableViewCell>
     </objects>
     <resources>

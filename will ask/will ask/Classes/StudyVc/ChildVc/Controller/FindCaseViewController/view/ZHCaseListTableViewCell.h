@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ZHCaseListsModel,ZHAllModel;
+@class ZHCaseListsModel,ZHAllModel,ZHMoreCaseListModel;
 
 @interface ZHCaseListTableViewCell : UITableViewCell
 
@@ -28,4 +28,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *releaseTime;
 
+
+@property (nonatomic, strong) ZHMoreCaseListModel *moreCaseModel;
 @end

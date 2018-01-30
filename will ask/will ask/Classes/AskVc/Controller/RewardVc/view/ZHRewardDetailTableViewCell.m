@@ -28,6 +28,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    [self.rewardMoney setCornerRadius:12];
+    [self.userAvatarImg setCornerRadius:12];
 }
 
 - (void)setDetailModel:(ZHFreeDetailModel *)detailModel {
@@ -47,6 +50,7 @@
                                               options: NSStringDrawingUsesLineFragmentOrigin
                                            attributes: @{NSFontAttributeName : [UIFont systemFontOfSize: 14]}
                                               context: nil].size.height;
+    
     [self.content mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.mas_equalTo(labelHeight);
     }];

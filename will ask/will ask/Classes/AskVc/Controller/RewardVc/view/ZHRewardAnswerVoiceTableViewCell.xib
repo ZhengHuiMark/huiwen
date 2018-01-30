@@ -122,15 +122,19 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dm8-x7-tDX">
-                        <rect key="frame" x="21" y="253.5" width="15" height="16.5"/>
+                        <rect key="frame" x="21" y="253.5" width="20" height="16.5"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="15" id="8Qf-XW-F70"/>
+                            <constraint firstAttribute="width" constant="20" id="8Qf-XW-F70"/>
                             <constraint firstAttribute="height" constant="16.5" id="a9F-SV-pAP"/>
                         </constraints>
-                        <state key="normal" image="zan-1"/>
+                        <state key="normal" image="zan-"/>
+                        <state key="selected" image="zan-1"/>
+                        <connections>
+                            <action selector="clickPriseAction:" destination="cm9-dU-PZZ" eventType="touchUpInside" id="8xd-b1-cBH"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBk-cG-V74">
-                        <rect key="frame" x="43.5" y="258" width="31" height="9.5"/>
+                        <rect key="frame" x="48.5" y="258" width="31" height="9.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="9.5" id="EMV-jw-ozL"/>
                         </constraints>
@@ -189,10 +193,25 @@
                             <action selector="learnPayAction:" destination="cm9-dU-PZZ" eventType="touchUpInside" id="6qu-cf-JgQ"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FmV-8Q-3Nu">
+                        <rect key="frame" x="256" y="20" width="100" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="m0P-Cv-H9Y"/>
+                            <constraint firstAttribute="width" constant="100" id="uKk-hC-eXP"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="12"/>
+                        <state key="normal" title="设为最佳答案">
+                            <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="bestAction:" destination="cm9-dU-PZZ" eventType="touchUpInside" id="afk-qW-4hD"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="irY-K7-3bP" firstAttribute="leading" secondItem="iSq-Fq-0Ip" secondAttribute="leading" id="2bK-3T-2FX"/>
                     <constraint firstItem="ulM-A0-tuf" firstAttribute="leading" secondItem="ADP-02-b3P" secondAttribute="leading" constant="18" id="4E9-pe-Vcq"/>
+                    <constraint firstItem="FmV-8Q-3Nu" firstAttribute="top" secondItem="ADP-02-b3P" secondAttribute="top" constant="20" id="5cd-hI-jKk"/>
                     <constraint firstItem="irY-K7-3bP" firstAttribute="top" secondItem="iSq-Fq-0Ip" secondAttribute="top" id="6Yp-Mm-gFy"/>
                     <constraint firstItem="Dm8-x7-tDX" firstAttribute="top" secondItem="X7M-ay-2tB" secondAttribute="bottom" constant="15.5" id="7iX-qg-48w"/>
                     <constraint firstItem="y6w-CW-kUv" firstAttribute="leading" secondItem="ADP-02-b3P" secondAttribute="leading" id="7lI-dN-OSQ"/>
@@ -203,6 +222,7 @@
                     <constraint firstItem="IEg-tg-Xs6" firstAttribute="centerX" secondItem="y6w-CW-kUv" secondAttribute="centerX" id="C0L-eF-QN0"/>
                     <constraint firstAttribute="trailing" secondItem="rfF-ay-v06" secondAttribute="trailing" id="D48-4P-nOd"/>
                     <constraint firstAttribute="trailing" secondItem="y6w-CW-kUv" secondAttribute="trailing" id="FAf-UT-YWf"/>
+                    <constraint firstAttribute="trailing" secondItem="FmV-8Q-3Nu" secondAttribute="trailing" constant="19" id="G1u-Am-eYm"/>
                     <constraint firstItem="UXE-4v-1hl" firstAttribute="leading" secondItem="hrb-VH-FtC" secondAttribute="trailing" constant="10" id="G2t-Bz-7zn"/>
                     <constraint firstItem="jT7-Mu-Btc" firstAttribute="leading" secondItem="ADP-02-b3P" secondAttribute="leading" constant="308" id="GbE-jC-S6c"/>
                     <constraint firstItem="irY-K7-3bP" firstAttribute="bottom" secondItem="iSq-Fq-0Ip" secondAttribute="bottom" id="IiG-LY-Uw6"/>
@@ -261,6 +281,7 @@
                 <outlet property="learnBtn" destination="IEg-tg-Xs6" id="ADr-v4-IdX"/>
                 <outlet property="learnNumber" destination="tbW-YC-3zs" id="x3f-L6-GCJ"/>
                 <outlet property="releaseTime" destination="jT7-Mu-Btc" id="Iht-3S-4DK"/>
+                <outlet property="setBestBtn" destination="FmV-8Q-3Nu" id="9Dg-MR-CB0"/>
                 <outlet property="userAvatar" destination="uHd-nv-GxF" id="RY4-3p-X2Q"/>
                 <outlet property="userName" destination="hrb-VH-FtC" id="P39-fn-zlc"/>
                 <outletCollection property="ansImgBtn" destination="RQc-zm-4R0" id="e2K-dG-u0d"/>
@@ -277,6 +298,7 @@
         <image name="bj" width="375" height="667"/>
         <image name="optimum" width="64" height="50"/>
         <image name="play-3" width="240" height="41"/>
+        <image name="zan-" width="14" height="14"/>
         <image name="zan-1" width="14" height="14"/>
     </resources>
 </document>

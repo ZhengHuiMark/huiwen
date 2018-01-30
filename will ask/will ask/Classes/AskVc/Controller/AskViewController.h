@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AskViewController : UITableViewController
+@interface AskViewController : UIViewController
+
 + (instancetype)sharedInstance;
+
 @end

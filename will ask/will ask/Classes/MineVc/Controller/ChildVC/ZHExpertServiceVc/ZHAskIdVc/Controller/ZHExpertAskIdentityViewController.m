@@ -55,6 +55,7 @@ static NSString *normalUserCellid = @"normalUserCellid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"提问身份";
     
     [self loadData];
     [self.view addSubview:self.tableView];

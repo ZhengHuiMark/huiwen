@@ -44,6 +44,10 @@ static NSInteger kMaxCount = 3;
     OssService * service;
     NSString * uploadFilePath;
     NSString * _voicePath;
+    
+        
+    BOOL _isCancelBool;
+    
 }
 
 
@@ -466,13 +470,10 @@ static NSInteger kMaxCount = 3;
 
 - (void)setupUI{
     
-
     [self.view addSubview:self.AllView];
     [_AllView addSubview:self.ControlsView];
     [_AllView addSubview:self.ContentView];
-    //    [_AllView addSubview:self.speakView];
     [_AllView addSubview:self.ImageView];
-    
     
     [self.ContentView addSubview:self.ContentTextView];
     [self.ControlsView addSubview:self.downBtn];
@@ -480,11 +481,8 @@ static NSInteger kMaxCount = 3;
     [self.ControlsView addSubview:self.speakBtn];
     [self.ControlsView addSubview:self.ReleaseBtn];
     
-    
-    
     [self.ContentTextView addSubview:self.PlaceholderLabel];
     [self.ContentTextView addSubview:self.LinkageLabel];
-    //    [self.speakView addSubview:self.VoiceBtn];
     
     self.ContentTextView.delegate = self;
     
@@ -507,16 +505,13 @@ static NSInteger kMaxCount = 3;
     _collectionView.showsVerticalScrollIndicator = NO;
     
     [self.ImageView addSubview:self.collectionView];
-    
 }
-
 
 - (UIButton *)VoiceBtn{
     if (!_VoiceBtn) {
         
         CGFloat VoiceBtnWidth = 75;
         CGFloat VoiceBtnHeight = VoiceBtnWidth;
-        
         
         _VoiceBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         
@@ -525,7 +520,6 @@ static NSInteger kMaxCount = 3;
         
         _VoiceBtn.frame = CGRectMake(([UIScreen mainScreen].bounds.size.width - VoiceBtnWidth ) / 2, 42.5, VoiceBtnWidth, VoiceBtnHeight);
     }
-    
     return _VoiceBtn;
 }
 
@@ -534,25 +528,21 @@ static NSInteger kMaxCount = 3;
     if (!_deleteButton) {
         
         _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        
-//        _deleteButton.titleLabel.text = @"删除";
         [_deleteButton setTitle:@"删除" forState:UIControlStateNormal];
         _deleteButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_deleteButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        
-//        _deleteButton.center = self.VoiceView.center;
         _deleteButton.frame = CGRectMake([UIScreen mainScreen].bounds.size.width / 2 - 14 , 150, 50, 13);
         [_deleteButton addTarget:self action:@selector(deleteAction) forControlEvents:UIControlEventTouchUpInside];
-        
     }
     
     return _deleteButton;
 }
+
 #pragma mark - 删除语音消息
 - (void)deleteAction{
     
     [self.VoiceView removeFromSuperview];
-    
+    _isCancelBool = YES;
 }
 
 - (UIView *)ControlsView{
@@ -566,12 +556,8 @@ static NSInteger kMaxCount = 3;
         _ControlsView.backgroundColor = [UIColor lightGrayColor];
         
         _ControlsView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, ControlsViewHeight);
-        
     }
-    
-    
     return _ControlsView;
-    
 }
 
 - (UIView *)ContentView{
@@ -585,10 +571,7 @@ static NSInteger kMaxCount = 3;
         _ContentView.backgroundColor = [UIColor redColor];
         
         _ContentView.frame = CGRectMake(0, CGRectGetMaxY(self.ControlsView.frame), [UIScreen mainScreen].bounds.size.width, ContentViewHeight);
-        
     }
-    
-    
     return _ContentView;
 }
 
@@ -602,14 +585,9 @@ static NSInteger kMaxCount = 3;
         _AllView.backgroundColor = [UIColor groupTableViewBackgroundColor];
         _AllView.frame = (CGRect){CGPointMake(0, [UIScreen mainScreen].bounds.size.height - 64
                                               ), CGSizeMake([UIScreen mainScreen].bounds.size.width, AllViewHeight )};
-        
     }
-    
-    
     return _AllView;
-    
 }
-
 
 - (UIView *)VoiceView{
     
@@ -621,10 +599,8 @@ static NSInteger kMaxCount = 3;
         
         _VoiceView.frame =  CGRectMake(0, CGRectGetMaxY(self.ControlsView.frame), [UIScreen mainScreen].bounds.size.width, VoiceViewHeight);
     }
-    
     return _VoiceView;
 }
-
 
 - (UIView *)speakView{
     
@@ -637,9 +613,7 @@ static NSInteger kMaxCount = 3;
         _speakView.backgroundColor = [UIColor greenColor];
         
         _speakView.frame = CGRectMake(0, CGRectGetMaxY(self.ControlsView.frame), [UIScreen mainScreen].bounds.size.width, SpeakViewHeight);
-        
     }
-    
     return _speakView;
 }
 
@@ -654,12 +628,9 @@ static NSInteger kMaxCount = 3;
         _ImageView.backgroundColor = [UIColor blueColor];
         
         _ImageView.frame = CGRectMake(0, CGRectGetMaxY(self.ContentView.frame), [UIScreen mainScreen].bounds.size.width, SpeakViewHeight);
-        
     }
     return _ImageView;
 }
-
-
 
 - (UITextView *)ContentTextView{
     
@@ -668,17 +639,12 @@ static NSInteger kMaxCount = 3;
         CGFloat ContentTextViewHeight = 190;
         
         _ContentTextView = [UITextView new];
-        
-        
         _ContentTextView.backgroundColor = [UIColor yellowColor];
         _ContentTextView.alpha = .8;
-        
-        
         _ContentTextView.frame = CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, ContentTextViewHeight);
     }
     return _ContentTextView;
 }
-
 
 - (UILabel *)PlaceholderLabel {
     
@@ -687,9 +653,7 @@ static NSInteger kMaxCount = 3;
         
         _PlaceholderLabel.text = @"请输入您的回答";
         _PlaceholderLabel.font = [UIFont systemFontOfSize:14];
-        
         _PlaceholderLabel.frame = CGRectMake(5, 7, 100, 15);
-        
     }
     return _PlaceholderLabel;
 }
@@ -743,10 +707,6 @@ static NSInteger kMaxCount = 3;
         
         [_downBtn addTarget:self action:@selector(downControl) forControlEvents:UIControlEventTouchUpInside];
     }
-    
-    
-    
-    
     return _downBtn;
 }
 
@@ -778,7 +738,6 @@ static NSInteger kMaxCount = 3;
     //        [self.ContentTextView removeFromSuperview];
     _speakBtn.selected = YES;
     self.textBtn.selected = NO;
-    
 }
 
 - (UIButton *)textBtn {
@@ -804,22 +763,19 @@ static NSInteger kMaxCount = 3;
     
     if (self.VoiceView) {
         UIAlertView *alertview = [[UIAlertView alloc] initWithTitle:@"标题" message:@"请问确定放弃语音内容，转换为文字输入？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"好的", nil];
-    
+        
         [alertview show];
     }
     [self.speakView removeFromSuperview];
     
     _speakBtn.selected = NO;
     self.textBtn.selected = YES;
-    
-    
-    
 }
 
 - (void)downControl {
-    self.footerView.hidden = NO;
-    self.answerButton.hidden = NO;
     
+    _answerButton.hidden = NO;
+    _footerView.hidden = NO;
     [UIView animateWithDuration: .5 animations:^{
         CGRect currentFrame = self.AllView.frame;
         currentFrame.origin.y = self.AllView.frame.origin.y + CGRectGetHeight(currentFrame)    ;
@@ -827,14 +783,18 @@ static NSInteger kMaxCount = 3;
     } completion:^(BOOL finished) {
         
     }];
-    
-    
 }
 
 - (void)UPUP {
+//    
+//    _shadowView = [UIView new];
+//    _shadowView.backgroundColor = [UIColor blackColor];
+//    _shadowView.alpha = .3;
+//    _shadowView.frame = self.tableView.frame;
+//    [self.tableView addSubview:self.shadowView];
     
-    self.answerButton.hidden = YES;
-    self.footerView.hidden = YES;
+    _answerButton.hidden = YES;
+    _footerView.hidden = YES;
     [UIView animateWithDuration: .5 animations:^{
         CGRect currentFrame = self.AllView.frame;
         currentFrame.origin.y = self.AllView.frame.origin.y - CGRectGetHeight(currentFrame);
@@ -842,7 +802,6 @@ static NSInteger kMaxCount = 3;
     } completion:^(BOOL finished) {
         
     }];
-    
 }
 
 - (void)textViewDidChange:(UITextView *)textView{
@@ -869,13 +828,16 @@ static NSInteger kMaxCount = 3;
     [[ICRecordManager shareManager] startRecordingWithFileName:self.recordName completion:^(NSError *error) {
         if (error) {   // 加了录音权限的判断
         } else {
-            //            if ([_delegate respondsToSelector:@selector(voiceDidStartRecording)]) {
-            //                [_delegate voiceDidStartRecording];
-            //            }
             NSLog(@"应该是拿到录音文件 %@ ",self.recordName);
             
             self.voiceHud.hidden = NO;
-            [self timer];
+            
+            if (_isCancelBool) {
+                self.voiceHud.image  = [UIImage imageNamed:@"voice_1"];
+                [self.timer setFireDate:[NSDate date]];
+            }else {
+                [self timer];
+            }
         }
     }];
 }
@@ -891,18 +853,13 @@ static NSInteger kMaxCount = 3;
             [alertString showString:@"语音太短" Delay:1];
             [[ICRecordManager shareManager] removeCurrentRecordFile:weakSelf.recordName];
             
-            
         } else {
-            //            if (_delegate && [_delegate respondsToSelector:@selector(chatBoxViewController:sendVoiceMessage:)]) {
-            //                [_delegate chatBoxViewController:weakSelf sendVoiceMessage:recordPath];
-            //            }
+            
             self.voiceHud.hidden = YES;
             NSLog(@"path-%@-",recordPath);
             
             CGFloat VoiceBtnWidth = 75;
             CGFloat VoiceBtnHeight = VoiceBtnWidth;
-            
-            
             
             [_VoiceBtn setImage:[UIImage imageNamed:@"record"] forState:UIControlStateNormal];
             [_VoiceBtn setImage:[UIImage imageNamed:@"record1"] forState:UIControlStateSelected];
@@ -914,11 +871,8 @@ static NSInteger kMaxCount = 3;
             
             yuyinView *yuyin = [[yuyinView alloc] initWithFrame:CGRectMake(55,(self.VoiceView.frame.size.height / 2) - 25,[UIScreen mainScreen].bounds.size.width - 55 - 88, 50)];
             yuyin.pathStr = recordPath;
-            _voiceSecondTime = yuyin.durationLabel.text;
-            //
-            NSLog(@"yuyin path = %@", yuyin.pathStr);
             
-            //
+            _voiceSecondTime = yuyin.durationLabel.text;
             
             // 文件路径
             NSString *voicePath =  recordPath;
@@ -933,29 +887,24 @@ static NSInteger kMaxCount = 3;
             _voicePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"456"];;
             [_VoiceData writeToFile:_voicePath atomically:YES];
             
-            
-            
-            
             [self.VoiceView addSubview:yuyin];
-            
         }
     }];
+    
+    [_timer setFireDate:[NSDate distantFuture]];
 }
 
 - (void)chatBoxDidCancelRecordingVoice:(ICChatBox *)chatBox {
     
     NSLog(@"Cancel");
-    
-    //    if ([_delegate respondsToSelector:@selector(voiceDidCancelRecording)]) {
-    //        [_delegate voiceDidCancelRecording];
-    //    }
     [[ICRecordManager shareManager] removeCurrentRecordFile:self.recordName];
     self.voiceHud.hidden = YES;
-    [_timer invalidate];
+    [_timer setFireDate:[NSDate distantFuture]];
+    _isCancelBool = YES;
 }
 
-- (void)chatBoxDidDrag:(BOOL)inside
-{
+- (void)chatBoxDidDrag:(BOOL)inside {
+    
     NSLog(@"DidDrag");
     
     if (inside) {
@@ -966,7 +915,6 @@ static NSInteger kMaxCount = 3;
         self.voiceHud.animationImages  = nil;
         self.voiceHud.image = [UIImage imageNamed:@"cancelVoice"];
     }
-    [_timer invalidate];
 }
 
 - (NSString *)currentRecordFileName
@@ -999,12 +947,6 @@ static NSInteger kMaxCount = 3;
 {
     AVAudioRecorder *recorder = [[ICRecordManager shareManager] recorder] ;
     [recorder updateMeters];
-//    float power= [recorder averagePowerForChannel:0];//取得第一个通道的音频，注意音频强度范围时-160到0,声音越大power绝对值越小
-
-//    CGFloat progress = (1.0/160)*(power + 160);
-//    self.voiceHud.progress = progress;
-    
-    
     
     float   level;                // The linear 0.0 .. 1.0 value we need.
     
@@ -1035,8 +977,8 @@ static NSInteger kMaxCount = 3;
         level = powf(adjAmp, 1.0f / root);
     }
     
-    NSLog(@"平均值 %f level %f", level * 100,level);
     self.voiceHud.progress = level* 100;
+    NSLog(@"平均值 %f level %f %f ", level * 100,level,self.voiceHud.progress);
 }
 
 #pragma mark - UICollectionView DataSource
@@ -1053,8 +995,6 @@ static NSInteger kMaxCount = 3;
 
 #pragma mark - UICollectionView Delegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
     
     // 获取 Model
     MLImageModel *imageModel = self.imageModels[indexPath.item];
@@ -1078,6 +1018,7 @@ static NSInteger kMaxCount = 3;
                 if (self.imageModels.count > kMaxCount) {
                     [self.imageModels removeObjectAtIndex: self.imageModels.count-1];
                 }
+                
                 
                 [self.collectionView reloadData];
                 
@@ -1107,7 +1048,6 @@ static NSInteger kMaxCount = 3;
     [self.collectionView reloadData];
 }
 
-
 #pragma mark - Lazy load
 - (UICollectionViewFlowLayout *)layout {
     if (!_layout) {
@@ -1121,7 +1061,6 @@ static NSInteger kMaxCount = 3;
     return _layout;
 }
 
-
 - (NSMutableArray<MLImageModel *> *)imageModels {
     if (!_imageModels) {
         _imageModels = [NSMutableArray arrayWithObject: [MLImageModel new]];
@@ -1129,7 +1068,6 @@ static NSInteger kMaxCount = 3;
     }
     return _imageModels;
 }
-
 
 - (NSMutableArray *)mArray {
     

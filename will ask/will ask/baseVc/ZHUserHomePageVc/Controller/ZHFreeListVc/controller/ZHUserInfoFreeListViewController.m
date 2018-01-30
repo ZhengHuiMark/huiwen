@@ -13,9 +13,12 @@
 #import "Macro.h"
 #import "YYModel.h"
 #import "FreeDetailViewController.h"
+#import "ZHCaseListTableViewCell.h"
 
 static NSString *moreFreeListCellid = @"moreFreeListCellid";
-@interface ZHUserInfoFreeListViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ZHUserInfoFreeListViewController ()<UITableViewDelegate,UITableViewDataSource>{
+    NSInteger _pageNumber;
+}
 
 @property(nonatomic,strong)UITableView *tableView;
 
@@ -30,21 +33,38 @@ static NSString *moreFreeListCellid = @"moreFreeListCellid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"免费问";
     
-    
-    [self loadData];
     [self.view addSubview:self.tableView];
+
+    _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        _pageNumber = 1;
+        
+        [self loadData];
+        
+    }];
+    _tableView.mj_header.automaticallyChangeAlpha = YES;
+    _tableView.mj_footer.automaticallyHidden = YES;
+    
+    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        _pageNumber++;
+        [self loadData];
+    }];
+    [_tableView.mj_header beginRefreshing];
+
+    
     
 
 }
 
 - (void)loadData {
     ///api/freeask/getUserHomePageMoreFreeAsk
-    NSString *userId = @"110341478336696320";
+//    NSString *userId = @"110341478336696320";
 
-NSMutableDictionary *dic = [ZHNetworkTools parameters];
-[dic setObject:userId forKey:@"userId"];
-NSString *url = [NSString stringWithFormat:@"%@/api/freeask/getUserHomePageMoreFreeAsk",kIP];
+    NSMutableDictionary *dic = [ZHNetworkTools parameters];
+    [dic setObject:_userId forKey:@"userId"];
+    [dic setObject:@(_pageNumber) forKey:@"pageNo"];
+    NSString *url = [NSString stringWithFormat:@"%@/api/freeask/getUserHomePageMoreFreeAsk",kIP];
 
 
 [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
@@ -55,10 +75,24 @@ NSString *url = [NSString stringWithFormat:@"%@/api/freeask/getUserHomePageMoreF
     
     NSArray <ZHMoerFreeListModel *>*models = [NSArray yy_modelArrayWithClass:[ZHMoerFreeListModel class] json:response[@"data"]];
     
-    _mListModels = [NSMutableArray arrayWithArray:models];
+    //  3.2 判断是刷新 还是 加载更多
+    if (_pageNumber == 1) { // 刷新
+        self.mListModels = [NSMutableArray arrayWithArray:models];
+    } else { // 加载更多
+        [self.mListModels addObjectsFromArray:models];
+    }
+    
     
     [self.tableView reloadData];
     
+    
+    if (!models || !models.count) {
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+    } else {
+        [self.tableView.mj_footer resetNoMoreData];
+    }
+    [self.tableView.mj_header endRefreshing];
+
     }];
 }
 
@@ -70,12 +104,12 @@ NSString *url = [NSString stringWithFormat:@"%@/api/freeask/getUserHomePageMoreF
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return _mListModels.count;
+    return self.mListModels.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ZHMoerFreeListModel *model = _mListModels[indexPath.row];
+    ZHMoerFreeListModel *model = self.mListModels[indexPath.row];
     
     ZHMoreFreeListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:moreFreeListCellid forIndexPath:indexPath];
     

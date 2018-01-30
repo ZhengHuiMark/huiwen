@@ -71,6 +71,8 @@ static NSString *ZHMyCollectionCaseListCellid = @"ZHMyCollectionCaseListCellid";
     [_tableView.mj_header beginRefreshing];
     
     [self LoadFreeAskData];
+    self.title = @"我收藏的案例";
+
 }
 
 - (void)setupUI{

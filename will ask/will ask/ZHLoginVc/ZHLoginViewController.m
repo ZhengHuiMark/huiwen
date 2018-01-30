@@ -19,6 +19,7 @@
 #import "ZHTabBarViewController.h"
 #import "ZHNavigationVC.h"
 #import "ZHForgetViewController.h"
+#import "JPushModel.h"
 
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKConnector/ShareSDKConnector.h>
@@ -232,65 +233,137 @@
 
 - (void)LoginWeChat {
     
-    
-
-    
-    [SSEThirdPartyLoginHelper loginByPlatform:SSDKPlatformTypeWechat onUserSync:^(SSDKUser *user, SSEUserAssociateHandler associateHandler) {
-        
-        //                     NSLog(@"%@",user.credential);
-        
-
-        NSString *access_token = user.credential.token;
-        //                     NSLog(@"access_token = %@",access_token);
-        NSString *openid = user.credential.uid;
-        //                     NSLog(@"openid = %@",openid);
-//        NSDictionary *dic = @{
-//                              @"accessToken":access_token,
-//                              @"openId":openid
-//                              };
-
-        NSMutableDictionary *dic =  [ZHNetworkTools parameters];
-        [dic setObject:access_token forKey:@"accessToken"];
-        [dic setObject:openid forKey:@"openId"];
-//
-        
-//        [SVProgressHUD show];
-        
-        
-        NSString *url = [NSString stringWithFormat:@"%@/api/user/loginByWechat", kIP];
-        
-        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
-//            [SVProgressHUD dismiss];
-            if (error) {
-                NSLog(@"%@",error);
-            }
-            NSLog(@"%@",response);
-            
-            [UserManager sharedManager].userModel = [UserModel yy_modelWithJSON: response[@"data"]];
-            [[UserManager sharedManager] saveUserModel];
-            //
-            //                            [[NSNotificationCenter defaultCenter] postNotificationName: @"loginSuccess"
-            //                                                                                object: nil];
-            !self.loginCompletion?:self.loginCompletion(NO);
-
-            
-        }];
-        
-        NSLog(@"%@",user.credential);
-        
-        
-    } onLoginResult:^(SSDKResponseState state, SSEBaseUser *user, NSError *error) {
-        
+    [ShareSDK getUserInfo:SSDKPlatformTypeWechat onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
         if (state == SSDKResponseStateSuccess)
         {
-            NSLog(@"%@",user);
-            NSLog(@"%@",[UserManager sharedManager].userModel);
+            
+            NSString *access_token = user.credential.token;
+            NSString *openid = user.credential.uid;
+            NSLog(@"uid=%@",user.uid);
+            NSLog(@"%@",user.credential);
+            NSLog(@"token=%@",user.credential.token);
+            NSLog(@"nickname=%@",user.nickname);
+            
+            
+            NSMutableDictionary *dic =  [ZHNetworkTools parameters];
+                    [dic setObject:access_token forKey:@"accessToken"];
+                    [dic setObject:openid forKey:@"openId"];
+            
+            
+            //        [SVProgressHUD show];
+            
+            
+                    NSString *url = [NSString stringWithFormat:@"%@/api/user/loginByWechat", kIP];
+            
+                    [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+            //            [SVProgressHUD dismiss];
+                        if (error) {
+                            NSLog(@"%@",error);
+                        }
+                        NSLog(@"%@",response);
+            
+                        [UserManager sharedManager].userModel = [UserModel yy_modelWithJSON: response[@"data"]];
+                        [[UserManager sharedManager] saveUserModel];
+            
+                        
+                    }];
+
+        }
+        
+        else
+        {
+            NSLog(@"%@",error);
         }
         
     }];
 
+    
+//    [SSEThirdPartyLoginHelper loginByPlatform:SSDKPlatformTypeWechat onUserSync:^(SSDKUser *user, SSEUserAssociateHandler associateHandler) {
+//        
+//        
+//
+//        NSString *access_token = user.credential.token;
+//        NSString *openid = user.credential.uid;
+//
+//        NSMutableDictionary *dic =  [ZHNetworkTools parameters];
+//        [dic setObject:access_token forKey:@"accessToken"];
+//        [dic setObject:openid forKey:@"openId"];
+//        
+//        
+////        [SVProgressHUD show];
+//        
+//        
+//        NSString *url = [NSString stringWithFormat:@"%@/api/user/loginByWechat", kIP];
+//        
+//        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+////            [SVProgressHUD dismiss];
+//            if (error) {
+//                NSLog(@"%@",error);
+//            }
+//            NSLog(@"%@",response);
+//            
+//            [UserManager sharedManager].userModel = [UserModel yy_modelWithJSON: response[@"data"]];
+//            [[UserManager sharedManager] saveUserModel];
+//
+//            
+//        }];
+//        
+//        NSLog(@"%@",user.credential);
+//        
+//        
+//    } onLoginResult:^(SSDKResponseState state, SSEBaseUser *user, NSError *error) {
+//        
+//        if (state == SSDKResponseStateSuccess)
+//        {
+//            NSLog(@"%@",user);
+//            NSLog(@"%@",[UserManager sharedManager].userModel);
+//        }
+//        
+//    }];
+//
 
     
+}
+
+- (void)LoginQQ{
+    [SSEThirdPartyLoginHelper loginByPlatform:SSDKPlatformTypeQQ onUserSync:^(SSDKUser *user, SSEUserAssociateHandler associateHandler) {
+        
+        NSLog(@"%@",user.credential);
+        
+        NSString *access_token = user.credential.token;
+        
+        NSString *openid = user.credential.uid;
+        
+        NSMutableDictionary *dic =  [ZHNetworkTools parameters];
+        [dic setObject:access_token forKey:@"accessToken"];
+        [dic setObject:openid forKey:@"openId"];
+        
+        NSString *url = [NSString stringWithFormat:@"%@/api/user/loginByQQ", kIP];
+        
+        [SVProgressHUD show];
+        
+        [[ZHNetworkTools sharedTools]requestWithType:POST andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+            [SVProgressHUD dismiss];
+            if (error) {
+                NSLog(@"%@",error);
+            }
+            NSLog(@"response = %@",response);
+            [UserManager sharedManager].userModel = [UserModel yy_modelWithJSON: response[@"data"]];
+            [[UserManager sharedManager] saveUserModel];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName: @"loginSuccess"
+                                                                object: nil];
+        }];
+        
+    } onLoginResult:^(SSDKResponseState state, SSEBaseUser *user, NSError *error) {
+        
+        NSLog(@"21321312313  ==%lu",(unsigned long)state);
+        
+        if (state == SSDKResponseStateSuccess) {
+            
+        }
+    }];
+
 }
 
 
@@ -422,7 +495,8 @@
     _QQLoginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     _QQLoginBtn.frame = CGRectMake(x, y, BtnWidth, BtnHeight);
     [_QQLoginBtn setBackgroundImage:[UIImage imageNamed:@"qq"] forState:UIControlStateNormal];
-    
+    [_QQLoginBtn addTarget:self action:@selector(LoginQQ) forControlEvents:UIControlEventTouchUpInside];
+
     [self.view addSubview:_QQLoginBtn];
     
     _WeChatLoginBtn = [UIButton buttonWithType:UIButtonTypeCustom];

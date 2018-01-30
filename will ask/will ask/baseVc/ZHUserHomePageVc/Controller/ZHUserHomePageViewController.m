@@ -12,7 +12,7 @@
 #import "ZHUserInfoRewardContentTableViewCell.h"
 #import "ZHUserInfoFreeAskTableViewCell.h"
 #import "ZHUserInfoNoModelTableViewCell.h"
-#import "HomeViewController.h"
+#import "ZHMoreRewardListViewController.h"
 
 #import "ZHNetworkTools.h"
 #import "Macro.h"
@@ -23,6 +23,7 @@
 #import "ZHUserInfoBigModel.h"
 
 #import "ZHRewardDetailViewController.h"
+#import "ZHUserInfoFreeListViewController.h"
 
 static NSString *userInfoCellid = @"userInfoCellid";
 
@@ -42,27 +43,12 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
 
 @property(nonatomic,strong)UITableView *tableView;
 
+@property(nonatomic,weak)UIView *headerView;
+
+
 @end
 
 @implementation ZHUserHomePageViewController
-
-//-(void)viewWillAppear:(BOOL)animated{
-//    
-//    self.navigationController.navigationBar.hidden = YES;
-//    
-////    [[NSNotificationCenter defaultCenter] postNotificationName: @"loginSuccess"
-////                                                        object: nil];
-////    [self.tableView reloadData];
-////    
-//}
-//
-//-(void)viewWillDisappear:(BOOL)animated{
-//    self.navigationController.navigationBar.hidden = NO;
-//    
-////    [[NSNotificationCenter defaultCenter] postNotificationName: @"loginSuccess"
-////                                                        object: nil];
-////    [self.tableView reloadData];
-//}
 
 - (void)viewWillAppear:(BOOL)animated
 
@@ -70,23 +56,18 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
     
     [super viewWillAppear:animated];
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.hidden = YES;
     
-    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
-    [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-
-    [self.navigationController.navigationBar setShadowImage:nil];
+    self.navigationController.navigationBar.hidden = NO;
+    
     
 }
-
-
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -95,16 +76,31 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
     [self.view addSubview:self.tableView];
     
     [self loadData];
-    
+//    
     if (self.tableView.style == UITableViewStylePlain) {
         UIEdgeInsets contentInset = self.tableView.contentInset;
-        contentInset.top = - 64 ;
+        contentInset.top = -22 ;
         [self.tableView setContentInset:contentInset];
     }
     
-   
-
+    UIView *view = [[UIView alloc] init];
+    _headerView = view;
+    view.frame = CGRectMake(0, 0, ScreenWidth, 64);
+    view.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:view];
+    
+    UIButton *backBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    backBtn1.frame = CGRectMake(10, 30, 30, 30);
+    [backBtn1 setImage:[UIImage imageNamed:@"return1"] forState:UIControlStateNormal];
+    [backBtn1 addTarget:self action:@selector(backClickAction) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:backBtn1];
+    
 }
+
+- (void)backClickAction {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 
 - (void)loadData{
     
@@ -225,17 +221,26 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
     
 }
 
+- (void)moreFreeAction{
+    
+    ZHUserInfoFreeListViewController *moreFreeListVc = [[ZHUserInfoFreeListViewController alloc]init];
+    moreFreeListVc.userId = _userId;
+
+    [self.navigationController pushViewController:moreFreeListVc animated:YES];
+    
+}
+
 - (void)moreRewardAction{
     
-    HomeViewController *homeVc  = [[HomeViewController alloc]init];
-    
-    [self.navigationController pushViewController:homeVc animated:YES];
+    ZHMoreRewardListViewController *moreRewardVc  = [[ZHMoreRewardListViewController alloc]init];
+    moreRewardVc.userId = _userId;
+    [self.navigationController pushViewController:moreRewardVc animated:YES];
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        return 171;
+        return 235;
     }
     if (indexPath.section == 1 && _bigModel.rewardModel) {
         
@@ -246,8 +251,7 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
                 return 228;
             }
         }
-        
-        
+    
         if (_bigModel.rewardModel.answerVoice) {
             return 300;
         }
@@ -328,8 +332,13 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
             if(!_bigModel.rewardModel.answerContent ||!_bigModel.rewardModel.answerVoice){
                 
                 ZHUserInfoNoModelTableViewCell *Nocell = [tableView dequeueReusableCellWithIdentifier:userInfoNoModelCelId forIndexPath:indexPath];
-                Nocell.titleLabel.text = @"您还没有悬赏问";
-                
+              
+                if (_bigModel.owner == YES) {
+                    Nocell.titleLabel.text = @"您还没有悬赏问";
+                }else{
+                    Nocell.titleLabel.text = @"他还没有悬赏问";
+                }
+            
                 return Nocell;
             }
         }else{
@@ -365,8 +374,13 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
             if(!_bigModel.rewardModel.answerContent ||!_bigModel.rewardModel.answerVoice){
                 
                 ZHUserInfoNoModelTableViewCell *Nocell = [tableView dequeueReusableCellWithIdentifier:userInfoNoModelCelId forIndexPath:indexPath];
-                Nocell.titleLabel.text = @"您还没有悬赏问";
-                
+
+                if (_bigModel.owner == YES) {
+                    Nocell.titleLabel.text = @"您还没有案例";
+                }else{
+                    Nocell.titleLabel.text = @"他还没有案例";
+                }
+
                 return Nocell;
             }
         }
@@ -428,6 +442,30 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
     }
     
     return _tableView;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    CGFloat offset = scrollView.contentOffset.y;
+    UIColor *color = [UIColor redColor];
+    
+    if (offset > 50) {
+        
+        if (offset >= 100) {
+            
+            offset = 100;
+        }
+        CGFloat alpha = (offset - 50)/50;
+        _headerView.backgroundColor = [color colorWithAlphaComponent:alpha];
+    }else {
+        _headerView.backgroundColor = [UIColor clearColor];
+    }
+    
+    if (offset < -80) {
+        _headerView.hidden = YES;
+    }else {
+        _headerView.hidden = NO;
+    }
 }
 
 

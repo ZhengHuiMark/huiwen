@@ -157,14 +157,15 @@ static NSString *invoceMailCellid = @"invoceMailCellid";
             
             if ([response[@"success"] integerValue] == 1) {
                 
-                [SVProgressHUD showSuccessWithStatus:@"保存成功"];
+                [SVProgressHUD showSuccessWithStatus:@"发布成功"];
+                [SVProgressHUD dismissWithDelay:1.0f];
                 [self.navigationController popViewControllerAnimated:YES];
+                
+                
             }
           
         }];
         
-    }else {
-        [SVProgressHUD showInfoWithStatus:@"请确认信息"];
     }
 }
 

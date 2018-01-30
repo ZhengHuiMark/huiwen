@@ -25,8 +25,8 @@
 
 - (void)setupMessageBtnUI {
     
-    [self setImage:[UIImage imageNamed:@"news1"] forState:UIControlStateNormal];
-    [self setImage:[UIImage imageNamed:@"news-index"] forState:UIControlStateSelected];
+    [self setImage:[UIImage imageNamed:@"news2"] forState:UIControlStateNormal];
+    [self setImage:[UIImage imageNamed:@"news-study"] forState:UIControlStateSelected];
         
     [self addTarget:self action:@selector(messageBtnClickAction) forControlEvents:UIControlEventTouchUpInside];
     

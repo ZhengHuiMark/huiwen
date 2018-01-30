@@ -60,6 +60,8 @@
         btnLa.layer.masksToBounds = YES;
         btnLa.textAlignment = NSTextAlignmentCenter;
         btnLa.font = [UIFont systemFontOfSize:15];
+        btnLa.adjustsFontSizeToFitWidth = YES;
+
 /* 第一终方法 只能使用两行
         if (i > 3) {
             int j = abs(i%4-1); //第二行的布局

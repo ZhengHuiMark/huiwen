@@ -59,6 +59,7 @@ static NSString *expertServiceCellid = @"expertServiceCellid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"专家服务";
     
     [self.view addSubview:self.tableView];
 }

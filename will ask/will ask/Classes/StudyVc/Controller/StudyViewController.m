@@ -49,8 +49,6 @@ static NSString *typeCellid = @"typeCellid";
 
 @property (nonatomic, strong) SDCycleScrollView *bannerView;
 
-
-
 @end
 
 @implementation StudyViewController {
@@ -59,15 +57,16 @@ static NSString *typeCellid = @"typeCellid";
     NSMutableArray *_bannerImageUrlMarray;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-
-{
-    
-    [super viewWillAppear:animated];
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     
     self.navigationController.navigationBar.hidden = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    
+    self.navigationController.navigationBar.hidden = YES;
 }
 
 - (void)viewDidLoad {
@@ -82,6 +81,10 @@ static NSString *typeCellid = @"typeCellid";
     [self loadBannerData];
     
     [self.view addSubview:self.tableView];
+    
+    NavBaseView *view = [[NavBaseView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth, SafeAreaTopHeight)];
+    view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:view];
 }
 
 - (void)loadData{
@@ -97,7 +100,6 @@ static NSString *typeCellid = @"typeCellid";
         }
 //        NSLog(@"response = %@",response);
         _TodayExpetsModel = [NSArray yy_modelArrayWithClass:[ZHStudyModel class] json:response[@"data"]];
-        
         
         [self.tableView reloadData];
     }];
@@ -174,7 +176,7 @@ static NSString *typeCellid = @"typeCellid";
     
     UIView * lineView = [[UIView alloc]init];
     lineView.frame = CGRectMake(0, 49, [UIScreen mainScreen].bounds.size.width, 1);
-    lineView.backgroundColor = [UIColor grayColor];
+    lineView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
     
     [headerView addSubview:lineView];
     
@@ -293,20 +295,7 @@ static NSString *typeCellid = @"typeCellid";
             cell.model = self.caseModel;
             
             return cell;
-//        }else {
-//            
-//            self.subCaseModel = _caseModelsss[indexPath.section-2].subCaseModels[indexPath.row-1];
-//
-//            ZHIntroductionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:IntroductionCellid forIndexPath:indexPath];
-//            
-//            if (cell == nil) {
-//                cell = [[ZHIntroductionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IntroductionCellid];
-//            }
-//           
-//            cell.model = self.subCaseModel;
-//            
-//            return cell;
-//        }
+
     }
     
     return cell?cell:[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault reuseIdentifier: @"Cell"];
@@ -417,15 +406,12 @@ static NSString *typeCellid = @"typeCellid";
     }
 }
 
-
-
-
 - (UITableView *)tableView {
     //
     
     if (!_tableView) {
         
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - SafeAreaTopHeight) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, SafeAreaTopHeight, self.view.frame.size.width, self.view.frame.size.height - SafeAreaTopHeight) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.backgroundColor = [UIColor colorWithRed: 245/255.0 green: 245/255.0 blue: 245/255.0 alpha: 1.0f];

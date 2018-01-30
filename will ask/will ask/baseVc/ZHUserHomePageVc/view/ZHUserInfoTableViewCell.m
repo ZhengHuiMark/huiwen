@@ -17,6 +17,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    [self.userAvatar setCornerRadius:40];
 }
 
 - (void)setUserInfoModel:(ZHUserInfoModel *)userInfoModel {

@@ -32,6 +32,7 @@ static NSString *recordListCellid = @"recordListCellid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"消费记录";
     [self.view addSubview:self.tableView];
     
     _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -101,12 +102,13 @@ static NSString *recordListCellid = @"recordListCellid";
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 1;
+    return _listModels.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
+    ZHRecordListModel *model = _listModels[indexPath.row];
+
     ZHRecordListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:recordListCellid forIndexPath:indexPath];
     
     if (cell == nil) {
@@ -114,7 +116,6 @@ static NSString *recordListCellid = @"recordListCellid";
         cell = [[ZHRecordListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:recordListCellid];
     }
 
-    ZHRecordListModel *model = _listModels[indexPath.row];
 
     cell.model = model;
     

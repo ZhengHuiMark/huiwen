@@ -34,6 +34,8 @@ static NSInteger kIsSubTag = 1;
 // 小分类code
 @property (nonatomic,copy) NSString *subTypeCode;
 
+@property (nonatomic, strong) UIButton *editorBtn;
+
 
 @property (nonatomic,copy) NSString *text1;
 @end
@@ -57,24 +59,31 @@ static NSInteger kIsSubTag = 1;
     
     // Table view
     [self.view addSubview: self.tableView];
+    self.title = @"选择提问分类";
     
-    
-    UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [editorBtn addTarget:self action:@selector(toAskDetailVc) forControlEvents:UIControlEventTouchUpInside];
-    [editorBtn setTitle:@"下一步" forState:UIControlStateNormal];
-    //    editorBtn.titleLabel.text = @"提问";
-    [editorBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-    [editorBtn sizeToFit];
-    UIBarButtonItem *editBtnItem = [[UIBarButtonItem alloc] initWithCustomView:editorBtn];
+    _editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+
+
+    [_editorBtn setTitle:@"下一步" forState:UIControlStateNormal];
+    [_editorBtn setTitle:@"下一步" forState:UIControlStateSelected];
+    [_editorBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+    [_editorBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    [_editorBtn addTarget:self action:@selector(toAskDetailVc:) forControlEvents:UIControlEventTouchUpInside];
+
+    [_editorBtn sizeToFit];
+    UIBarButtonItem *editBtnItem = [[UIBarButtonItem alloc] initWithCustomView:_editorBtn];
     self.navigationItem.rightBarButtonItem = editBtnItem;
 
 }
 
 
-- (void)toAskDetailVc{
+- (void)toAskDetailVc:(UIButton *)sender{
+
     
-    
-    
+    if (!sender.selected) {
+        [SVProgressHUD showInfoWithStatus:@"请选择分类"];
+        [SVProgressHUD dismissWithDelay:1.0];
+    }else{
     ZHAskQuestionTableViewController *askVc = [[ZHAskQuestionTableViewController alloc]init];
     
     askVc.titleTypeLabel = _text1;
@@ -86,7 +95,7 @@ static NSInteger kIsSubTag = 1;
     askVc.CodeSubType = _subTypeCode;
     
     [self.navigationController pushViewController:askVc animated:YES];
-    
+    }
 }
 
 - (void)LoadFreeAskData {
@@ -104,7 +113,7 @@ static NSInteger kIsSubTag = 1;
             NSLog(@"%@",error);
         }
         
-        //        NSLog(@"response = %@",response);
+                NSLog(@"response = %@",response);
         
 //        _title = @"未选中标签";
         NSArray<NSDictionary *> *JSONArray = response[@"data"];
@@ -129,16 +138,18 @@ static NSInteger kIsSubTag = 1;
 #pragma mark - UITableViewDataSource
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *header = [UIView new];
-//    header.backgroundColor = [UIColor greenColor];
-    
+
+    UIView *lineView= [UIView new];
+    lineView.frame = CGRectMake(17,12,3, 20);
+    lineView.backgroundColor = [UIColor colorWithRed:242.0/255.0 green:90/255.0 blue:41/255.0 alpha:1];
+    [header addSubview:lineView];
     
     _typeTitle = [UILabel new];
-    _typeTitle.frame = (CGRect){CGPointZero, {200, 44}};
+//    _typeTitle.frame = (CGRect){CGPointZero, {200, 44}};
+    _typeTitle.frame = CGRectMake(CGRectGetMaxX(lineView.frame) + 10, 0, 200, 44);
     _typeTitle.text = self.tagContainer.tagModels[section].title;
     [header addSubview: _typeTitle];
-    
-    
-    
+
     return header;
 }
 
@@ -173,8 +184,6 @@ static NSInteger kIsSubTag = 1;
         return CGRectGetMaxY([self.tagContainer.tagModels[indexPath.section].subTags lastObject].frame);
         
     }
-    
-    
     if (indexPath.section == 0) {
         return self.tagContainer.cellHeight;
     }
@@ -192,6 +201,7 @@ static NSInteger kIsSubTag = 1;
             
             cell.tableView = tableView;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
             cell.cellClick = ^(ZHChooseTypeTableViewCell *cell, ZHChooseTypeBtn *tagButton, ZHChooseTypeBtnModel *tagModel){
                 
                 if (tagModel.selected) {
@@ -199,11 +209,11 @@ static NSInteger kIsSubTag = 1;
 //                    NSLog(@"%@",[NSString stringWithFormat:@"%@", tagModel.title]);
                     _SubTypeTitle = tagModel.title;
                     
-                    
                     _subTypeCode = tagModel.code;
                     
                     _text1 = self.tagContainer.tagModels[indexPath.section].title;
-//                    NSLog(@"text1 = %@", _text1);
+                    
+                    _editorBtn.selected = YES;
                 
                 }
                 
@@ -216,32 +226,6 @@ static NSInteger kIsSubTag = 1;
         
         return cell;
     }
-    
-    //    if (indexPath.section == 0) {
-    //        MLTagCell *cell = [tableView dequeueReusableCellWithIdentifier: @"123"];
-    //        if (!cell) {
-    //            cell = [[MLTagCell alloc] initWithStyle: UITableViewCellStyleDefault
-    //                                    reuseIdentifier: @"123"];
-    //            cell.tableView = tableView;
-    //            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //            cell.cellClick = ^(MLTagCell *cell, MLTagButton *tagButton, MLTagModel *tagModel) {
-    //                if ([tagModel isKindOfClass: [MLSubTagModel class
-    //                                              ]]) {
-    //                    if (tagModel.isSelected) {
-    //                        _title = tagModel.title;
-    //                    } else {
-    //                        _title = @"未选中标签";
-    //                    }
-    //                } else if ([tagModel isKindOfClass: [MLTagModel class]]) {
-    //                    if (!tagModel.isSelected) {
-    //                        _title = @"未选中标签";
-    //                    }
-    //                }
-    //            };
-    //        }
-    //        cell.tagContainer = self.tagContainer;
-    //        return cell;
-    //    }
     
     UITableViewCell *aCell = [tableView dequeueReusableCellWithIdentifier: @"1"];
     if (!aCell) {
@@ -257,6 +241,8 @@ static NSInteger kIsSubTag = 1;
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame: self.view.bounds
                                                   style: UITableViewStyleGrouped];
+        _tableView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
+
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableFooterView = [UIView new];

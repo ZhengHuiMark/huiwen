@@ -58,7 +58,6 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-//    [self.navigationController setNavigationBarHidden:YES animated:YES];
     
         [self loadUserInfo];
     self.navigationController.navigationBar.hidden = YES;
@@ -108,8 +107,6 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
     
     [self loadUserInfo];
 
-   
-    
     
 }
 
@@ -231,10 +228,7 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
     self.tableView.hidden = NO;
     
 }
-//
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-//    return 190;
-//}
+
 
 // cell的高度
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -501,7 +495,6 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
  
 }
 
-
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     switch (section) {
@@ -514,10 +507,6 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
     }
     return 0;
 }
-
-
-
-
 
 - (void)loadData{
     
@@ -576,8 +565,6 @@ static NSString *ExpertBtnCellid = @"ExpertBtnCellid";
     UIViewController *controller = [[clz alloc]init];
     NSLog(@"%@",controller);
     [self.navigationController pushViewController:controller animated:YES];
-    
-    
     
 }
 

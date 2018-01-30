@@ -29,6 +29,7 @@ static NSString *learnCellid = @"learnCellid";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"向我学习的用户";
 
     [self.view addSubview:self.tableView];
     

@@ -10,4 +10,6 @@
 
 @interface ZHUserInfoFreeListViewController : UIViewController
 
+@property(nonatomic,copy) NSString *userId;
+
 @end

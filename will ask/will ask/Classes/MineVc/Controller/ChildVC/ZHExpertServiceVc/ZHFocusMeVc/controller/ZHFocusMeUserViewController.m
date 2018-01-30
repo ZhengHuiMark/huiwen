@@ -28,6 +28,7 @@ static NSString *focusMeCellid = @"focusMeCellid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"关注我的用户";
     [self.view addSubview:self.tableView];
     
     _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{

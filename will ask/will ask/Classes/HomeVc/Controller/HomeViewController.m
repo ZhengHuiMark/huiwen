@@ -15,6 +15,12 @@
 #import "ZHRewardDetailViewController.h"
 #import "ZHSearchPageViewController.h"
 #import "ZHJPushCustomMessageViewController.h"
+#import "ZHExpertViewController.h"
+#import "ZHFreeQuestionViewController.h"
+#import "ZHRewardViewController.h"
+#import "ZHFindCaseViewController.h"
+#import "ZHExpertUserInfoHomePageViewController.h"
+#import "ZHCaseDetaiPageleViewController.h"
 
 #import "ZHBtn.h"
 #import "ZHBtnModel.h"
@@ -157,15 +163,6 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mingzizijiqi:) name:@"postVc" object:nil];
 }
 
-//- (void)toMessage{
-//    
-//    ZHJPushCustomMessageViewController *JPushCustomVc = [[ZHJPushCustomMessageViewController alloc]init];
-//    
-//    [self.navigationController pushViewController:JPushCustomVc animated:YES];
-//
-//}
-
-
 - (void)mingzizijiqi:(NSNotification *)notification{
     
     
@@ -268,11 +265,22 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
         return;
     }
     if (indexPath.section == 2) {
-        return;
+        
+        ZHExpertUserInfoHomePageViewController *expertPageVc = [[ZHExpertUserInfoHomePageViewController alloc]init];
+        expertPageVc.expertID = _expertModelArray[indexPath.row].expertId;
+        
+        [self.navigationController pushViewController:expertPageVc animated:YES];
     }
     
-    if (indexPath.section > 2) {
-        return;
+    if (indexPath.section == 3) {
+        ZHCaseDetaiPageleViewController *caseDetailVc = [[ZHCaseDetaiPageleViewController alloc]init];
+        caseDetailVc.urlId = _caseModelArray[indexPath.row].caseId;
+        caseDetailVc.time = _caseModelArray[indexPath.row].readingTime;
+        caseDetailVc.title = _caseModelArray[indexPath.row].title;
+        caseDetailVc.words = _caseModelArray[indexPath.row].words;
+        
+        [self.navigationController pushViewController:caseDetailVc animated:YES];
+
     }
     
 }
@@ -294,18 +302,18 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
     
     UILabel *nameLa = [[UILabel alloc]init];
     
-    nameLa.frame = CGRectMake(20, 17 ,[UIScreen mainScreen].bounds.size.width, 15.5);
+    nameLa.frame = CGRectMake(20, 10 ,[UIScreen mainScreen].bounds.size.width, 20);
     
     nameLa.text = @"最新悬赏榜";
     
     [headerView addSubview:nameLa];
     
-    UIView * lineView = [[UIView alloc]init];
-    lineView.frame = CGRectMake(0, 49, [UIScreen mainScreen].bounds.size.width, 1);
-    lineView.backgroundColor = [UIColor grayColor];
-    
-    [headerView addSubview:lineView];
-    
+//    UIView * lineView = [[UIView alloc]init];
+//    lineView.frame = CGRectMake(0, 49, [UIScreen mainScreen].bounds.size.width, 1);
+//    lineView.backgroundColor = [UIColor colorWithRed:245.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1];
+//    
+//    [headerView addSubview:lineView];
+//    
     if (section == 1) {
         nameLa.text = @"最新悬赏榜";
     }else if (section == 2) {
@@ -338,7 +346,7 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return _caseModelArray.count + 3;
+    return 4;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -352,7 +360,7 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
     if (section == 2) {
         return _expertModelArray.count;
     }
-    return _caseModelArray[section - 3].subCaseModels.count + 1;
+    return _caseModelArray.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -361,6 +369,33 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
 
     if (indexPath.section == 0) {
         ZHJumpFourTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:jumpCellid forIndexPath:indexPath];
+        
+        cell.expertDidClick = ^{
+            ZHExpertViewController *expertVc = [[ZHExpertViewController alloc]init];
+            
+            [self.navigationController pushViewController:expertVc animated:YES];
+            
+        };
+        
+        cell.freeDidClick = ^{
+            ZHFreeQuestionViewController *freeVc = [[ZHFreeQuestionViewController alloc]init];
+            
+            [self.navigationController pushViewController:freeVc animated:YES];
+        };
+        
+        cell.rewardDidClick = ^{
+            
+           ZHRewardViewController  *rewardVc = [[ZHRewardViewController alloc]init];
+            
+            [self.navigationController pushViewController:rewardVc animated:YES];
+        };
+        
+        cell.CaseDidClick = ^{
+            
+            ZHFindCaseViewController *caseVc = [[ZHFindCaseViewController alloc]init];
+            
+            [self.navigationController pushViewController:caseVc animated:YES];
+        };
         
         return cell;
     }
@@ -392,10 +427,10 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
         return cell;
     }
     
-    if (indexPath.section > 2) {
+    if (indexPath.section == 3) {
         
-        if (indexPath.row == 0) {
-            self.caseModel = _caseModelArray[indexPath.section - 3];
+//        if (indexPath.row == 0) {
+            self.caseModel = _caseModelArray[indexPath.row];
 
             ZHCaseBreakDownTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CaseBreakDownCellid forIndexPath:indexPath];
             
@@ -406,20 +441,21 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
             cell.model = self.caseModel;
             
             return cell;
-        }else {
-            
-            self.subCaseModel = _caseModelArray[indexPath.section - 3].subCaseModels[indexPath.row-1];
-            
-            ZHIntroductionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:IntroductionCellid forIndexPath:indexPath];
-            
-            if (cell == nil) {
-                cell = [[ZHIntroductionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IntroductionCellid];
-            }
-            
-            cell.model = self.subCaseModel;
-            
-            return cell;
-        }
+//        }
+//        else {
+//            
+//            self.subCaseModel = _caseModelArray[indexPath.section - 3].subCaseModels[indexPath.row-1];
+//            
+//            ZHIntroductionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:IntroductionCellid forIndexPath:indexPath];
+//            
+//            if (cell == nil) {
+//                cell = [[ZHIntroductionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:IntroductionCellid];
+//            }
+//            
+//            cell.model = self.subCaseModel;
+//            
+//            return cell;
+//        }
         
     }
     
@@ -445,11 +481,11 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
         return 159;
     }
     
-    if (indexPath.section > 2 && indexPath.row == 0) {
+    if (indexPath.section == 3) {
         return 110;
     }
 
-    return 310;
+    return 0;
 }
 
 - (UITableView *)tableView {
@@ -501,8 +537,6 @@ static NSString *IntroductionCellid = @"IntroductionCellid";
         _searchBar.layer.cornerRadius = 3;
         _searchBar.layer.masksToBounds = YES;
         _searchBar.layer.borderColor = [UIColor whiteColor].CGColor;
-
-        
     }
     return _searchBar;
 }

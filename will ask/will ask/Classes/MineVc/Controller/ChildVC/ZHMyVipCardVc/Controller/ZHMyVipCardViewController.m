@@ -33,20 +33,26 @@ static NSString *vipCardDetailCellid = @"vipCardDetailCellid";
 
 @implementation ZHMyVipCardViewController
 
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self loadData];
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view addSubview: self.tableView];
     
     [self setupUI];
-    [self loadData];
 
 }
 
 - (void)setupUI{
     
-    [self.navigationController setTitle:@"我的会员卡"];
-    
+    self.title = @"我的会员卡";
 }
 
 
@@ -77,6 +83,10 @@ static NSString *vipCardDetailCellid = @"vipCardDetailCellid";
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     if (indexPath.section == 0) {
+        return;
+    }
+    
+    if (indexPath.section == 1) {
         return;
     }
     

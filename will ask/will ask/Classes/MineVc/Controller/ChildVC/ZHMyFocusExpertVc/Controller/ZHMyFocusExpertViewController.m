@@ -34,9 +34,9 @@ static NSString *myFocusCellid = @"myFocusCellid";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
+    self.title = @"我关注的专家";
     [self.view addSubview:self.tableView];
-
+    
     
     _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         _pageNumber = 1;

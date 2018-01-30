@@ -50,6 +50,7 @@ static NSString *CaseListCellid = @"CaseListCellid";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.title = @"案例";
     [self setupUI];
 
     _tableView.mj_header= [MJRefreshNormalHeader headerWithRefreshingBlock:^{

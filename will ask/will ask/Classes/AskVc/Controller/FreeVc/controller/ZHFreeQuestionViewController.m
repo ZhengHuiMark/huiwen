@@ -22,6 +22,7 @@
 #import "ZHChooseTypeViewController.h"
 #import "ZHUserHomePageViewController.h"
 #import "ZHExpertUserInfoHomePageViewController.h"
+#import "ZHSearchPageViewController.h"
 
 
 
@@ -33,8 +34,6 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 @interface ZHFreeQuestionViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>{
     NSString *_title;
     NSInteger _pageNumber;
-
-
 }
 
 // 给提问选择分类界面所传的值
@@ -44,10 +43,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 @property (nonatomic, strong) MLTagModelContainer *tagContainer;
 
-
 @property(nonatomic,strong)NSMutableArray<ZHAskModel *>* Freemodels;
-
-
 
 @property(nonatomic,strong)MLTagButton *btn;
 
@@ -57,8 +53,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
 @property (nonatomic,strong)UISearchBar *searchBar;
 
-
-
+@property (nonatomic, strong) UIButton *searchButton;
 
 @end
 
@@ -68,6 +63,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    [self ceshi];
 
     [self setupUI];
         
@@ -94,6 +90,17 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 }
 
 
+- (void)ceshi{
+    NSMutableDictionary *dic = [ZHNetworkTools parameters];
+    [dic setObject:@"25444083740705010" forKey:@"freeAskId"];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/api/freeask/ut/getFreeAskInfo",kIP];
+    
+    [[ZHNetworkTools sharedTools]requestWithType:GET andUrl:url andParams:dic andCallBlock:^(id response, NSError *error) {
+       
+        NSLog(@"%@",response);
+    }];
+}
 
 
 #pragma mark - Basic setup
@@ -110,12 +117,12 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     
     [self.view addSubview: self.tableView];
     
-    
     UIView *PlaceHolderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 44)];
     PlaceHolderView.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:PlaceHolderView];
     [PlaceHolderView addSubview:self.searchBar];
+    [PlaceHolderView addSubview:self.searchButton];
     
     UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [editorBtn addTarget:self action:@selector(toAskQuestion) forControlEvents:UIControlEventTouchUpInside];
@@ -133,21 +140,23 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     self.navigationItem.backBarButtonItem = backItem;
     
    [[UINavigationBar appearance]setTintColor:[UIColor grayColor]];
-    
 
-    
 
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(NSIntegerMin, NSIntegerMin)
                                                          forBarMetrics:UIBarMetricsDefault];
-    
 
-    
-    
     [self.tableView registerNib:[UINib nibWithNibName:@"ZHFreeListTableViewCell" bundle:nil] forCellReuseIdentifier:FreeListTableViewCellid];
 }
 
 
+- (void)toSearchPageVc{
+    
+    ZHSearchPageViewController *pageVc = [[ZHSearchPageViewController alloc]init];
+    
+    [self.navigationController pushViewController:pageVc animated:YES];
+}
 
+// 跳转
 - (void)toAskQuestion {
     
     _stringType = @"1";
@@ -170,21 +179,11 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
         
         UIView *headerView = [[UIView alloc] init];
         headerView.backgroundColor = [UIColor redColor];
-        
-//        UILabel *label
-        
-        
-
+    
         return headerView;
-        
-        
+ 
     }
-    
-    
-    
     return view;
-    
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -211,17 +210,12 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
         FDeetailVc.uidString = self.Freemodels[indexPath.row].freeAskId ;
         
         [self.navigationController pushViewController:FDeetailVc animated:YES];
-        
     }
-    
-    
 }
 
 
 #pragma mark - UITableViewDataSource
-//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-//    return 100;
-//}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 10;
@@ -258,6 +252,8 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     
     if (indexPath.section == 0) {
         MLTagCell *cell = [tableView dequeueReusableCellWithIdentifier: @"123"];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         if (!cell) {
             cell = [[MLTagCell alloc] initWithStyle: UITableViewCellStyleDefault
                                     reuseIdentifier: @"123"];
@@ -361,6 +357,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
     if (cell == nil) {
         cell = [[ZHFreeListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FreeListTableViewCellid];
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     [cell setModel:model];
     
@@ -425,8 +422,7 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
         if (error) {
             NSLog(@"%@",error);
         }
-        
-        
+
         _title = @"未选中标签";
         NSArray<NSDictionary *> *JSONArray = response[@"data"];
         NSMutableArray<MLTagModel *> *tagModels = [NSMutableArray array];
@@ -514,6 +510,21 @@ static NSString *FreeListTableViewCellid = @"FreeListTableViewCellid";
 
     }
     return _searchBar;
+}
+
+
+
+- (UIButton *)searchButton{
+    
+    if (!_searchButton) {
+        _searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _searchButton.frame = CGRectMake(10, 0, [UIScreen mainScreen].bounds.size.width - 40, 44);
+        _searchButton.backgroundColor = [UIColor clearColor];
+        _searchButton.alpha = .5;
+        [_searchButton addTarget:self action:@selector(toSearchPageVc) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _searchButton;
 }
 
 

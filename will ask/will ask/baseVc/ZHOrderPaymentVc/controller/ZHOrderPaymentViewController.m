@@ -13,6 +13,7 @@
 #import "ZHTheThirdPartyModel.h"
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "AskViewController.h"
 static NSString *payContentCellid = @"payContentCellid";
 static NSString *paymentOptionsCellid = @"paymentOptionsCellid";
 
@@ -137,9 +138,91 @@ static NSString *paymentOptionsCellid = @"paymentOptionsCellid";
                         NSLog(@"reslut = %@",resultDic);
                         NSString * memo = resultDic[@"memo"];
                         NSLog(@"===memo:%@", memo);
+                        
+                        switch ([resultDic[@"ResultStatus"]integerValue]) {
+                            case 9000:{
+                                [SVProgressHUD showSuccessWithStatus:@"发布成功"];
+                                [SVProgressHUD dismissWithDelay:1.0f];
+                                for (UIViewController *Vc in self.navigationController.viewControllers) {
+                                    if ([Vc isKindOfClass:[AskViewController class]]) {
+                                        [self.navigationController popToViewController:Vc animated:YES];
+                                    }
+                                }
+
+                            }
+                                break;
+                            case 6001:{
+                                [SVProgressHUD showSuccessWithStatus:@"中途取消支付"];
+                                [SVProgressHUD dismissWithDelay:1.0f];
+                                for (UIViewController *Vc in self.navigationController.viewControllers) {
+                                    if ([Vc isKindOfClass:[AskViewController class]]) {
+                                        [self.navigationController popToViewController:Vc animated:YES];
+                                    }
+                                }
+                                
+                            }
+                                break;
+                            case 6002:{
+                                [SVProgressHUD showSuccessWithStatus:@"网络连接出错"];
+                                [SVProgressHUD dismissWithDelay:1.0f];
+                                for (UIViewController *Vc in self.navigationController.viewControllers) {
+                                    if ([Vc isKindOfClass:[AskViewController class]]) {
+                                        [self.navigationController popToViewController:Vc animated:YES];
+                                    }
+                                }
+                                
+                            }
+                                break;
+                                
+                            case 6004:
+                            {
+                                [SVProgressHUD showSuccessWithStatus:@"支付结果未知（有可能已经支付成功），请查询商户订单列表中订单的支付状态"];
+                                [SVProgressHUD dismissWithDelay:1.0f];
+                                for (UIViewController *Vc in self.navigationController.viewControllers) {
+                                    if ([Vc isKindOfClass:[AskViewController class]]) {
+                                        [self.navigationController popToViewController:Vc animated:YES];
+                                    }
+                                }
+                            }
+                                break;
+                                
+                            case 4000:
+                            {
+                                [SVProgressHUD showSuccessWithStatus:@"订单支付失败"];
+                                [SVProgressHUD dismissWithDelay:1.0f];
+                                for (UIViewController *Vc in self.navigationController.viewControllers) {
+                                    if ([Vc isKindOfClass:[AskViewController class]]) {
+                                        [self.navigationController popToViewController:Vc animated:YES];
+                                    }
+                                }
+                            }
+                                break;
+                                
+                            case 8000:
+                            {
+                                [SVProgressHUD showSuccessWithStatus:@"正在处理中，支付结果未知（有可能已经支付成功），请查询商户订单列表中订单的支付状态"];
+                                [SVProgressHUD dismissWithDelay:1.0f];
+                                for (UIViewController *Vc in self.navigationController.viewControllers) {
+                                    if ([Vc isKindOfClass:[AskViewController class]]) {
+                                        [self.navigationController popToViewController:Vc animated:YES];
+                                    }
+                                }
+                            }
+                                break;
+                                
+                     
+                            default:
+                                break;
+                        }
                         if ([resultDic[@"ResultStatus"] isEqualToString:@"9000"]) {
                             
-                            //            [SVProgressHUD showSuccessWithStatus:@"支付成功"];
+                            [SVProgressHUD showSuccessWithStatus:@"发布成功"];
+                            [SVProgressHUD dismissWithDelay:1.0f];
+                            for (UIViewController *Vc in self.navigationController.viewControllers) {
+                                if ([Vc isKindOfClass:[AskViewController class]]) {
+                                    [self.navigationController popToViewController:Vc animated:YES];
+                                }
+                            }
                         }else{
                             //            [SVProgressHUD showErrorWithStatus:memo];
                         }
@@ -171,12 +254,14 @@ static NSString *paymentOptionsCellid = @"paymentOptionsCellid";
                         [SVProgressHUD showInfoWithStatus: response[@"message"]];
                         [SVProgressHUD dismissWithDelay:1];
                     }else{
-                        [SVProgressHUD showInfoWithStatus: @"支付成功"];
-                        [SVProgressHUD dismissWithDelay:1];
-                        [self.navigationController popViewControllerAnimated:YES];
-                        if (self.popToView) {
-                            self.popToView();
+                        [SVProgressHUD showSuccessWithStatus:@"发布成功"];
+                        [SVProgressHUD dismissWithDelay:1.0f];
+                        for (UIViewController *Vc in self.navigationController.viewControllers) {
+                            if ([Vc isKindOfClass:[AskViewController class]]) {
+                                [self.navigationController popToViewController:Vc animated:YES];
+                            }
                         }
+
                     }
                     
                 }];
@@ -205,12 +290,14 @@ static NSString *paymentOptionsCellid = @"paymentOptionsCellid";
                         [SVProgressHUD showInfoWithStatus: response[@"message"]];
                         [SVProgressHUD dismissWithDelay:1];
                     }else{
-                        [SVProgressHUD showInfoWithStatus: @"支付成功"];
-                        [SVProgressHUD dismissWithDelay:1];
-                        [self.navigationController popViewControllerAnimated:YES];
-                        if (self.popToView) {
-                            self.popToView();
+                        [SVProgressHUD showSuccessWithStatus:@"发布成功"];
+                        [SVProgressHUD dismissWithDelay:1.0f];
+                        for (UIViewController *Vc in self.navigationController.viewControllers) {
+                            if ([Vc isKindOfClass:[AskViewController class]]) {
+                                [self.navigationController popToViewController:Vc animated:YES];
+                            }
                         }
+
                     }
                 }];
                 

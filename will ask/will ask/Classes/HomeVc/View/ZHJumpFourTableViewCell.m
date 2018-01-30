@@ -15,10 +15,26 @@
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (IBAction)rewardAction:(UIButton *)sender {
+    !self.rewardDidClick?:self.rewardDidClick();
+    
 }
+
+- (IBAction)freeAction:(UIButton *)sender {
+    !self.freeDidClick?:self.freeDidClick();
+
+}
+
+- (IBAction)findExpertAction:(UIButton *)sender {
+    !self.expertDidClick?:self.expertDidClick();
+
+    
+}
+- (IBAction)cheakCase:(UIButton *)sender {
+    
+    !self.CaseDidClick?:self.CaseDidClick();
+
+}
+
 
 @end

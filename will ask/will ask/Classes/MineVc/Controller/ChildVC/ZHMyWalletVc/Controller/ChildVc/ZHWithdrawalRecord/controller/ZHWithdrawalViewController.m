@@ -34,6 +34,7 @@ static NSString *withdrawalRecordCellid = @"withdrawalRecordCellid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"提现记录";
     
     [self.view addSubview: self.tableView];
     
@@ -75,6 +76,7 @@ static NSString *withdrawalRecordCellid = @"withdrawalRecordCellid";
             
             [self.models addObjectsFromArray: models];
         }
+
         
         
         [self.tableView reloadData];
@@ -108,8 +110,12 @@ static NSString *withdrawalRecordCellid = @"withdrawalRecordCellid";
     
     ZHWithdrawalModel *model = _models[indexPath.row];
     
-    ZHWithdrawalRecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:withdrawalRecordCellid forIndexPath:indexPath];
-    
+    ZHWithdrawalRecordTableViewCell *cell = [tableView  dequeueReusableCellWithIdentifier:withdrawalRecordCellid forIndexPath:indexPath];
+    if (cell == nil) {
+        
+        cell = [[ZHWithdrawalRecordTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:withdrawalRecordCellid];
+    }
+
     
     cell.model = model;
     

@@ -12,9 +12,16 @@
 typedef void(^setupAction)();
 
 @interface ZHHeaderTableViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UIButton *touXiangBtn;
+
 @property (weak, nonatomic) IBOutlet UILabel *userIDLabel;
+
 @property (weak, nonatomic) IBOutlet UIView *placeholderView;
+
+//@property (weak, nonatomic) IBOutlet messageBtn *messageButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *setBtn;
 
 @property (nonatomic, strong)UserModel *usermodel;
 

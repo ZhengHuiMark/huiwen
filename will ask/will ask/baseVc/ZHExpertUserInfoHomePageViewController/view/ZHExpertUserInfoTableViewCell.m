@@ -30,6 +30,9 @@
     
     self.clipsToBounds = YES;
     self.contentView.clipsToBounds = YES;
+    
+    
+
 
 }
 

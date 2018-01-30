@@ -14,17 +14,36 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    [self.payForBtn setCornerRadius:15];
 }
 
 -(void)setOrderModel:(ZHMyOrderModel *)orderModel {
     _orderModel = orderModel;
     
-    self.generateTimeL.text = self.orderModel.createTime;
+    self.generateTimeL.text = [NSString stringWithFormat:@"订单生成时间:%@",self.orderModel.createTime];
     self.money.text = self.orderModel.amount;
     self.titleL.text = self.orderModel.goodsName;
-    self.TypeName.text = self.orderModel.type;
-    self.orderDetailL.text = @"订单详情";
+    
+    if ([self.orderModel.type isEqualToString:@"1"]) {
+        self.TypeName.text = @"悬赏问订单";
 
+    }
+    if ([self.orderModel.type isEqualToString:@"2"]) {
+        self.TypeName.text = @"学习一下订单";
+
+    }
+    if ([self.orderModel.type isEqualToString:@"3"]) {
+        self.TypeName.text = @"案例订单";
+
+    }
+    if ([self.orderModel.type isEqualToString:@"4"]) {
+        self.TypeName.text = @"咨询订单";
+
+    }
+    if ([self.orderModel.type isEqualToString:@"5"]) {
+        self.TypeName.text = @"会员卡订单";
+        
+    }
 
     switch (self.orderModel.status) {
         case ReviewStatusWaitPayFor:{
@@ -37,24 +56,22 @@
                     [self.payForBtn.layer setMasksToBounds:YES];
                     self.payLabel.hidden = YES;
                     self.PayStatus.text = @"等待支付";
-            //
-            
         }
             break;
         case ReviewStatusCancel:{
-                    self.closeTime.hidden = YES;
+//                    self.closeTime.hidden = YES;
                     self.orderDetailL.text = @"订单详情";
             
                     self.payForBtn.hidden = YES;
-            self.payLabel.hidden = NO;
+                    self.payLabel.hidden = NO;
                     self.payLabel.text = self.orderModel.payMode;
-                    self.closeTime.text = self.orderModel.payTime;
+                    self.closeTime.text = [NSString stringWithFormat:@"订单支付时间:%@",self.orderModel.payTime];
                     self.PayStatus.text = @"已完成";
         }
             break;
         case ReviewStatusSuccess:{
             
-                    self.closeTime.text = self.orderModel.closeTime;
+                    self.closeTime.text = [NSString stringWithFormat:@"订单关闭时间:%@",self.orderModel.closeTime];
                     self.orderDetailL.text = @"订单详情";
                     self.payForBtn.hidden = YES;
                     self.payLabel.hidden = YES;

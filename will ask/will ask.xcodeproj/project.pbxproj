@@ -90,6 +90,11 @@
 		440B4CCB201DD1100049B01A /* KSGuaidViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B4CC6201DD1100049B01A /* KSGuaidViewCell.m */; };
 		440B4CCC201DD1100049B01A /* KSGuaidViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B4CC8201DD1100049B01A /* KSGuaidViewController.m */; };
 		440B4CCD201DD1100049B01A /* KSGuaidViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B4CCA201DD1100049B01A /* KSGuaidViewManager.m */; };
+		440B4CD0201DDD9D0049B01A /* NavBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B4CCF201DDD9D0049B01A /* NavBaseView.m */; };
+		440B4CD3201EB94E0049B01A /* ZHMoreRewardListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B4CD2201EB94E0049B01A /* ZHMoreRewardListModel.m */; };
+		440B4CD8201EC7A50049B01A /* ZHMoreCaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B4CD7201EC7A50049B01A /* ZHMoreCaseViewController.m */; };
+		440B4CDC201ED0980049B01A /* ZHMoreCaseListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B4CDB201ED0980049B01A /* ZHMoreCaseListModel.m */; };
+		440B4CDF20204B1B0049B01A /* JPushModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B4CDE20204B1B0049B01A /* JPushModel.m */; };
 		440CC2BA2019A6250076D907 /* ZHMyCollectionOfCasesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440CC2B92019A6250076D907 /* ZHMyCollectionOfCasesViewController.m */; };
 		440CC2C12019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 440CC2BF2019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.m */; };
 		440CC2C22019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440CC2C02019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.xib */; };
@@ -598,6 +603,16 @@
 		440B4CC8201DD1100049B01A /* KSGuaidViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSGuaidViewController.m; sourceTree = "<group>"; };
 		440B4CC9201DD1100049B01A /* KSGuaidViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KSGuaidViewManager.h; sourceTree = "<group>"; };
 		440B4CCA201DD1100049B01A /* KSGuaidViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KSGuaidViewManager.m; sourceTree = "<group>"; };
+		440B4CCE201DDD9D0049B01A /* NavBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavBaseView.h; sourceTree = "<group>"; };
+		440B4CCF201DDD9D0049B01A /* NavBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavBaseView.m; sourceTree = "<group>"; };
+		440B4CD1201EB94E0049B01A /* ZHMoreRewardListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHMoreRewardListModel.h; sourceTree = "<group>"; };
+		440B4CD2201EB94E0049B01A /* ZHMoreRewardListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHMoreRewardListModel.m; sourceTree = "<group>"; };
+		440B4CD6201EC7A50049B01A /* ZHMoreCaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHMoreCaseViewController.h; sourceTree = "<group>"; };
+		440B4CD7201EC7A50049B01A /* ZHMoreCaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHMoreCaseViewController.m; sourceTree = "<group>"; };
+		440B4CDA201ED0980049B01A /* ZHMoreCaseListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHMoreCaseListModel.h; sourceTree = "<group>"; };
+		440B4CDB201ED0980049B01A /* ZHMoreCaseListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHMoreCaseListModel.m; sourceTree = "<group>"; };
+		440B4CDD20204B1B0049B01A /* JPushModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPushModel.h; sourceTree = "<group>"; };
+		440B4CDE20204B1B0049B01A /* JPushModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPushModel.m; sourceTree = "<group>"; };
 		440CC2B82019A6250076D907 /* ZHMyCollectionOfCasesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHMyCollectionOfCasesViewController.h; sourceTree = "<group>"; };
 		440CC2B92019A6250076D907 /* ZHMyCollectionOfCasesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHMyCollectionOfCasesViewController.m; sourceTree = "<group>"; };
 		440CC2BE2019A9AD0076D907 /* ZHMyCollectionCaseListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZHMyCollectionCaseListTableViewCell.h; sourceTree = "<group>"; };
@@ -1856,6 +1871,8 @@
 		440771501FE929710000C20E /* model */ = {
 			isa = PBXGroup;
 			children = (
+				440B4CD1201EB94E0049B01A /* ZHMoreRewardListModel.h */,
+				440B4CD2201EB94E0049B01A /* ZHMoreRewardListModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -1873,6 +1890,7 @@
 		440771651FEB4FC80000C20E /* ZHExpertUserInfoHomePageViewController */ = {
 			isa = PBXGroup;
 			children = (
+				440B4CD4201EC78C0049B01A /* ZHExpertMoreCaseVc */,
 				444D495D1FF0DDB700D82736 /* controller */,
 				444D495E1FF0DDB700D82736 /* model */,
 				444D495F1FF0DDB700D82736 /* view */,
@@ -1891,6 +1909,33 @@
 				440B4CCA201DD1100049B01A /* KSGuaidViewManager.m */,
 			);
 			path = KSGuaidView;
+			sourceTree = "<group>";
+		};
+		440B4CD4201EC78C0049B01A /* ZHExpertMoreCaseVc */ = {
+			isa = PBXGroup;
+			children = (
+				440B4CD9201ED07F0049B01A /* model */,
+				440B4CD5201EC78C0049B01A /* Controller */,
+			);
+			path = ZHExpertMoreCaseVc;
+			sourceTree = "<group>";
+		};
+		440B4CD5201EC78C0049B01A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				440B4CD6201EC7A50049B01A /* ZHMoreCaseViewController.h */,
+				440B4CD7201EC7A50049B01A /* ZHMoreCaseViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		440B4CD9201ED07F0049B01A /* model */ = {
+			isa = PBXGroup;
+			children = (
+				440B4CDA201ED0980049B01A /* ZHMoreCaseListModel.h */,
+				440B4CDB201ED0980049B01A /* ZHMoreCaseListModel.m */,
+			);
+			path = model;
 			sourceTree = "<group>";
 		};
 		440CC2B42019A6130076D907 /* ZHMyCollectionOfCases */ = {
@@ -3264,6 +3309,8 @@
 				442C038F1F6FC0DE0078CDC7 /* LBViewController+ImagePicker.h */,
 				442C03901F6FC0DE0078CDC7 /* LBViewController+ImagePicker.m */,
 				44827BDA1F9DC70E0097F1E7 /* ImageTools.h */,
+				440B4CCE201DDD9D0049B01A /* NavBaseView.h */,
+				440B4CCF201DDD9D0049B01A /* NavBaseView.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -3297,6 +3344,8 @@
 				4499570C1F6778440087503B /* UserModel.m */,
 				4499570E1F67787A0087503B /* UserManager.h */,
 				4499570F1F67787A0087503B /* UserManager.m */,
+				440B4CDD20204B1B0049B01A /* JPushModel.h */,
+				440B4CDE20204B1B0049B01A /* JPushModel.m */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -4187,6 +4236,7 @@
 				444D49931FF1F9DC00D82736 /* ZHExpertAskIdentityViewController.m in Sources */,
 				4411EF501F7B4603003AAF1C /* ZHAskModel.m in Sources */,
 				4407708C1FDFDBDE0000C20E /* ZHRecordListTableViewCell.m in Sources */,
+				440B4CDF20204B1B0049B01A /* JPushModel.m in Sources */,
 				44BB65EB1FCD4A4E003C3A6E /* ZHCaseListsModel.m in Sources */,
 				449A0CFA201350E90003196A /* ZHCertifiedExpertsHeaderView.m in Sources */,
 				448DC9A71FFB572F004F4F2A /* ZHContactViewController.m in Sources */,
@@ -4268,12 +4318,14 @@
 				440771491FE908430000C20E /* ZHUserInfoBigModel.m in Sources */,
 				440771321FE8E50A0000C20E /* ZHUserInfoRewardContentTableViewCell.m in Sources */,
 				449957131F678F6A0087503B /* ZHMD5.m in Sources */,
+				440B4CD0201DDD9D0049B01A /* NavBaseView.m in Sources */,
 				44827B3A1F971EEE0097F1E7 /* ZHBtn.m in Sources */,
 				444D49831FF1193F00D82736 /* ZHExpertServiceListTableViewCell.m in Sources */,
 				449A0C7B20062C400003196A /* ZHLearnToMeModel.m in Sources */,
 				440B4CCD201DD1100049B01A /* KSGuaidViewManager.m in Sources */,
 				440770401FD8DDD10000C20E /* ZHMyFreeAskViewController.m in Sources */,
 				44C7AC871FAAF22500F42616 /* XLCircleProgress.m in Sources */,
+				440B4CDC201ED0980049B01A /* ZHMoreCaseListModel.m in Sources */,
 				440770481FD8E9820000C20E /* ZHMyFreeAskModel.m in Sources */,
 				4422893E1F4BD50D0084EB83 /* MineViewController.m in Sources */,
 				440770F71FE792C50000C20E /* ZHMyConsultVc.m in Sources */,
@@ -4427,6 +4479,7 @@
 				449A0C5C200608EB0003196A /* ZHMyRewardAnswerTableViewCell.m in Sources */,
 				44C952021FB97AA9002B5509 /* ZHChooseTypeBtn.m in Sources */,
 				4410C5102002123F0085086C /* ZHStudyBannerModel.m in Sources */,
+				440B4CD8201EC7A50049B01A /* ZHMoreCaseViewController.m in Sources */,
 				449A0D3520138FAF0003196A /* NSAttributedString+LPC.m in Sources */,
 				449A0C3D2004A4170003196A /* ZHAllModel.m in Sources */,
 				4407706B1FDE69FF0000C20E /* ZHMyConsultModel.m in Sources */,
@@ -4449,6 +4502,7 @@
 				44BB65F21FCFE9A2003C3A6E /* ZHLIstsModel.m in Sources */,
 				44AF4AEF20049E500022B237 /* ZHFocusButton.m in Sources */,
 				442C03311F6A8A460078CDC7 /* ZHMineTableViewCell.m in Sources */,
+				440B4CD3201EB94E0049B01A /* ZHMoreRewardListModel.m in Sources */,
 				449A0CD5200EEB040003196A /* ZHCaseDetaiPageleViewController.m in Sources */,
 				449A0D122013512F0003196A /* UIView+LPC.m in Sources */,
 				449A0CFD201350E90003196A /* ZHExpertCategoryCell.m in Sources */,
@@ -4598,6 +4652,7 @@
 			baseConfigurationReference = 4590DB001BF95EC79B6CC8FE /* Pods-will ask.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "will ask/will ask.entitlements";
 				DEVELOPMENT_TEAM = 3N27RE33NW;
 				ENABLE_BITCODE = NO;
@@ -4649,6 +4704,7 @@
 			baseConfigurationReference = 3764AB3937DC31F0F0536059 /* Pods-will ask.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "will ask/will ask.entitlements";
 				DEVELOPMENT_TEAM = 3N27RE33NW;
 				ENABLE_BITCODE = NO;

@@ -25,6 +25,9 @@
 #import "ZHMyConsultDetailViewController.h"
 #import "ZHRewardDetailViewController.h"
 #import "ZHOrderPaymentViewController.h"
+#import "ZHCaseDetaiPageleViewController.h"
+#import "ZHMoreCaseViewController.h"
+#import "ZHMoreRewardListViewController.h"
 #import "ZHOrderPayModel.h"
 
 
@@ -94,23 +97,18 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
         contentInset.top = -22;
         [self.tableView setContentInset:contentInset];
     }
-//    [self.view addSubview:self.focusView];
-
     
     UIView *view = [[UIView alloc] init];
     _headerView = view;
     view.frame = CGRectMake(0, 0, ScreenWidth, 64);
     view.backgroundColor = [UIColor clearColor];
     [self.view addSubview:view];
-    
-    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"return"] style:UIBarButtonItemStyleDone target:self action:@selector(backClickAction)];
-    
+  
     UIButton *backBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
     backBtn1.frame = CGRectMake(10, 30, 30, 30);
     [backBtn1 setImage:[UIImage imageNamed:@"return1"] forState:UIControlStateNormal];
     [backBtn1 addTarget:self action:@selector(backClickAction) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:backBtn1];
-    //    self.navigationItem.backBarButtonItem = backBtn;
   
 
 }
@@ -222,7 +220,7 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
         [headerView addSubview:lineView];
         
         UIButton *moreBtn = [[UIButton alloc]init];
-        moreBtn.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 40 - 18, 18, 50 , 20);
+        moreBtn.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 40 - 10, 15, 50 , 30);
         [moreBtn setTitle:@"更多>>" forState:UIControlStateNormal];
         moreBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         [moreBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
@@ -255,11 +253,11 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
         [headerView addSubview:lineView];
         
         UIButton *moreBtn = [[UIButton alloc]init];
-        moreBtn.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 40 - 18, 18, 50 , 20);
+        moreBtn.frame = CGRectMake([UIScreen mainScreen].bounds.size.width - 40 - 18, 10, 50 , 30);
         [moreBtn setTitle:@"更多>>" forState:UIControlStateNormal];
         moreBtn.titleLabel.font = [UIFont systemFontOfSize:12];
         [moreBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-        [moreBtn addTarget:self action:@selector(moreFreeAction) forControlEvents:UIControlEventTouchUpInside];
+        [moreBtn addTarget:self action:@selector(moreCaseAction) forControlEvents:UIControlEventTouchUpInside];
         
         [headerView addSubview:moreBtn];
         
@@ -269,6 +267,24 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
     
     return view;
     
+    
+}
+
+- (void)moreCaseAction{
+    
+    ZHMoreCaseViewController *caseVc = [[ZHMoreCaseViewController alloc]init];
+    caseVc.userId = _expertID;
+    
+    [self.navigationController pushViewController:caseVc animated:YES];
+    
+}
+
+- (void)moreRewardAction{
+    
+    ZHMoreRewardListViewController *rewardVc = [[ZHMoreRewardListViewController alloc]init];
+    rewardVc.userId = _expertID;
+    [self.navigationController pushViewController:rewardVc animated:YES];
+
     
 }
 
@@ -338,7 +354,8 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
     if (indexPath.section == 0) {
         ZHExpertUserInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:expertUserInfoCellid forIndexPath:indexPath];
         
-        
+        cell.selectionStyle =UITableViewCellSelectionStyleNone;
+
         cell.expertUserInfoModel = _bigModel.expertUserInfoModel;
         
         return cell;
@@ -357,7 +374,8 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
             ZHUserInfoRewardContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:userInfoRewardContntCellid forIndexPath:indexPath];
             cell.bigModel = _bigModel;
             cell.expertRewardModel = _bigModel.expertRewardModel;
-        
+            cell.selectionStyle =UITableViewCellSelectionStyleNone;
+
             cell.didClick = ^{
                 
                 ZHRewardDetailViewController *rewardVc = [[ZHRewardDetailViewController alloc]init];
@@ -397,7 +415,8 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
     }else if(indexPath.section == 2 && !_bigModel.expertRewardModel){
 
             ZHUserInfoNoModelTableViewCell *Nocell = [tableView dequeueReusableCellWithIdentifier:userInfoNoModelCelId forIndexPath:indexPath];
-        
+            cell.selectionStyle =UITableViewCellSelectionStyleNone;
+
             Nocell.titleLabel.text = @"12312313";
             return Nocell;
   
@@ -405,16 +424,17 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
 
     if (indexPath.section == 3 && _bigModel.expertCaseModel) {
             ZHExpertUserInfoCaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:expertUserInfoCaseCellid forIndexPath:indexPath];
-    
+            cell.selectionStyle =UITableViewCellSelectionStyleNone;
+
             cell.caseModel = _bigModel.expertCaseModel;
     
         return cell;
     }else if(indexPath.section == 3 && !_bigModel.expertCaseModel){
         
         ZHUserInfoNoModelTableViewCell *Nocell = [tableView dequeueReusableCellWithIdentifier:userInfoNoModelCelId forIndexPath:indexPath];
+        cell.selectionStyle =UITableViewCellSelectionStyleNone;
         Nocell.titleLabel.text = @"455654665464646";
 
-        
         return Nocell;
         
     }
@@ -422,6 +442,35 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
     
     return cell?cell:[[UITableViewCell alloc] initWithStyle: UITableViewCellStyleDefault
                                             reuseIdentifier: @"Cell"];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section == 0) {
+        return;
+    }
+    
+    if (indexPath.section == 1) {
+        return;
+    }
+    
+    if (indexPath.section == 2) {
+        return;
+    }
+    
+    if (indexPath.section == 3) {
+        
+        ZHCaseDetaiPageleViewController *caseDetailVc = [[ZHCaseDetaiPageleViewController alloc]init];
+        caseDetailVc.urlId = _bigModel.expertCaseModel.caseId;
+        caseDetailVc.time = _bigModel.expertCaseModel.readingTime;
+        caseDetailVc.title = _bigModel.expertCaseModel.title;
+        caseDetailVc.words = _bigModel.expertCaseModel.caseWords;
+        
+        [self.navigationController pushViewController:caseDetailVc animated:YES];
+
+    }
+    
+    
 }
 
 
@@ -478,6 +527,8 @@ static NSString *userInfoNoModelCelId = @"userInfoNoModelCelId";
             }
             
             NSLog(@"%@",response);
+           
+            
             
         }];
         

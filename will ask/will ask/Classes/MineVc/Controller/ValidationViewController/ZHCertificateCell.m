@@ -138,7 +138,7 @@
         make.top.right.left.mas_equalTo(self);
         make.height.mas_equalTo(74.5);
     }];
-    UILabel *idcordLabel = [self creatSubLabel:@"身份认证照片:" color:[UIColor colorWithHexString:@"333333"] font:15];
+    UILabel *idcordLabel = [self creatSubLabel:@"已认证专家身份:" color:[UIColor colorWithHexString:@"333333"] font:15];
 //    NSMutableAttributedString *mastr = [[NSMutableAttributedString alloc] initWithString:idcordLabel.text];
 //    [mastr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:NSMakeRange(0, 1)];
 //    idcordLabel.attributedText = mastr;

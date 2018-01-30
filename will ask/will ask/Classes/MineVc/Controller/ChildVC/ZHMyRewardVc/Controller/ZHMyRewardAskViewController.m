@@ -60,6 +60,7 @@ static NSString *MyRewardRightListCellid = @"MyRewardRightListCellid";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = @"我的悬赏抢答";
     self.tag = 0;
     [self initTableView];
 

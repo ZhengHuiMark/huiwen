@@ -24,6 +24,7 @@
 #import "ZHChooseTypeViewController.h"
 #import "ZHExpertUserInfoHomePageViewController.h"
 #import "ZHUserHomePageViewController.h"
+#import "ZHSearchPageViewController.h"
 
 
 static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
@@ -45,7 +46,7 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
 
 @property(nonatomic,strong)NSMutableArray<ZHAskModel *>* RewardModels;
 
-
+@property (nonatomic, strong) UIButton *searchButton;
 
 @property(nonatomic,strong)MLTagButton *btn;
 
@@ -108,6 +109,7 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
     
     [self.view addSubview:PlaceHolderView];
     [PlaceHolderView addSubview:self.searchBar];
+    [PlaceHolderView addSubview:self.searchButton];
     
     UIButton *editorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [editorBtn addTarget:self action:@selector(toAskQuestion) forControlEvents:UIControlEventTouchUpInside];
@@ -122,6 +124,14 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
     
     
     [self.tableView registerNib:[UINib nibWithNibName:@"ZHRewardListTableViewCell" bundle:nil] forCellReuseIdentifier:ZHRewardListTableViewCellid];
+}
+
+- (void)toSearchPageVc{
+    
+    ZHSearchPageViewController *pageVc = [[ZHSearchPageViewController alloc]init];
+    
+    [self.navigationController pushViewController:pageVc animated:YES];
+
 }
 
 #pragma mark - 跳转提问页
@@ -343,7 +353,8 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
     if (cell == nil) {
         cell = [[ZHRewardListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ZHRewardListTableViewCellid];
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     [cell setModel:model];
     
     
@@ -460,7 +471,7 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
             self.RewardModels = [NSMutableArray arrayWithArray:models];
         } else { // 加载更多
             
-            self.RewardModels = [NSMutableArray arrayWithArray:models];
+            [self.RewardModels addObjectsFromArray: models];
         }
     
         [self.tableView reloadData];
@@ -495,6 +506,20 @@ static NSString *ZHRewardListTableViewCellid = @"ZHRewardListTableViewCellid";
         
     }
     return _searchBar;
+}
+
+
+- (UIButton *)searchButton{
+    
+    if (!_searchButton) {
+        _searchButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _searchButton.frame = CGRectMake(10, 0, [UIScreen mainScreen].bounds.size.width - 40, 44);
+        _searchButton.backgroundColor = [UIColor clearColor];
+        _searchButton.alpha = .5;
+        [_searchButton addTarget:self action:@selector(toSearchPageVc) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _searchButton;
 }
 
 @end

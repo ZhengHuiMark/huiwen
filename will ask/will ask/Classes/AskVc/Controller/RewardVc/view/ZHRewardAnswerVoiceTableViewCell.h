@@ -24,6 +24,8 @@ typedef void(^learnBtnAction)();
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *ansImgViews;
 
 @property (weak, nonatomic) IBOutlet UILabel *ClickUpNumber;
+//自定义变量
+@property (nonatomic, assign) NSInteger labelNumber;
 
 @property (weak, nonatomic) IBOutlet UILabel *learnNumber;
 
@@ -31,6 +33,8 @@ typedef void(^learnBtnAction)();
 @property (weak, nonatomic) IBOutlet UIImageView *bestImage;
 @property (weak, nonatomic) IBOutlet UIImageView *backGroundImg;
 @property (weak, nonatomic) IBOutlet UIButton *learnBtn;
+@property (weak, nonatomic) IBOutlet UIButton *setBestBtn;
+
 
 @property (nonatomic, copy)learnBtnAction didClick;
 

@@ -11,13 +11,14 @@
 typedef NS_ENUM(NSUInteger, MLImageModelType) {
     MLImageModelTypePlaceholder = 0, // 默认为占位图状态, 占位图使用 "" 这个图片
     MLImageModelTypeImage, // 设置图片后, 会变为真是图片.
+    MLImageModelTypeUrl    // 网络图
 };
 
 @interface MLImageModel : NSObject
 
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, assign) MLImageModelType modelType;
-
+@property (nonatomic, copy) NSString *urlStr;
 @end
 
 

@@ -75,8 +75,8 @@
         case MLTagButtonTypeImage: {
             self.backgroundColor = [UIColor whiteColor];
             self.layer.borderColor = [UIColor orangeColor].CGColor;
-            self.layer.borderWidth = 0.0f;
-            self.layer.cornerRadius = 0.0f;
+            self.layer.borderWidth = 1.0f;
+            self.layer.cornerRadius = 5.0f;
         }
             break;
             

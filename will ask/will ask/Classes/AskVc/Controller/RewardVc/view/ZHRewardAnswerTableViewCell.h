@@ -35,10 +35,14 @@ typedef void(^learnDidClick)();
 @property (weak, nonatomic) IBOutlet UIButton *learnButton;
 
 @property (weak, nonatomic) IBOutlet UIImageView *backGroundImg;
+@property (weak, nonatomic) IBOutlet UIButton *setBestBtn;
 
 @property (nonatomic,strong)ZHFreeAnswerModel *answerModel;
 
 @property (nonatomic,strong)ZHFreeDetailModel *detailModel;
+
+//自定义变量
+@property (nonatomic, assign) NSInteger labelNumber;
 
 
 @property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *answerImgs;

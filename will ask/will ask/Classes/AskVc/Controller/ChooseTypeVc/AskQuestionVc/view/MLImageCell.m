@@ -42,7 +42,12 @@
 #pragma mark - Override Setter/Getter Methods
 - (void)setImageModel:(MLImageModel *)imageModel {
     _imageModel = imageModel;
-    self.imgView.image = imageModel.image;
+    if (imageModel.urlStr.length > 0) {
+        [self.imgView sd_setImageWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@%@",bucketNameFreeLoad,OSS,imageModel.urlStr]]];
+    } else {
+        self.imgView.image = imageModel.image;
+    }
+    
 }
 
 @end

@@ -53,6 +53,8 @@ static NSString *myOrderCellid = @"myOrderCellid";
 
     _loadDataStr = @"";
     
+    self.title = @"我的订单";
+    
     self.view.backgroundColor = [UIColor colorWithRed:245 green:245 blue:245 alpha:1];
     
     
@@ -349,7 +351,7 @@ static NSString *myOrderCellid = @"myOrderCellid";
 #pragma mark - Lazy load
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame: CGRectMake(0,50, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)
+        _tableView = [[UITableView alloc] initWithFrame: CGRectMake(0,50, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 100)
                                                             style: UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
